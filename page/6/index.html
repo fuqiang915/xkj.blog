@@ -9,7 +9,7 @@
   <meta name="description" content="埃克斯">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:url" content="http://www.xkjchen.com/page/6/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="埃克斯">
 <meta name="twitter:card" content="summary">
@@ -658,6 +658,79 @@
 
 
   
+    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
+<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>方法一</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>方法二（需要安装好git）</p>
+</li>
+</ul>
+<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
+<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
+<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
+<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
+<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
+<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
+</blockquote>
+<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
+<p><img src="!--￼5--&gt;/images/page_img/zsh-2.png" alt="目录选择"></p>
+<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
+<p><img src="!--￼6--&gt;/images/page_img/zsh-1.png" alt="目录历史"></p>
+<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
+<p><img src="!--￼7--&gt;/images/page_img/zsh-3.png" alt="命令参数提示"></p>
+<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
+  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-vim-short-keys" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -760,7 +833,7 @@
 
 
   
-    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-RAM" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -770,7 +843,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
+      <a class="article-title" href="/uncategorized/2014/12/04/RAM/">谈谈Android内存</a>
     </h1>
   
 
@@ -778,137 +851,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
-<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>方法一</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>方法二（需要安装好git）</p>
-</li>
-</ul>
-<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
-<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
-<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
-<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
-<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
-<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
-</blockquote>
-<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
-<p><img src="!--￼5--&gt;/images/page_img/zsh-2.png" alt="目录选择"></p>
-<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
-<p><img src="!--￼6--&gt;/images/page_img/zsh-1.png" alt="目录历史"></p>
-<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
-<p><img src="!--￼7--&gt;/images/page_img/zsh-3.png" alt="命令参数提示"></p>
-<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
+        <h2 id="内存简介："><a href="#内存简介：" class="headerlink" title="内存简介："></a>内存简介：</h2><p><strong>RAM（random access memory）</strong>:随机存取存储器。说白了就是内存。<br>一般Java在内存分配时会涉及到以下区域：</p>
+<p><strong>寄存器（Registers）</strong>：速度最快的存储场所，因为寄存器位于处理器内部，我们在程序中无法控制</p>
+<p><strong>栈（Stack）</strong>：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中</p>
+<p><strong>堆（Heap）</strong>：堆内存用来存放由new创建的对象和数组。在堆中分配的内存，由Java虚拟机的自动垃圾回收器（GC）来管理。</p>
+<p><strong>静态域（static field）</strong>：  静态存储区域就是指在固定的位置存放应用程序运行时一直存在的数据，Java在内存中专门划分了一个静态存储区域来管理一些特殊的数据变量如静态的数据变量</p>
+<p><strong>常量池（constant pool）</strong>：虚拟机必须为每个被装载的类型维护一个常量池。常量池就是该类型所用到常量的一个有序集和，包括直接常量（string,integer和floating point常量）和对其他类型，字段和方法的符号引用。</p>
+<p><strong>非RAM存储</strong>：硬盘等永久存储空间</p>
+<h2 id="堆栈特点对比："><a href="#堆栈特点对比：" class="headerlink" title="堆栈特点对比："></a>堆栈特点对比：</h2><p><strong>栈：</strong>当定义一个变量时，Java就在栈中为这个变量分配内存空间，当该变量退出该作用域后，Java会自动释放掉为该变量所分配的内存空间，该内存空间可以立即被另作他用。</p>
+<p><strong>堆：</strong>当堆中的new产生数组和对象超出其作用域后，它们不会被释放，只有在没有引用变量指向它们的时候才变成垃圾，不能再被使用。即使这样，所占内存也不会立即释放，而是等待被垃圾回收器收走。这也是Java比较占内存的原因。</p>
+<p><strong>栈：</strong>存取速度比堆要快，仅次于寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。</p>
+<p><strong>堆：</strong>堆是一个运行时数据区，可以动态地分配内存大小，因此存取速度较慢。也正因为这个特点，堆的生存期不必事先告诉编译器，而且Java的垃圾收集器会自动收走这些不再使用的数据。</p>
+<p><strong>栈：</strong>栈中的数据可以共享， 它是由编译器完成的，有利于节省空间。</p>
+<p>例如：需要定义两个变量int a = 3；int b = 3；</p>
+<p>编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，如果没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，因为在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，如果再让a=4；那么编译器会重新搜索栈中是否有4值，如果没有，则将4存放进来，并让a指向4；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。</p>
+<p><strong>堆：</strong>例如上面栈中a的修改并不会影响到b, 而在堆中一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。<br>（注：因此像int,float,[] 这类都是存在栈中，）</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
-  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Service-Long-Time-Stay" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/">Android Service</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>Service用于一些耗时的操作，或者 后台执行，不提供用户交互界面的操作，例如：下载，播放音乐等</p>
-<h3 id="在独立进程运行"><a href="#在独立进程运行" class="headerlink" title="在独立进程运行"></a>在独立进程运行</h3><p>以 “：message”中以”:” 开头 代表在独立进程中运行， 在关闭App 后仍然独立运行</p>
-<h3 id="生命周期："><a href="#生命周期：" class="headerlink" title="生命周期："></a>生命周期：</h3><h4 id="onCreate-onStart-onDestroy"><a href="#onCreate-onStart-onDestroy" class="headerlink" title="onCreate, onStart,onDestroy()"></a>onCreate, onStart,onDestroy()</h4><p>第一次启动时调用onCreate()-&gt;onStart()， 如果启动一个正在运行的Service，不会调用onCreate,只调用onStart<br>停止服务时调用onDestroy();</p>
-<h4 id="onStartCommand-Intent-int-int"><a href="#onStartCommand-Intent-int-int" class="headerlink" title="onStartCommand(Intent , int , int )"></a>onStartCommand(Intent , int , int )</h4><p>有四种返回值：</p>
-<ol>
-<li><strong>START_STICKY</strong>：<br>如果service进程被kill掉，保留service的状态为开始状态，但不保留递送的intent对象。随后系统会尝试重新创建service，由于服务状态为开始状态，所以创建服务后一定会调用onStartCommand(Intent,int,int)方法。如果在此期间没有任何启动命令被传递到service，那么参数Intent将为null。</li>
-<li><strong>START_NOT_STICKY</strong>：<br>“非粘性的”。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统将会把它置为started状态，系统不会自动重启该服务，直到startService(Intent intent)方法再次被调用;。</li>
-<li><strong>START_REDELIVER_INTENT</strong>：<br>重传Intent。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统会自动重启该服务，并将Intent的值传入。</li>
-<li><strong>START_STICKY_COMPATIBILITY</strong>：<br>START_STICKY的兼容版本，但不保证服务被kill后一定能重启。 </li>
-</ol>
-<h3 id="启动方式"><a href="#启动方式" class="headerlink" title="启动方式"></a>启动方式</h3><ul>
-<li><strong>startService()</strong></li>
-</ul>
-<p>正常启动未被启动过的Service：<br>onCreate() - &gt; onStart()  -运行- -&gt;stopService()或selfStop() -&gt; onDestroy()</p>
-<p>启动正在运行的Service：不会回调onCreate()<br>onStart()  -运行- -&gt; stopService()或selfStop() -&gt; onDestroy()</p>
-<p>传递参数：<br>启动Service时通过intent 传递参数，Service 中在 onStartCommand(Intent ,int ,int )回调方法中获取参数</p>
-<ul>
-<li><strong>bindService()</strong></li>
-</ul>
-<p>把这个 Service 和调用 Service 的客户类绑起来，如果调用这个客户类被销毁，Service 也会被销毁。<br>好处是会回调onBind()方法，可以从这里返回一个实现IBind接口的类，这样可以实现和Service的通信了。<br>如果调用时Service没有运行，会自动启动Service</p>
-<p>绑定未启动的Service过程：没有onStart()回调</p>
-<p>onCreate –&gt; onBind(只一次，不可多次绑定) –&gt; onUnbind –&gt; onDestory</p>
-<h4 id="二者区别："><a href="#二者区别：" class="headerlink" title="二者区别："></a>二者区别：</h4><ul>
-<li><strong>startService()</strong> : 调用者和服务没有关系，即使调用者退出，服务仍然运行。</li>
-<li><strong>bindService()</strong> : 调用者和服务绑定，如果调用者退出，那么服务也被停止了。</li>
-</ul>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>所以，在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。</p>
-<h3 id="使服务常驻内存，不被系统销毁"><a href="#使服务常驻内存，不被系统销毁" class="headerlink" title="使服务常驻内存，不被系统销毁"></a>使服务常驻内存，不被系统销毁</h3><p>自己的app的service总是容易被系统回收，基本上的解决思路有以下几种：</p>
-<ul>
-<li>把service写成系统服务，将不会被回收(未实践)：<br>在Manifest.xml文件中设置persistent属性为true，则可使该服务免受out-of-memory killer的影响。但是这种做法一定要谨慎，系统服务太多将严重影响系统的整体运行效率。</li>
-<li><p>提高service的优先级(未实践)：<br>设置android:priority=”1000”</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 为了消去加上android:priority="1000"后出现的警告信息，可以设置android:exported属性，指示该服务是否能够被其他应用程序组件调用或跟它交互 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.example.helloandroid.weatherforecast.service.UpdateWidgetService"</span><span class="attr">android:exported</span>=<span class="string">"false"</span> &gt;</span></div><div class="line">	 <span class="comment">&lt;!-- 为防止Service被系统回收，可以通过提高优先级解决，1000是最高优先级，数字越小，优先级越低 --&gt;</span></div><div class="line">	 <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"1000"</span>&gt;</span><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">service</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>将服务写成前台服务foreground service(已实践，很大程度上能解决问题，但不能保证一定不会被杀)：<br>重写onStartCommand方法，使用StartForeground(int,Notification)方法来启动service。</p>
-</li>
-</ul>
-<blockquote>
-<p>注：前台服务会在状态栏显示一个通知，最典型的应用就是音乐播放器，只要在播放状态下，就算休眠也不会被杀，如果不想显示通知，只要把参数里的int设为0即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Notification notification = <span class="keyword">new</span> Notification(R.drawable.logo,</div><div class="line">                <span class="string">"wf update service is running"</span>,</div><div class="line">                System.currentTimeMillis());</div><div class="line">        pintent=PendingIntent.getService(<span class="keyword">this</span>, <span class="number">0</span>, intent, <span class="number">0</span>);</div><div class="line">        notification.setLatestEventInfo(<span class="keyword">this</span>, <span class="string">"WF Update Service"</span>,</div><div class="line">                <span class="string">"wf update service is running！"</span>, pintent);</div><div class="line">            </div><div class="line">        <span class="comment">//让该service前台运行，避免手机休眠时系统自动杀掉该服务</span></div><div class="line">        <span class="comment">//如果 id 为 0 ，那么状态栏的 notification 将不会显示。</span></div><div class="line">        startForeground(startId, notification);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>同时，对于通过startForeground启动的service，onDestory方法中需要通过stopForeground(true)来取消前台运行状态。</p>
-<blockquote>
-<p>ps：如果service被杀后下次重启出错，可能是此时重发的Intent为null的缘故，可以通过修改onStartCommand方法的返回值来解决：</p>
-</blockquote>
-<ul>
-<li>利用ANDROID的系统广播检查Service的运行状态，如果被杀掉，就再起来:<br>利用的系统广播是Intent.ACTION_TIME_TICK，这个广播每分钟发送一次，我们可以每分钟检查一次Service的运行状态，如果已经被结束了，就重新启动Service。</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/" class="archive-article-date">
+      <a href="/uncategorized/2014/12/04/RAM/" class="archive-article-date">
   	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
 	</div>
 
       
