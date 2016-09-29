@@ -277,6 +277,56 @@
 
 
   
+    <article id="post-Java_threads" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/21/Java_threads/">Java多线程总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/21/Java_threads/" class="archive-article-date">
+  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Thread_Producer_Consumer" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -318,56 +368,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java_threads" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/06/21/Java_threads/">Java多线程总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/06/21/Java_threads/" class="archive-article-date">
-  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 	</div>
 
       
@@ -580,101 +580,6 @@
 
 
   
-    <article id="post-Android-ThreadPool" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/04/Android-ThreadPool/">Android线程池解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目录</p>
-<ul>
-<li>m</li>
-</ul>
-<p>##概念<br>思路: 线程池维护N个线程持续运行，可以随时接收Runnable任务交给池内线程执行。任务队列为空时等待。</p>
-<p>##优点</p>
-<ul>
-<li>重用线程池中的线程，减少因为线程的创建和销毁带来的性能开销</li>
-<li>能有效控制线程池的最大并发数，避免大量的线程之间因互相抢占系统资源而导致的阻塞线程</li>
-<li>能够对线程进行简单地管理，并提供定时执行以及指定间隔循环执行等功能 源于Java Executor接口，Android中的实现：ThreadPoolExecutor。 可配置为四类线程池。</li>
-</ul>
-<blockquote>
-<p>相比来说通过<code>new Thread</code>的方式执行的缺点：</p>
-<ul>
-<li>每次new Thread新建对象性能差。</li>
-<li>线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。</li>
-<li>缺乏更多功能，如定时执行、定期执行、线程中断。</li>
-</ul>
-</blockquote>
-<h2 id="构造函数说明"><a href="#构造函数说明" class="headerlink" title="构造函数说明"></a>构造函数说明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</div><div class="line">     BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory)</div></pre></td></tr></table></figure>
-<ul>
-<li><code>corePoolSize</code><br>核心线程数。默认核心线程一直存活，即便闲置时。若<code>allowCoreThreadTimeOut=true</code> =&gt; 核心线程等待新任务时间超过<code>keepAliveTime</code>会被终止。</li>
-<li><code>maximumPoolSize</code><br>最大线程数,活动线程达到此值后，后续新任务会被阻塞</li>
-<li><code>keepAliveTime</code><br>非核心线程闲置时超时时长，超过后非核心线程会被回收。当<code>allowCoreThreadTimeOut = true</code> 那么核心线程也会超时。</li>
-<li><code>unit</code><br>keepAliveTime的单位,枚举。<code>TimeUnit.MILLISECONDS</code>,<code>TimeUnit.SECONDS</code>,<code>TimeUnit.MINUTES</code></li>
-<li><code>workQueue</code><br>线程池中的任务队列，通过线程池的execute方法提交的Runnable会存储在这个参数中</li>
-<li><code>threadFactory</code><br>线程工厂，为线程池提供创建新线程功能。<code>ThreadFactory</code>是接口,只有一个方法： <code>Thread newThread(Runnable r)</code></li>
-</ul>
-<h2 id="Java线程池的种类"><a href="#Java线程池的种类" class="headerlink" title="Java线程池的种类"></a>Java线程池的种类</h2><ul>
-<li>newCachedThreadPool</li>
-</ul>
-<p>缓存的线程池，需要时创建，无用时回收，合理使用资源.</p>
-<ul>
-<li>newFixedThreadPool</li>
-</ul>
-<p>固定数量线程</p>
-<ul>
-<li>newScheduledThreadPool </li>
-</ul>
-<p>用于定时，延时，周期性任务的执行</p>
-<ul>
-<li>newSingleThreadPool</li>
-</ul>
-<p>只有一个线程运行，保证任务顺序执行FIFO，LILO</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService service = Executors.newCachedThreadPool();</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/02/04/Android-ThreadPool/" class="archive-article-date">
-  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread/">thread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread-pool/">thread pool</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-adb-shell" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -761,6 +666,101 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/">cmd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/commend/">commend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-ThreadPool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/02/04/Android-ThreadPool/">Android线程池解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<ul>
+<li>m</li>
+</ul>
+<p>##概念<br>思路: 线程池维护N个线程持续运行，可以随时接收Runnable任务交给池内线程执行。任务队列为空时等待。</p>
+<p>##优点</p>
+<ul>
+<li>重用线程池中的线程，减少因为线程的创建和销毁带来的性能开销</li>
+<li>能有效控制线程池的最大并发数，避免大量的线程之间因互相抢占系统资源而导致的阻塞线程</li>
+<li>能够对线程进行简单地管理，并提供定时执行以及指定间隔循环执行等功能 源于Java Executor接口，Android中的实现：ThreadPoolExecutor。 可配置为四类线程池。</li>
+</ul>
+<blockquote>
+<p>相比来说通过<code>new Thread</code>的方式执行的缺点：</p>
+<ul>
+<li>每次new Thread新建对象性能差。</li>
+<li>线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。</li>
+<li>缺乏更多功能，如定时执行、定期执行、线程中断。</li>
+</ul>
+</blockquote>
+<h2 id="构造函数说明"><a href="#构造函数说明" class="headerlink" title="构造函数说明"></a>构造函数说明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</div><div class="line">     BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>corePoolSize</code><br>核心线程数。默认核心线程一直存活，即便闲置时。若<code>allowCoreThreadTimeOut=true</code> =&gt; 核心线程等待新任务时间超过<code>keepAliveTime</code>会被终止。</li>
+<li><code>maximumPoolSize</code><br>最大线程数,活动线程达到此值后，后续新任务会被阻塞</li>
+<li><code>keepAliveTime</code><br>非核心线程闲置时超时时长，超过后非核心线程会被回收。当<code>allowCoreThreadTimeOut = true</code> 那么核心线程也会超时。</li>
+<li><code>unit</code><br>keepAliveTime的单位,枚举。<code>TimeUnit.MILLISECONDS</code>,<code>TimeUnit.SECONDS</code>,<code>TimeUnit.MINUTES</code></li>
+<li><code>workQueue</code><br>线程池中的任务队列，通过线程池的execute方法提交的Runnable会存储在这个参数中</li>
+<li><code>threadFactory</code><br>线程工厂，为线程池提供创建新线程功能。<code>ThreadFactory</code>是接口,只有一个方法： <code>Thread newThread(Runnable r)</code></li>
+</ul>
+<h2 id="Java线程池的种类"><a href="#Java线程池的种类" class="headerlink" title="Java线程池的种类"></a>Java线程池的种类</h2><ul>
+<li>newCachedThreadPool</li>
+</ul>
+<p>缓存的线程池，需要时创建，无用时回收，合理使用资源.</p>
+<ul>
+<li>newFixedThreadPool</li>
+</ul>
+<p>固定数量线程</p>
+<ul>
+<li>newScheduledThreadPool </li>
+</ul>
+<p>用于定时，延时，周期性任务的执行</p>
+<ul>
+<li>newSingleThreadPool</li>
+</ul>
+<p>只有一个线程运行，保证任务顺序执行FIFO，LILO</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService service = Executors.newCachedThreadPool();</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/02/04/Android-ThreadPool/" class="archive-article-date">
+  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread/">thread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread-pool/">thread pool</a></li></ul>
 	</div>
 
       

@@ -584,78 +584,6 @@
 
 
   
-    <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/">Android下利用Charles监听Https</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android手机利用Charles监听Https请求</p>
-<h3 id="1-安装证书"><a href="#1-安装证书" class="headerlink" title="1,安装证书"></a>1,安装证书</h3><h4 id="方法1-Android-4-0以上"><a href="#方法1-Android-4-0以上" class="headerlink" title="方法1 (Android 4.0以上):"></a>方法1 (Android 4.0以上):</h4><p>Android 4.0以上的手机支持用户安装证书。</p>
-<p>1,下载证书到手机上</p>
-<p>2,设置-&gt;安全-&gt;从存储设备安装 即可,安装时需要设置锁屏PIN或密码</p>
-<h4 id="方法2-需要Root"><a href="#方法2-需要Root" class="headerlink" title="方法2  (需要Root)"></a>方法2  (需要Root)</h4><p>手机root之后</p>
-<p>1,直接将证书拷贝到：<code>etc/security/cacerts</code> </p>
-<p>2,设置-&gt;安全-&gt;受信任的凭据 ，在系统tab找到你安装上的证书，然后选中即可。这样是以系统证书存在的。</p>
-<blockquote>
-<p>参考<a href="http://blog.csdn.net/winceos/article/details/32130655" target="_blank" rel="external">Android下安装证书的方法</a></p>
-</blockquote>
-<h3 id="2-设置Charles"><a href="#2-设置Charles" class="headerlink" title="2,设置Charles"></a>2,设置Charles</h3><p>打开Charles -&gt; Proxy -&gt; Proxy Settings -&gt; SSL</p>
-<p>勾选Enable SSL proxying</p>
-<p>Locations添加想要监听的域名和端口，比如 www.ihaveu.com, 443</p>
-<p>以上</p>
-<h3 id="附-如何设置手机代理"><a href="#附-如何设置手机代理" class="headerlink" title="附:如何设置手机代理"></a>附:如何设置手机代理</h3><ul>
-<li>在手机上WLAN中找到链接的网络</li>
-<li>设置网络</li>
-<li>高级选项</li>
-<li>填写PC的ip</li>
-<li>端口号通常默认 8888，否则需要到Charles中找到对应监听的端口号</li>
-<li>保存即可</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Android-WebViewBridge" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -726,6 +654,78 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/">Android下利用Charles监听Https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android手机利用Charles监听Https请求</p>
+<h3 id="1-安装证书"><a href="#1-安装证书" class="headerlink" title="1,安装证书"></a>1,安装证书</h3><h4 id="方法1-Android-4-0以上"><a href="#方法1-Android-4-0以上" class="headerlink" title="方法1 (Android 4.0以上):"></a>方法1 (Android 4.0以上):</h4><p>Android 4.0以上的手机支持用户安装证书。</p>
+<p>1,下载证书到手机上</p>
+<p>2,设置-&gt;安全-&gt;从存储设备安装 即可,安装时需要设置锁屏PIN或密码</p>
+<h4 id="方法2-需要Root"><a href="#方法2-需要Root" class="headerlink" title="方法2  (需要Root)"></a>方法2  (需要Root)</h4><p>手机root之后</p>
+<p>1,直接将证书拷贝到：<code>etc/security/cacerts</code> </p>
+<p>2,设置-&gt;安全-&gt;受信任的凭据 ，在系统tab找到你安装上的证书，然后选中即可。这样是以系统证书存在的。</p>
+<blockquote>
+<p>参考<a href="http://blog.csdn.net/winceos/article/details/32130655" target="_blank" rel="external">Android下安装证书的方法</a></p>
+</blockquote>
+<h3 id="2-设置Charles"><a href="#2-设置Charles" class="headerlink" title="2,设置Charles"></a>2,设置Charles</h3><p>打开Charles -&gt; Proxy -&gt; Proxy Settings -&gt; SSL</p>
+<p>勾选Enable SSL proxying</p>
+<p>Locations添加想要监听的域名和端口，比如 www.ihaveu.com, 443</p>
+<p>以上</p>
+<h3 id="附-如何设置手机代理"><a href="#附-如何设置手机代理" class="headerlink" title="附:如何设置手机代理"></a>附:如何设置手机代理</h3><ul>
+<li>在手机上WLAN中找到链接的网络</li>
+<li>设置网络</li>
+<li>高级选项</li>
+<li>填写PC的ip</li>
+<li>端口号通常默认 8888，否则需要到Charles中找到对应监听的端口号</li>
+<li>保存即可</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/" class="archive-article-date">
+  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 	</div>
 
       

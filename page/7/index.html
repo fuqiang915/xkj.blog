@@ -140,61 +140,6 @@
       <div class="body-wrap">
         
   
-    <article id="post-Android-Problems" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Problems/">Android常见问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-ListView-Item无法点击参考"><a href="#1-ListView-Item无法点击参考" class="headerlink" title="1.ListView Item无法点击参考"></a>1.ListView Item无法点击<a href="http://blog.csdn.net/zhufuing/article/details/8677407" target="_blank" rel="external">参考</a></h3><p>在item 的 最外层添加如下属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:descendantFocusability=<span class="string">"blocksDescendants"</span></div></pre></td></tr></table></figure></p>
-<h3 id="2-Android中系统设置中的清除数据究竟会清除哪些数据-参考"><a href="#2-Android中系统设置中的清除数据究竟会清除哪些数据-参考" class="headerlink" title="2.Android中系统设置中的清除数据究竟会清除哪些数据-参考"></a>2.Android中系统设置中的清除数据究竟会清除哪些数据-<a href="http://my.eoe.cn/sunshine_girl/archive/14873.html" target="_blank" rel="external">参考</a></h3><p>应用中的清理数据，会清理掉除去lib文件夹（含内部文件）的文件及文件夹。<br>p.s:/sdcard/Android/data/这个目录也是和包名相关的，但是系统中的清理数据不会清理掉这个目录中的相关信息。</p>
-<h3 id="3-如何修改-Android-ActionBar-左边的-icon"><a href="#3-如何修改-Android-ActionBar-左边的-icon" class="headerlink" title="3.如何修改 Android ActionBar 左边的 icon"></a>3.如何修改 Android ActionBar 左边的 icon</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span>  <span class="attr">android:logo</span>=<span class="string">"@drawable/logo"</span> &gt;</span></div></pre></td></tr></table></figure>
-<h3 id="4-WebView加载页面"><a href="#4-WebView加载页面" class="headerlink" title="4.WebView加载页面"></a>4.WebView加载页面</h3><p>设置WebViewClient ，可以使点击WebView中的链接在WebView中加载</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.webView.setWebViewClient(<span class="keyword">new</span> webViewClient()); </div><div class="line"><span class="comment">//加载地址</span></div><div class="line"><span class="keyword">this</span>.webView.loadUrl(<span class="string">"http://10.0.2.2"</span>);  </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">webViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span></span>&#123;</div><div class="line"><span class="comment">//重写shouldOverrideUrlLoading方法，使点击链接后不使用其他的浏览器打开。 </span></div><div class="line">    <span class="meta">@Override</span> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123; </div><div class="line">    </div><div class="line">        view.loadUrl(url); </div><div class="line"></div><div class="line">        <span class="comment">//如果不需要其他对点击链接事件的处理返回true，否则返回false </span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/Android-Problems/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Android-Theme-Translucent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -379,6 +324,61 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Problems" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/04/Android-Problems/">Android常见问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-ListView-Item无法点击参考"><a href="#1-ListView-Item无法点击参考" class="headerlink" title="1.ListView Item无法点击参考"></a>1.ListView Item无法点击<a href="http://blog.csdn.net/zhufuing/article/details/8677407" target="_blank" rel="external">参考</a></h3><p>在item 的 最外层添加如下属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:descendantFocusability=<span class="string">"blocksDescendants"</span></div></pre></td></tr></table></figure></p>
+<h3 id="2-Android中系统设置中的清除数据究竟会清除哪些数据-参考"><a href="#2-Android中系统设置中的清除数据究竟会清除哪些数据-参考" class="headerlink" title="2.Android中系统设置中的清除数据究竟会清除哪些数据-参考"></a>2.Android中系统设置中的清除数据究竟会清除哪些数据-<a href="http://my.eoe.cn/sunshine_girl/archive/14873.html" target="_blank" rel="external">参考</a></h3><p>应用中的清理数据，会清理掉除去lib文件夹（含内部文件）的文件及文件夹。<br>p.s:/sdcard/Android/data/这个目录也是和包名相关的，但是系统中的清理数据不会清理掉这个目录中的相关信息。</p>
+<h3 id="3-如何修改-Android-ActionBar-左边的-icon"><a href="#3-如何修改-Android-ActionBar-左边的-icon" class="headerlink" title="3.如何修改 Android ActionBar 左边的 icon"></a>3.如何修改 Android ActionBar 左边的 icon</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span>  <span class="attr">android:logo</span>=<span class="string">"@drawable/logo"</span> &gt;</span></div></pre></td></tr></table></figure>
+<h3 id="4-WebView加载页面"><a href="#4-WebView加载页面" class="headerlink" title="4.WebView加载页面"></a>4.WebView加载页面</h3><p>设置WebViewClient ，可以使点击WebView中的链接在WebView中加载</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.webView.setWebViewClient(<span class="keyword">new</span> webViewClient()); </div><div class="line"><span class="comment">//加载地址</span></div><div class="line"><span class="keyword">this</span>.webView.loadUrl(<span class="string">"http://10.0.2.2"</span>);  </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">webViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span></span>&#123;</div><div class="line"><span class="comment">//重写shouldOverrideUrlLoading方法，使点击链接后不使用其他的浏览器打开。 </span></div><div class="line">    <span class="meta">@Override</span> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123; </div><div class="line">    </div><div class="line">        view.loadUrl(url); </div><div class="line"></div><div class="line">        <span class="comment">//如果不需要其他对点击链接事件的处理返回true，否则返回false </span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/04/Android-Problems/" class="archive-article-date">
+  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li></ul>
 	</div>
 
       
