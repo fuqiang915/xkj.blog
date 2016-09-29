@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="埃克斯">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="埃克斯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="埃克斯">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/xkj_v1_light.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XBlog</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">技术路线</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/">所有文章</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">XBlog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/xkj_v1_light.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XBlog</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">技术路线</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-Android-make-jar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/02/Android-make-jar/">如何重新编辑jar包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇到一个问题，为了使用Monkey Talk作测试，需要把项目转换成AspectJ的项目，但是转换完成之后，编译项目的时候遇到了一个冲突,意思是说aspectj的某个jar包和项目中的一个jar包的<code>about.html</code>文件冲突了。因为<code>about.html</code>文件没什么用，就打算直接把它从<code>jar</code>包中删掉。</p>
+<p>详细解决方法：</p>
+<ol>
+<li>将jar包用解压工具解压，把解压后的<code>about.html</code>文件删掉</li>
+<li>利用命令 <code>jar cvf jar_name.jar ./*</code> 重新打包</li>
+</ol>
+<p>命令说明： <code>jar cvf  jar包名称  需要打包的文件</code></p>
+<p>实际上就是利用jdk提供的命令重新将文件打包而已.</p>
+<blockquote>
+<p>参考文档： <a href="http://docs.oracle.com/javase/tutorial/deployment/jar/build.html" target="_blank" rel="external">jar 命令文档</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/02/Android-make-jar/" class="archive-article-date">
+  	<time datetime="2015-02-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Event-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/01/Android-Event-01/">Android事件基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-事件处理机制"><a href="#1-事件处理机制" class="headerlink" title="1.事件处理机制"></a>1.事件处理机制</h1><ol>
+<li>基于监听的事件处理</li>
+<li>基于回调的事件处理</li>
+</ol>
+<h2 id="1-1-基于监听的事件处理"><a href="#1-1-基于监听的事件处理" class="headerlink" title="1.1 基于监听的事件处理"></a>1.1 基于监听的事件处理</h2><h3 id="1-1-1-View事件种类"><a href="#1-1-1-View事件种类" class="headerlink" title="1.1.1 View事件种类"></a>1.1.1 View事件种类</h3><ol>
+<li><code>View.OnClickListener</code></li>
+<li><code>View.OnCreateContextMenuListener</code></li>
+<li><code>View.OnFocusChangeListener</code></li>
+<li><code>View.OnKeyListener</code></li>
+<li><code>View.OnLongClickListener</code></li>
+<li><code>View.OnTouchListener</code></li>
+</ol>
+<h3 id="1-1-2-实现事件监听器的几种形式"><a href="#1-1-2-实现事件监听器的几种形式" class="headerlink" title="1.1.2 实现事件监听器的几种形式"></a>1.1.2 实现事件监听器的几种形式</h3><ol>
+<li>内部类</li>
+<li>外部类</li>
+<li>Activity本身实现事件接口</li>
+<li>匿名内部类形式</li>
+</ol>
+<h2 id="1-2-基于回调的事件处理"><a href="#1-2-基于回调的事件处理" class="headerlink" title="1.2 基于回调的事件处理"></a>1.2 基于回调的事件处理</h2><p>组件自身负责处理事件,通过集成组件重写其中的事件接口来实现</p>
+<h3 id="1-2-1-View回调事件"><a href="#1-2-1-View回调事件" class="headerlink" title="1.2.1 View回调事件"></a>1.2.1 View回调事件</h3><ol>
+<li><code>boolean onKeyDown(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyLongPress(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyShortcut(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyUp(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onTouchEvent(MotionEvent event);</code></li>
+<li><code>boolean onTrackballEvent(MotionEvent event);</code></li>
+</ol>
+<h3 id="1-2-2-基于回调的事件传播"><a href="#1-2-2-基于回调的事件传播" class="headerlink" title="1.2.2 基于回调的事件传播"></a>1.2.2 基于回调的事件传播</h3><ul>
+<li>如果事件返回true，说明事件已经被处理，不会传播</li>
+<li>如果事件返回false，说明事件未被处理，会继续传播</li>
+</ul>
+<h2 id="响应系统设置的事件"><a href="#响应系统设置的事件" class="headerlink" title="响应系统设置的事件"></a>响应系统设置的事件</h2><p>当应用程序随系统设置进行调整，比如屏幕方向，导航等。有时候还需要应用程序监听系统设置的更改作出响应。</p>
+<h1 id="2-Configuration-类"><a href="#2-Configuration-类" class="headerlink" title="2. Configuration 类"></a>2. Configuration 类</h1><p>提供了一些配置相关的功能<br><code>Configuration conf = getResources().getConfiguration();</code><br>常用属性</p>
+<ul>
+<li><code>public float fontScale</code>: 系统字体缩放系数</li>
+<li><code>public int keyboard</code>: 获取键盘类型</li>
+<li><code>public int keyboardHidden</code>: 返回键盘是否可用（软键盘是否开启） </li>
+<li><code>public Locale locale</code>: 获取用户当前的Locale场所（位置）</li>
+<li><code>public int mcc</code>: 获取移动信号的国家码</li>
+<li><code>public int mnc</code>: 获取移动信号的网络码</li>
+<li><code>public int navigation</code>: 判断系统上方向导航设备类型</li>
+<li><code>public int orientation</code>: 获取系统屏幕的方向</li>
+<li><code>public int touchscreen</code>: 获取系统触摸屏的触摸方式</li>
+</ul>
+<h3 id="响应系统设置更改事件"><a href="#响应系统设置更改事件" class="headerlink" title="响应系统设置更改事件"></a>响应系统设置更改事件</h3><p><code>public void onConfigurationChanged(Configuration newConfig);</code></p>
+<h1 id="3-Handler-消息传递机制"><a href="#3-Handler-消息传递机制" class="headerlink" title="3. Handler 消息传递机制"></a>3. Handler 消息传递机制</h1><p>为了解决Android多线程事件传递的问题</p>
+<h2 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h2><p>两个作用：</p>
+<ul>
+<li>在新启动的线程中发送消息</li>
+<li>在主线程中获取、处理消息<br>//TODO: 继续</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/01/Android-Event-01/" class="archive-article-date">
+  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event/">Event</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-9-patch-pic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/01/Android-9-patch-pic/">Android 9-patch图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android可以处理一种特殊的png图片9-patch图，图片以<code>.9.png</code>结尾,主要为了实现图片的部分区域的缩放。更多时候应用在按钮或其他控件的背景图上。</p>
+<h3 id="gt-制作方法："><a href="#gt-制作方法：" class="headerlink" title="&gt;制作方法："></a>&gt;制作方法：</h3><p>Android提供了制作9-patch图的工具位置在：<code>android_sdk/tools/draw9patch</code></p>
+<p>先看下工具截图：</p>
+<p><img src="!--￼0--&gt;/images/page_img/20150201_1.png" alt="9-patch tools"></p>
+<p>简单来说：<br>截图中左边是编辑区，右边是预览</p>
+<p>左边图中的四条黑线分别指定缩放区域和显示区域. </p>
+<ul>
+<li>左、上: 缩放区域(repeat区域)</li>
+<li>右、下: 内容区域</li>
+</ul>
+<p>编辑时很简单，只要拖动对应的线条就可以调整到你需要的缩放效果，右边可以实时预览。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/01/Android-9-patch-pic/" class="archive-article-date">
+  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/9-patch/">9-patch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Jenkins_Set_up" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/01/27/Jenkins_Set_up/">Jenkins持续集成系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jenkins配置方法：</p>
+<h2 id="1-安装tomcat"><a href="#1-安装tomcat" class="headerlink" title="1.安装tomcat"></a>1.安装tomcat</h2><h2 id="2-下载Jenkins"><a href="#2-下载Jenkins" class="headerlink" title="2.下载Jenkins"></a>2.下载Jenkins</h2><p>将下载好的jenkins.war,放入tomcat下的 <code>web_app</code>目录</p>
+<h2 id="3-启动tomcat-进入-http-localhost-8080-jenkins"><a href="#3-启动tomcat-进入-http-localhost-8080-jenkins" class="headerlink" title="3.启动tomcat,进入 http://localhost:8080/jenkins"></a>3.启动tomcat,进入 <a href="http://localhost:8080/jenkins" target="_blank" rel="external">http://localhost:8080/jenkins</a></h2><h2 id="4-配置Jenkins"><a href="#4-配置Jenkins" class="headerlink" title="4.配置Jenkins"></a>4.配置Jenkins</h2><h3 id="4-1-进入系统配置"><a href="#4-1-进入系统配置" class="headerlink" title="4.1.进入系统配置"></a>4.1.进入系统配置</h3><h3 id="4-2-配置JavaSDK"><a href="#4-2-配置JavaSDK" class="headerlink" title="4.2.配置JavaSDK"></a>4.2.配置JavaSDK</h3><p>按照提示设置好JavaSdk的目录(绝对路径)就好</p>
+<blockquote>
+<p>mac下查找<code>JAVA_HOME</code>的方法：<br>命令行<code>$ /usr/libexec/java_home</code> ，然后将目录地址添加到 <code>~/.bash_profile</code>中</p>
+</blockquote>
+<h3 id="4-3-配置Ant"><a href="#4-3-配置Ant" class="headerlink" title="4.3.配置Ant"></a>4.3.配置Ant</h3><p>设置Ant目录地址即可</p>
+<h3 id="4-4-配置构建项目"><a href="#4-4-配置构建项目" class="headerlink" title="4.4.配置构建项目"></a>4.4.配置构建项目</h3><p>重点需要配置的位置：</p>
+<h4 id="4-4-1-源码管理"><a href="#4-4-1-源码管理" class="headerlink" title="4.4.1. 源码管理"></a>4.4.1. 源码管理</h4><p>(img)</p>
+<h4 id="4-4-2-Invoke-Ant"><a href="#4-4-2-Invoke-Ant" class="headerlink" title="4.4.2. Invoke Ant"></a>4.4.2. Invoke Ant</h4><p><img src="!--￼0--&gt;/images/page_img/20150201_2-1.png" alt="Invoke Ant"></p>
+<p>令。测试环境中是 <code>ant debug</code>,正式环境可以是 <code>ant release</code>.</p>
+<p>参数：</p>
+<ul>
+<li><p>Targets : 需要执行的命令</p>
+</li>
+<li><p>Build File : 相对于workspace的目录，也就是源码管理时填写的目录</p>
+</li>
+</ul>
+<p>如图中的配置构建时相当于执行：<code>ant -f uapp/build.xml debug</code></p>
+<h4 id="4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins"><a href="#4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)"></a>4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)</h4><p><img src="!--￼1--&gt;/images/page_img/20150201_2-3.png" alt="Run Android monkey tester"></p>
+<h4 id="4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins"><a href="#4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)"></a>4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)</h4><p><img src="!--￼2--&gt;/images/page_img/20150201_2-2.png" alt="install android package"></p>
+<h4 id="4-4-5-配置构建之后保存的文档"><a href="#4-4-5-配置构建之后保存的文档" class="headerlink" title="4.4.5. 配置构建之后保存的文档"></a>4.4.5. 配置构建之后保存的文档</h4><p>配置好之后，构建成功之后就会显示此文件，可以点击直接下载，见下图：</p>
+<p><img src="!--￼3--&gt;/images/page_img/20150201_2-4.png" alt="install android package"></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/01/27/Jenkins_Set_up/" class="archive-article-date">
+  	<time datetime="2015-01-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-27</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Effective_Java_39" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/01/24/Effective_Java_39/">Effective Java 第39条:必要时进行保护性拷贝</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>旨在保持代码健壮性，防止客户端破坏类的约束条件。</p>
+<p>例如,下面这个类表示一段不可变的时间周期：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start,Date end)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(start.compareTo(end)&gt;<span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span>+end);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">this</span>.start = start;</div><div class="line">		<span class="keyword">this</span>.end = end;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> start;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> end;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看似代码没什么问题，在构造方式内验证了数据的约束。但是遇到如下攻击问题就凸显出来了。</p>
+<p>这些时候就需要用到保护性拷贝</p>
+<h3 id="第一种攻击-传入构造参数之后，修改引用的值"><a href="#第一种攻击-传入构造参数之后，修改引用的值" class="headerlink" title="第一种攻击: 传入构造参数之后，修改引用的值"></a>第一种攻击: 传入构造参数之后，修改引用的值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Date start = <span class="keyword">new</span> Date();</div><div class="line">Date end = <span class="keyword">new</span> Date();</div><div class="line">Period p = <span class="keyword">new</span> Period(start,end);</div><div class="line">end.setYear(<span class="number">78</span>);<span class="comment">// 修改了内部参数，导致约束失效</span></div></pre></td></tr></table></figure>
+<p><strong>解决办法</strong>：将传入的参数拷贝一份，而不使用原始对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start,Date end)</span></span>&#123;</div><div class="line">	<span class="comment">//保护性拷贝</span></div><div class="line">	<span class="keyword">this</span>.start = <span class="keyword">new</span> Date(start.getTime());</div><div class="line">	<span class="keyword">this</span>.end= <span class="keyword">new</span> Date(end.getTime());</div><div class="line"></div><div class="line">	<span class="comment">//验证数据有效性	</span></div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.start.compareTo(<span class="keyword">this</span>.end)&gt;<span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start +<span class="string">" after "</span>+end);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于参数类型可以被不可信任方子类化的参数，不要使用clone方法进行保护性拷贝。</p>
+<h3 id="第二种攻击-修改获取到的参数引用"><a href="#第二种攻击-修改获取到的参数引用" class="headerlink" title="第二种攻击: 修改获取到的参数引用"></a>第二种攻击: 修改获取到的参数引用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Date start = <span class="keyword">new</span> Date();</div><div class="line">Date end = <span class="keyword">new</span> Date();</div><div class="line">Period p = <span class="keyword">new</span> Period(start,end):;</div><div class="line">p.end().setYear(<span class="number">78</span>);<span class="comment">// 修改了类参数，导致约束无效</span></div></pre></td></tr></table></figure>
+<p><strong>解决办法</strong>：end()返回可变内部域的保护性拷贝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Date(start.getTime());</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Date(end.getTime());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到此为止，这个类就是真正不可变的了，约束有了保证,绝对不会违反”周期的起始时间不能落后于结束时间”这个约束条件。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/01/24/Effective_Java_39/" class="archive-article-date">
+  	<time datetime="2015-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Effective/">Effective</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Notification" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/01/22/Android-Notification/">Notification</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>参考资料：</p>
+<p><a href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Compatibility" target="_blank" rel="external">Notifications</a></p>
+</blockquote>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>使用<code>NotificationCompat.Builder</code>创建<code>Notification</code></p>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NotificationCompat.Builder mBuilder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>)</div><div class="line">.setSmallIcon(R.drawable.notification_icon)</div><div class="line">.setContentTitle(<span class="string">"My notification"</span>)</div><div class="line">.setContentText(<span class="string">"Hello World!"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="设置内容"><a href="#设置内容" class="headerlink" title="设置内容"></a>设置内容</h3><ul>
+<li>icon : <code>builder.setSmallIcon(R.drawable.ic);</code></li>
+<li>title : <code>builder.setContextText(&quot;内容&quot;);</code></li>
+</ul>
+<h3 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h3><ul>
+<li>ongoing : 是否一直持续，比如打电话</li>
+<li>setAutoCancel() :  设置是否自动删除</li>
+</ul>
+<h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><p>通过设置<code>PendingIntent</code>响应点击事件。</p>
+<p>4.1以上版本支持展开式的通知，支持多个Action Button,4.1以下不支持.<a href="http://developer.android.com/training/notify-user/expanded.html" target="_blank" rel="external">Using Big View Styles</a></p>
+<h3 id="priority"><a href="#priority" class="headerlink" title="priority"></a>priority</h3><p><code>builder.setPriority();</code>设置优先级</p>
+<h5 id="创建PendingIntent"><a href="#创建PendingIntent" class="headerlink" title="创建PendingIntent"></a>创建PendingIntent</h5><p><code>PendingIntent</code> 的目标可以是 <code>Activity</code>，<code>Broadcast</code>,<code>Service</code><br>打开Activity</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Intent resultIntent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, ResultActivity.class);</div><div class="line"></div><div class="line"><span class="comment">// Because clicking the notification opens a new ("special") activity, there's</span></div><div class="line"><span class="comment">// no need to create an artificial back stack.</span></div><div class="line">PendingIntent resultPendingIntent =</div><div class="line">	PendingIntent.getActivity(</div><div class="line">	<span class="keyword">this</span>,</div><div class="line">	<span class="number">0</span>,</div><div class="line">	resultIntent,</div><div class="line">	PendingIntent.FLAG_UPDATE_CURRENT</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>发送广播</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(mContext, AppUpdateReceiver.class);</div><div class="line">intent.putExtra(AppUpdateReceiver.P_DOWNLOAD_URL, url);</div><div class="line">PendingIntent pIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, intent, 	PendingIntent.FLAG_UPDATE_CURRENT);</div></pre></td></tr></table></figure>
+<p>打开Service</p>
+<h4 id="设置点击事件"><a href="#设置点击事件" class="headerlink" title="设置点击事件"></a>设置点击事件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PendingIntent resultPendingIntent;</div><div class="line">...</div><div class="line">mBuilder.setContentIntent(resultPendingIntent);</div></pre></td></tr></table></figure>
+<h3 id="展示"><a href="#展示" class="headerlink" title="展示"></a>展示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mNotificationManager =</div><div class="line">	(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</div><div class="line">mNotificationManager.notify(notification_id,notification);</div></pre></td></tr></table></figure>
+<p>之后可以通过<code>notification_id</code>来更新notification</p>
+<h3 id="删除Notification"><a href="#删除Notification" class="headerlink" title="删除Notification"></a>删除Notification</h3><ul>
+<li><code>cancel(notification_id)</code> : 清除指定id的通知</li>
+<li><code>cancelAll()</code> : 清除你之前展示的所有通知</li>
+<li><code>setAutoCancel()</code> : 通过设置<code>notification</code>的属性，使用户点击之后自动删除</li>
+</ul>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li>点击通知栏没有反应<br>Notificaiton 对应的PendingIntent 对应的是一个服务代码如下</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(mContext, InstallAppService.class);</div><div class="line">intent.putExtra(InstallAppService.P_FILE_PATH, filePath);</div><div class="line"> <span class="comment">// 设置点击之后启动一个服务</span></div><div class="line"> PendingIntent pIntent = PendingIntent.getService(mContext, genRequestCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);</div><div class="line"> NotificationCompat.Builder mBuilder = <span class="keyword">new</span> NotificationCompat.Builder(mContext)</div><div class="line">         .setTicker(<span class="string">"下载完成"</span>)</div><div class="line">         .setContent(<span class="keyword">new</span> RemoteViews(mPackageName, R.layout.download_notification_fail))</div><div class="line">         .setSmallIcon(R.drawable.ic_launcher)</div><div class="line">         .setContentIntent(pIntent);</div><div class="line"> Notification n = mBuilder.build();</div><div class="line"> n.contentView.setTextViewText(R.id.notification_title, msg);</div></pre></td></tr></table></figure>
+<h4 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h4><p>在三星测试机上点击此通知无法启动对应的服务。这个测试机已被刷为4.4系统。在其他手机（Nexus5,小米3，LG，HTC等）上没有出现问题</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>经过反复查找和测试，定位到<code>getService</code>方法中的<code>requestCode</code>参数。当<code>requestCode</code>为定值时，第一次点击之后可以正确打开服务，但是之后（不知道是次数原因还是其他原因）会出现点击之后没有反应的情况。</p>
+<h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><p>针对上述原因，我把<code>requestCode</code>参数设置为随机数，算是暂时解决了这个问题</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/01/22/Android-Notification/" class="archive-article-date">
+  	<time datetime="2015-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-22</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Notification/">Notification</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-OGEngine-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/01/19/Android-OGEngine-1/">OGEngine教程(一):简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="gt-简介"><a href="#gt-简介" class="headerlink" title="&gt;简介"></a>&gt;简介</h3><p>OGEngine是国内一款开源移动端游戏开发引擎，基于AndEngine。目前开始走向跨平台，之前一直专注于Android端。</p>
+<blockquote>
+<p>从最开始想开始做Android游戏开发时，为了选择一个游戏引擎纠结了很久，最终定下OGEngine。<br>原因在于：OGEngine用Java编写、开源虽然资料不是很多，但是源码示例不少够用了。没有选择cocos2d-x主要因为C语言不熟悉，还有cocos主站有点乱找不到头绪的赶脚。</p>
+</blockquote>
+<h3 id="gt-相关资料"><a href="#gt-相关资料" class="headerlink" title="&gt;相关资料"></a>&gt;相关资料</h3><ul>
+<li><a href="http://www.ogengine.com/" target="_blank" rel="external">OGEngine 官网</a></li>
+</ul>
+<h3 id="gt-HelloWorld-项目"><a href="#gt-HelloWorld-项目" class="headerlink" title="&gt;HelloWorld 项目"></a>&gt;HelloWorld 项目</h3><h4 id="需要的资源"><a href="#需要的资源" class="headerlink" title="需要的资源:"></a>需要的资源:</h4><ul>
+<li>OGEngine lib  <a href="http://oge.ogengine.com/download/downloadInfo.jsp" target="_blank" rel="external">下载地址</a></li>
+</ul>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤:"></a>步骤:</h4><ol>
+<li>新建项目将OGEngine lib拷贝到项目libs文件夹中，添加lib的引用</li>
+<li>新建建类 MainGameLauncher 继承自 GameLauncher</li>
+<li>将MainActivity 修改为继承 GameActivity</li>
+<li>创建MainScene继承自Scene，作为主要场景，类似于一个页面</li>
+</ol>
+<p>到此，最最基本的项目结构就建好了</p>
+<p>GameLauncher 一枚</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainGameLauncher</span> <span class="keyword">extends</span> <span class="title">GameLauncher</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CAMERA_WIDTH = <span class="number">320</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> PixelPerfectEngineOptions <span class="title">onCreatePixelPerfectEngineOptions</span><span class="params">()</span> </span>&#123;</div><div class="line">        PixelPerfectEngineOptions pixelPerfectEngineOptions = <span class="keyword">new</span> PixelPerfectEngineOptions(ZoomCamera.class);</div><div class="line">        <span class="comment">// 设置竖屏</span></div><div class="line">        pixelPerfectEngineOptions.setScreenOrientation(ScreenOrientation.PORTRAIT_FIXED);</div><div class="line">        <span class="comment">// 适配模式,这里设置为“保持宽度不变，改变高”</span></div><div class="line">        pixelPerfectEngineOptions.setPixelPerfectMode(PixelPerfectMode.CHANGE_HEIGHT);</div><div class="line">        <span class="comment">// 参考尺寸</span></div><div class="line">        pixelPerfectEngineOptions.setDesiredSize(CAMERA_WIDTH);</div><div class="line">        <span class="keyword">return</span> pixelPerfectEngineOptions;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLoadResources</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 加载资源</span></div><div class="line">        RegionRes.loadBitmapTextureFromAssets(Res.mBackGroundTexture);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLoadComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 启动一个Scene</span></div><div class="line">        startScene(MainScene.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>GameActivity:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">GameActivity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> GameLauncher <span class="title">CreateGameLauncher</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">//游戏启动器</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MainGameLauncher();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle pSavedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(pSavedInstanceState);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>MainScene:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainScene</span> <span class="keyword">extends</span> <span class="title">Scene</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> VertexBufferObjectManager pVertexBufferObjectManager;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSceneCreate</span><span class="params">(SceneBundle bundle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSceneCreate(bundle);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</div><div class="line">        initBg();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initBg</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 创建并显示一个背景图精灵</span></div><div class="line">        Sprite bg = <span class="keyword">new</span> Sprite(<span class="number">0</span>, <span class="number">0</span>, RegionRes.getRegion(Res.mBackGroundTexture), pVertexBufferObjectManager);</div><div class="line">        <span class="comment">// 添加到场景中</span></div><div class="line">        <span class="keyword">this</span>.attachChild(bg);</div><div class="line">        <span class="comment">// 创建一个文字并加入到场景中</span></div><div class="line">        Text text = <span class="keyword">new</span> Text(<span class="number">100</span>,<span class="number">100</span>, FontHelper.getBitmapFont(FontHelper.FONT_TEST),<span class="string">"汪萍 fuqiang"</span>,pVertexBufferObjectManager);</div><div class="line">        text.setScale(<span class="number">0.8f</span>);</div><div class="line">        <span class="keyword">this</span>.attachChild(text);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/01/19/Android-OGEngine-1/" class="archive-article-date">
+  	<time datetime="2015-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-19</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GameDevelop/">GameDevelop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OGEngine/">OGEngine</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vim-short-keys" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/07/vim-short-keys/">Vim快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记得是在刚上班的时候就开始用Vim，不过到现在为止感觉还是没有完全将Vim的潜力完全挖掘出来。<br>这里主要记录一下常用的快捷键，方便查找。</p>
+<hr>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><ul>
+<li><code>i</code>: 在当前字符的左边插入</li>
+<li><code>I</code>: 在当前行首插入</li>
+<li><code>a</code>: 在当前字符的右边插入</li>
+<li><code>A</code>: 在当前行尾插入</li>
+<li><code>o</code>: 在当前行下面插入一个新行</li>
+<li><code>O</code>: 在当前行上面插入一个新行</li>
+<li><code>d</code>: 删除.删除和查找,方向，重复次数方向都可以组合操作</li>
+<li><code>dd</code>: 删除当前</li>
+<li><code>D</code>: 删除当前为止到行尾</li>
+</ul>
+<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><ul>
+<li><code>[范围]s/[源字符]/[目标字符]/[g]</code>: 替换字符</li>
+<li><code>s/[源字符]/[目标字符]</code>: 替换字符,当前行</li>
+<li><code>%s/[源字符]/[目标字符]</code>: 替换字符,整个文件范围</li>
+<li><code>1,20 s/[源字符]/[目标字符]</code>: 替换字符,1到20行</li>
+<li><code>/[字符表达式]</code>: 查找字符</li>
+<li><code>/admin</code>: 查找admin</li>
+<li><code>/a.*in</code>: 查找类似admin,aaxxxin,axxxxin,<code>.</code> 匹配单个字符,<code>*</code>匹配任意字符 类似正则表达式， </li>
+</ul>
+<h3 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h3><ul>
+<li><code>k</code>: 上</li>
+<li><code>j</code>: 下 </li>
+<li><code>h</code>: 左</li>
+<li><code>l</code>: 右</li>
+<li><code>gg</code>: 到文件首</li>
+<li><code>G</code>: 到文件尾</li>
+<li><code>^</code>: 到行首</li>
+<li><code>$</code>: 到行尾</li>
+<li><code>w</code>: 移动到下一个单词</li>
+<li><code>b</code>: 移动到上一个单词</li>
+<li><code>%</code>: 跳到匹配的括号处（”{ }””[]””()”）</li>
+<li><code>[num]G</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>[num]gg</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>[num]:</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>&amp;lt;control-i, tab&amp;gt;</code>:跳到下一个跳点(Jump Point)</li>
+<li><code>&amp;lt;control-o&amp;gt;</code>:跳到上一个跳点</li>
+<li><code>H</code>: 移动光标到屏幕上面</li>
+<li><code>M</code>: 移动光标到屏幕中间</li>
+<li><code>L</code>: 移动光标到屏幕下面</li>
+<li><code>&amp;lt;control-F&amp;gt;</code>: 向下移动一屏。</li>
+<li><code>&amp;lt;control-B&amp;gt;</code>: 向上移动一屏。</li>
+<li><code>*</code>: 读取光标处的字符串，并且移动光标到它再次出现的地方。</li>
+<li><code>\#</code>: 和上面的类似，但是是往反方向寻找。</li>
+<li><code>ma</code>: 在当前光标的位置标记一个书签，名字为 a。书签名只能是小写字母。你看不见书签的存在，但它确实已经在那里了。</li>
+<li><code>`a</code>: 到书签 a 处。注意这个不是单引号，它一般位于大部分键盘的 1 的左边。</li>
+<li><code>`.</code>: 到你上次编辑文件的地方。这个命令很有用，而且你不用自己去标记它</li>
+<li><code>/text</code>: 从当前光标处开始搜索字符串 text，并且到达 text 出现的地方。必须使用回车来开始这个搜索命令。如果想重复上次的搜索的话，按n。</li>
+<li><code>?text</code>: 和上面类似，但是是反方向。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/07/vim-short-keys/" class="archive-article-date">
+  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
+<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>方法一</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>方法二（需要安装好git）</p>
+</li>
+</ul>
+<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
+<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
+<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
+<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
+<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
+<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
+</blockquote>
+<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
+<p><img src="!--￼5--&gt;/images/page_img/zsh-2.png" alt="目录选择"></p>
+<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
+<p><img src="!--￼6--&gt;/images/page_img/zsh-1.png" alt="目录历史"></p>
+<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
+<p><img src="!--￼7--&gt;/images/page_img/zsh-3.png" alt="命令参数提示"></p>
+<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
+  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Service-Long-Time-Stay" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/">Android Service</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>Service用于一些耗时的操作，或者 后台执行，不提供用户交互界面的操作，例如：下载，播放音乐等</p>
+<h3 id="在独立进程运行"><a href="#在独立进程运行" class="headerlink" title="在独立进程运行"></a>在独立进程运行</h3><p>以 “：message”中以”:” 开头 代表在独立进程中运行， 在关闭App 后仍然独立运行</p>
+<h3 id="生命周期："><a href="#生命周期：" class="headerlink" title="生命周期："></a>生命周期：</h3><h4 id="onCreate-onStart-onDestroy"><a href="#onCreate-onStart-onDestroy" class="headerlink" title="onCreate, onStart,onDestroy()"></a>onCreate, onStart,onDestroy()</h4><p>第一次启动时调用onCreate()-&gt;onStart()， 如果启动一个正在运行的Service，不会调用onCreate,只调用onStart<br>停止服务时调用onDestroy();</p>
+<h4 id="onStartCommand-Intent-int-int"><a href="#onStartCommand-Intent-int-int" class="headerlink" title="onStartCommand(Intent , int , int )"></a>onStartCommand(Intent , int , int )</h4><p>有四种返回值：</p>
+<ol>
+<li><strong>START_STICKY</strong>：<br>如果service进程被kill掉，保留service的状态为开始状态，但不保留递送的intent对象。随后系统会尝试重新创建service，由于服务状态为开始状态，所以创建服务后一定会调用onStartCommand(Intent,int,int)方法。如果在此期间没有任何启动命令被传递到service，那么参数Intent将为null。</li>
+<li><strong>START_NOT_STICKY</strong>：<br>“非粘性的”。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统将会把它置为started状态，系统不会自动重启该服务，直到startService(Intent intent)方法再次被调用;。</li>
+<li><strong>START_REDELIVER_INTENT</strong>：<br>重传Intent。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统会自动重启该服务，并将Intent的值传入。</li>
+<li><strong>START_STICKY_COMPATIBILITY</strong>：<br>START_STICKY的兼容版本，但不保证服务被kill后一定能重启。 </li>
+</ol>
+<h3 id="启动方式"><a href="#启动方式" class="headerlink" title="启动方式"></a>启动方式</h3><ul>
+<li><strong>startService()</strong></li>
+</ul>
+<p>正常启动未被启动过的Service：<br>onCreate() - &gt; onStart()  -运行- -&gt;stopService()或selfStop() -&gt; onDestroy()</p>
+<p>启动正在运行的Service：不会回调onCreate()<br>onStart()  -运行- -&gt; stopService()或selfStop() -&gt; onDestroy()</p>
+<p>传递参数：<br>启动Service时通过intent 传递参数，Service 中在 onStartCommand(Intent ,int ,int )回调方法中获取参数</p>
+<ul>
+<li><strong>bindService()</strong></li>
+</ul>
+<p>把这个 Service 和调用 Service 的客户类绑起来，如果调用这个客户类被销毁，Service 也会被销毁。<br>好处是会回调onBind()方法，可以从这里返回一个实现IBind接口的类，这样可以实现和Service的通信了。<br>如果调用时Service没有运行，会自动启动Service</p>
+<p>绑定未启动的Service过程：没有onStart()回调</p>
+<p>onCreate –&gt; onBind(只一次，不可多次绑定) –&gt; onUnbind –&gt; onDestory</p>
+<h4 id="二者区别："><a href="#二者区别：" class="headerlink" title="二者区别："></a>二者区别：</h4><ul>
+<li><strong>startService()</strong> : 调用者和服务没有关系，即使调用者退出，服务仍然运行。</li>
+<li><strong>bindService()</strong> : 调用者和服务绑定，如果调用者退出，那么服务也被停止了。</li>
+</ul>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>所以，在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。</p>
+<h3 id="使服务常驻内存，不被系统销毁"><a href="#使服务常驻内存，不被系统销毁" class="headerlink" title="使服务常驻内存，不被系统销毁"></a>使服务常驻内存，不被系统销毁</h3><p>自己的app的service总是容易被系统回收，基本上的解决思路有以下几种：</p>
+<ul>
+<li>把service写成系统服务，将不会被回收(未实践)：<br>在Manifest.xml文件中设置persistent属性为true，则可使该服务免受out-of-memory killer的影响。但是这种做法一定要谨慎，系统服务太多将严重影响系统的整体运行效率。</li>
+<li><p>提高service的优先级(未实践)：<br>设置android:priority=”1000”</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 为了消去加上android:priority="1000"后出现的警告信息，可以设置android:exported属性，指示该服务是否能够被其他应用程序组件调用或跟它交互 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.example.helloandroid.weatherforecast.service.UpdateWidgetService"</span><span class="attr">android:exported</span>=<span class="string">"false"</span> &gt;</span></div><div class="line">	 <span class="comment">&lt;!-- 为防止Service被系统回收，可以通过提高优先级解决，1000是最高优先级，数字越小，优先级越低 --&gt;</span></div><div class="line">	 <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"1000"</span>&gt;</span><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">service</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>将服务写成前台服务foreground service(已实践，很大程度上能解决问题，但不能保证一定不会被杀)：<br>重写onStartCommand方法，使用StartForeground(int,Notification)方法来启动service。</p>
+</li>
+</ul>
+<blockquote>
+<p>注：前台服务会在状态栏显示一个通知，最典型的应用就是音乐播放器，只要在播放状态下，就算休眠也不会被杀，如果不想显示通知，只要把参数里的int设为0即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Notification notification = <span class="keyword">new</span> Notification(R.drawable.logo,</div><div class="line">                <span class="string">"wf update service is running"</span>,</div><div class="line">                System.currentTimeMillis());</div><div class="line">        pintent=PendingIntent.getService(<span class="keyword">this</span>, <span class="number">0</span>, intent, <span class="number">0</span>);</div><div class="line">        notification.setLatestEventInfo(<span class="keyword">this</span>, <span class="string">"WF Update Service"</span>,</div><div class="line">                <span class="string">"wf update service is running！"</span>, pintent);</div><div class="line">            </div><div class="line">        <span class="comment">//让该service前台运行，避免手机休眠时系统自动杀掉该服务</span></div><div class="line">        <span class="comment">//如果 id 为 0 ，那么状态栏的 notification 将不会显示。</span></div><div class="line">        startForeground(startId, notification);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>同时，对于通过startForeground启动的service，onDestory方法中需要通过stopForeground(true)来取消前台运行状态。</p>
+<blockquote>
+<p>ps：如果service被杀后下次重启出错，可能是此时重发的Intent为null的缘故，可以通过修改onStartCommand方法的返回值来解决：</p>
+</blockquote>
+<ul>
+<li>利用ANDROID的系统广播检查Service的运行状态，如果被杀掉，就再起来:<br>利用的系统广播是Intent.ACTION_TIME_TICK，这个广播每分钟发送一次，我们可以每分钟检查一次Service的运行状态，如果已经被结束了，就重新启动Service。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/" class="archive-article-date">
+  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
+    </nav>
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 XBlog
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">fuqiang.chen@android@Beijing</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
