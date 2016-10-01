@@ -140,6 +140,76 @@
       <div class="body-wrap">
         
   
+    <article id="post-DesignParttenFactory" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/24/DesignParttenFactory/">设计模式--工厂模式(创建型)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>面向对象编程中，最通常的方法是一个new操作时产生一个对象，通常用new操作符来创建。但是一些复杂情况下，new操作符就不够用了。比如一个类的创建需要一系列步骤，可能需要根据参数决定创建哪个子类，生成对象之前需要创建其他的辅助对象，参数需要经过处理等等。这些情况下创建对象就是一个过程了，而不只是一步操作。</p>
+<p>问题: 如何能方便的构造对象，而不用关心构造对象的细节和过程呢？</p>
+<p>答案就是：工厂模式,工厂模式主要是为创建对象提供过度接口，以便将创建对象的具体过程屏蔽起来，达到灵活性的目的。</p>
+<h2 id="工厂模式de历史"><a href="#工厂模式de历史" class="headerlink" title="工厂模式de历史"></a>工厂模式de历史</h2><ul>
+<li>还没有工厂时代：假如还没有工业革命，如果一个客户要一款宝马车,一般的做法是客户去创建一款宝马车，然后拿来用。</li>
+<li>简单工厂模式：后来出现工业革命。用户不用去创建宝马车。因为客户有一个工厂来帮他创建宝马.想要什么车，这个工厂就可以建。比如想要320i系列车。工厂就创建这个系列的车。即工厂可以创建产品。</li>
+<li>工厂方法模式时代：为了满足客户，宝马车系列越来越多，如320i，523i,30li等系列一个工厂无法创建所有的宝马系列。于是由单独分出来多个具体的工厂。每个具体工厂创建一种系列。即具体工厂类只能创建一个具体产品。但是宝马工厂还是个抽象。你需要指定某个具体的工厂才能生产车出来。</li>
+<li>抽象工厂模式时代：随着客户的要求越来越高，宝马车必须配置空调。而且这空调必须对应给系列车才能使用。于是这个工厂开始生产宝马车和需要的空调。</li>
+</ul>
+<p>最终是客户只要对宝马的销售员说：我要523i空调车，销售员就直接给他523i空调车了。而不用自己去创建523i空调车宝马车.<br>这就是工厂模式。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>工厂模式可以分为三类</p>
+<ol>
+<li>简单工厂模式(Simple Factory)</li>
+<li>工厂方法模式(Factory Method)</li>
+<li>抽象工厂模式(Abstract Factory)</li>
+</ol>
+<h3 id="三种工厂的区别"><a href="#三种工厂的区别" class="headerlink" title="三种工厂的区别"></a>三种工厂的区别</h3><h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h4><h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>一个抽象产品类，可以派生出多个具体的产品类<br>一个抽象工厂类，可以派生出多个具体的工厂类<br>每个具体工厂类只能创建一个具体产品类的实例</p>
+<h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><p>多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。<br>一个抽象工厂类，可以派生出多个具体工厂类。<br>每个具体工厂类可以创建多个具体产品类的实例。   </p>
+<p>TODO: other</p>
+<p><a href="http://www.jianshu.com/p/f111f06da05b" target="_blank" rel="external">http://www.jianshu.com/p/f111f06da05b</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/24/DesignParttenFactory/" class="archive-article-date">
+  	<time datetime="2016-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Thread_Summary" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -277,56 +347,6 @@
 
 
   
-    <article id="post-Java_threads" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/06/21/Java_threads/">Java多线程总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/06/21/Java_threads/" class="archive-article-date">
-  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Thread_Producer_Consumer" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -368,6 +388,56 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java_threads" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/21/Java_threads/">Java多线程总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/21/Java_threads/" class="archive-article-date">
+  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 	</div>
 
       
@@ -1363,62 +1433,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shortcut/">shortcut</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-SampleCodes" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/01/SampleCodes/">Android样例代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目录</p>
-<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * BaseAdapter</div><div class="line"> * Created by fuqiang on 16/2/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MBaseAdapter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">widget</span>.<span class="title">BaseAdapter</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String TAG = <span class="string">"MBaseAdapter"</span>;</div><div class="line">    <span class="keyword">private</span> LayoutInflater mInfalter;</div><div class="line">    <span class="keyword">private</span> ArrayList&lt;T&gt; mList;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MBaseAdapter</span><span class="params">(Context context, ArrayList&lt;T&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">if</span> (context == <span class="keyword">null</span>) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Context is null"</span>);</div><div class="line">        &#125;</div><div class="line">        mContext = context;</div><div class="line">        mList = list;</div><div class="line">        mInfalter = LayoutInflater.from(context);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> position;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendSms</span><span class="params">(Context context, String phoneNumber,</span></span></div><div class="line">            String content) &#123;</div><div class="line">    Uri uri = Uri.parse(<span class="string">"smsto:"</span></div><div class="line">            + (TextUtils.isEmpty(phoneNumber) ? <span class="string">""</span> : phoneNumber));</div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SENDTO, uri);</div><div class="line">    intent.putExtra(<span class="string">"sms_body"</span>, TextUtils.isEmpty(content) ? <span class="string">""</span> : content);</div><div class="line">    context.startActivity(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="判断当前app处于前台还是后台"><a href="#判断当前app处于前台还是后台" class="headerlink" title="判断当前app处于前台还是后台"></a>判断当前app处于前台还是后台</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isApplicationBackground</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</div><div class="line">    ActivityManager am = (ActivityManager) context</div><div class="line">            .getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</div><div class="line">    List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(<span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (!tasks.isEmpty()) &#123;</div><div class="line">        ComponentName topActivity = tasks.get(<span class="number">0</span>).topActivity;</div><div class="line">        <span class="keyword">if</span> (!topActivity.getPackageName().equals(context.getPackageName())) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.GET_TASKS"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="判断网络是否连接"><a href="#判断网络是否连接" class="headerlink" title="判断网络是否连接"></a>判断网络是否连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOnline</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    ConnectivityManager manager = (ConnectivityManager) context</div><div class="line">            .getSystemService(Activity.CONNECTIVITY_SERVICE);</div><div class="line">    NetworkInfo info = manager.getActiveNetworkInfo();</div><div class="line">    <span class="keyword">if</span> (info != <span class="keyword">null</span> &amp;&amp; info.isConnected()) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/02/01/SampleCodes/" class="archive-article-date">
-  	<time datetime="2016-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sample/">sample</a></li></ul>
 	</div>
 
       

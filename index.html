@@ -140,6 +140,65 @@
       <div class="body-wrap">
         
   
+    <article id="post-jekyll-moveto-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/10/01/jekyll-moveto-hexo/">Jekyll迁移到Hexo记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录一下迁移过程中遇到的问题</p>
+<h1 id="迁移步骤"><a href="#迁移步骤" class="headerlink" title="迁移步骤"></a>迁移步骤</h1><ul>
+<li>直接将jekyll下的md文件拷贝到hexo的<code>_posts</code>目录下</li>
+<li>因为hexo用的MarkDown语法解析器和Jekyll不一致，需要替换一些语法问题.替换方法见:<a href="http://reverland.org/web/2015/11/18/notes-on-migrating-from-jeykll-to-hexo/" target="_blank" rel="external">迁移过程</a></li>
+<li>修改配置,部署</li>
+</ul>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>部署命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure></p>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><ul>
+<li><p>CNAME<br>首先你需要先有个域名，然后再域名服务器下设置CNAME映射到你github上博客地址‘somename.github.io’,然后创建CNAME文件放在<br><code>hexo/source</code>目录下,CNAME中只写一行你的域名比如<code>www.youraddress.com</code>,注意不需要加<code>http</code>前缀</p>
+</li>
+<li><p>_config.xml配置需要调整<br>注意冒号后面有空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">url: http://youraddress.com</div><div class="line">root: /</div><div class="line">#如果不绑定域名</div><div class="line">url: http://youraddress.com</div><div class="line">root: /</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/10/01/jekyll-moveto-hexo/" class="archive-article-date">
+  	<time datetime="2016-10-01T10:30:50.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-01</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-2014-12-4-Android-resolution-ratio" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -291,79 +350,6 @@
 
 
   
-    <article id="post-2014-11-3-Android-Tools-IDEA" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/09/29/2014-11-3-Android-Tools-IDEA/">Android开发神器:IntelliJ IDEA</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="官方主页"><a href="#官方主页" class="headerlink" title="官方主页"></a><a href="https://www.jetbrains.com/idea/" target="_blank" rel="external">官方主页</a></h2><blockquote>
-<p>以下快捷键均为Mac系统下有效</p>
-</blockquote>
-<h2 id="最赞的地方"><a href="#最赞的地方" class="headerlink" title="最赞的地方"></a>最赞的地方</h2><ul>
-<li>支持项目文件搜索</li>
-</ul>
-<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键:"></a>快捷键:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Command + Shift + n </div><div class="line">or</div><div class="line">Shift Shift</div></pre></td></tr></table></figure>
-<p>以前写Js时用惯了Sublime,其中的文件搜索简直太方便了，查找效率没的说，一个字爽！</p>
-<p>吐槽：Eclipse 中的文件搜索只支持打开的项目文件，用起来很不方便，我总不能把我项目所有文件都打开吧,而且特别卡</p>
-<ul>
-<li>流畅</li>
-</ul>
-<p>无论是启动速度还是文件操作都是相当的流畅，传说中的行云流水，可以用来秀操作了！</p>
-<ul>
-<li><p>贴心的代码提示</p>
-</li>
-<li><p>全面细致的代码错误提示</p>
-</li>
-</ul>
-<h2 id="碉堡的插件们"><a href="#碉堡的插件们" class="headerlink" title="碉堡的插件们"></a>碉堡的插件们</h2><p>插件安装方法，进 Pereferences-&gt;Plugins,然后直接搜索,上图：</p>
-<p><img src="!--￼1--&gt;/images/page_img/img_2_2014-11-03.png" alt="Plugins"></p>
-<h3 id="ideaVim-Vim-er必备"><a href="#ideaVim-Vim-er必备" class="headerlink" title="ideaVim (Vim-er必备)"></a>ideaVim (Vim-er必备)</h3><p>支持Vim操作，个人感觉比Eclipse中的Vim插件支持的更好一些</p>
-<h3 id="FindBugs"><a href="#FindBugs" class="headerlink" title="FindBugs"></a>FindBugs</h3><p>自动查找Bug，你懂得。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/09/29/2014-11-3-Android-Tools-IDEA/" class="archive-article-date">
-  	<time datetime="2016-09-29T05:25:42.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-29</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-2014-11-3-Android-Show-App-Memory" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -416,6 +402,79 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2014-11-3-Android-Tools-IDEA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/09/29/2014-11-3-Android-Tools-IDEA/">Android开发神器:IntelliJ IDEA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="官方主页"><a href="#官方主页" class="headerlink" title="官方主页"></a><a href="https://www.jetbrains.com/idea/" target="_blank" rel="external">官方主页</a></h2><blockquote>
+<p>以下快捷键均为Mac系统下有效</p>
+</blockquote>
+<h2 id="最赞的地方"><a href="#最赞的地方" class="headerlink" title="最赞的地方"></a>最赞的地方</h2><ul>
+<li>支持项目文件搜索</li>
+</ul>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键:"></a>快捷键:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Command + Shift + n </div><div class="line">or</div><div class="line">Shift Shift</div></pre></td></tr></table></figure>
+<p>以前写Js时用惯了Sublime,其中的文件搜索简直太方便了，查找效率没的说，一个字爽！</p>
+<p>吐槽：Eclipse 中的文件搜索只支持打开的项目文件，用起来很不方便，我总不能把我项目所有文件都打开吧,而且特别卡</p>
+<ul>
+<li>流畅</li>
+</ul>
+<p>无论是启动速度还是文件操作都是相当的流畅，传说中的行云流水，可以用来秀操作了！</p>
+<ul>
+<li><p>贴心的代码提示</p>
+</li>
+<li><p>全面细致的代码错误提示</p>
+</li>
+</ul>
+<h2 id="碉堡的插件们"><a href="#碉堡的插件们" class="headerlink" title="碉堡的插件们"></a>碉堡的插件们</h2><p>插件安装方法，进 Pereferences-&gt;Plugins,然后直接搜索,上图：</p>
+<p><img src="/img/page_img/img_2_2014-11-03.png" alt="Plugins"></p>
+<h3 id="ideaVim-Vim-er必备"><a href="#ideaVim-Vim-er必备" class="headerlink" title="ideaVim (Vim-er必备)"></a>ideaVim (Vim-er必备)</h3><p>支持Vim操作，个人感觉比Eclipse中的Vim插件支持的更好一些</p>
+<h3 id="FindBugs"><a href="#FindBugs" class="headerlink" title="FindBugs"></a>FindBugs</h3><p>自动查找Bug，你懂得。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/09/29/2014-11-3-Android-Tools-IDEA/" class="archive-article-date">
+  	<time datetime="2016-09-29T05:25:42.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-29</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
 	</div>
 
       
@@ -780,89 +839,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘录/">备忘录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android_Monkey_log" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/07/27/Android_Monkey_log/">Monkey日志分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文讲解Monkey日志的分析方法，帮助解决常见的Monkey日志中的bug出现位置的查找方法</p>
-<h1 id="Monkey"><a href="#Monkey" class="headerlink" title="Monkey"></a>Monkey</h1><p>Monkey是Android客户端用于做压力测试的工具，Google官方提供的开源工具。运行Monkey后会根据参数发送随机事件到客户端模拟用户操作来进行压力测试，当出现崩溃时会自动保存相关日志，并发送邮件给开发者。</p>
-<p>一个Monkey崩溃日志一般包括三个部分:</p>
-<ul>
-<li><p><strong>xxxxxx_x_xxxxxx_bugreport</strong></p>
-<p>  这个日志基本包含需要的大部分需要的信息，是<strong>重点分析对象</strong>，里面包含Android系统的相关信息：</p>
-<ul>
-<li><strong>运行中的Activity</strong> : Running Application Activities</li>
-<li><strong>运行中的Service</strong> : Running Services</li>
-<li><strong>运行中的Provider</strong> : Running Application Providers</li>
-<li><strong>系统Log</strong> : SYSTEM LOG</li>
-<li><strong>事件日志</strong> : EVENT LOG</li>
-<li>CPU信息: CPU INFO (top -n 1 -d 1 -m 30 -t)</li>
-<li>虚拟机内存信息： VIRTUAL MEMORY STATS</li>
-<li>虚拟机内存分配情况：VMALLOC INFO</li>
-<li>线程信息等等</li>
-</ul>
-</li>
-</ul>
-<p>重点日志一般在<strong>系统Log</strong>和<strong>Activity</strong>,里面包含了崩溃信息和Activity的Task信息,大部分错误都可以通过这两种日志找到,至于其他的就按照其他日志按图索骥吧。</p>
-<blockquote>
-<p>搜索 “—– ” 可以定位到每种日志的开头,或者直接搜索上面列出的名称</p>
-</blockquote>
-<ul>
-<li><p><strong>xxxxxx_x_xxxxxx_Monkey_Error</strong></p>
-<p>  直接的Android错误堆栈信息,里面一般可以看到出错类的位置，这个可以直接找出错误位置，但是里面指出的错误一般只有一个，但是崩溃可能不止这一个，更多的还是需要在bugreport中寻找。具体信息如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"> CRASH: com.xkj.demo(pid <span class="number">22949</span>)</div><div class="line">Short Msg: java.lang.OutOfMemoryError</div><div class="line">Long Msg: java.lang.OutOfMemoryError: Failed to allocate a <span class="number">2433612</span> <span class="keyword">byte</span> allocation with <span class="number">41160</span> free bytes and <span class="number">40</span>KB until OOM</div><div class="line">Build Label: SHARP/M1_00WW/MS1:<span class="number">6.0</span>/MRA58K/<span class="number">00</span>CN_6_27F:user/release-keys</div><div class="line">Build Changelist: <span class="number">00</span>CN_6_27F</div><div class="line">Build Time: <span class="number">1469009491000</span></div><div class="line">java.lang.OutOfMemoryError: Failed to allocate a <span class="number">2433612</span> <span class="keyword">byte</span> allocation with <span class="number">41160</span> free bytes and <span class="number">40</span>KB until OOM</div><div class="line">   at dalvik.system.VMRuntime.newNonMovableArray(Native Method)</div><div class="line">   at android.graphics.BitmapFactory.nativeDecodeAsset(Native Method)</div><div class="line">   at android.graphics.BitmapFactory.decodeStream(BitmapFactory.java:<span class="number">651</span>)</div><div class="line">   at android.graphics.BitmapFactory.decodeResourceStream(BitmapFactory.java:<span class="number">486</span>)</div><div class="line">   at android.graphics.drawable.Drawable.createFromResourceStream(Drawable.java:<span class="number">1085</span>)</div><div class="line">   at android.content.res.Resources.loadDrawableForCookie(Resources.java:<span class="number">3037</span>)</div><div class="line">   at android.content.res.Resources.loadDrawable(Resources.java:<span class="number">2926</span>)</div><div class="line">   at android.content.res.TypedArray.getDrawable(TypedArray.java:<span class="number">870</span>)</div><div class="line">   at android.view.View.&lt;init&gt;(View.java:<span class="number">4009</span>)</div><div class="line">   at android.widget.ImageView.&lt;init&gt;(ImageView.java:<span class="number">145</span>)</div><div class="line">   at android.widget.ImageView.&lt;init&gt;(ImageView.java:<span class="number">140</span>)</div><div class="line">   at android.support.v7.widget.AppCompatImageView.&lt;init&gt;(Unknown Source)</div><div class="line">   at android.support.v7.widget.AppCompatImageView.&lt;init&gt;(Unknown Source)</div><div class="line">   at android.support.v7.app.AppCompatViewInflater.createView(Unknown Source)</div><div class="line">   at android.support.v7.app.AppCompatDelegateImplV7.createView(Unknown Source)</div><div class="line">   at android.support.v7.app.AppCompatDelegateImplV7.onCreateView(Unknown Source)</div><div class="line">   at android.support.v4.view.LayoutInflaterCompatHC$FactoryWrapperHC.onCreateView(Unknown Source)</div><div class="line">   at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:<span class="number">746</span>)</div><div class="line">   at android.view.LayoutInflater.createViewFromTag(LayoutInflater.java:<span class="number">704</span>)</div><div class="line">   at android.view.LayoutInflater.rInflate(LayoutInflater.java:<span class="number">835</span>)</div><div class="line">   at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:<span class="number">798</span>)</div><div class="line">   at android.view.LayoutInflater.rInflate(LayoutInflater.java:<span class="number">838</span>)</div><div class="line">   at android.view.LayoutInflater.rInflateChildren(LayoutInflater.java:<span class="number">798</span>)</div><div class="line">   at android.view.LayoutInflater.inflate(LayoutInflater.java:<span class="number">515</span>)</div><div class="line">   at android.view.LayoutInflater.inflate(LayoutInflater.java:<span class="number">423</span>)</div><div class="line">   at android.view.LayoutInflater.inflate(LayoutInflater.java:<span class="number">374</span>)</div><div class="line">   at com.xkj.demo.ui.custom_view.LoadingView.a(Unknown Source)</div><div class="line">   at com.xkj.demo.ui.custom_view.LoadingView.&lt;init&gt;(Unknown Source)</div><div class="line">   at com.xkj.demo.ui.activity.UserCenterBaseActivity.g(Unknown Source)</div><div class="line">   at com.xkj.demo.ui.activity.UserCenterAttentionActivity.onStart(Unknown Source)</div><div class="line">   at android.app.Instrumentation.callActivityOnStart(Instrumentation.java:<span class="number">1245</span>)</div><div class="line">   at android.app.Activity.performStart(Activity.java:<span class="number">6334</span>)</div><div class="line">   at android.app.Activity.performRestart(Activity.java:<span class="number">6380</span>)</div><div class="line">   at android.app.Activity.performResume(Activity.java:<span class="number">6385</span>)</div><div class="line">   at android.app.ActivityThread.performResumeActivity(ActivityThread.java:<span class="number">3346</span>)</div><div class="line">   at android.app.ActivityThread.handleResumeActivity(ActivityThread.java:<span class="number">3392</span>)</div><div class="line">   at android.app.ActivityThread$H.handleMessage(ActivityThread.java:<span class="number">1535</span>)</div><div class="line">   at android.os.Handler.dispatchMessage(Handler.java:<span class="number">111</span>)</div><div class="line">   at android.os.Looper.loop(Looper.java:<span class="number">207</span>)</div><div class="line">   at android.app.ActivityThread.main(ActivityThread.java:<span class="number">5789</span>)</div><div class="line">   at java.lang.reflect.Method.invoke(Native Method)</div><div class="line">   at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">789</span>)</div><div class="line">   at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">679</span>)</div><div class="line"></div><div class="line">System appears to have crashed at event <span class="number">6604</span> of <span class="number">10000000</span> using seed <span class="number">1469634542357</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>xxxxxx_x_xxxxxx_Monkey_Standard</strong></p>
-<p>  里面是Monkey发送事件的日志，可以看到Monkey 总共事件数和Seed以及所有Monkey发送的随机事件，可以用来了解Monkey所有的测试步骤，对于我们找问题起到的作用不大，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Sleeping <span class="keyword">for</span> <span class="number">1000</span> milliseconds</div><div class="line">:<span class="function">Sending <span class="title">Key</span> <span class="params">(ACTION_DOWN)</span>: 21    <span class="comment">// KEYCODE_DPAD_LEFT</span></span></div><div class="line">:Sending <span class="title">Key</span> <span class="params">(ACTION_UP)</span>: 21    <span class="comment">// KEYCODE_DPAD_LEFT</span></div><div class="line">Sleeping <span class="keyword">for</span> 1000 milliseconds</div><div class="line">:Sending <span class="title">Touch</span> <span class="params">(ACTION_DOWN)</span>: 0:<span class="params">(<span class="number">560.0</span>,<span class="number">282.0</span>)</span></div><div class="line">:Sending <span class="title">Touch</span> <span class="params">(ACTION_UP)</span>: 0:<span class="params">(<span class="number">545.46906</span>,<span class="number">297.27124</span>)</span></div><div class="line">Sleeping <span class="keyword">for</span> 1000 milliseconds</div><div class="line">:Sending <span class="title">Touch</span> <span class="params">(ACTION_DOWN)</span>: 0:<span class="params">(<span class="number">127.0</span>,<span class="number">184.0</span>)</span></div><div class="line">:Sending <span class="title">Touch</span> <span class="params">(ACTION_MOVE)</span>: 0:<span class="params">(<span class="number">132.4029</span>,<span class="number">176.63887</span>)</span></div><div class="line">:Sending <span class="title">Touch</span> <span class="params">(ACTION_MOVE)</span>: 0:<span class="params">(<span class="number">137.67516</span>,<span class="number">173.73633</span>)</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/07/27/Android_Monkey_log/" class="archive-article-date">
-  	<time datetime="2016-07-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-27</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Monkey/">Monkey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bugreport/">bugreport</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
 	</div>
 
       

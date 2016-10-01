@@ -140,6 +140,71 @@
       <div class="body-wrap">
         
   
+    <article id="post-RAM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2014/12/04/RAM/">谈谈Android内存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="内存简介："><a href="#内存简介：" class="headerlink" title="内存简介："></a>内存简介：</h2><p><strong>RAM（random access memory）</strong>:随机存取存储器。说白了就是内存。<br>一般Java在内存分配时会涉及到以下区域：</p>
+<p><strong>寄存器（Registers）</strong>：速度最快的存储场所，因为寄存器位于处理器内部，我们在程序中无法控制</p>
+<p><strong>栈（Stack）</strong>：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中</p>
+<p><strong>堆（Heap）</strong>：堆内存用来存放由new创建的对象和数组。在堆中分配的内存，由Java虚拟机的自动垃圾回收器（GC）来管理。</p>
+<p><strong>静态域（static field）</strong>：  静态存储区域就是指在固定的位置存放应用程序运行时一直存在的数据，Java在内存中专门划分了一个静态存储区域来管理一些特殊的数据变量如静态的数据变量</p>
+<p><strong>常量池（constant pool）</strong>：虚拟机必须为每个被装载的类型维护一个常量池。常量池就是该类型所用到常量的一个有序集和，包括直接常量（string,integer和floating point常量）和对其他类型，字段和方法的符号引用。</p>
+<p><strong>非RAM存储</strong>：硬盘等永久存储空间</p>
+<h2 id="堆栈特点对比："><a href="#堆栈特点对比：" class="headerlink" title="堆栈特点对比："></a>堆栈特点对比：</h2><p><strong>栈：</strong>当定义一个变量时，Java就在栈中为这个变量分配内存空间，当该变量退出该作用域后，Java会自动释放掉为该变量所分配的内存空间，该内存空间可以立即被另作他用。</p>
+<p><strong>堆：</strong>当堆中的new产生数组和对象超出其作用域后，它们不会被释放，只有在没有引用变量指向它们的时候才变成垃圾，不能再被使用。即使这样，所占内存也不会立即释放，而是等待被垃圾回收器收走。这也是Java比较占内存的原因。</p>
+<p><strong>栈：</strong>存取速度比堆要快，仅次于寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。</p>
+<p><strong>堆：</strong>堆是一个运行时数据区，可以动态地分配内存大小，因此存取速度较慢。也正因为这个特点，堆的生存期不必事先告诉编译器，而且Java的垃圾收集器会自动收走这些不再使用的数据。</p>
+<p><strong>栈：</strong>栈中的数据可以共享， 它是由编译器完成的，有利于节省空间。</p>
+<p>例如：需要定义两个变量int a = 3；int b = 3；</p>
+<p>编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，如果没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，因为在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，如果再让a=4；那么编译器会重新搜索栈中是否有4值，如果没有，则将4存放进来，并让a指向4；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。</p>
+<p><strong>堆：</strong>例如上面栈中a的修改并不会影响到b, 而在堆中一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。<br>（注：因此像int,float,[] 这类都是存在栈中，）</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2014/12/04/RAM/" class="archive-article-date">
+  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android-Theme-Translucent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -819,7 +884,7 @@
 
 
   
-    <article id="post-Git-command" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Githubpages" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -829,7 +894,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/10/19/Git-command/">Git常用命令</a>
+      <a class="article-title" href="/uncategorized/2014/10/19/Githubpages/">Github搭建博客</a>
     </h1>
   
 
@@ -837,97 +902,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目录</p>
+        <p>记录一下Mac系统下github搭建静态博客的过程。</p>
+<blockquote>
+<p>前提条件：Github 账号一只, Git基础</p>
+<p>系统环境：Mac 10.9 </p>
+</blockquote>
+<h3 id="整体流程如下："><a href="#整体流程如下：" class="headerlink" title="整体流程如下："></a>整体流程如下：</h3><ol>
+<li>创建Git版本库并创建Pages</li>
+<li>安装jekyll </li>
+<li>使用jekyll发表博客</li>
+</ol>
+<p>下面一一详述相关细节</p>
+<h2 id="1-创建Git版本库并创建Pages"><a href="#1-创建Git版本库并创建Pages" class="headerlink" title="1. 创建Git版本库并创建Pages"></a>1. 创建Git版本库并创建Pages</h2><p>如何创建版本库就略过了，看一下如何创建Pages<br>    进入Github版本库页面中的Settings页面,找到Github Pages项，如下图：<br><img src="!--￼10--&gt;/images/page_img/github_pages_1.png" alt="Github pages"><br>点击 Automatic page generator 按钮,剩下的就是选择主题生成页面不详述了<br><img src="!--￼11--&gt;/images/page_img/github_pages_2.png" alt="Github pages"><br>点击 Publish page 之后就搞定了，<br>在浏览器中输入<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://[username].github.io/[repository_name]</div></pre></td></tr></table></figure></p>
+<p>就可以访问啦</p>
+<p>实际上github是利用一个gh-pages的分支来负责网页的展示和管理静态页面的,在库中的分支可以看到对应代码,接下来其实只要去修改里面的静态网页就OK了.</p>
+<h2 id="2-安装jekyll"><a href="#2-安装jekyll" class="headerlink" title="2.安装jekyll"></a>2.安装jekyll</h2><p>安装jekyll的时候着实遇到一些问题,jekyll是基于ruby的，因此需要先安装ruby环境，建议ruby版本2.1.2以上,使用默认的ruby 2.0.0 安装会报错。</p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤:"></a>安装步骤:</h3><ul>
+<li><h4 id="rvm"><a href="#rvm" class="headerlink" title="rvm"></a>rvm</h4><p>  安装Ruby的话就需要 <code>rvm</code>用来管理ruby各个版本.</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https://get.rvm.io | bash -s stable</div></pre></td></tr></table></figure>
+<p>载入环境变量<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ source ~/.rvm/scripts/rvm</div></pre></td></tr></table></figure></p>
+<p>查看一下是否正确安装<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rvm -v</div></pre></td></tr></table></figure></p>
+<p>使用rvm安装ruby:列出所有的ruby版本并安装2.1.2版本<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ rvm list known</div><div class="line">$ rvm install 2.1.2</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参考资料:<a href="https://ruby-china.org/wiki/install_ruby_guide" target="_blank" rel="external">https://ruby-china.org/wiki/install_ruby_guide</a></p>
+</blockquote>
 <ul>
-<li>m</li>
+<li><h4 id="gem相关配置"><a href="#gem相关配置" class="headerlink" title="gem相关配置"></a>gem相关配置</h4></li>
 </ul>
-<h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone [remote_git_address.git]</div></pre></td></tr></table></figure>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支列表<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -l</div></pre></td></tr></table></figure></p>
-<p>创建分支<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch [branch_name]</div></pre></td></tr></table></figure></p>
-<p>检出指定分支<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout [target_branch]</div></pre></td></tr></table></figure></p>
-<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>提交到本地<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m "message"</div></pre></td></tr></table></figure></p>
-<p>提交默认分支到远程服务器<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push</div></pre></td></tr></table></figure></p>
-<h2 id="冲突-TODO"><a href="#冲突-TODO" class="headerlink" title="冲突(TODO)"></a>冲突(TODO)</h2><p>标记冲突已解决<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add -u</div></pre></td></tr></table></figure></p>
-<h2 id="暂存修改-git-stash"><a href="#暂存修改-git-stash" class="headerlink" title="暂存修改:git stash"></a>暂存修改:<code>git stash</code></h2><h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a><code>git stash</code></h3><pre><code>暂存当前的修改
-</code></pre><h3 id="git-stash-list"><a href="#git-stash-list" class="headerlink" title="git stash list"></a><code>git stash list</code></h3><pre><code>查看暂存列表
-</code></pre><h3 id="git-stash-apply"><a href="#git-stash-apply" class="headerlink" title="git stash apply"></a><code>git stash apply</code></h3><pre><code>应用最新的一次暂存的修改.
-</code></pre><ul>
-<li><code>git stash apply stash@{id}</code>: 应用对应id的暂存（stash@{id}可以在list中查找到）</li>
+<p>安装jekyll时需要gem,但是因为通常默认镜像的下载速度会比较慢,因此需要先修改gem镜像地址<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">$ gem sources -a https://ruby.taobao.org/</div><div class="line">$ gem sources -l</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p> 可以看一下淘宝的说明:<a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a></p>
+</blockquote>
+<ul>
+<li><h4 id="安装jekyll"><a href="#安装jekyll" class="headerlink" title="安装jekyll"></a>安装jekyll</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gem install jekyll</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="git-stash-pop"><a href="#git-stash-pop" class="headerlink" title="git stash pop"></a><code>git stash pop</code></h3><pre><code>应用最新一次暂存的修改，并将其从stash列表中删除
-</code></pre><h2 id="避免每次都输入密码"><a href="#避免每次都输入密码" class="headerlink" title="避免每次都输入密码"></a>避免每次都输入密码</h2><ul>
-<li>(推荐)通过Https通信，即从https连接clone到本地</li>
-<li>通过SSH clone。需要将每个电脑生成的SSH公钥上传到github中，(见github settings/ssh keys)</li>
-<li>ssh 文件位置(Mac): ~/ssh/</li>
-</ul>
-<h2 id="把文件从版本库删除，本地保留"><a href="#把文件从版本库删除，本地保留" class="headerlink" title="把文件从版本库删除，本地保留"></a>把文件从版本库删除，本地保留</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">`git rm -r -n  —cached  <span class="tag">&lt;<span class="name">file,dir</span>&gt;</span>`</div></pre></td></tr></table></figure>
-<h2 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h2><p><a href="https://raw.githubusercontent.com/github/gitignore/master/Android.gitignore" target="_blank" rel="external">Android项目.gitignore</a></p>
+<p>同样检查一下是否正确安装<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ jekyll -v</div><div class="line">  jekyll 2.4.0</div></pre></td></tr></table></figure></p>
+<h2 id="3-使用jekyll发表博客"><a href="#3-使用jekyll发表博客" class="headerlink" title="3.使用jekyll发表博客"></a>3.使用jekyll发表博客</h2><p>jekyll安装成功之后先创建一个demo试一下<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ jekyll new demoblog</div><div class="line">New jekyll site installed in /Users/fuqiang/Documents/Blog/demoBlogSec/demo. </div><div class="line">$ cd demoblog </div><div class="line">$ jekyll server</div></pre></td></tr></table></figure></p>
+<p>这时打开<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>就可以看到博客啦</p>
+<blockquote>
+<p><a href="!--￼12--&gt;/Jekyll-command/">jekyll一些常用命令</a></p>
+</blockquote>
+<p>在写博客之前需要简单配置一下,配置文件在jekyll项目根目录下<code>_config</code>,打开文件,这里需要修改的地方不是很多，比较重要的一个地方就是 <code>url</code>,将这里改为需要部署的地址.</p>
+<p>如果是本地环境 或 github<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url: http://localhost:4000</div><div class="line">url: http://[username].github.io/[repository_name]</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>更多信息见：<a href="http://jekyllrb.com/docs/configuration/" target="_blank" rel="external">官方配置说明</a></p>
+</blockquote>
+<p>OK，基本上现在就可以开始写博客了:</p>
+<p>_post目录下新建文件，文件名yyyy-MM-dd-filename.md</p>
+<h2 id="4-添加评论功能"><a href="#4-添加评论功能" class="headerlink" title="4.添加评论功能"></a>4.添加评论功能</h2><p>评论使用<a href="https://disqus.com/home/explore/" target="_blank" rel="external">Disqus</a>，注册一个账号，然后按照教程将代码添加到需要的位置就可以啦，比较简单就不细说了，给一个<a href="http://pizn.github.io/2011/11/15/use-disqus-for-your-post.html" target="_blank" rel="external">参考文章</a>。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/10/19/Git-command/" class="archive-article-date">
+      <a href="/uncategorized/2014/10/19/Githubpages/" class="archive-article-date">
   	<time datetime="2014-10-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-10-19</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Jekyll-command" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/10/19/Jekyll-command/">Jekyll常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><h3 id="编译并运行"><a href="#编译并运行" class="headerlink" title="编译并运行"></a>编译并运行</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jekyll server</div></pre></td></tr></table></figure>
-<p>执行打开<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>即可访问编译好的静态网站了</p>
-<h3 id="仅编译"><a href="#仅编译" class="headerlink" title="仅编译"></a>仅编译</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jekyll build </div><div class="line">jekyll build -s [folder] -d [folder]</div></pre></td></tr></table></figure>
-<p>加上<code>-s</code>,<code>-d</code> 参数即可指定资源目录和目标目录,<br>默认会将编译好的静态网站放置在资源目录下的<code>_site</code>文件夹</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/10/19/Jekyll-command/" class="archive-article-date">
-  	<time datetime="2014-10-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-10-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jekyll/">Jekyll</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
 	</div>
 
       

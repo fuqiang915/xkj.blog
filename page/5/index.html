@@ -264,6 +264,74 @@
 
 
   
+    <article id="post-Node-Sails-Passport-Email" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司的内部管理平台经常需要使用统一的邮箱登录所有的平台，本文介绍在Sails中如何实现这一功能</p>
+<p>下面按照步骤一一介绍</p>
+<h1 id="1-dependencies"><a href="#1-dependencies" class="headerlink" title="1. dependencies"></a>1. dependencies</h1><p>在项目package.json中新增插件包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    ...</div><div class="line">    <span class="string">"bcrypt"</span>: <span class="string">"~0.8.0"</span>,</div><div class="line">    <span class="string">"ldapjs"</span>: <span class="string">"mcavage/node-ldapjs"</span>,</div><div class="line">    <span class="string">"passport"</span>: <span class="string">"~0.2.1"</span>,</div><div class="line">    <span class="string">"passport-ldapauth"</span>: <span class="string">"0.3.0"</span>,</div><div class="line">    ...</div><div class="line">   &#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>然后打开命令行</p>
+<pre><code>sudo npm install
+</code></pre><h1 id="2-创建SessionController"><a href="#2-创建SessionController" class="headerlink" title="2. 创建SessionController"></a>2. 创建SessionController</h1><p>命令行输入</p>
+<pre><code>sails generate api session
+</code></pre><p>然后向 <code>项目目录/api/contorllers/SessionController.js</code> 添加如下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> bcrypt = <span class="built_in">require</span>(<span class="string">'bcrypt'</span>);</div><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 公司邮箱登录</div><div class="line"> */</div><div class="line">  login:<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> LdapStrategy = <span class="built_in">require</span>(<span class="string">'passport-ldapauth'</span>);</div><div class="line"></div><div class="line">	passport.use(<span class="keyword">new</span> LdapStrategy(&#123;</div><div class="line">		<span class="comment">//这里需要改成自己的配置</span></div><div class="line">	    server: &#123;</div><div class="line">	       <span class="attr">url</span>: <span class="string">'ldap://mail.xxxx.net:389'</span>,</div><div class="line">		   <span class="attr">bindDn</span>: <span class="string">'uid=zimbra,cn=admins,cn=zimbra'</span>,</div><div class="line">		   <span class="attr">bindCredentials</span>: <span class="string">'OKfh_meB'</span>,</div><div class="line">		   <span class="attr">searchBase</span>: <span class="string">'dc=xxxxx,dc=net'</span>,</div><div class="line">		   <span class="attr">searchFilter</span>: <span class="string">'(uid=&#123;&#123;username&#125;&#125;)'</span></div><div class="line">	    &#125;</div><div class="line">	  &#125;));</div><div class="line"></div><div class="line">	passport.authenticate(<span class="string">'ldapauth'</span>, &#123;<span class="attr">session</span>: <span class="literal">false</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,user,info</span>)</span>&#123;</div><div class="line">         	<span class="keyword">if</span>(err) &#123;res.send(err);&#125;</div><div class="line">         	<span class="keyword">if</span>(user)&#123;</div><div class="line">        	  <span class="comment">//创建新用户</span></div><div class="line">        	  <span class="comment">//登录成功</span></div><div class="line">              req.session.isAuthenticated=<span class="literal">true</span>;<span class="comment">// 标记登录成功</span></div><div class="line">         	&#125;<span class="keyword">else</span>&#123;</div><div class="line">         	  <span class="comment">//登录失败的操作</span></div><div class="line">         	&#125;</div><div class="line">	&#125;)(req,res);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="3-配置-Express-Middleware"><a href="#3-配置-Express-Middleware" class="headerlink" title="3. 配置 Express Middleware"></a>3. 配置 Express Middleware</h1><p>使用passport需要我们自己配置一下middleware,位置在 <code>项目目录/config/http.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.http = &#123;</div><div class="line"></div><div class="line">  <span class="attr">middleware</span>: &#123;</div><div class="line"></div><div class="line">    <span class="attr">passportInit</span> : <span class="built_in">require</span>(<span class="string">'passport'</span>).initialize(), <span class="comment">//这里是需要加的东西</span></div><div class="line">    passportSession : <span class="built_in">require</span>(<span class="string">'passport'</span>).session(), <span class="comment">//这里是需要加的东西</span></div><div class="line"></div><div class="line">    order: [</div><div class="line">      <span class="string">'startRequestTimer'</span>,</div><div class="line">      <span class="string">'cookieParser'</span>,</div><div class="line">      <span class="string">'session'</span>,</div><div class="line">      <span class="string">'passportInit'</span>,     <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'passportSession'</span>,  <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'myRequestLogger'</span>,</div><div class="line">      <span class="string">'bodyParser'</span>,</div><div class="line">      <span class="string">'handleBodyParserError'</span>,</div><div class="line">      <span class="string">'compress'</span>,</div><div class="line">      <span class="string">'methodOverride'</span>,</div><div class="line">      <span class="string">'poweredBy'</span>,</div><div class="line">      <span class="string">'router'</span>,</div><div class="line">      <span class="string">'www'</span>,</div><div class="line">      <span class="string">'favicon'</span>,</div><div class="line">      <span class="string">'404'</span>,</div><div class="line">      <span class="string">'500'</span></div><div class="line">    ],</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意<code>order</code> 数组中的顺序保持一致</p>
+<h1 id="4-添加-policy"><a href="#4-添加-policy" class="headerlink" title="4. 添加 policy"></a>4. 添加 policy</h1><p>创建一个新的policy <code>isAuthenticated.js</code> 放在 <code>项目目录/api/policies/</code>目录下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> (req.isAuthenticated) &#123;</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> res.redirect(<span class="string">'/login'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="5-绑定policy到controller"><a href="#5-绑定policy到controller" class="headerlink" title="5. 绑定policy到controller"></a>5. 绑定policy到controller</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.policies = &#123;</div><div class="line">   <span class="string">'*'</span>: <span class="literal">true</span>,</div><div class="line">  <span class="string">'SessionController'</span>: &#123;</div><div class="line">    <span class="string">'*'</span>: <span class="string">'isAuthenticated'</span></div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="6-测试一下吧"><a href="#6-测试一下吧" class="headerlink" title="6. 测试一下吧"></a>6. 测试一下吧</h1><p><a href="http://localhost:1337" target="_blank" rel="external">localhost:1337</a></p>
+<p>创建View的部分，以及其他注销操作本文就不给出了。 </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/" class="archive-article-date">
+  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱登录/">邮箱登录</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Animation-Android" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -654,78 +722,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/">Android下利用Charles监听Https</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android手机利用Charles监听Https请求</p>
-<h3 id="1-安装证书"><a href="#1-安装证书" class="headerlink" title="1,安装证书"></a>1,安装证书</h3><h4 id="方法1-Android-4-0以上"><a href="#方法1-Android-4-0以上" class="headerlink" title="方法1 (Android 4.0以上):"></a>方法1 (Android 4.0以上):</h4><p>Android 4.0以上的手机支持用户安装证书。</p>
-<p>1,下载证书到手机上</p>
-<p>2,设置-&gt;安全-&gt;从存储设备安装 即可,安装时需要设置锁屏PIN或密码</p>
-<h4 id="方法2-需要Root"><a href="#方法2-需要Root" class="headerlink" title="方法2  (需要Root)"></a>方法2  (需要Root)</h4><p>手机root之后</p>
-<p>1,直接将证书拷贝到：<code>etc/security/cacerts</code> </p>
-<p>2,设置-&gt;安全-&gt;受信任的凭据 ，在系统tab找到你安装上的证书，然后选中即可。这样是以系统证书存在的。</p>
-<blockquote>
-<p>参考<a href="http://blog.csdn.net/winceos/article/details/32130655" target="_blank" rel="external">Android下安装证书的方法</a></p>
-</blockquote>
-<h3 id="2-设置Charles"><a href="#2-设置Charles" class="headerlink" title="2,设置Charles"></a>2,设置Charles</h3><p>打开Charles -&gt; Proxy -&gt; Proxy Settings -&gt; SSL</p>
-<p>勾选Enable SSL proxying</p>
-<p>Locations添加想要监听的域名和端口，比如 www.ihaveu.com, 443</p>
-<p>以上</p>
-<h3 id="附-如何设置手机代理"><a href="#附-如何设置手机代理" class="headerlink" title="附:如何设置手机代理"></a>附:如何设置手机代理</h3><ul>
-<li>在手机上WLAN中找到链接的网络</li>
-<li>设置网络</li>
-<li>高级选项</li>
-<li>填写PC的ip</li>
-<li>端口号通常默认 8888，否则需要到Charles中找到对应监听的端口号</li>
-<li>保存即可</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 	</div>
 
       

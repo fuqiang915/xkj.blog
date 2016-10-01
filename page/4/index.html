@@ -140,6 +140,62 @@
       <div class="body-wrap">
         
   
+    <article id="post-SampleCodes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/02/01/SampleCodes/">Android样例代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * BaseAdapter</div><div class="line"> * Created by fuqiang on 16/2/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MBaseAdapter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">widget</span>.<span class="title">BaseAdapter</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String TAG = <span class="string">"MBaseAdapter"</span>;</div><div class="line">    <span class="keyword">private</span> LayoutInflater mInfalter;</div><div class="line">    <span class="keyword">private</span> ArrayList&lt;T&gt; mList;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MBaseAdapter</span><span class="params">(Context context, ArrayList&lt;T&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">if</span> (context == <span class="keyword">null</span>) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Context is null"</span>);</div><div class="line">        &#125;</div><div class="line">        mContext = context;</div><div class="line">        mList = list;</div><div class="line">        mInfalter = LayoutInflater.from(context);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> position;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendSms</span><span class="params">(Context context, String phoneNumber,</span></span></div><div class="line">            String content) &#123;</div><div class="line">    Uri uri = Uri.parse(<span class="string">"smsto:"</span></div><div class="line">            + (TextUtils.isEmpty(phoneNumber) ? <span class="string">""</span> : phoneNumber));</div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SENDTO, uri);</div><div class="line">    intent.putExtra(<span class="string">"sms_body"</span>, TextUtils.isEmpty(content) ? <span class="string">""</span> : content);</div><div class="line">    context.startActivity(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="判断当前app处于前台还是后台"><a href="#判断当前app处于前台还是后台" class="headerlink" title="判断当前app处于前台还是后台"></a>判断当前app处于前台还是后台</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isApplicationBackground</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</div><div class="line">    ActivityManager am = (ActivityManager) context</div><div class="line">            .getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</div><div class="line">    List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(<span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (!tasks.isEmpty()) &#123;</div><div class="line">        ComponentName topActivity = tasks.get(<span class="number">0</span>).topActivity;</div><div class="line">        <span class="keyword">if</span> (!topActivity.getPackageName().equals(context.getPackageName())) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.GET_TASKS"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="判断网络是否连接"><a href="#判断网络是否连接" class="headerlink" title="判断网络是否连接"></a>判断网络是否连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOnline</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    ConnectivityManager manager = (ConnectivityManager) context</div><div class="line">            .getSystemService(Activity.CONNECTIVITY_SERVICE);</div><div class="line">    NetworkInfo info = manager.getActiveNetworkInfo();</div><div class="line">    <span class="keyword">if</span> (info != <span class="keyword">null</span> &amp;&amp; info.isConnected()) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/02/01/SampleCodes/" class="archive-article-date">
+  	<time datetime="2016-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sample/">sample</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android-Dialog-About" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -677,74 +733,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/用户/">用户</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Node-Sails-Passport-Email" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>公司的内部管理平台经常需要使用统一的邮箱登录所有的平台，本文介绍在Sails中如何实现这一功能</p>
-<p>下面按照步骤一一介绍</p>
-<h1 id="1-dependencies"><a href="#1-dependencies" class="headerlink" title="1. dependencies"></a>1. dependencies</h1><p>在项目package.json中新增插件包</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    ...</div><div class="line">    <span class="string">"bcrypt"</span>: <span class="string">"~0.8.0"</span>,</div><div class="line">    <span class="string">"ldapjs"</span>: <span class="string">"mcavage/node-ldapjs"</span>,</div><div class="line">    <span class="string">"passport"</span>: <span class="string">"~0.2.1"</span>,</div><div class="line">    <span class="string">"passport-ldapauth"</span>: <span class="string">"0.3.0"</span>,</div><div class="line">    ...</div><div class="line">   &#125;</div><div class="line">...</div></pre></td></tr></table></figure>
-<p>然后打开命令行</p>
-<pre><code>sudo npm install
-</code></pre><h1 id="2-创建SessionController"><a href="#2-创建SessionController" class="headerlink" title="2. 创建SessionController"></a>2. 创建SessionController</h1><p>命令行输入</p>
-<pre><code>sails generate api session
-</code></pre><p>然后向 <code>项目目录/api/contorllers/SessionController.js</code> 添加如下代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> bcrypt = <span class="built_in">require</span>(<span class="string">'bcrypt'</span>);</div><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 公司邮箱登录</div><div class="line"> */</div><div class="line">  login:<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> LdapStrategy = <span class="built_in">require</span>(<span class="string">'passport-ldapauth'</span>);</div><div class="line"></div><div class="line">	passport.use(<span class="keyword">new</span> LdapStrategy(&#123;</div><div class="line">		<span class="comment">//这里需要改成自己的配置</span></div><div class="line">	    server: &#123;</div><div class="line">	       <span class="attr">url</span>: <span class="string">'ldap://mail.xxxx.net:389'</span>,</div><div class="line">		   <span class="attr">bindDn</span>: <span class="string">'uid=zimbra,cn=admins,cn=zimbra'</span>,</div><div class="line">		   <span class="attr">bindCredentials</span>: <span class="string">'OKfh_meB'</span>,</div><div class="line">		   <span class="attr">searchBase</span>: <span class="string">'dc=xxxxx,dc=net'</span>,</div><div class="line">		   <span class="attr">searchFilter</span>: <span class="string">'(uid=&#123;&#123;username&#125;&#125;)'</span></div><div class="line">	    &#125;</div><div class="line">	  &#125;));</div><div class="line"></div><div class="line">	passport.authenticate(<span class="string">'ldapauth'</span>, &#123;<span class="attr">session</span>: <span class="literal">false</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,user,info</span>)</span>&#123;</div><div class="line">         	<span class="keyword">if</span>(err) &#123;res.send(err);&#125;</div><div class="line">         	<span class="keyword">if</span>(user)&#123;</div><div class="line">        	  <span class="comment">//创建新用户</span></div><div class="line">        	  <span class="comment">//登录成功</span></div><div class="line">              req.session.isAuthenticated=<span class="literal">true</span>;<span class="comment">// 标记登录成功</span></div><div class="line">         	&#125;<span class="keyword">else</span>&#123;</div><div class="line">         	  <span class="comment">//登录失败的操作</span></div><div class="line">         	&#125;</div><div class="line">	&#125;)(req,res);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="3-配置-Express-Middleware"><a href="#3-配置-Express-Middleware" class="headerlink" title="3. 配置 Express Middleware"></a>3. 配置 Express Middleware</h1><p>使用passport需要我们自己配置一下middleware,位置在 <code>项目目录/config/http.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.http = &#123;</div><div class="line"></div><div class="line">  <span class="attr">middleware</span>: &#123;</div><div class="line"></div><div class="line">    <span class="attr">passportInit</span> : <span class="built_in">require</span>(<span class="string">'passport'</span>).initialize(), <span class="comment">//这里是需要加的东西</span></div><div class="line">    passportSession : <span class="built_in">require</span>(<span class="string">'passport'</span>).session(), <span class="comment">//这里是需要加的东西</span></div><div class="line"></div><div class="line">    order: [</div><div class="line">      <span class="string">'startRequestTimer'</span>,</div><div class="line">      <span class="string">'cookieParser'</span>,</div><div class="line">      <span class="string">'session'</span>,</div><div class="line">      <span class="string">'passportInit'</span>,     <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'passportSession'</span>,  <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'myRequestLogger'</span>,</div><div class="line">      <span class="string">'bodyParser'</span>,</div><div class="line">      <span class="string">'handleBodyParserError'</span>,</div><div class="line">      <span class="string">'compress'</span>,</div><div class="line">      <span class="string">'methodOverride'</span>,</div><div class="line">      <span class="string">'poweredBy'</span>,</div><div class="line">      <span class="string">'router'</span>,</div><div class="line">      <span class="string">'www'</span>,</div><div class="line">      <span class="string">'favicon'</span>,</div><div class="line">      <span class="string">'404'</span>,</div><div class="line">      <span class="string">'500'</span></div><div class="line">    ],</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>注意<code>order</code> 数组中的顺序保持一致</p>
-<h1 id="4-添加-policy"><a href="#4-添加-policy" class="headerlink" title="4. 添加 policy"></a>4. 添加 policy</h1><p>创建一个新的policy <code>isAuthenticated.js</code> 放在 <code>项目目录/api/policies/</code>目录下</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> (req.isAuthenticated) &#123;</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> res.redirect(<span class="string">'/login'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="5-绑定policy到controller"><a href="#5-绑定policy到controller" class="headerlink" title="5. 绑定policy到controller"></a>5. 绑定policy到controller</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.policies = &#123;</div><div class="line">   <span class="string">'*'</span>: <span class="literal">true</span>,</div><div class="line">  <span class="string">'SessionController'</span>: &#123;</div><div class="line">    <span class="string">'*'</span>: <span class="string">'isAuthenticated'</span></div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="6-测试一下吧"><a href="#6-测试一下吧" class="headerlink" title="6. 测试一下吧"></a>6. 测试一下吧</h1><p><a href="http://localhost:1337" target="_blank" rel="external">localhost:1337</a></p>
-<p>创建View的部分，以及其他注销操作本文就不给出了。 </p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/" class="archive-article-date">
-  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱登录/">邮箱登录</a></li></ul>
 	</div>
 
       
