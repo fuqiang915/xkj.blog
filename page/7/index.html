@@ -311,7 +311,7 @@
 
 
   
-    <article id="post-Android-Resources-strings" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Theme-Translucent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -321,7 +321,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Resources-strings/">Android资源-strings</a>
+      <a class="article-title" href="/uncategorized/2014/12/04/Android-Theme-Translucent/">Android主题-透明</a>
     </h1>
   
 
@@ -329,15 +329,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文介绍Resources strings中的一些知识点.</p>
-<p>strings.xml中如何输入特殊字符</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">空格 : &amp;#160;</div><div class="line">" : &amp;#34; 或 &amp;quot;</div><div class="line">' : &amp;#39; 或 &amp;apos;</div><div class="line">&amp; :  &amp;#38; 或 &amp;amp;</div><div class="line">lt(&lt;) : &amp;#60; 或 &amp;lt;</div><div class="line">gt(&gt;) : &amp;#62; 或 &amp;gt;</div></pre></td></tr></table></figure>
+        <p>将Activity设置为透明,并把ActionBar隐藏</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--透明--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Theme.Translucent"</span> <span class="attr">parent</span>=<span class="string">"AppTheme"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p> 此方法同样可以解决初次打开App时会闪现Activity的白屏。主要是因为App默认的Activity的默认主题是白色带ActionBar的，因此同过修改默认主题可以避免此问题。</p>
+</blockquote>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/04/Android-Resources-strings/" class="archive-article-date">
+      <a href="/uncategorized/2014/12/04/Android-Theme-Translucent/" class="archive-article-date">
   	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
 </a>
       
@@ -460,7 +462,7 @@
 
 
   
-    <article id="post-Android-Theme-Translucent" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Resources-strings" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -470,7 +472,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Theme-Translucent/">Android主题-透明</a>
+      <a class="article-title" href="/uncategorized/2014/12/04/Android-Resources-strings/">Android资源-strings</a>
     </h1>
   
 
@@ -478,17 +480,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>将Activity设置为透明,并把ActionBar隐藏</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--透明--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Theme.Translucent"</span> <span class="attr">parent</span>=<span class="string">"AppTheme"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p> 此方法同样可以解决初次打开App时会闪现Activity的白屏。主要是因为App默认的Activity的默认主题是白色带ActionBar的，因此同过修改默认主题可以避免此问题。</p>
-</blockquote>
+        <p>本文介绍Resources strings中的一些知识点.</p>
+<p>strings.xml中如何输入特殊字符</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">空格 : &amp;#160;</div><div class="line">" : &amp;#34; 或 &amp;quot;</div><div class="line">' : &amp;#39; 或 &amp;apos;</div><div class="line">&amp; :  &amp;#38; 或 &amp;amp;</div><div class="line">lt(&lt;) : &amp;#60; 或 &amp;lt;</div><div class="line">gt(&gt;) : &amp;#62; 或 &amp;gt;</div></pre></td></tr></table></figure>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/04/Android-Theme-Translucent/" class="archive-article-date">
+      <a href="/uncategorized/2014/12/04/Android-Resources-strings/" class="archive-article-date">
   	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
 </a>
       

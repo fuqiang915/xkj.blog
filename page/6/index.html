@@ -144,65 +144,6 @@
       <div class="body-wrap">
         
   
-    <article id="post-Android-debug-kill-app" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-debug-kill-app/">Android 调试技巧</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-如何模拟App被Kill掉"><a href="#1-如何模拟App被Kill掉" class="headerlink" title="1.如何模拟App被Kill掉"></a>1.如何模拟App被Kill掉</h3><p>以前开发App时有一个bug出现在系统回收掉app之后，重新打开时造成的，当时模拟的方式是不断打开其他app占用内存，直到app被回收。那种方法现在想想太…</p>
-<p><em>正确姿势：</em> 需要模拟器或者root过的手机</p>
-<p>在ddms中直接kill掉App线程</p>
-<blockquote>
-<p>App被Kill掉之后重启会直接打开最后显示的Activity</p>
-</blockquote>
-<h3 id="2-adb-shell-真机获取root权限"><a href="#2-adb-shell-真机获取root权限" class="headerlink" title="2.adb shell 真机获取root权限"></a>2.adb shell 真机获取root权限</h3><p>前提条件：手机已经root</p>
-<p>1, 将手机连接到电脑,然后输入下面命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell <span class="comment">//进入shell</span></div><div class="line">$ su  <span class="comment">// 获取root权限</span></div></pre></td></tr></table></figure></p>
-<p>2, 手机会提示获取root权限的提示，点击授权即可</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-debug-kill-app/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -275,6 +216,65 @@
 
 
   
+    <article id="post-Android-debug-kill-app" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-debug-kill-app/">Android 调试技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-如何模拟App被Kill掉"><a href="#1-如何模拟App被Kill掉" class="headerlink" title="1.如何模拟App被Kill掉"></a>1.如何模拟App被Kill掉</h3><p>以前开发App时有一个bug出现在系统回收掉app之后，重新打开时造成的，当时模拟的方式是不断打开其他app占用内存，直到app被回收。那种方法现在想想太…</p>
+<p><em>正确姿势：</em> 需要模拟器或者root过的手机</p>
+<p>在ddms中直接kill掉App线程</p>
+<blockquote>
+<p>App被Kill掉之后重启会直接打开最后显示的Activity</p>
+</blockquote>
+<h3 id="2-adb-shell-真机获取root权限"><a href="#2-adb-shell-真机获取root权限" class="headerlink" title="2.adb shell 真机获取root权限"></a>2.adb shell 真机获取root权限</h3><p>前提条件：手机已经root</p>
+<p>1, 将手机连接到电脑,然后输入下面命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell <span class="comment">//进入shell</span></div><div class="line">$ su  <span class="comment">// 获取root权限</span></div></pre></td></tr></table></figure></p>
+<p>2, 手机会提示获取root权限的提示，点击授权即可</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/03/Android-debug-kill-app/" class="archive-article-date">
+  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android-make-jar" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -316,67 +316,6 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-9-patch-pic" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/01/Android-9-patch-pic/">Android 9-patch图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android可以处理一种特殊的png图片9-patch图，图片以<code>.9.png</code>结尾,主要为了实现图片的部分区域的缩放。更多时候应用在按钮或其他控件的背景图上。</p>
-<h3 id="gt-制作方法："><a href="#gt-制作方法：" class="headerlink" title="&gt;制作方法："></a>&gt;制作方法：</h3><p>Android提供了制作9-patch图的工具位置在：<code>android_sdk/tools/draw9patch</code></p>
-<p>先看下工具截图：</p>
-<p><img src="/img/page_img/20150201_1.png" alt="9-patch tools"></p>
-<p>简单来说：<br>截图中左边是编辑区，右边是预览</p>
-<p>左边图中的四条黑线分别指定缩放区域和显示区域. </p>
-<ul>
-<li>左、上: 缩放区域(repeat区域)</li>
-<li>右、下: 内容区域</li>
-</ul>
-<p>编辑时很简单，只要拖动对应的线条就可以调整到你需要的缩放效果，右边可以实时预览。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/01/Android-9-patch-pic/" class="archive-article-date">
-  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/9-patch/">9-patch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 	</div>
 
       
@@ -478,6 +417,67 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event/">Event</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-9-patch-pic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/01/Android-9-patch-pic/">Android 9-patch图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android可以处理一种特殊的png图片9-patch图，图片以<code>.9.png</code>结尾,主要为了实现图片的部分区域的缩放。更多时候应用在按钮或其他控件的背景图上。</p>
+<h3 id="gt-制作方法："><a href="#gt-制作方法：" class="headerlink" title="&gt;制作方法："></a>&gt;制作方法：</h3><p>Android提供了制作9-patch图的工具位置在：<code>android_sdk/tools/draw9patch</code></p>
+<p>先看下工具截图：</p>
+<p><img src="/img/page_img/20150201_1.png" alt="9-patch tools"></p>
+<p>简单来说：<br>截图中左边是编辑区，右边是预览</p>
+<p>左边图中的四条黑线分别指定缩放区域和显示区域. </p>
+<ul>
+<li>左、上: 缩放区域(repeat区域)</li>
+<li>右、下: 内容区域</li>
+</ul>
+<p>编辑时很简单，只要拖动对应的线条就可以调整到你需要的缩放效果，右边可以实时预览。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/01/Android-9-patch-pic/" class="archive-article-date">
+  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/9-patch/">9-patch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 	</div>
 
       
