@@ -1,0 +1,38 @@
+{
+  "helloworld.fire_2d2f792f-a40c-49bb-a189-ed176a246e49": {
+    "files": [
+      "res/import/2d/2d2f792f-a40c-49bb-a189-ed176a246e49.json",
+      "res/import/41/410fb916-8721-4663-bab8-34397391ace7.json",
+      "res/raw-assets/Texture/singleColor.png",
+      "res/import/31/31bc895a-c003-4566-a9f3-2e54ae1c17dc.json",
+      "res/raw-assets/Texture/HelloWorld.png"
+    ],
+    "priority": 0,
+    "index": 0
+  },
+  "GameOver.fire_7f9bdf86-551c-4cae-b9e2-1ba0cb221c9a": {
+    "files": [
+      "res/import/7f/7f9bdf86-551c-4cae-b9e2-1ba0cb221c9a.json",
+      "res/import/f0/f0048c10-f03e-4c97-b9d3-3506e1d58952.json",
+      "res/raw-internal/image/default_btn_normal.png",
+      "res/import/e9/e9ec654c-97a2-4787-9325-e6a10375219a.json",
+      "res/raw-internal/image/default_btn_pressed.png",
+      "res/import/29/29158224-f8dd-4661-a796-1ffab537140e.json",
+      "res/raw-internal/image/default_btn_disabled.png"
+    ],
+    "priority": 0,
+    "index": 1
+  },
+  "boot": {
+    "files": [
+      "res/import/a2/a23235d1-15db-4b95-8439-a2e005bfff91.json",
+      "res/raw-internal/image/default_sprite_splash.png",
+      "res/import/31/3191ceb1-57e2-4e71-a326-4d174fb4bc20.json",
+      "res/import/28/28462bb8-6e15-4b28-893b-12060d229183.json",
+      "res/import/f0/f0423cfc-55c0-4cf4-b615-0ca3f339a859.json",
+      "res/import/03/03aeb13f-cfe5-448a-bd40-de42d32687aa.json"
+    ],
+    "priority": 0,
+    "index": 2
+  }
+}
