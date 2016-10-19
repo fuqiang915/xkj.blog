@@ -144,7 +144,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-vim-short-keys" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -154,7 +154,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/07/vim-short-keys/">Vim快捷键</a>
+      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
     </h1>
   
 
@@ -162,70 +162,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记得是在刚上班的时候就开始用Vim，不过到现在为止感觉还是没有完全将Vim的潜力完全挖掘出来。<br>这里主要记录一下常用的快捷键，方便查找。</p>
-<hr>
-<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><ul>
-<li><code>i</code>: 在当前字符的左边插入</li>
-<li><code>I</code>: 在当前行首插入</li>
-<li><code>a</code>: 在当前字符的右边插入</li>
-<li><code>A</code>: 在当前行尾插入</li>
-<li><code>o</code>: 在当前行下面插入一个新行</li>
-<li><code>O</code>: 在当前行上面插入一个新行</li>
-<li><code>d</code>: 删除.删除和查找,方向，重复次数方向都可以组合操作</li>
-<li><code>dd</code>: 删除当前</li>
-<li><code>D</code>: 删除当前为止到行尾</li>
+        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
+<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>方法一</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>方法二（需要安装好git）</p>
+</li>
 </ul>
-<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><ul>
-<li><code>[范围]s/[源字符]/[目标字符]/[g]</code>: 替换字符</li>
-<li><code>s/[源字符]/[目标字符]</code>: 替换字符,当前行</li>
-<li><code>%s/[源字符]/[目标字符]</code>: 替换字符,整个文件范围</li>
-<li><code>1,20 s/[源字符]/[目标字符]</code>: 替换字符,1到20行</li>
-<li><code>/[字符表达式]</code>: 查找字符</li>
-<li><code>/admin</code>: 查找admin</li>
-<li><code>/a.*in</code>: 查找类似admin,aaxxxin,axxxxin,<code>.</code> 匹配单个字符,<code>*</code>匹配任意字符 类似正则表达式， </li>
-</ul>
-<h3 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h3><ul>
-<li><code>k</code>: 上</li>
-<li><code>j</code>: 下 </li>
-<li><code>h</code>: 左</li>
-<li><code>l</code>: 右</li>
-<li><code>gg</code>: 到文件首</li>
-<li><code>G</code>: 到文件尾</li>
-<li><code>^</code>: 到行首</li>
-<li><code>$</code>: 到行尾</li>
-<li><code>w</code>: 移动到下一个单词</li>
-<li><code>b</code>: 移动到上一个单词</li>
-<li><code>%</code>: 跳到匹配的括号处（”{ }””[]””()”）</li>
-<li><code>[num]G</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>[num]gg</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>[num]:</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>&amp;lt;control-i, tab&amp;gt;</code>:跳到下一个跳点(Jump Point)</li>
-<li><code>&amp;lt;control-o&amp;gt;</code>:跳到上一个跳点</li>
-<li><code>H</code>: 移动光标到屏幕上面</li>
-<li><code>M</code>: 移动光标到屏幕中间</li>
-<li><code>L</code>: 移动光标到屏幕下面</li>
-<li><code>&amp;lt;control-F&amp;gt;</code>: 向下移动一屏。</li>
-<li><code>&amp;lt;control-B&amp;gt;</code>: 向上移动一屏。</li>
-<li><code>*</code>: 读取光标处的字符串，并且移动光标到它再次出现的地方。</li>
-<li><code>\#</code>: 和上面的类似，但是是往反方向寻找。</li>
-<li><code>ma</code>: 在当前光标的位置标记一个书签，名字为 a。书签名只能是小写字母。你看不见书签的存在，但它确实已经在那里了。</li>
-<li><code>`a</code>: 到书签 a 处。注意这个不是单引号，它一般位于大部分键盘的 1 的左边。</li>
-<li><code>`.</code>: 到你上次编辑文件的地方。这个命令很有用，而且你不用自己去标记它</li>
-<li><code>/text</code>: 从当前光标处开始搜索字符串 text，并且到达 text 出现的地方。必须使用回车来开始这个搜索命令。如果想重复上次的搜索的话，按n。</li>
-<li><code>?text</code>: 和上面类似，但是是反方向。</li>
-</ul>
+<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
+<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
+<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
+<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
+<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
+<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
+</blockquote>
+<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
+<p><img src="/img/page_img/zsh-2.png" alt="目录选择"></p>
+<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
+<p><img src="/img/page_img/zsh-1.png" alt="目录历史"></p>
+<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
+<p><img src="/img/page_img/zsh-3.png" alt="命令参数提示"></p>
+<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/07/vim-short-keys/" class="archive-article-date">
+      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
   	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
 	</div>
 
       

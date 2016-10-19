@@ -216,7 +216,7 @@
 
 
   
-    <article id="post-Android-debug-kill-app" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-WebViewBridge" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -226,7 +226,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-debug-kill-app/">Android 调试技巧</a>
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-WebViewBridge/">WebView中实现js与java互相调用</a>
     </h1>
   
 
@@ -234,27 +234,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-如何模拟App被Kill掉"><a href="#1-如何模拟App被Kill掉" class="headerlink" title="1.如何模拟App被Kill掉"></a>1.如何模拟App被Kill掉</h3><p>以前开发App时有一个bug出现在系统回收掉app之后，重新打开时造成的，当时模拟的方式是不断打开其他app占用内存，直到app被回收。那种方法现在想想太…</p>
-<p><em>正确姿势：</em> 需要模拟器或者root过的手机</p>
-<p>在ddms中直接kill掉App线程</p>
+        <p>在Android项目中，经常会用到在<code>Webview</code>中js与java的互相调用。当然，Google官方为WebView提供了对应的方法，通过<code>WebView.addJavascriptInterface()</code>方法来注入java对象来实现。但是这个方法有一个问题，在于4.2版本之前有漏洞。</p>
+<p>今天就来介绍另外一种js与java的互相调用的实现方式。当然这种方式可能网上已经有一些教程，我这里介绍的还是相对完善的一套解决方案。</p>
+<p>实现这套方案的条件：要求开发人员同时熟悉java与js</p>
+<h2 id="1-整体思路："><a href="#1-整体思路：" class="headerlink" title="1.整体思路："></a>1.整体思路：</h2><ul>
+<li>js调用java</li>
+</ul>
+<p>首先将js代码注入到webview的页面中,然后通过修改<code>window.location.href</code>来向java传递参数,java端通过监听页面url的改变来识别js端传递的参数.然后再经解析数据实现java方法的调用.</p>
+<ul>
+<li>java调用js</li>
+</ul>
+<p>java通过<code>webView.loadUrl(&quot;javascript:&quot;+jsCode);</code>来实现js代码的调用</p>
+<h2 id="2-详解："><a href="#2-详解：" class="headerlink" title="2.详解："></a>2.详解：</h2><h3 id="2-1-js调用java的实现"><a href="#2-1-js调用java的实现" class="headerlink" title="2.1 js调用java的实现"></a>2.1 js调用java的实现</h3><h4 id="2-1-1-js调用Java最简单版本-不支持callback"><a href="#2-1-1-js调用Java最简单版本-不支持callback" class="headerlink" title="2.1.1  js调用Java最简单版本,不支持callback"></a>2.1.1  js调用Java最简单版本,不支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">	<span class="comment">// 不包含回调方法的参数调用</span></div><div class="line">	share:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arg = &#123;<span class="attr">title</span>:<span class="string">"i am title"</span>&#125;;</div><div class="line">		<span class="comment">//修改href传递参数</span></div><div class="line">	    <span class="built_in">window</span>.location.href=<span class="string">"app://share?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>定义了一个全局对象来定义一些java端需要调用的方法，比如这里的share。关键的地方在于传递的参数格式<code>app://share</code>，很像<code>http</code>协议对吧,其实就是自己定义了一个协议开头而已。</p>
+<p>参数格式说明：</p>
+<p><code>app://share?+JSON.stringify(arg)</code></p>
+<p><code>app://</code> : 协议名称，自己可以随便定义，只要方便解析</p>
+<p><code>share</code> : 方法名称，用于指定需要执行的java方法</p>
+<p><code>?+JSON.stringify(arg)</code> : json格式参数</p>
+<h4 id="2-1-1-js调用java高端版支持callback"><a href="#2-1-1-js调用java高端版支持callback" class="headerlink" title="2.1.1 js调用java高端版支持callback"></a>2.1.1 js调用java高端版支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用于保存所有回调函数</span></div><div class="line"><span class="built_in">window</span>._callbacks = &#123;&#125;;</div><div class="line"><span class="comment">// 回调Id生成器</span></div><div class="line"><span class="built_in">window</span>._callbacks_id = <span class="number">0</span>;</div><div class="line"><span class="comment">// js Java 桥接器</span></div><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">        微信分享</div><div class="line">        @param  message:&#123;url:页面地址string, image:缩略图地址string,title:分享标题string,description:分享内容string &#125;</div><div class="line">        @param  success:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">        @param  error:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">     */</div><div class="line">    wxshare:<span class="function"><span class="keyword">function</span>(<span class="params">message,success,error</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(!message || !success || !error)&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"message or success or error is empty."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//== start =========================</span></div><div class="line">        <span class="comment">//这里是处理js调用java之后的回调,只要是需要回调都要像下面这样写</span></div><div class="line">        <span class="comment">// 生成 Callback Id</span></div><div class="line">        <span class="keyword">var</span> id = _callbacks_id++;</div><div class="line">        <span class="comment">// 设置回调函数</span></div><div class="line">        _callbacks[id]=&#123;</div><div class="line">            <span class="attr">success</span>:success,</div><div class="line">            <span class="attr">error</span>:error</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//== end =========================</span></div><div class="line"></div><div class="line">        <span class="comment">//解析Message</span></div><div class="line">        <span class="comment">// 通过修改location.href 给WebView传递参数</span></div><div class="line">        <span class="keyword">var</span> arg = &#123;</div><div class="line">            <span class="attr">message</span>:message,</div><div class="line">            <span class="comment">// 回调函数的id,java端通过callback_id来调用指定回调函数</span></div><div class="line">            callback_id:id</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">window</span>.location.href= <span class="string">"app://wxshare?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
+<p>思路: 当java端调用wxshare方法时会注册一组回调函数:<code>success</code>,<code>error</code>,然后将<code>callback_id</code>传递给java端，当java端执行完成后通过<code>callback_id</code>调用js端的回调函数</p>
+<p><code>_callback</code>: 保存回调函数<br><code>_callback_id</code> : 回调函数id生成器</p>
+<h4 id="2-2-java-端代码"><a href="#2-2-java-端代码" class="headerlink" title="2.2 java 端代码"></a>2.2 java 端代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeWebViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(<span class="keyword">final</span> WebView view, String url)</span> </span>&#123;</div><div class="line">        	<span class="comment">//在这里处理js传递过来的参数 url</span></div><div class="line">        	<span class="comment">//比如 url = app://share</span></div><div class="line">            <span class="keyword">if</span> (mBridge.handleJsArgument(url, <span class="keyword">new</span> WebViewBridge.handleJsCallback() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onHandleJs</span><span class="params">(String func, JSONObject argument)</span> </span>&#123;</div><div class="line">                   <span class="comment">//func 是js传递过来的方法名,比如 share </span></div><div class="line">                   <span class="comment">//argument ： 参数</span></div><div class="line">                &#125;</div><div class="line">            &#125;)) &#123;</div><div class="line">	            <span class="comment">//返回true代表请求已经被处理，为了防止传过来的参数被webview加载，直接返回true</span></div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            view.loadUrl(url);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">            <span class="comment">//此处需要注入js代码</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageStarted</span><span class="params">(WebView view, String url, Bitmap favicon)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageStarted(view, url, favicon);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">            <span class="comment">//这里需要触发js注入完成事件</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>App被Kill掉之后重启会直接打开最后显示的Activity</p>
+<p>设置WebViewClient: <code>webView.setWebClient(new BridgeWebViewClient());</code></p>
 </blockquote>
-<h3 id="2-adb-shell-真机获取root权限"><a href="#2-adb-shell-真机获取root权限" class="headerlink" title="2.adb shell 真机获取root权限"></a>2.adb shell 真机获取root权限</h3><p>前提条件：手机已经root</p>
-<p>1, 将手机连接到电脑,然后输入下面命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell <span class="comment">//进入shell</span></div><div class="line">$ su  <span class="comment">// 获取root权限</span></div></pre></td></tr></table></figure></p>
-<p>2, 手机会提示获取root权限的提示，点击授权即可</p>
+<p>上面的代码定义了一个BridgeWebViewClient类，关键在sholdOverrideUrlLoading方法中，通过<code>mBridge.handleJsArgument</code>方法来解析url,如果是js调用就会阻断页面的加载。</p>
+<p>下面是 handleJsArgument方法细节，这里的代码可以不用细看，只是用来解析参数的，解析完成后，在回调接口中返回方法名称和JSONObject格式的参数.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handleJsArgument</span><span class="params">(String url, handleJsCallback jscallback)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || !url.startsWith(UAPP_PRE)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//解析参数</span></div><div class="line">    String func = parseFuncName(url);</div><div class="line">    jscallback.onHandleJs(func, parseJsArgumentFromJsonStr(url));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> JSONObject <span class="title">parseJsArgumentFromJsonStr</span><span class="params">(String json)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (json == <span class="keyword">null</span> || json.equals(<span class="string">""</span>) || !json.startsWith(UAPP_PRE) || json.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    json = json.substring(json.indexOf(<span class="string">"?"</span>) + <span class="number">1</span>);</div><div class="line">    JSONObject jsonObject=<span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        jsonObject = <span class="keyword">new</span> JSONObject(json);</div><div class="line">    &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> jsonObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">parseFuncName</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || url.equals(<span class="string">""</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    String a = UAPP_PRE + <span class="string">"\\w+\\??"</span>;</div><div class="line">    String result = <span class="string">""</span>;</div><div class="line">    Pattern pattern = Pattern.compile(a);</div><div class="line">    Matcher matcher = pattern.matcher(url);</div><div class="line">    <span class="keyword">if</span> (matcher.find()) &#123;</div><div class="line">        result = matcher.group(<span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = <span class="number">0</span>;</div><div class="line">        start = result.indexOf(<span class="string">"/"</span>) + <span class="number">2</span>;</div><div class="line">        start = start &gt;= result.length() ? result.length() : start;</div><div class="line">        <span class="keyword">if</span> (result.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">            end = result.length();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            end = result.indexOf(<span class="string">"?"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result.substring(start, end);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-2-java调用js的实现"><a href="#2-2-java调用js的实现" class="headerlink" title="2.2 java调用js的实现"></a>2.2 java调用js的实现</h3><p>java调用js的方法，相当简单:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String jsCode = <span class="string">"(function()&#123; /*js code here*/  &#125;)()"</span>;</div><div class="line">webview.loadUrl(<span class="string">"javascript:"</span> + jsCode);</div></pre></td></tr></table></figure></p>
+<p>注意：要把js代码用自执行函数包裹起来</p>
+<p>利用这种方法可以把任意代码注入到页面中</p>
+<p>注意：<br>当页面刚加载时就需要把 2.1中的js代码注入到页面中，但是有时会出现页面加载完成，但是注入的代码没有执行的现象,应该是因为js没有及时加载而页面先加载完成。要解决这个问题就需要在页面加载完成时触发一个事件比如<code>jsBridgeReady</code>,js端通过监听jsBridgeReady事件来调用java方法。那么总体流程如下：</p>
+<p>加载页面-&gt;注入js代码-&gt;页面加载完成-&gt;触发js注入完成事件</p>
+<p>代码：</p>
+<p>在BridgeWebClient中添加逻辑：<br>1,加载页面时注入js代码：<br>2,加载完成后触发加载完成事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="comment">// 注入桥接代码</span></div><div class="line">    <span class="comment">// 这里通过读取js文件获得js代码</span></div><div class="line">    <span class="keyword">if</span> (mFileName != <span class="keyword">null</span>) &#123;</div><div class="line">        view.loadUrl(mBridge.createBaseJs(mContext, mFileName));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">    <span class="comment">// 触发注入完成事件，用于解决 注入的代码没有及时加载成功导致无法调用的问题</span></div><div class="line">    view.loadUrl(<span class="string">"(function()&#123;if(window.UAPPJSBridgeReady)&#123;window.UAPPJSBridgeReady();&#125;&#125;)()"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果你也想从文件读取js代码，记得把读取的代码压缩一下，把注释和换行删除,不然很可能会报错</p>
+</blockquote>
+<p>js端调用java注入的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//判断代码是否注入完成</span></div><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">	<span class="comment">//调用注入的方法</span></div><div class="line">    <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="comment">//监听注入完成的事件</span></div><div class="line">    <span class="built_in">window</span>.onBridgeLoaded=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">            <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上就是Android端js与java互相调用的方法，Good Luck!</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/02/03/Android-debug-kill-app/" class="archive-article-date">
+      <a href="/uncategorized/2015/02/03/Android-WebViewBridge/" class="archive-article-date">
   	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
 	</div>
 
       
@@ -793,7 +824,7 @@
 
 
   
-    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-vim-short-keys" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -803,7 +834,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
+      <a class="article-title" href="/uncategorized/2014/12/07/vim-short-keys/">Vim快捷键</a>
     </h1>
   
 
@@ -811,41 +842,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
-<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>方法一</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>方法二（需要安装好git）</p>
-</li>
+        <p>记得是在刚上班的时候就开始用Vim，不过到现在为止感觉还是没有完全将Vim的潜力完全挖掘出来。<br>这里主要记录一下常用的快捷键，方便查找。</p>
+<hr>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><ul>
+<li><code>i</code>: 在当前字符的左边插入</li>
+<li><code>I</code>: 在当前行首插入</li>
+<li><code>a</code>: 在当前字符的右边插入</li>
+<li><code>A</code>: 在当前行尾插入</li>
+<li><code>o</code>: 在当前行下面插入一个新行</li>
+<li><code>O</code>: 在当前行上面插入一个新行</li>
+<li><code>d</code>: 删除.删除和查找,方向，重复次数方向都可以组合操作</li>
+<li><code>dd</code>: 删除当前</li>
+<li><code>D</code>: 删除当前为止到行尾</li>
 </ul>
-<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
-<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
-<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
-<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
-<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
-<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
-</blockquote>
-<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
-<p><img src="/img/page_img/zsh-2.png" alt="目录选择"></p>
-<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
-<p><img src="/img/page_img/zsh-1.png" alt="目录历史"></p>
-<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
-<p><img src="/img/page_img/zsh-3.png" alt="命令参数提示"></p>
-<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
+<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><ul>
+<li><code>[范围]s/[源字符]/[目标字符]/[g]</code>: 替换字符</li>
+<li><code>s/[源字符]/[目标字符]</code>: 替换字符,当前行</li>
+<li><code>%s/[源字符]/[目标字符]</code>: 替换字符,整个文件范围</li>
+<li><code>1,20 s/[源字符]/[目标字符]</code>: 替换字符,1到20行</li>
+<li><code>/[字符表达式]</code>: 查找字符</li>
+<li><code>/admin</code>: 查找admin</li>
+<li><code>/a.*in</code>: 查找类似admin,aaxxxin,axxxxin,<code>.</code> 匹配单个字符,<code>*</code>匹配任意字符 类似正则表达式， </li>
+</ul>
+<h3 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h3><ul>
+<li><code>k</code>: 上</li>
+<li><code>j</code>: 下 </li>
+<li><code>h</code>: 左</li>
+<li><code>l</code>: 右</li>
+<li><code>gg</code>: 到文件首</li>
+<li><code>G</code>: 到文件尾</li>
+<li><code>^</code>: 到行首</li>
+<li><code>$</code>: 到行尾</li>
+<li><code>w</code>: 移动到下一个单词</li>
+<li><code>b</code>: 移动到上一个单词</li>
+<li><code>%</code>: 跳到匹配的括号处（”{ }””[]””()”）</li>
+<li><code>[num]G</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>[num]gg</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>[num]:</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
+<li><code>&amp;lt;control-i, tab&amp;gt;</code>:跳到下一个跳点(Jump Point)</li>
+<li><code>&amp;lt;control-o&amp;gt;</code>:跳到上一个跳点</li>
+<li><code>H</code>: 移动光标到屏幕上面</li>
+<li><code>M</code>: 移动光标到屏幕中间</li>
+<li><code>L</code>: 移动光标到屏幕下面</li>
+<li><code>&amp;lt;control-F&amp;gt;</code>: 向下移动一屏。</li>
+<li><code>&amp;lt;control-B&amp;gt;</code>: 向上移动一屏。</li>
+<li><code>*</code>: 读取光标处的字符串，并且移动光标到它再次出现的地方。</li>
+<li><code>\#</code>: 和上面的类似，但是是往反方向寻找。</li>
+<li><code>ma</code>: 在当前光标的位置标记一个书签，名字为 a。书签名只能是小写字母。你看不见书签的存在，但它确实已经在那里了。</li>
+<li><code>`a</code>: 到书签 a 处。注意这个不是单引号，它一般位于大部分键盘的 1 的左边。</li>
+<li><code>`.</code>: 到你上次编辑文件的地方。这个命令很有用，而且你不用自己去标记它</li>
+<li><code>/text</code>: 从当前光标处开始搜索字符串 text，并且到达 text 出现的地方。必须使用回车来开始这个搜索命令。如果想重复上次的搜索的话，按n。</li>
+<li><code>?text</code>: 和上面类似，但是是反方向。</li>
+</ul>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
+      <a href="/uncategorized/2014/12/07/vim-short-keys/" class="archive-article-date">
   	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
 	</div>
 
       
