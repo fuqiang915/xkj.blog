@@ -20,12 +20,12 @@ _CCSettings = {
             ]
         },
         "internal": {
-            "0275e94c-56a7-410f-bd1a-fc7483f7d14a": [
-                "image/default_sprite_splash.png",
-                "cc.Texture2D"
-            ],
             "e851e89b-faa2-4484-bea6-5c01dd9f06e2": [
                 "image/default_btn_normal.png",
+                "cc.Texture2D"
+            ],
+            "0275e94c-56a7-410f-bd1a-fc7483f7d14a": [
+                "image/default_sprite_splash.png",
                 "cc.Texture2D"
             ],
             "b43ff3c2-02bb-4874-81f7-f2dea6970f18": [
@@ -50,16 +50,16 @@ _CCSettings = {
         }
     ],
     "packedAssets": {
-        "4d63e10e-cef0-4a67-ac7d-5d24fce254f6": [
+        "b7fd9afb-b00f-4001-aac2-645c6582177c": [
             "3191ceb1-57e2-4e71-a326-4d174fb4bc20",
-            "f0423cfc-55c0-4cf4-b615-0ca3f339a859",
             "28462bb8-6e15-4b28-893b-12060d229183",
             "03aeb13f-cfe5-448a-bd40-de42d32687aa",
+            "f0423cfc-55c0-4cf4-b615-0ca3f339a859",
             "0a7f9b75-0b93-4d3c-a50d-9e33ab65301f"
         ],
-        "6ac5f73b-32af-4144-aa12-4ceaf92059d9": [
-            "a23235d1-15db-4b95-8439-a2e005bfff91",
+        "ce8520ba-f92d-44be-bf84-e23099f1e0b5": [
             "f0048c10-f03e-4c97-b9d3-3506e1d58952",
+            "a23235d1-15db-4b95-8439-a2e005bfff91",
             "e9ec654c-97a2-4787-9325-e6a10375219a",
             "29158224-f8dd-4661-a796-1ffab537140e"
         ]

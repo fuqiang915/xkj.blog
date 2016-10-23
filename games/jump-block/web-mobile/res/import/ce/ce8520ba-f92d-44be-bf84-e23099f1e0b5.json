@@ -2,27 +2,6 @@
   {
     "__type__": "cc.SpriteFrame",
     "content": {
-      "name": "default_sprite_splash",
-      "texture": "0275e94c-56a7-410f-bd1a-fc7483f7d14a",
-      "rect": [
-        0,
-        0,
-        2,
-        2
-      ],
-      "offset": [
-        0,
-        0
-      ],
-      "originalSize": [
-        2,
-        2
-      ]
-    }
-  },
-  {
-    "__type__": "cc.SpriteFrame",
-    "content": {
       "name": "default_btn_normal",
       "texture": "e851e89b-faa2-4484-bea6-5c01dd9f06e2",
       "rect": [
@@ -44,6 +23,27 @@
         3,
         3,
         7
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "default_sprite_splash",
+      "texture": "0275e94c-56a7-410f-bd1a-fc7483f7d14a",
+      "rect": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        2,
+        2
       ]
     }
   },
