@@ -9,6 +9,16 @@ _CCSettings = {
         ]
     ],
     "rawAssets": {
+        "assets": {
+            "817dac6a-aea0-4cb7-a32b-445f55359342": [
+                "Audio/pause.mp3",
+                "cc.AudioClip"
+            ],
+            "b936e282-3940-4074-88e2-e9686ef4c7e6": [
+                "Audio/bk.mp3",
+                "cc.AudioClip"
+            ]
+        },
         "internal": {
             "0275e94c-56a7-410f-bd1a-fc7483f7d14a": [
                 "image/default_sprite_splash.png",
@@ -40,14 +50,14 @@ _CCSettings = {
         }
     ],
     "packedAssets": {
-        "2e459ff5-f462-4ef8-99b3-2c90d9555ab8": [
+        "4d63e10e-cef0-4a67-ac7d-5d24fce254f6": [
             "3191ceb1-57e2-4e71-a326-4d174fb4bc20",
-            "28462bb8-6e15-4b28-893b-12060d229183",
             "f0423cfc-55c0-4cf4-b615-0ca3f339a859",
+            "28462bb8-6e15-4b28-893b-12060d229183",
             "03aeb13f-cfe5-448a-bd40-de42d32687aa",
             "0a7f9b75-0b93-4d3c-a50d-9e33ab65301f"
         ],
-        "cc92ebb2-a651-4f7a-93e9-8086c18d988a": [
+        "6ac5f73b-32af-4144-aa12-4ceaf92059d9": [
             "a23235d1-15db-4b95-8439-a2e005bfff91",
             "f0048c10-f03e-4c97-b9d3-3506e1d58952",
             "e9ec654c-97a2-4787-9325-e6a10375219a",
