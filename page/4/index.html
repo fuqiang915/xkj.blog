@@ -56,6 +56,8 @@
 	        
 				<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
 	        
+				<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -122,6 +124,8 @@
 		        
 					<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
 		        
+					<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+		        
 				</ul>
 			</nav>
 			<nav class="header-nav">
@@ -143,6 +147,787 @@
 
       <div class="body-wrap">
         
+  
+    <article id="post-adb-shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/02/04/adb-shell/">Adb Shell 命令总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><ul>
+<li>登入shell<code>adb shell //运行远端shell交互</code></li>
+<li>运行远端shell 命令: <code>adb shell &lt;command&gt;</code></li>
+<li>运行仿真控制台命令: <code>adb emu &lt;command&gt;</code></li>
+</ul>
+<h2 id="进程信息相关"><a href="#进程信息相关" class="headerlink" title="进程信息相关"></a>进程信息相关</h2><ul>
+<li>获取手机所有进程: <code>adb shell ps -x</code><ul>
+<li>利用grep筛选关键字：<code>adb shell ps -x | grep qiyi</code></li>
+<li>VSS - Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）</li>
+<li>RSS - Resident Set Size 实际使用物理内存（包含共享库占用的内存）</li>
+<li>PSS - Proportional Set Size 实际使用的物理内存（比例分配共享库占用的内存）</li>
+<li>USS - Unique Set Size 进程独自占用的物理内存（不包含共享库占用的内存）</li>
+</ul>
+</li>
+<li>设备信息：<code>cat /system/build.prop | grep &quot;product&quot;</code></li>
+<li>CPU信息：<code>/proc/cpuinfo</code>和<code>/proc/stat</code></li>
+<li>内存：<code>/proc/meminfo adb shell dumpsys meminfo</code></li>
+</ul>
+<h2 id="文件导入导出"><a href="#文件导入导出" class="headerlink" title="文件导入导出"></a>文件导入导出</h2><ul>
+<li>导入: <code>adb push &lt;local&gt; &lt;remote&gt;</code><ul>
+<li><code>adb push  &lt;local_file_path&gt;  /sdcard/</code></li>
+</ul>
+</li>
+<li><p>导出: <code>adb pull &lt;remote&gt; [&lt;local&gt;]</code></p>
+<ul>
+<li><code>adb pull  /sdcard/ &lt;local_file_path&gt;</code></li>
+</ul>
+</li>
+<li><p>文件同步: <code>adb sync [&lt;directory&gt;] //只有发生改变时从主机拷贝到设备</code></p>
+</li>
+</ul>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><ul>
+<li>浏览日志: <code>adb logcat [&lt;filter-spec&gt;]</code></li>
+</ul>
+<h2 id="应用卸载安装"><a href="#应用卸载安装" class="headerlink" title="应用卸载安装"></a>应用卸载安装</h2><ul>
+<li>拷贝文件包到设备并安装: <code>adb install [-l] [-r] [-s] &lt;file&gt;</code></li>
+<li>卸载程序包，-k意味着保留数据和缓存: <code>adb uninstall [-k] &lt;package&gt;</code></li>
+<li>返回所有的bugreport信息: <code>adb bugreport</code></li>
+<li>转发套接字连接: <code>adb forward &lt;local&gt; &lt;remote&gt;</code></li>
+</ul>
+<h2 id="连接设备"><a href="#连接设备" class="headerlink" title="连接设备"></a>连接设备</h2><ul>
+<li>阻塞直到设备上线: <code>adb wait-for-device</code></li>
+<li>启动服务： <code>adb start-server</code></li>
+<li>关闭服务：<code>adb kill-server</code></li>
+<li>列印offline,bootloader,device信息: <code>adb get-state</code></li>
+<li>获取序列号：<code>adb get-serialno</code></li>
+<li>连续列印设备状态:<code>adb status-window</code></li>
+<li>重装载/system分区: <code>adb remount</code></li>
+<li>重启: <code>adb reboot [bootloader|recomry]</code><ul>
+<li><code>adb reboot-bootloader</code></li>
+</ul>
+</li>
+<li>获取权限：<code>adb root</code></li>
+<li>重启adb重新监听usb：<code>adb usb</code></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/02/04/adb-shell/" class="archive-article-date">
+  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/">cmd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/commend/">commend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-ThreadPool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/02/04/Android-ThreadPool/">Android线程池解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>思路: 线程池维护N个线程持续运行，可以随时接收Runnable任务交给池内线程执行。任务队列为空时等待。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>重用线程池中的线程，减少因为线程的创建和销毁带来的性能开销</li>
+<li>能有效控制线程池的最大并发数，避免大量的线程之间因互相抢占系统资源而导致的阻塞线程</li>
+<li>能够对线程进行简单地管理，并提供定时执行以及指定间隔循环执行等功能 源于Java Executor接口，Android中的实现：ThreadPoolExecutor。 可配置为四类线程池。</li>
+</ul>
+<blockquote>
+<p>相比来说通过<code>new Thread</code>的方式执行的缺点：</p>
+<ul>
+<li>每次new Thread新建对象性能差。</li>
+<li>线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。</li>
+<li>缺乏更多功能，如定时执行、定期执行、线程中断。</li>
+</ul>
+</blockquote>
+<h2 id="构造函数说明"><a href="#构造函数说明" class="headerlink" title="构造函数说明"></a>构造函数说明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</div><div class="line">     BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>corePoolSize</code><br>核心线程数。默认核心线程一直存活，即便闲置时。若<code>allowCoreThreadTimeOut=true</code> =&gt; 核心线程等待新任务时间超过<code>keepAliveTime</code>会被终止。</li>
+<li><code>maximumPoolSize</code><br>最大线程数,活动线程达到此值后，后续新任务会被阻塞</li>
+<li><code>keepAliveTime</code><br>非核心线程闲置时超时时长，超过后非核心线程会被回收。当<code>allowCoreThreadTimeOut = true</code> 那么核心线程也会超时。</li>
+<li><code>unit</code><br>keepAliveTime的单位,枚举。<code>TimeUnit.MILLISECONDS</code>,<code>TimeUnit.SECONDS</code>,<code>TimeUnit.MINUTES</code></li>
+<li><code>workQueue</code><br>线程池中的任务队列，通过线程池的execute方法提交的Runnable会存储在这个参数中</li>
+<li><code>threadFactory</code><br>线程工厂，为线程池提供创建新线程功能。<code>ThreadFactory</code>是接口,只有一个方法： <code>Thread newThread(Runnable r)</code></li>
+</ul>
+<h2 id="Java线程池的种类"><a href="#Java线程池的种类" class="headerlink" title="Java线程池的种类"></a>Java线程池的种类</h2><ul>
+<li>newCachedThreadPool</li>
+</ul>
+<p>缓存的线程池，需要时创建，无用时回收，合理使用资源.</p>
+<ul>
+<li>newFixedThreadPool</li>
+</ul>
+<p>固定数量线程</p>
+<ul>
+<li>newScheduledThreadPool </li>
+</ul>
+<p>用于定时，延时，周期性任务的执行</p>
+<ul>
+<li>newSingleThreadPool</li>
+</ul>
+<p>只有一个线程运行，保证任务顺序执行FIFO，LILO</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService service = Executors.newCachedThreadPool();</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/02/04/Android-ThreadPool/" class="archive-article-date">
+  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread/">thread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread-pool/">thread pool</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-AndroidStudioShortcuts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/02/03/AndroidStudioShortcuts/">AndroidStudio快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<p>总结一下AndroidStudio常用快捷键，以备不时之需。</p>
+<h1 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F1</td>
+<td style="text-align:left">帮助</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+F1</td>
+<td style="text-align:left">查找文件所在目录位置</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+1</td>
+<td style="text-align:left">快速打开或隐藏工程面板</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+</td>
+<td style="text-align:left">打开设置对话框</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Alt(Option)+Home</strong></td>
+<td style="text-align:left"><strong>跳转到导航栏</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Esc</td>
+<td style="text-align:left">光标返回编辑框</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Shift+Esc</strong></td>
+<td style="text-align:left"><strong>光标返回编辑框,关闭无用的窗口</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+Click</td>
+<td style="text-align:left">关闭标签页</td>
+</tr>
+<tr>
+<td style="text-align:left">F12</td>
+<td style="text-align:left">把焦点从编辑器移到最近使用的工具窗口</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Y</td>
+<td style="text-align:left">同步</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+S</td>
+<td style="text-align:left">打开设置对话框</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Shift+Inert</td>
+<td style="text-align:left">开启/关闭列选择模式</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+S</td>
+<td style="text-align:left">打开当前项目/模块属性</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Alt(Option)+Shift+C</strong></td>
+<td style="text-align:left"><strong>查看文件的变更历史</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+F10</td>
+<td style="text-align:left">运行</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+F9</td>
+<td style="text-align:left">debug运行</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+F12</td>
+<td style="text-align:left">资源管理器打开文件夹</td>
+</tr>
+</tbody>
+</table>
+<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ctrl(Command)+C</td>
+<td style="text-align:left">复制当前行或选中的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+D</td>
+<td style="text-align:left">粘贴当前行或选中的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+X</td>
+<td style="text-align:left">剪切当前行或选中的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Y</td>
+<td style="text-align:left">删除行</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Z</td>
+<td style="text-align:left">倒退</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Z</td>
+<td style="text-align:left">向前</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Enter</td>
+<td style="text-align:left">自动修正</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+L</td>
+<td style="text-align:left">格式化代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+I</td>
+<td style="text-align:left">将选中的代码进行自动缩进编排</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+O</td>
+<td style="text-align:left">优化导入的类和包</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Insert</td>
+<td style="text-align:left">得到一些Intention Action，可以生成构造器、Getter、Setter、将 == 改为 equals() 等</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+V</td>
+<td style="text-align:left">选最近使用的剪贴板内容并插入</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+V</td>
+<td style="text-align:left">简单粘贴</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Insert</td>
+<td style="text-align:left">选最近使用的剪贴板内容并插入（同Ctrl(Command)+Shift+V）</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Enter</td>
+<td style="text-align:left">在当前行的上面插入新行，并移动光标到新行（此功能光标在行首时有效）</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+Enter</td>
+<td style="text-align:left">在当前行的下面插入新行，并移动光标到新行</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+J</strong></td>
+<td style="text-align:left"><strong>自动代码</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+T</strong></td>
+<td style="text-align:left"><strong>把选中的代码放在 try{} 、if{} 、 else{} 里</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+Alt(Option)+Insert</td>
+<td style="text-align:left">竖编辑模式</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+ /</td>
+<td style="text-align:left">注释 //</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+ /</td>
+<td style="text-align:left">注释 /…/</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+J</td>
+<td style="text-align:left">合并成一行</td>
+</tr>
+<tr>
+<td style="text-align:left">F2/Shift+F2</td>
+<td style="text-align:left">跳转到下/上一个错误语句处</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Shift+Back</strong></td>
+<td style="text-align:left"><strong>跳转到上次编辑的地方</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Space</td>
+<td style="text-align:left">类名自动完成</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+Alt(Option)+Up/Down</td>
+<td style="text-align:left">内容向上/下移动</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Up/Down</td>
+<td style="text-align:left">语句向上/下移动</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+U</td>
+<td style="text-align:left">大小写切换</td>
+</tr>
+<tr>
+<td style="text-align:left">Tab</td>
+<td style="text-align:left">代码标签输入完成后，按 Tab，生成代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Backspace</td>
+<td style="text-align:left">按单词删除</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Enter</td>
+<td style="text-align:left">语句完成</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+J</td>
+<td style="text-align:left">用动态模板环绕</td>
+</tr>
+</tbody>
+</table>
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+F12</strong></td>
+<td style="text-align:left"><strong>显示当前文件的结构</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+H</td>
+<td style="text-align:left">显示类继承结构图</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Q</td>
+<td style="text-align:left">显示注释文档</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+P</strong></td>
+<td style="text-align:left"><strong>方法参数提示</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+U</td>
+<td style="text-align:left">打开当前类的父类或者实现的接口</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Left/Right</td>
+<td style="text-align:left">切换代码视图</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+Left/Right</strong></td>
+<td style="text-align:left"><strong>返回上次编辑的位置</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Alt(Option)+Up/Down</strong></td>
+<td style="text-align:left"><strong>在方法间快速移动定位</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+B</td>
+<td style="text-align:left">快速打开光标处的类或方法</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+W</strong></td>
+<td style="text-align:left"><strong>选中代码，连续按会有其他效果</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+W</td>
+<td style="text-align:left">取消选择光标所在词</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+ - / +</td>
+<td style="text-align:left">折叠/展开代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+ - / +</td>
+<td style="text-align:left">折叠/展开全部代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+.</td>
+<td style="text-align:left">折叠/展开当前花括号中的代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+</td>
+<td style="text-align:left">] / [    跳转到代码块结束/开始处</td>
+</tr>
+<tr>
+<td style="text-align:left">F2</td>
+<td style="text-align:left">或 Shift+F2 高亮错误或警告快速定位</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Shift+C</strong></td>
+<td style="text-align:left"><strong>复制路径</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+C</td>
+<td style="text-align:left">复制引用，必须选择类名</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Alt(Option)+Up/Down</strong></td>
+<td style="text-align:left"><strong>在方法间快速移动定位</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F1</td>
+<td style="text-align:left">要打开编辑器光标字符处使用的类或者方法 Java 文档的浏览器</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+G</td>
+<td style="text-align:left">定位行</td>
+</tr>
+</tbody>
+</table>
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ctrl(Command)+F</td>
+<td style="text-align:left">在当前窗口查找文本</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+F</td>
+<td style="text-align:left">在指定环境下查找文本</td>
+</tr>
+<tr>
+<td style="text-align:left">F3</td>
+<td style="text-align:left">向下查找关键字出现位置</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F3</td>
+<td style="text-align:left">向上一个关键字出现位置</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+R</td>
+<td style="text-align:left">在当前窗口替换文本</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+R</td>
+<td style="text-align:left">在指定窗口替换文本</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+N</td>
+<td style="text-align:left">查找类</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+N</td>
+<td style="text-align:left">查找文件</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Alt(Option)+N</td>
+<td style="text-align:left">查找项目中的方法或变量</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+B</td>
+<td style="text-align:left">查找变量的来源</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+B</td>
+<td style="text-align:left">快速打开光标处的类或方法</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+B</td>
+<td style="text-align:left">跳转到类或方法实现处</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+E</strong></td>
+<td style="text-align:left"><strong>最近打开的文件</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+F3</td>
+<td style="text-align:left">快速查找，效果和Ctrl(Command)+F相同</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>F4</strong></td>
+<td style="text-align:left"><strong>跳转至定义变量的位置</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Alt(Option)+F7</strong></td>
+<td style="text-align:left"><strong>查询当前元素在工程中的引用</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+F7</strong></td>
+<td style="text-align:left"><strong>查询当前元素在当前文件中的引用，然后按 F3 可以选择</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+F7</td>
+<td style="text-align:left">选中查询当前元素在工程中的引用</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Shift+F7</strong></td>
+<td style="text-align:left"><strong>高亮显示匹配的字符，按 Esc 高亮消失</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+F7</strong></td>
+<td style="text-align:left"><strong>查找某个方法的所有调用地方</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+Alt(Option)+N</td>
+<td style="text-align:left">查找类中的方法或变量</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+O</td>
+<td style="text-align:left">弹出显示查找内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Up/Down</td>
+<td style="text-align:left">快速跳转搜索结果</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Shift+S</td>
+<td style="text-align:left">高级搜索、搜索结构</td>
+</tr>
+</tbody>
+</table>
+<h1 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F5</td>
+<td style="text-align:left">复制</td>
+</tr>
+<tr>
+<td style="text-align:left">F6</td>
+<td style="text-align:left">移动</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Delete</td>
+<td style="text-align:left">安全删除</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+U</td>
+<td style="text-align:left">转到父类</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+O</td>
+<td style="text-align:left">重写父类的方法</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+I</td>
+<td style="text-align:left">实现方法</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+N</td>
+<td style="text-align:left">内联</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+T</td>
+<td style="text-align:left">弹出重构菜单</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F6</td>
+<td style="text-align:left">重构-重命名</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+M</strong></td>
+<td style="text-align:left"><strong>提取代码组成方法</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+C</strong></td>
+<td style="text-align:left"><strong>将变量更改为常量</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+V</strong></td>
+<td style="text-align:left"><strong>定义变量引用当前对象或者方法的返回值</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+F</td>
+<td style="text-align:left">将局部变量更改为类的成员变量</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+P</strong></td>
+<td style="text-align:left"><strong>将变量更改为方法的参数</strong></td>
+</tr>
+</tbody>
+</table>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F8</td>
+<td style="text-align:left">跳到下一步</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F8</td>
+<td style="text-align:left">跳出函数、跳到下一个断点</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Shift+F8</td>
+<td style="text-align:left">强制跳出函数</td>
+</tr>
+<tr>
+<td style="text-align:left">F7</td>
+<td style="text-align:left">进入代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+F7</td>
+<td style="text-align:left">智能进入代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+Shift+F7</td>
+<td style="text-align:left">强制进入代码</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+F9</td>
+<td style="text-align:left">运行至光标处</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+Alt(Option)+F9</td>
+<td style="text-align:left">强制运行至光标处</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl(Command)+F2</td>
+<td style="text-align:left">停止运行</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt(Option)+F8</td>
+<td style="text-align:left">计算变量值</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/02/03/AndroidStudioShortcuts/" class="archive-article-date">
+  	<time datetime="2016-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shortcut/">shortcut</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-SampleCodes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -589,57 +1374,6 @@
 
 
   
-    <article id="post-start-up" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/23/start-up/">创业-资源</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://startupclass.club/" target="_blank" rel="external">YC</a>;<br>YC中文社区，创业必逛，很多视频讲座等。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/23/start-up/" class="archive-article-date">
-  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创业/">创业</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-shell-cmd" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -696,7 +1430,7 @@
 
 
   
-    <article id="post-redis-introduce" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-start-up" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -706,7 +1440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/16/redis-introduce/">redis 介绍</a>
+      <a class="article-title" href="/uncategorized/2015/07/23/start-up/">创业-资源</a>
     </h1>
   
 
@@ -714,164 +1448,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天项目中实现消息发送队列时用到redis，之前从来没接触过，这里记录一下一些基本使用方法.</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><hr>
-<p>Redis是一个Key-Value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)和zset(有序集合)。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，Redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是Redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><hr>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install</div></pre></td></tr></table></figure>
-<p>安装成功之后启动服务：<code>redis-server</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启动服务，应用对应配置</span></div><div class="line">/usr/local/bin/redis-server /etc/redis.conf</div></pre></td></tr></table></figure>
-<p>命令行工具： <code>redis-cli</code></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><hr>
-<p>取值：<code>get [key]</code></p>
-<p>存值：<code>set [key] [value]</code></p>
-<h2 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h2><p><a href="http://redisdoc.com/" target="_blank" rel="external">Redis 命令参考</a></p>
-<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><p>设置需要密码链接： requirepass</p>
-<p>默认配置如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div></pre></td><td class="code"><pre><div class="line"># # Note on units: when memory size is needed, it is possible to specify</div><div class="line"># it in the usual form of 1k 5GB 4M and so forth:</div><div class="line">#</div><div class="line"># 1k =&gt; 1000 bytes</div><div class="line"># 1kb =&gt; 1024 bytes</div><div class="line"># 1m =&gt; 1000000 bytes</div><div class="line"># 1mb =&gt; 1024*1024 bytes</div><div class="line"># 1g =&gt; 1000000000 bytes</div><div class="line"># 1gb =&gt; 1024*1024*1024 bytes</div><div class="line">#</div><div class="line"># units are case insensitive so 1GB 1Gb 1gB are all the same.</div><div class="line"># # By default Redis does not run as a daemon. Use 'yes' if you need it.</div><div class="line"># Note that Redis will write a pid file in /var/run/redis.pid when daemonized.</div><div class="line">daemonize no</div><div class="line"># # When running daemonized, Redis writes a pid file in /var/run/redis.pid by</div><div class="line"># default. You can specify a custom pid file location here.</div><div class="line">pidfile /var/run/redis.pid</div><div class="line"># # Accept connections on the specified port, default is 6379.</div><div class="line"># If port 0 is specified Redis will not listen on a TCP socket.</div><div class="line">port 6379</div><div class="line"># # If you want you can bind a single interface, if the bind option is not</div><div class="line"># specified all the interfaces will listen for incoming connections.</div><div class="line">#</div><div class="line"># bind 127.0.0.1</div><div class="line"># # Specify the path for the unix socket that will be used to listen for</div><div class="line"># incoming connections. There is no default, so Redis will not listen</div><div class="line"># on a unix socket when not specified.</div><div class="line">#</div><div class="line"># unixsocket /tmp/redis.sock</div><div class="line"># unixsocketperm 755</div><div class="line"># # Close the connection after a client is idle for N seconds (0 to disable)</div><div class="line">timeout 0</div><div class="line"># # TCP keepalive.</div><div class="line">#</div><div class="line"># If non-zero, use SO_KEEPALIVE to send TCP ACKs to clients in absence</div><div class="line"># of communication. This is useful for two reasons:</div><div class="line">#</div><div class="line"># 1) Detect dead peers.</div><div class="line"># 2) Take the connection alive from the point of view of network</div><div class="line">#    equipment in the middle.</div><div class="line">#</div><div class="line"># On Linux, the specified value (in seconds) is the period used to send ACKs.</div><div class="line"># Note that to close the connection the double of the time is needed.</div><div class="line"># On other kernels the period depends on the kernel configuration.</div><div class="line">#</div><div class="line"># A reasonable value for this option is 60 seconds.</div><div class="line">tcp-keepalive 0</div><div class="line"># # Specify the server verbosity level.</div><div class="line"># This can be one of:</div><div class="line"># debug (a lot of information, useful for development/testing)</div><div class="line"># verbose (many rarely useful info, but not a mess like the debug level)</div><div class="line"># notice (moderately verbose, what you want in production probably)</div><div class="line"># warning (only very important / critical messages are logged)</div><div class="line">loglevel notice</div><div class="line"># # Specify the log file name. Also 'stdout' can be used to force</div><div class="line"># Redis to log on the standard output. Note that if you use standard</div><div class="line"># output for logging but daemonize, logs will be sent to /dev/null</div><div class="line">logfile stdout</div><div class="line"># # To enable logging to the system logger, just set 'syslog-enabled' to yes,</div><div class="line"># and optionally update the other syslog parameters to suit your needs.</div><div class="line"># syslog-enabled no</div><div class="line"># # Specify the syslog identity.</div><div class="line"># syslog-ident redis</div><div class="line"># # Specify the syslog facility. Must be USER or between LOCAL0-LOCAL7.</div><div class="line"># syslog-facility local0</div><div class="line"># # Set the number of databases. The default database is DB 0, you can select</div><div class="line"># a different one on a per-connection basis using SELECT &lt;dbid&gt; where</div><div class="line"># dbid is a number between 0 and 'databases'-1</div><div class="line">databases 16</div><div class="line"># ################################ SNAPSHOTTING  #################################</div><div class="line">#</div><div class="line"># Save the DB on disk:</div><div class="line">#</div><div class="line">#   save &lt;seconds&gt; &lt;changes&gt;</div><div class="line">#</div><div class="line">#   Will save the DB if both the given number of seconds and the given</div><div class="line">#   number of write operations against the DB occurred.</div><div class="line">#</div><div class="line">#   In the example below the behaviour will be to save:</div><div class="line">#   after 900 sec (15 min) if at least 1 key changed</div><div class="line">#   after 300 sec (5 min) if at least 10 keys changed</div><div class="line">#   after 60 sec if at least 10000 keys changed</div><div class="line">#</div><div class="line">#   Note: you can disable saving at all commenting all the "save" lines.</div><div class="line">#</div><div class="line">#   It is also possible to remove all the previously configured save</div><div class="line">#   points by adding a save directive with a single empty string argument</div><div class="line">#   like in the following example:</div><div class="line">#</div><div class="line">#   save ""</div><div class="line"># save 900 1</div><div class="line">save 300 10</div><div class="line">save 60 10000</div><div class="line"># # By default Redis will stop accepting writes if RDB snapshots are enabled</div><div class="line"># (at least one save point) and the latest background save failed.</div><div class="line"># This will make the user aware (in an hard way) that data is not persisting</div><div class="line"># on disk properly, otherwise chances are that no one will notice and some</div><div class="line"># distater will happen.</div><div class="line">#</div><div class="line"># If the background saving process will start working again Redis will</div><div class="line"># automatically allow writes again.</div><div class="line">#</div><div class="line"># However if you have setup your proper monitoring of the Redis server</div><div class="line"># and persistence, you may want to disable this feature so that Redis will</div><div class="line"># continue to work as usually even if there are problems with disk,</div><div class="line"># permissions, and so forth.</div><div class="line">stop-writes-on-bgsave-error yes</div><div class="line"># # Compress string objects using LZF when dump .rdb databases?</div><div class="line"># For default that's set to 'yes' as it's almost always a win.</div><div class="line"># If you want to save some CPU in the saving child set it to 'no' but</div><div class="line"># the dataset will likely be bigger if you have compressible values or keys.</div><div class="line">rdbcompression yes</div><div class="line"># # Since version 5 of RDB a CRC64 checksum is placed at the end of the file.</div><div class="line"># This makes the format more resistant to corruption but there is a performance</div><div class="line"># hit to pay (around 10%) when saving and loading RDB files, so you can disable it</div><div class="line"># for maximum performances.</div><div class="line">#</div><div class="line"># RDB files created with checksum disabled have a checksum of zero that will</div><div class="line"># tell the loading code to skip the check.</div><div class="line">rdbchecksum yes</div><div class="line"># # The filename where to dump the DB</div><div class="line">dbfilename dump.rdb</div><div class="line"># # The working directory.</div><div class="line">#</div><div class="line"># The DB will be written inside this directory, with the filename specified</div><div class="line"># above using the 'dbfilename' configuration directive.</div><div class="line"># </div><div class="line"># The Append Only File will also be created inside this directory.</div><div class="line"># </div><div class="line"># Note that you must specify a directory here, not a file name.</div><div class="line">dir ./</div><div class="line"># ################################# REPLICATION #################################</div><div class="line"># # Master-Slave replication. Use slaveof to make a Redis instance a copy of</div><div class="line"># another Redis server. Note that the configuration is local to the slave</div><div class="line"># so for example it is possible to configure the slave to save the DB with a</div><div class="line"># different interval, or to listen to another port, and so on.</div><div class="line">#</div><div class="line"># slaveof &lt;masterip&gt; &lt;masterport&gt;</div><div class="line"># # If the master is password protected (using the "eequirepass" configuration</div><div class="line"># directive below) it is possible to tell the slave to authenticate before</div><div class="line"># starting the replication synchronization process, otherwise the master will</div><div class="line"># refuse the slave request.</div><div class="line">#</div><div class="line"># masterauth &lt;master-password&gt;</div><div class="line"># # When a slave loses its connection with the master, or when the replication</div><div class="line"># is still in progress, the slave can act in two different ways:</div><div class="line">#</div><div class="line"># 1) if slave-serve-stale-data is set to 'yes' (the default) the slave will</div><div class="line">#    still reply to client requests, possibly with out of date data, or the</div><div class="line">#    data set may just be empty if this is the first synchronization.</div><div class="line">#</div><div class="line"># 2) if slave-serve-stale-data is set to 'no' the slave will reply with</div><div class="line">#    an error "SYNC with master in progress" to all the kind of commands</div><div class="line">#    but to INFO and SLAVEOF.</div><div class="line">#</div><div class="line">slave-serve-stale-data yes</div><div class="line"># # You can configure a slave instance to accept writes or not. Writing against</div><div class="line"># a slave instance may be useful to store some ephemeral data (because data</div><div class="line"># written on a slave will be easily deleted after resync with the master) but</div><div class="line"># may also cause problems if clients are writing to it because of a</div><div class="line"># misconfiguration.</div><div class="line">#</div><div class="line"># Since Redis 2.6 by default slaves are read-only.</div><div class="line">#</div><div class="line"># Note: read only slaves are not designed to be exposed to untrusted clients</div><div class="line"># on the internet. It's just a protection layer against misuse of the instance.</div><div class="line"># Still a read only slave exports by default all the administrative commands</div><div class="line"># such as CONFIG, DEBUG, and so forth. To a limited extend you can improve</div><div class="line"># security of read only slaves using 'rename-command' to shadow all the</div><div class="line"># administrative / dangerous commands.</div><div class="line">slave-read-only yes</div><div class="line"># # Slaves send PINGs to server in a predefined interval. It's possible to change</div><div class="line"># this interval with the repl_ping_slave_period option. The default value is 10</div><div class="line"># seconds.</div><div class="line">#</div><div class="line"># repl-ping-slave-period 10</div><div class="line"># # The following option sets a timeout for both Bulk transfer I/O timeout and</div><div class="line"># master data or ping response timeout. The default value is 60 seconds.</div><div class="line">#</div><div class="line"># It is important to make sure that this value is greater than the value</div><div class="line"># specified for repl-ping-slave-period otherwise a timeout will be detected</div><div class="line"># every time there is low traffic between the master and the slave.</div><div class="line">#</div><div class="line"># repl-timeout 60</div><div class="line"># # Disable TCP_NODELAY on the slave socket after SYNC?</div><div class="line">#</div><div class="line"># If you select "yes" Redis will use a smaller number of TCP packets and</div><div class="line"># less bandwidth to send data to slaves. But this can add a delay for</div><div class="line"># the data to appear on the slave side, up to 40 milliseconds with</div><div class="line"># Linux kernels using a default configuration.</div><div class="line">#</div><div class="line"># If you select "no" the delay for data to appear on the slave side will</div><div class="line"># be reduced but more bandwidth will be used for replication.</div><div class="line">#</div><div class="line"># By default we optimize for low latency, but in very high traffic conditions</div><div class="line"># or when the master and slaves are many hops away, turning this to "yes" may</div><div class="line"># be a good idea.</div><div class="line">repl-disable-tcp-nodelay no</div><div class="line"># # The slave priority is an integer number published by Redis in the INFO output.</div><div class="line"># It is used by Redis Sentinel in order to select a slave to promote into a</div><div class="line"># master if the master is no longer working correctly.</div><div class="line">#</div><div class="line"># A slave with a low priority number is considered better for promotion, so</div><div class="line"># for instance if there are three slaves with priority 10, 100, 25 Sentinel will</div><div class="line"># pick the one wtih priority 10, that is the lowest.</div><div class="line">#</div><div class="line"># However a special priority of 0 marks the slave as not able to perform the</div><div class="line"># role of master, so a slave with priority of 0 will never be selected by</div><div class="line"># Redis Sentinel for promotion.</div><div class="line">#</div><div class="line"># By default the priority is 100.</div><div class="line">slave-priority 100</div><div class="line"># ################################## SECURITY ###################################</div><div class="line"># # Require clients to issue AUTH &lt;PASSWORD&gt; before processing any other</div><div class="line"># commands.  This might be useful in environments in which you do not trust</div><div class="line"># others with access to the host running redis-server.</div><div class="line">#</div><div class="line"># This should stay commented out for backward compatibility and because most</div><div class="line"># people do not need auth (e.g. they run their own servers).</div><div class="line"># </div><div class="line"># Warning: since Redis is pretty fast an outside user can try up to</div><div class="line"># 150k passwords per second against a good box. This means that you should</div><div class="line"># use a very strong password otherwise it will be very easy to break.</div><div class="line">#</div><div class="line">requirepass xkjqiang</div><div class="line"># # Command renaming.</div><div class="line">#</div><div class="line"># It is possible to change the name of dangerous commands in a shared</div><div class="line"># environment. For instance the CONFIG command may be renamed into something</div><div class="line"># hard to guess so that it will still be available for internal-use tools</div><div class="line"># but not available for general clients.</div><div class="line">#</div><div class="line"># Example:</div><div class="line">#</div><div class="line"># rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52</div><div class="line">#</div><div class="line"># It is also possible to completely kill a command by renaming it into</div><div class="line"># an empty string:</div><div class="line">#</div><div class="line"># rename-command CONFIG ""</div><div class="line">#</div><div class="line"># Please note that changing the name of commands that are logged into the</div><div class="line"># AOF file or transmitted to slaves may cause problems.</div><div class="line"># ################################### LIMITS ####################################</div><div class="line"># # Set the max number of connected clients at the same time. By default</div><div class="line"># this limit is set to 10000 clients, however if the Redis server is not</div><div class="line"># able to configure the process file limit to allow for the specified limit</div><div class="line"># the max number of allowed clients is set to the current file limit</div><div class="line"># minus 32 (as Redis reserves a few file descriptors for internal uses).</div><div class="line">#</div><div class="line"># Once the limit is reached Redis will close all the new connections sending</div><div class="line"># an error 'max number of clients reached'.</div><div class="line">#</div><div class="line"># maxclients 10000</div><div class="line"># # Don't use more memory than the specified amount of bytes.</div><div class="line"># When the memory limit is reached Redis will try to remove keys</div><div class="line"># accordingly to the eviction policy selected (see maxmemmory-policy).</div><div class="line">#</div><div class="line"># If Redis can't remove keys according to the policy, or if the policy is</div><div class="line"># set to 'noeviction', Redis will start to reply with errors to commands</div><div class="line"># that would use more memory, like SET, LPUSH, and so on, and will continue</div><div class="line"># to reply to read-only commands like GET.</div><div class="line">#</div><div class="line"># This option is usually useful when using Redis as an LRU cache, or to set</div><div class="line"># an hard memory limit for an instance (using the 'noeviction' policy).</div><div class="line">#</div><div class="line"># WARNING: If you have slaves attached to an instance with maxmemory on,</div><div class="line"># the size of the output buffers needed to feed the slaves are subtracted</div><div class="line"># from the used memory count, so that network problems / resyncs will</div><div class="line"># not trigger a loop where keys are evicted, and in turn the output</div><div class="line"># buffer of slaves is full with DELs of keys evicted triggering the deletion</div><div class="line"># of more keys, and so forth until the database is completely emptied.</div><div class="line">#</div><div class="line"># In short... if you have slaves attached it is suggested that you set a lower</div><div class="line"># limit for maxmemory so that there is some free RAM on the system for slave</div><div class="line"># output buffers (but this is not needed if the policy is 'noeviction').</div><div class="line">#</div><div class="line"># maxmemory &lt;bytes&gt;</div><div class="line"># # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory</div><div class="line"># is reached. You can select among five behaviors:</div><div class="line"># </div><div class="line"># volatile-lru -&gt; remove the key with an expire set using an LRU algorithm</div><div class="line"># allkeys-lru -&gt; remove any key accordingly to the LRU algorithm</div><div class="line"># volatile-random -&gt; remove a random key with an expire set</div><div class="line"># allkeys-random -&gt; remove a random key, any key</div><div class="line"># volatile-ttl -&gt; remove the key with the nearest expire time (minor TTL)</div><div class="line"># noeviction -&gt; don't expire at all, just return an error on write operations</div><div class="line"># </div><div class="line"># Note: with any of the above policies, Redis will return an error on write</div><div class="line">#       operations, when there are not suitable keys for eviction.</div><div class="line">#</div><div class="line">#       At the date of writing this commands are: set setnx setex append</div><div class="line">#       incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd</div><div class="line">#       sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby</div><div class="line">#       zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby</div><div class="line">#       getset mset msetnx exec sort</div><div class="line">#</div><div class="line"># The default is:</div><div class="line">#</div><div class="line"># maxmemory-policy volatile-lru</div><div class="line"># # LRU and minimal TTL algorithms are not precise algorithms but approximated</div><div class="line"># algorithms (in order to save memory), so you can select as well the sample</div><div class="line"># size to check. For instance for default Redis will check three keys and</div><div class="line"># pick the one that was used less recently, you can change the sample size</div><div class="line"># using the following configuration directive.</div><div class="line">#</div><div class="line"># maxmemory-samples 3</div><div class="line"># ############################## APPEND ONLY MODE ###############################</div><div class="line"># # By default Redis asynchronously dumps the dataset on disk. This mode is</div><div class="line"># good enough in many applications, but an issue with the Redis process or</div><div class="line"># a power outage may result into a few minutes of writes lost (depending on</div><div class="line"># the configured save points).</div><div class="line">#</div><div class="line"># The Append Only File is an alternative persistence mode that provides</div><div class="line"># much better durability. For instance using the default data fsync policy</div><div class="line"># (see later in the config file) Redis can lose just one second of writes in a</div><div class="line"># dramatic event like a server power outage, or a single write if something</div><div class="line"># wrong with the Redis process itself happens, but the operating system is</div><div class="line"># still running correctly.</div><div class="line">#</div><div class="line"># AOF and RDB persistence can be enabled at the same time without problems.</div><div class="line"># If the AOF is enabled on startup Redis will load the AOF, that is the file</div><div class="line"># with the better durability guarantees.</div><div class="line">#</div><div class="line"># Please check http://redis.io/topics/persistence for more information.</div><div class="line"># appendonly no</div><div class="line"># # The name of the append only file (default: "appendonly.aof")</div><div class="line"># appendfilename appendonly.aof</div><div class="line"># # The fsync() call tells the Operating System to actually write data on disk</div><div class="line"># instead to wait for more data in the output buffer. Some OS will really flush </div><div class="line"># data on disk, some other OS will just try to do it ASAP.</div><div class="line">#</div><div class="line"># Redis supports three different modes:</div><div class="line">#</div><div class="line"># no: don't fsync, just let the OS flush the data when it wants. Faster.</div><div class="line"># always: fsync after every write to the append only log . Slow, Safest.</div><div class="line"># everysec: fsync only one time every second. Compromise.</div><div class="line">#</div><div class="line"># The default is "everysec", as that's usually the right compromise between</div><div class="line"># speed and data safety. It's up to you to understand if you can relax this to</div><div class="line"># "no" that will let the operating system flush the output buffer when</div><div class="line"># it wants, for better performances (but if you can live with the idea of</div><div class="line"># some data loss consider the default persistence mode that's snapshotting),</div><div class="line"># or on the contrary, use "always" that's very slow but a bit safer than</div><div class="line"># everysec.</div><div class="line">#</div><div class="line"># More details please check the following article:</div><div class="line"># http://antirez.com/post/redis-persistence-demystified.html</div><div class="line">#</div><div class="line"># If unsure, use "everysec".</div><div class="line"># # appendfsync always</div><div class="line">appendfsync everysec</div><div class="line"># appendfsync no</div><div class="line"># # When the AOF fsync policy is set to always or everysec, and a background</div><div class="line"># saving process (a background save or AOF log background rewriting) is</div><div class="line"># performing a lot of I/O against the disk, in some Linux configurations</div><div class="line"># Redis may block too long on the fsync() call. Note that there is no fix for</div><div class="line"># this currently, as even performing fsync in a different thread will block</div><div class="line"># our synchronous write(2) call.</div><div class="line">#</div><div class="line"># In order to mitigate this problem it's possible to use the following option</div><div class="line"># that will prevent fsync() from being called in the main process while a</div><div class="line"># BGSAVE or BGREWRITEAOF is in progress.</div><div class="line">#</div><div class="line"># This means that while another child is saving, the durability of Redis is</div><div class="line"># the same as "appendfsync none". In practical terms, this means that it is</div><div class="line"># possible to lose up to 30 seconds of log in the worst scenario (with the</div><div class="line"># default Linux settings).</div><div class="line"># </div><div class="line"># If you have latency problems turn this to "yes". Otherwise leave it as</div><div class="line"># "no" that is the safest pick from the point of view of durability.</div><div class="line">no-appendfsync-on-rewrite no</div><div class="line"># # Automatic rewrite of the append only file.</div><div class="line"># Redis is able to automatically rewrite the log file implicitly calling</div><div class="line"># BGREWRITEAOF when the AOF log size grows by the specified percentage.</div><div class="line"># </div><div class="line"># This is how it works: Redis remembers the size of the AOF file after the</div><div class="line"># latest rewrite (if no rewrite has happened since the restart, the size of</div><div class="line"># the AOF at startup is used).</div><div class="line">#</div><div class="line"># This base size is compared to the current size. If the current size is</div><div class="line"># bigger than the specified percentage, the rewrite is triggered. Also</div><div class="line"># you need to specify a minimal size for the AOF file to be rewritten, this</div><div class="line"># is useful to avoid rewriting the AOF file even if the percentage increase</div><div class="line"># is reached but it is still pretty small.</div><div class="line">#</div><div class="line"># Specify a percentage of zero in order to disable the automatic AOF</div><div class="line"># rewrite feature.</div><div class="line"># auto-aof-rewrite-percentage 100</div><div class="line">auto-aof-rewrite-min-size 64mb</div><div class="line"># ################################ LUA SCRIPTING  ###############################</div><div class="line"># # Max execution time of a Lua script in milliseconds.</div><div class="line">#</div><div class="line"># If the maximum execution time is reached Redis will log that a script is</div><div class="line"># still in execution after the maximum allowed time and will start to</div><div class="line"># reply to queries with an error.</div><div class="line">#</div><div class="line"># When a long running script exceed the maximum execution time only the</div><div class="line"># SCRIPT KILL and SHUTDOWN NOSAVE commands are available. The first can be</div><div class="line"># used to stop a script that did not yet called write commands. The second</div><div class="line"># is the only way to shut down the server in the case a write commands was</div><div class="line"># already issue by the script but the user don't want to wait for the natural</div><div class="line"># termination of the script.</div><div class="line">#</div><div class="line"># Set it to 0 or a negative value for unlimited execution without warnings.</div><div class="line">lua-time-limit 5000</div><div class="line"># ################################## SLOW LOG ###################################</div><div class="line"># # The Redis Slow Log is a system to log queries that exceeded a specified</div><div class="line"># execution time. The execution time does not include the I/O operations</div><div class="line"># like talking with the client, sending the reply and so forth,</div><div class="line"># but just the time needed to actually execute the command (this is the only</div><div class="line"># stage of command execution where the thread is blocked and can not serve</div><div class="line"># other requests in the meantime).</div><div class="line"># </div><div class="line"># You can configure the slow log with two parameters: one tells Redis</div><div class="line"># what is the execution time, in microseconds, to exceed in order for the</div><div class="line"># command to get logged, and the other parameter is the length of the</div><div class="line"># slow log. When a new command is logged the oldest one is removed from the</div><div class="line"># queue of logged commands.</div><div class="line"># # The following time is expressed in microseconds, so 1000000 is equivalent</div><div class="line"># to one second. Note that a negative number disables the slow log, while</div><div class="line"># a value of zero forces the logging of every command.</div><div class="line">slowlog-log-slower-than 10000</div><div class="line"># # There is no limit to this length. Just be aware that it will consume memory.</div><div class="line"># You can reclaim memory used by the slow log with SLOWLOG RESET.</div><div class="line">slowlog-max-len 128</div><div class="line"># ############################### ADVANCED CONFIG ###############################</div><div class="line"># # Hashes are encoded using a memory efficient data structure when they have a</div><div class="line"># small number of entries, and the biggest entry does not exceed a given</div><div class="line"># threshold. These thresholds can be configured using the following directives.</div><div class="line">hash-max-ziplist-entries 512</div><div class="line">hash-max-ziplist-value 64</div><div class="line"># # Similarly to hashes, small lists are also encoded in a special way in order</div><div class="line"># to save a lot of space. The special representation is only used when</div><div class="line"># you are under the following limits:</div><div class="line">list-max-ziplist-entries 512</div><div class="line">list-max-ziplist-value 64</div><div class="line"># # Sets have a special encoding in just one case: when a set is composed</div><div class="line"># of just strings that happens to be integers in radix 10 in the range</div><div class="line"># of 64 bit signed integers.</div><div class="line"># The following configuration setting sets the limit in the size of the</div><div class="line"># set in order to use this special memory saving encoding.</div><div class="line">set-max-intset-entries 512</div><div class="line"># # Similarly to hashes and lists, sorted sets are also specially encoded in</div><div class="line"># order to save a lot of space. This encoding is only used when the length and</div><div class="line"># elements of a sorted set are below the following limits:</div><div class="line">zset-max-ziplist-entries 128</div><div class="line">zset-max-ziplist-value 64</div><div class="line"># # Active rehashing uses 1 millisecond every 100 milliseconds of CPU time in</div><div class="line"># order to help rehashing the main Redis hash table (the one mapping top-level</div><div class="line"># keys to values). The hash table implementation Redis uses (see dict.c)</div><div class="line"># performs a lazy rehashing: the more operation you run into an hash table</div><div class="line"># that is rehashing, the more rehashing "steps" are performed, so if the</div><div class="line"># server is idle the rehashing is never complete and some more memory is used</div><div class="line"># by the hash table.</div><div class="line"># </div><div class="line"># The default is to use this millisecond 10 times every second in order to</div><div class="line"># active rehashing the main dictionaries, freeing memory when possible.</div><div class="line">#</div><div class="line"># If unsure:</div><div class="line"># use "activerehashing no" if you have hard latency requirements and it is</div><div class="line"># not a good thing in your environment that Redis can reply form time to time</div><div class="line"># to queries with 2 milliseconds delay.</div><div class="line">#</div><div class="line"># use "activerehashing yes" if you don't have such hard requirements but</div><div class="line"># want to free memory asap when possible.</div><div class="line">activerehashing yes</div><div class="line"># # The client output buffer limits can be used to force disconnection of clients</div><div class="line"># that are not reading data from the server fast enough for some reason (a</div><div class="line"># common reason is that a Pub/Sub client can't consume messages as fast as the</div><div class="line"># publisher can produce them).</div><div class="line">#</div><div class="line"># The limit can be set differently for the three different classes of clients:</div><div class="line">#</div><div class="line"># normal -&gt; normal clients</div><div class="line"># slave  -&gt; slave clients and MONITOR clients</div><div class="line"># pubsub -&gt; clients subcribed to at least one pubsub channel or pattern</div><div class="line">#</div><div class="line"># The syntax of every client-output-buffer-limit directive is the following:</div><div class="line">#</div><div class="line"># client-output-buffer-limit &lt;class&gt; &lt;hard limit&gt; &lt;soft limit&gt; &lt;soft seconds&gt;</div><div class="line">#</div><div class="line"># A client is immediately disconnected once the hard limit is reached, or if</div><div class="line"># the soft limit is reached and remains reached for the specified number of</div><div class="line"># seconds (continuously).</div><div class="line"># So for instance if the hard limit is 32 megabytes and the soft limit is</div><div class="line"># 16 megabytes / 10 seconds, the client will get disconnected immediately</div><div class="line"># if the size of the output buffers reach 32 megabytes, but will also get</div><div class="line"># disconnected if the client reaches 16 megabytes and continuously overcomes</div><div class="line"># the limit for 10 seconds.</div><div class="line">#</div><div class="line"># By default normal clients are not limited because they don't receive data</div><div class="line"># without asking (in a push way), but just after a request, so only</div><div class="line"># asynchronous clients may create a scenario where data is requested faster</div><div class="line"># than it can read.</div><div class="line">#</div><div class="line"># Instead there is a default limit for pubsub and slave clients, since</div><div class="line"># subscribers and slaves receive data in a push fashion.</div><div class="line">#</div><div class="line"># Both the hard or the soft limit can be disabled by setting them to zero.</div><div class="line">client-output-buffer-limit normal 0 0 0</div><div class="line">client-output-buffer-limit slave 256mb 64mb 60</div><div class="line">client-output-buffer-limit pubsub 32mb 8mb 60</div><div class="line"># # Redis calls an internal function to perform many background tasks, like</div><div class="line"># closing connections of clients in timeot, purging expired keys that are</div><div class="line"># never requested, and so forth.</div><div class="line">#</div><div class="line"># Not all tasks are perforemd with the same frequency, but Redis checks for</div><div class="line"># tasks to perform accordingly to the specified "hz" value.</div><div class="line">#</div><div class="line"># By default "hz" is set to 10. Raising the value will use more CPU when</div><div class="line"># Redis is idle, but at the same time will make Redis more responsive when</div><div class="line"># there are many keys expiring at the same time, and timeouts may be</div><div class="line"># handled with more precision.</div><div class="line">#</div><div class="line"># The range is between 1 and 500, however a value over 100 is usually not</div><div class="line"># a good idea. Most users should use the default of 10 and raise this up to</div><div class="line"># 100 only in environments where very low latency is required.</div><div class="line">hz 10</div><div class="line"># # When a child rewrites the AOF file, if the following option is enabled</div><div class="line"># the file will be fsync-ed every 32 MB of data generated. This is useful</div><div class="line"># in order to commit the file to the disk more incrementally and avoid</div><div class="line"># big latency spikes.</div><div class="line">aof-rewrite-incremental-fsync yes</div><div class="line"># ################################## INCLUDES ###################################</div><div class="line"># # Include one or more other config files here.  This is useful if you</div><div class="line"># have a standard template that goes to all Redis server but also need</div><div class="line"># to customize a few per-server settings.  Include files can include</div><div class="line"># other files, so use this wisely.</div><div class="line">#</div><div class="line"># include /path/to/local.conf</div><div class="line"># include /path/to/other.conf</div></pre></td></tr></table></figure></p>
+        <p><a href="http://startupclass.club/" target="_blank" rel="external">YC</a>;<br>YC中文社区，创业必逛，很多视频讲座等。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/07/16/redis-introduce/" class="archive-article-date">
-  	<time datetime="2015-07-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-16</time>
+      <a href="/uncategorized/2015/07/23/start-up/" class="archive-article-date">
+  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Design-links" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/14/Design-links/">设计资源站</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="UI4App"><a href="#UI4App" class="headerlink" title="UI4App"></a><a href="http://ui4app.com/" target="_blank" rel="external">UI4App</a></h3><p>界面设计，图标设计，资源。 各种控件设计资源，很实用。</p>
-<h3 id="EasyIcon"><a href="#EasyIcon" class="headerlink" title="EasyIcon"></a><a href="http://www.easyicon.net/" target="_blank" rel="external">EasyIcon</a></h3><p>简洁，实用的icon站</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/14/Design-links/" class="archive-article-date">
-  	<time datetime="2015-07-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-14</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网站/">网站</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/资源/">资源</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Mysql-About" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/14/Mysql-About/">Mysql常见问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><hr>
-<h3 id="登陆Mysql"><a href="#登陆Mysql" class="headerlink" title="登陆Mysql"></a>登陆Mysql</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//root身份</div><div class="line">mysql -u root</div></pre></td></tr></table></figure>
-<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><blockquote>
-<p>[] 中为变量</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> [username] <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'[password]'</span>;</div></pre></td></tr></table></figure>
-<h3 id="为用户添加权限"><a href="#为用户添加权限" class="headerlink" title="为用户添加权限"></a>为用户添加权限</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> [<span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span>,<span class="keyword">create</span>,<span class="keyword">drop</span>] <span class="keyword">on</span> [*.*] <span class="keyword">to</span> [ihaveu_message]@[localhost] <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'[ihaveu]'</span>;</div></pre></td></tr></table></figure>
-<p>例如，为test_user添加select等权限到所有数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span>,<span class="keyword">create</span>,<span class="keyword">drop</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> test_user@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'test'</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><h3 id="查看所有用户"><a href="#查看所有用户" class="headerlink" title="查看所有用户"></a>查看所有用户</h3><p>需要root权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">user</span>,host,<span class="keyword">password</span> <span class="keyword">from</span> mysql.user;</div></pre></td></tr></table></figure></p>
-<h2 id="mysql服务"><a href="#mysql服务" class="headerlink" title="mysql服务"></a>mysql服务</h2><hr>
-<p>重启、启动、停止mysql服务<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/Library/StartupItems/MySQLCOM/MySQLCOM restart</div><div class="line">/Library/StartupItems/MySQLCOM/MySQLCOM <span class="keyword">start</span></div><div class="line">/<span class="keyword">Library</span>/StartupItems/MySQLCOM/MySQLCOM <span class="keyword">stop</span></div></pre></td></tr></table></figure></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><hr>
-<h3 id="设置数据库默认编码为utf-8"><a href="#设置数据库默认编码为utf-8" class="headerlink" title="设置数据库默认编码为utf-8"></a>设置数据库默认编码为utf-8</h3><ul>
-<li><p>修改mysql配置文件/etc/my.cnf</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf</div><div class="line">sudo vi /etc/my.cnf</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加配置</p>
-</li>
-</ul>
-<p>[client]部分加入：<br><code>default-character-set=utf8</code></p>
-<p>[mysqld]部分加入：<br><code>character-set-server=utf8</code></p>
-<blockquote>
-<p>修改上述文件之后有可能出现无法启动mysql的情况。</p>
-</blockquote>
-<p>修改完毕之后再启动mysql</p>
-<ul>
-<li>检查结果<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show variables like '%char%';</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>典型的配置文件内容如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">[client]</div><div class="line">default-character-<span class="keyword">set</span> = utf8</div><div class="line">port = <span class="number">3306</span></div><div class="line">socket = /tmp/mysql.sock</div><div class="line">[mysqld]</div><div class="line"><span class="keyword">user</span> = mysql</div><div class="line">port = <span class="number">3306</span></div><div class="line">socket = /tmp/mysql.sock</div><div class="line">basedir = /opt/mysql</div><div class="line">datadir = /opt/mysql/<span class="keyword">var</span></div><div class="line"><span class="keyword">log</span>-<span class="keyword">error</span> = /opt/mysql/<span class="keyword">var</span>/mysql-error.log</div><div class="line">pid-<span class="keyword">file</span> = /opt/mysql/<span class="keyword">var</span>/mysql.pid</div><div class="line">log_slave_updates = <span class="number">1</span></div><div class="line"><span class="keyword">log</span>-<span class="keyword">bin</span> = /opt/mysql/<span class="keyword">var</span>/mysql-<span class="keyword">bin</span></div><div class="line">binlog_format = mixed</div><div class="line">binlog_cache_size = <span class="number">4</span>M</div><div class="line">max_binlog_cache_size = <span class="number">8</span>M</div><div class="line">max_binlog_size = <span class="number">1</span>G</div><div class="line">expire_logs_days = <span class="number">90</span></div><div class="line">key_buffer_size = <span class="number">384</span>M</div><div class="line">sort_buffer_size = <span class="number">2</span>M</div><div class="line">read_buffer_size = <span class="number">2</span>M</div><div class="line">read_rnd_buffer_size = <span class="number">16</span>M</div><div class="line">join_buffer_size = <span class="number">2</span>M</div><div class="line">thread_cache_size = <span class="number">8</span></div><div class="line">query_cache_size = <span class="number">32</span>M</div><div class="line">query_cache_limit = <span class="number">2</span>M</div><div class="line">query_cache_min_res_unit = <span class="number">2</span>k</div><div class="line">thread_concurrency = <span class="number">32</span></div><div class="line">table_cache = <span class="number">614</span></div><div class="line">table_open_cache = <span class="number">512</span></div><div class="line">open_files_limit = <span class="number">10240</span></div><div class="line">back_log = <span class="number">600</span></div><div class="line">max_connections = <span class="number">5000</span></div><div class="line">max_connect_errors = <span class="number">6000</span></div><div class="line"><span class="keyword">external</span>-locking = <span class="literal">FALSE</span></div><div class="line">max_allowed_packet = <span class="number">16</span>M</div><div class="line"><span class="keyword">default</span>-<span class="keyword">storage</span>-<span class="keyword">engine</span> = MYISAM</div><div class="line">thread_stack = <span class="number">192</span>k</div><div class="line">transaction_isolation = <span class="keyword">READ</span>-COMMITTED</div><div class="line">tmp_table_size = <span class="number">256</span>M</div><div class="line">max_heap_table_size = <span class="number">512</span>M</div><div class="line">bulk_insert_buffer_size = <span class="number">64</span>M</div><div class="line">myisam_sort_buffer_size = <span class="number">64</span>M</div><div class="line">myisam_max_sort_file_size = <span class="number">10</span>G</div><div class="line">myisam_repair_threads = <span class="number">1</span></div><div class="line">myisam_recover</div><div class="line">long_query_time = <span class="number">2</span></div><div class="line">slow_query_log</div><div class="line">slow_query_log_file = /opt/mysql/<span class="keyword">var</span>/slow.log</div><div class="line"><span class="keyword">skip</span>-<span class="keyword">name</span>-resolve</div><div class="line"><span class="keyword">skip</span>-locking</div><div class="line"><span class="keyword">skip</span>-networking</div><div class="line">innodb_additional_mem_pool_size = <span class="number">16</span>M</div><div class="line">innodb_buffer_pool_size = <span class="number">512</span>M</div><div class="line">innodb_data_file_path = ibdata1:<span class="number">256</span>M:<span class="keyword">autoextend</span></div><div class="line">innodb_file_io_threads = <span class="number">4</span></div><div class="line">innodb_thread_aoncurrency = <span class="number">8</span></div><div class="line">innodb_flush_log_at_trx_commit = <span class="number">2</span></div><div class="line">innodb_log_buffer_size = <span class="number">16</span>M</div><div class="line">innodb_log_file_size = <span class="number">128</span>M</div><div class="line">innodb_log_files_in_group = <span class="number">3</span></div><div class="line">innodb_max_dirty_pages_pct = <span class="number">90</span></div><div class="line">innodb_lock_wait_timeout = <span class="number">120</span></div><div class="line">innodb_file_per_table = <span class="number">0</span></div><div class="line">[mysqldump]</div><div class="line"><span class="keyword">quick</span></div><div class="line">max_allow_packet = <span class="number">64</span>M</div><div class="line">[mysql]</div><div class="line"><span class="keyword">no</span>-<span class="keyword">auto</span>-rehash</div><div class="line">safr-updates</div><div class="line">[myisamchk]</div><div class="line">key_buffer_size = <span class="number">256</span>M</div><div class="line">sort_buffer_size = <span class="number">256</span>M</div><div class="line">read_buffer = <span class="number">2</span>M</div><div class="line">[mysqldump]</div><div class="line"><span class="keyword">quick</span></div><div class="line">max_allow_packet = <span class="number">64</span>M</div><div class="line">[mysql]</div><div class="line"><span class="keyword">no</span>-<span class="keyword">auto</span>-rehash</div><div class="line"><span class="keyword">safe</span>-updates</div><div class="line">[myisamchk]</div><div class="line">key_buffer_size = <span class="number">256</span>M</div><div class="line">sort_buffer_size = <span class="number">256</span>M</div><div class="line">read_buffer = <span class="number">2</span>M</div><div class="line">write_buffer = <span class="number">2</span>M</div><div class="line">[mysqlhotcopy]</div><div class="line">interactive-<span class="keyword">timeout</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/14/Mysql-About/" class="archive-article-date">
-  	<time datetime="2015-07-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-14</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/用户/">用户</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创业/">创业</a></li></ul>
 	</div>
 
       
@@ -951,7 +1540,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
     			</div>
     	</section>
     

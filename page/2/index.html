@@ -56,6 +56,8 @@
 	        
 				<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
 	        
+				<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -122,6 +124,8 @@
 		        
 					<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
 		        
+					<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+		        
 				</ul>
 			</nav>
 			<nav class="header-nav">
@@ -143,6 +147,209 @@
 
       <div class="body-wrap">
         
+  
+    <article id="post-Android-JNI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/08/18/Android-JNI/">Android JNI开发(新手向)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇简单介绍JNI开发基础流程，以及其中的一些坑</p>
+<p>JNI开发流程</p>
+<ul>
+<li>Java中声明native方法</li>
+<li>编译Java源文件，然后通过.class文件通过javah生成JNI的头文件</li>
+<li>实现JNI方法</li>
+</ul>
+<h2 id="AndroidStudio中JNI开发的详细流程"><a href="#AndroidStudio中JNI开发的详细流程" class="headerlink" title="AndroidStudio中JNI开发的详细流程"></a>AndroidStudio中JNI开发的详细流程</h2><h3 id="方式1-手动编译so"><a href="#方式1-手动编译so" class="headerlink" title="方式1:手动编译so"></a>方式1:手动编译so</h3><h4 id="1-配置项目中ndk路径"><a href="#1-配置项目中ndk路径" class="headerlink" title="1,配置项目中ndk路径"></a>1,配置项目中ndk路径</h4><h4 id="2-app-src-main目录创建jni目录，用来存放native源码"><a href="#2-app-src-main目录创建jni目录，用来存放native源码" class="headerlink" title="2,app/src/main目录创建jni目录，用来存放native源码"></a>2,app/src/main目录创建jni目录，用来存放native源码</h4><h4 id="3-app-build-gradle-配置ndk信息"><a href="#3-app-build-gradle-配置ndk信息" class="headerlink" title="3,app/build.gradle 配置ndk信息"></a>3,app/build.gradle 配置ndk信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sourceSets.main &#123;</div><div class="line">    jniLibs.srcDirs = [<span class="string">'libs'</span>,<span class="string">'src/main/libs'</span>]<span class="comment">//so文件存放的位置</span></div><div class="line">    jni.srcDirs =[] <span class="comment">//c,c++源码存放位置</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里推荐将jniLibs.srcDir 设置为<code>src/main/libs</code>,因为手动编译成so之后默认生成目录是这个.</p>
+<blockquote>
+<p>坑1：jni.srcDirs设置为空，是因为当项目中存在jni目录时，AndroidStudio会编译jni目录下的代码，如果build.gradle中没有配置ndk信息会报错.</p>
+</blockquote>
+<h4 id="4-Java中声明native方法-此时类中方法名会为红色，这个没关系"><a href="#4-Java中声明native方法-此时类中方法名会为红色，这个没关系" class="headerlink" title="4, Java中声明native方法(此时类中方法名会为红色，这个没关系)"></a>4, Java中声明native方法(此时类中方法名会为红色，这个没关系)</h4><h4 id="5-MakeProject-编译生成-class文件"><a href="#5-MakeProject-编译生成-class文件" class="headerlink" title="5, MakeProject 编译生成.class文件"></a>5, MakeProject 编译生成.class文件</h4><h4 id="6-javah-通过-class生成头文件"><a href="#6-javah-通过-class生成头文件" class="headerlink" title="6, javah 通过.class生成头文件"></a>6, javah 通过.class生成头文件</h4><p>class文件位置： app/build/intermediates/classes/debug</p>
+<p>javah 生成.h<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在项目app/src/main目录下执行</span></div><div class="line">javah -d ./jni/ -classpath ../../app/build/intermediates/classes/debug/ com.xkj.demos.jni.JNIObject</div><div class="line"><span class="comment">//注意classpath是debug目录,如果是在com/xkj/demos/jni/目录下，后面类名只需要JNIObject就可以了</span></div><div class="line"><span class="comment">//类名是报名+类名(实际就是路径+类名)</span></div></pre></td></tr></table></figure></p>
+<h4 id="7-实现JNI方法"><a href="#7-实现JNI方法" class="headerlink" title="7, 实现JNI方法"></a>7, 实现JNI方法</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;string.h&gt;</div><div class="line">#include "com_xkj_demos_jni_JNIObject.h"</div><div class="line"></div><div class="line">jstring Java_com_xkj_demos_jni_JNIObject_getJNIString</div><div class="line">        (JNIEnv * env, jobject obj)&#123;</div><div class="line">        return env-&gt;NewStringUTF("This just a test for Android Studio NDK JNI developer!");</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>坑2： C/C++中env方法的实现方式是不一样的,C: (* env)-&gt;NewStringUTF(env,””); C++:env-&gt;NewStringUTF(“”); 注意自己使用的是c还是cpp</p>
+</blockquote>
+<h4 id="8-编译生成so"><a href="#8-编译生成so" class="headerlink" title="8, 编译生成so"></a>8, 编译生成so</h4><p>首先编写mk文件，将其放在项目jni目录下,然后进入 <code>app/main/src/jni</code> 目录下执行<code>ndk-build</code></p>
+<p>mk文件需要自己编写,下面有样例和官网介绍供参考</p>
+<p>Android.mk样例:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># Copyright (C) 2009 The Android Open Source Project</div><div class="line">#</div><div class="line"># Licensed under the Apache License, Version 2.0 (the "License");</div><div class="line"># you may not use this file except in compliance with the License.</div><div class="line"># You may obtain a copy of the License at</div><div class="line">#</div><div class="line">#      http://www.apache.org/licenses/LICENSE-2.0</div><div class="line">#</div><div class="line"># Unless required by applicable law or agreed to in writing, software</div><div class="line"># distributed under the License is distributed on an "AS IS" BASIS,</div><div class="line"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line"># See the License for the specific language governing permissions and</div><div class="line"># limitations under the License.</div><div class="line">#</div><div class="line">LOCAL_PATH := $(call my-dir) #源码路径,my-dir指当前目录</div><div class="line"></div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line">LOCAL_MODULE    := jnitest  # so名称</div><div class="line">LOCAL_SRC_FILES := com_xkj_demos_jni_JNIObject.cpp # 需要编译的源码</div><div class="line"></div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>扩展 <a href="http://android.mk/#ndk" target="_blank" rel="external">Android.mk规则</a></p>
+</blockquote>
+<p>实例:<br>ndk目录下samples内有一些demo项目</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/08/18/Android-JNI/" class="archive-article-date">
+  	<time datetime="2016-08-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/">JNI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Object_Oriented_Programing_OOP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/08/10/Object_Oriented_Programing_OOP/">面向对象编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Object Oriented Programing</p>
+<p>六大原则：</p>
+<ul>
+<li>单一职责: 一个类只有一个改变的动机。一个类只有一个职责。</li>
+<li>开闭原则: 对修改关闭，对扩展开放</li>
+<li>里氏替换原则: 父类可以由子类替换，而不出现错误</li>
+<li>依赖倒置原则: 依赖抽象而不是实现.面向抽象编程，而不是实现</li>
+<li>接口隔离原则: 一个类对另一个类的依赖应该建立在最小接口上</li>
+<li>迪米特原则: 一个对象应该尽可能独立，对其他类了解越少越好</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/08/10/Object_Oriented_Programing_OOP/" class="archive-article-date">
+  	<time datetime="2016-08-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-10</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-DesignPattern_Memento" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/08/03/DesignPattern_Memento/">设计模式-备忘录模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>备忘录模式</p>
+<p>##定义</p>
+<p>在不破坏封装的前提下，保存一个对象内部的状态，到另外一个对象中，以便在需要的时候恢复。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>文本编辑器后退操作</li>
+<li>数据库回滚操作(jdbc)</li>
+</ul>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><p>涉及三个对象: </p>
+<ul>
+<li>Originator : 发起者，就是要保存它的内部状态</li>
+<li>Memento : 备忘录，就是用它来保存状态</li>
+<li>Caretaker : 管理者，用来管理Memnto和Originator不认识</li>
+</ul>
+<p>具体实现如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Originator</span> </span>&#123;</div><div class="line">    <span class="comment">//内部状态</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Memento <span class="title">backup</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Memento(state);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recovery</span><span class="params">(Memento memento)</span> </span>&#123;</div><div class="line">        state = memento.getState();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Memento</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Memento</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        setState(state);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.state = state;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Caretaker</span> </span>&#123;</div><div class="line">    Memento memento;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Memento <span class="title">getMemento</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> memento;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMemento</span><span class="params">(Memento memento)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.memento = memento;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> <span class="keyword">implements</span> <span class="title">IDemo</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runDemo</span><span class="params">()</span> </span>&#123;</div><div class="line">        Originator originator = <span class="keyword">new</span> Originator();</div><div class="line">        originator.setState(<span class="number">0x213</span>);</div><div class="line">        <span class="comment">//保存状态</span></div><div class="line">        Caretaker caretaker = <span class="keyword">new</span> Caretaker();</div><div class="line">        caretaker.setMemento(originator.backup());</div><div class="line">        <span class="comment">//改变状态</span></div><div class="line">        originator.setState(<span class="number">12345</span>);</div><div class="line">        <span class="comment">//恢复状态</span></div><div class="line">        originator.recovery(caretaker.getMemento());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端模拟了状态的改变、保存以及恢复。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/08/03/DesignPattern_Memento/" class="archive-article-date">
+  	<time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/备忘录/">备忘录</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
   
     <article id="post-Android_Monkey_log" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -533,65 +740,6 @@
 
 
   
-    <article id="post-ideas" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/07/07/ideas/">IDEA</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Your-ideas"><a href="#Your-ideas" class="headerlink" title="Your ideas"></a>Your ideas</h1><ul>
-<li><p>项目评价网站</p>
-</li>
-<li><p>职业技能树wiki<br>入门以及行业相关</p>
-</li>
-</ul>
-<p>每个人可以编辑，提交技能树，需要三个人审核通过</p>
-<p>评论  </p>
-<p>解决方案</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/07/07/ideas/" class="archive-article-date">
-  	<time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-07</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ideas/">ideas</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-Seven-suggest" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -649,7 +797,7 @@
 
 
   
-    <article id="post-Android_source_code" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ideas" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -659,7 +807,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/07/07/Android_source_code/">Android源码解析</a>
+      <a class="article-title" href="/uncategorized/2016/07/07/ideas/">IDEA</a>
     </h1>
   
 
@@ -667,220 +815,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="Fragment源码解析"><a href="#Fragment源码解析" class="headerlink" title="Fragment源码解析"></a>Fragment源码解析</h2><p><a href="!--￼0--&gt;/Fragment_Source_Code">Fragment源码解析</a></p>
-<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><hr>
-<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><h2 id="Intent-IntentFilter"><a href="#Intent-IntentFilter" class="headerlink" title="Intent,IntentFilter"></a>Intent,IntentFilter</h2><h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><h2 id="SQLiteDatabase"><a href="#SQLiteDatabase" class="headerlink" title="SQLiteDatabase"></a>SQLiteDatabase</h2><h2 id="adb-shell"><a href="#adb-shell" class="headerlink" title="adb shell"></a>adb shell</h2><h1 id="提高篇"><a href="#提高篇" class="headerlink" title="提高篇"></a>提高篇</h1><h2 id="View-绘制流程"><a href="#View-绘制流程" class="headerlink" title="View 绘制流程"></a>View 绘制流程</h2><h2 id="ActivityManagerService的使用"><a href="#ActivityManagerService的使用" class="headerlink" title="ActivityManagerService的使用"></a>ActivityManagerService的使用</h2><p>startActivity流程<br>startService流程</p>
-<h2 id="PackageManagerService使用"><a href="#PackageManagerService使用" class="headerlink" title="PackageManagerService使用"></a>PackageManagerService使用</h2><p>开机时如何解析所有已安装应用程序的Apk包的信息</p>
-<h2 id="基本掌握View添加至窗口的过程—即WindowManagerIml-、WindowManagerService类的用法"><a href="#基本掌握View添加至窗口的过程—即WindowManagerIml-、WindowManagerService类的用法" class="headerlink" title="基本掌握View添加至窗口的过程—即WindowManagerIml 、WindowManagerService类的用法"></a>基本掌握View添加至窗口的过程—即WindowManagerIml 、WindowManagerService类的用法</h2><h2 id="Canvas绘制-自定义控件"><a href="#Canvas绘制-自定义控件" class="headerlink" title="Canvas绘制,自定义控件"></a>Canvas绘制,自定义控件</h2><h2 id="Handler，消息机制原理"><a href="#Handler，消息机制原理" class="headerlink" title="Handler，消息机制原理"></a>Handler，消息机制原理</h2><h2 id="Context-实现原理"><a href="#Context-实现原理" class="headerlink" title="Context 实现原理"></a>Context 实现原理</h2><h2 id="触摸事件的分发流程"><a href="#触摸事件的分发流程" class="headerlink" title="触摸事件的分发流程"></a>触摸事件的分发流程</h2><h2 id="能编写自定义View-ViewGroup"><a href="#能编写自定义View-ViewGroup" class="headerlink" title="能编写自定义View,ViewGroup"></a>能编写自定义View,ViewGroup</h2><h2 id="Binder机制"><a href="#Binder机制" class="headerlink" title="Binder机制"></a>Binder机制</h2><h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h1><p>《Android内核剖析》</p>
+        <h1 id="Your-ideas"><a href="#Your-ideas" class="headerlink" title="Your ideas"></a>Your ideas</h1><ul>
+<li><p>项目评价网站</p>
+</li>
+<li><p>职业技能树wiki<br>入门以及行业相关</p>
+</li>
+</ul>
+<p>每个人可以编辑，提交技能树，需要三个人审核通过</p>
+<p>评论  </p>
+<p>解决方案</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/07/07/Android_source_code/" class="archive-article-date">
+      <a href="/uncategorized/2016/07/07/ideas/" class="archive-article-date">
   	<time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-07</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android源码/">Android源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/source-code/">source code</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Fragment_Source_Code" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/07/06/Fragment_Source_Code/">Fragment全面解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h1><p>v4包源码</p>
-<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><p>片段，官方提供的容器用于展示页面。典型的宿主是FragmentActivity。与Activity的功能类似，但是比Activity更加灵活，可以自由实例化，动态添加、切换、组合等。生命周期随Activity和自己的状态改变。</p>
-<blockquote>
-<p>实际上Fragment不止以Activity为宿主，只要实现了FragmentHostCallback就可以作为Fragment的宿主</p>
-</blockquote>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>Android 3.0(API 11)以后引入，主要是为大屏幕（Pad）提供UI解决方案。</p>
-<blockquote>
-<p>[B] 最好将Fragment设计成可重复使用的模块化Activity组件,一个Fragment可能添加到多个Activity，不要在Fragment直接关联另一个Fragment或Activity，而以接口的方式关联。</p>
-<p>参考：<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">官方文档</a></p>
-</blockquote>
-<p><img src="!--￼3--&gt;/images/page_img/fragment_lifecycle.png" alt="Fragment生命周期">{: .pull-right}</p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>生命周期如右图, </p>
-<p>一般必须实现的三个生命周期</p>
-<h3 id="onCreate"><a href="#onCreate" class="headerlink" title="onCreate"></a>onCreate</h3><pre><code>用于恢复一些，上次暂停或停止后保存的数据
-</code></pre><h3 id="onCreateView"><a href="#onCreateView" class="headerlink" title="onCreateView"></a>onCreateView</h3><pre><code>创建Fragment的View,实现View的查找等
-</code></pre><h3 id="onPause"><a href="#onPause" class="headerlink" title="onPause"></a>onPause</h3><pre><code>保存一些需要恢复的数据,确保用户回来之后需要存在的数据
-</code></pre><h2 id="扩展类"><a href="#扩展类" class="headerlink" title="扩展类"></a>扩展类</h2><ul>
-<li><p><code>DialogFragment</code><br>  用于替代Dialog,优点在于可以将对话框压入Fragment管理栈</p>
-</li>
-<li><p><code>ListFragment</code><br>  显示一个列表，封装了列表的一些操作，比如实现了onListItemClick方法等</p>
-</li>
-<li><p><code>PreferenceFragment</code><br>  用于创建设置页面，PreferenceActivity的替代品</p>
-</li>
-</ul>
-<h1 id=""><a href="#" class="headerlink" title="-"></a>-</h1><h1 id="-1"><a href="#-1" class="headerlink" title="-"></a>-</h1><h2 id="添加用户界面"><a href="#添加用户界面" class="headerlink" title="添加用户界面"></a>添加用户界面</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123; </div><div class="line">    <span class="meta">@Override</span> </div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        <span class="comment">// Inflate the layout for this fragment </span></div><div class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.example_fragment, container, <span class="keyword">false</span>);</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>inflater.inflate(int,ViewGroup,boolean)</code><br>三个参数</p>
-<ul>
-<li>布局</li>
-<li>Fragment中的View的父View</li>
-<li>boolean参数:指示是否应该在扩展期间将扩展布局附加至 ViewGroup（第二个参数）的布尔值。（在本例中，其值为 false，因为系统已经将扩展布局插入 container—传递 true 值会在最终布局中创建一个多余的视图组。）</li>
-</ul>
-<h2 id="添加到Activity中"><a href="#添加到Activity中" class="headerlink" title="添加到Activity中"></a>添加到Activity中</h2><p>###1,布局文件中标签形式添加<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当系统创建此 Activity 布局时，会实例化在布局中指定的每个片段，并为每个片段调用 onCreateView() 方法，以检索每个片段的布局。<strong>系统会直接插入片段返回的 View 来替代 &lt;fragment&gt; 元素</strong>。</p>
-<blockquote>
-<p>注：每个片段都需要一个唯一的标识符，重启 Activity 时，系统可以使用该标识符来恢复片段（您也可以使用该标识符来捕获片段以执行某些事务，如将其删除）。 </p>
-<p>可以通过三种方式为片段提供 ID：</p>
-<ul>
-<li>为 android:id 属性提供唯一 ID</li>
-<li>为 android:tag 属性提供唯一字符串</li>
-<li>如果您未给以上两个属性提供值，系统会使用容器视图的 ID</li>
-</ul>
-</blockquote>
-<h3 id="2-通过编程方式添加到ViewGroup"><a href="#2-通过编程方式添加到ViewGroup" class="headerlink" title="2,通过编程方式添加到ViewGroup"></a>2,通过编程方式添加到ViewGroup</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FragmentManager fragmentManager = getFragmentManager()</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); </div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
-<h2 id="添加没有UI的Fragment"><a href="#添加没有UI的Fragment" class="headerlink" title="添加没有UI的Fragment"></a>添加没有UI的Fragment</h2><p>当Fragment没有UI时，只能通过<code>add(Fragment fragment,String tag)</code>的方式添加到Activity中，此时Tag就是唯一标识符。此时也不会调用<code>onCreateView</code>方法。可以通过<code>findFragmentByTag()</code>方式查找到此<code>Fragment</code></p>
-<h1 id="FragmentActivity"><a href="#FragmentActivity" class="headerlink" title="FragmentActivity"></a>FragmentActivity</h1><ul>
-<li>继承链:<br>  <code>BaseFragmentActivityHoneycomb</code> &gt; <code>BaseFragmentActivityEclair</code> &gt; <code>BaseFragmentActivityDonut</code> &gt; <code>Activity</code></li>
-<li>如果想作为<code>Fragment</code>的Host需要实现<code>FragmentHostCallback</code>,<code>HostCallbacks</code>是其中的实现类</li>
-</ul>
-<h2 id="实现Fragment的onActiivtyResult回调"><a href="#实现Fragment的onActiivtyResult回调" class="headerlink" title="实现Fragment的onActiivtyResult回调"></a>实现Fragment的onActiivtyResult回调</h2><ul>
-<li><code>int mNextCandidateRequestIndex</code></li>
-<li><code>boolean mStartedActivityFromFragment</code></li>
-<li><code>SparseArrayCompat&lt;String&gt; mPendingFragmentActivityResults</code></li>
-<li><code>requestCode</code>有效的是0xffff 低4位16进制,否则无效</li>
-</ul>
-<p>基于Activity的<code>onActivityResult</code>根据<code>requestCode</code>从<code>mPendingFragmentActivityResults</code>中找到对应<code>Fragment</code>名称，进而找到<code>Fragment</code></p>
-<h1 id="FragmentController"><a href="#FragmentController" class="headerlink" title="FragmentController"></a>FragmentController</h1><p>内部有属性<code>FragmentHostCallback mHost</code>, 用于包裹<code>FragmentHostCallback</code>的功能,让Activity可以作为Fragment的宿主。基本上实现的方法都是直接调用<code>mHost</code>,或<code>mHost.mFragmentManager</code>的方法。作为二者功能的一个整合。</p>
-<h1 id="FragmentManager-FragmentManagerImpl"><a href="#FragmentManager-FragmentManagerImpl" class="headerlink" title="FragmentManager,FragmentManagerImpl"></a>FragmentManager,FragmentManagerImpl</h1><ul>
-<li>abstract FragmentManager : 定义接口</li>
-<li>interface BackStackEntry : 回退栈接口</li>
-<li><p>class FragmentManagerImpl : 实现类</p>
-</li>
-<li><p>moveToState<br>实现了Fragment的生命周期相关调用</p>
-</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/07/06/Fragment_Source_Code/" class="archive-article-date">
-  	<time datetime="2016-07-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-06</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fragment/">Fragment</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-DesignParttenTemplateMethod" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/06/24/DesignParttenTemplateMethod/">设计模式--模板方法(类行为型)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>模板方法模式是一种比较基本的代码复用技术，父类来控制宏观上几个方法执行步骤，在子类中实现这些方法，这样如果需要修改某个步骤时只去修改子类方法，不需要改变父类逻辑。而且如果有新的实现只要实现一个新的子类就可以了。</p>
-<h2 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h2><p>开发过程中常遇到一种情况：已知一个算法或业务的主要步骤，但每一步的具体实现是未知的，不确定的。</p>
-<p>比如去医院看病，一般包含几个步骤：</p>
-<ol>
-<li>挂号</li>
-<li>诊断</li>
-<li>治疗</li>
-<li>离开</li>
-</ol>
-<p>挂号和离开是一样的，而其他的诊断和治疗则不尽相同。这时对于各种病症诊断和治疗的实现就是不一样的。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>实现上述需求需要考虑几种情况：</p>
-<ol>
-<li>主要步骤大体是固定的，挂号一般是一样的，具体的诊断和治疗实现是不一致的</li>
-<li>但是部分可能有变化，比如诊断结果没有问题的时候不需要治疗，那么治疗这步就不需要了，这就需要根据具体情况确定</li>
-</ol>
-<p>模板方法就是抽象出系列固定框架，将一些大体步骤抽象出来，而具体步骤实现延迟到子类中。使得一个算法总体结构不变，可以重新定义算法中某些特定的步骤。(有点类似于注入)</p>
-<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><ul>
-<li><strong>抽象类(AbstractClass)</strong>: 定义抽象的源于操作，具体的子类将重新定义他们以实现一个算法</li>
-<li><strong>具体子类(ConcreteClass)</strong>: 实现源于操作以完成算法中与特定子相关的步骤</li>
-</ul>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>是一种代码复用的基本技术。它们在类库中尤其重要，它们提取了类库中的公共行为。</li>
-<li>导致一种反向的控制结构，这种结构有时成为“好莱坞法则”：“Don’t call me,We will call you”。通过父类调用子类的操作（而不是子类操作父类），通过子类的扩展增加新的行为，符合“开闭原则”</li>
-<li>符合单一职责原则</li>
-</ul>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>每个不同的实现都要实现一个子类，这会导致类的个数增加，系统更加庞大，抽象，不易理解。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/6/24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        AbstractBank bank = <span class="keyword">new</span> ConcreteDeposit();</div><div class="line">        bank.templateMethod();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String TAG = <span class="string">"AbstractBank"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mNumber;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 模板方法</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">templateMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        takeNumber();</div><div class="line">        transact();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//取号</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">takeNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">        Log.d(TAG, <span class="string">"take number"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">//钩子方法</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">hook</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 存款</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDeposit</span> <span class="keyword">extends</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(TAG, <span class="string">"transact of concreteDeposit 存款"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 取款</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteTransfer</span> <span class="keyword">extends</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(TAG, <span class="string">" transact of Transfer 取款"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="各种方法说明"><a href="#各种方法说明" class="headerlink" title="各种方法说明"></a>各种方法说明</h2><ul>
-<li><strong>模板方法</strong>: 算法步骤的整体调用</li>
-<li><strong>基本方法</strong>: 组成算法的每一步具体实现</li>
-<li><strong>钩子方法</strong>: 用于子类反向控制父类模板方法中调用顺序，逻辑的方法.<br>比如父类中通过钩子方法返回值判断某一步骤是否执行，这样子类可以通过返回true or false来控制父类算法的逻辑走向,<br>代码如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//父类中</span></div><div class="line">...</div><div class="line"><span class="keyword">if</span>(needJump())&#123;<span class="comment">//needJump就是钩子方法</span></div><div class="line">    jump();<span class="comment">//基本方法</span></div><div class="line">&#125;</div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">//子类中</span></div><div class="line">...</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">needJump</span><span class="params">()</span></span>&#123;</div><div class="line">   <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/06/24/DesignParttenTemplateMethod/" class="archive-article-date">
-  	<time datetime="2016-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-24</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ideas/">ideas</a></li></ul>
 	</div>
 
       
@@ -960,7 +915,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
     			</div>
     	</section>
     
