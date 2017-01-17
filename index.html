@@ -148,7 +148,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-Games" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Andorid-Change-Jar" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/11/01/Games/">独立游戏</a>
+      <a class="article-title" href="/uncategorized/2017/01/17/Andorid-Change-Jar/">修改第三方jar包中class文件的方法</a>
     </h1>
   
 
@@ -166,16 +166,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JumpBlock"><a href="#JumpBlock" class="headerlink" title="JumpBlock"></a><a href="/games/jump-block/web-mobile/index.html">JumpBlock</a></h2><p><a href="/games/jump-block/web-mobile/index.html"><img src="/img/page_img/jump_block.jpg" alt="JumpBlock"></a></p>
+        <p>今天项目中有个第三方jar包有bug，需要修改，因为没有提供新版本，所以打算直接修改jar包。</p>
+<p>首先是发现了jar包中一个类<code>e</code>中会因为某种原因抛出异常导致线程崩溃，会反馈到我们的CrashReport系统上。那么最直接的方法就是修改这个类。</p>
+<p>我们知道<code>class</code>只是<code>java</code>编译后的二进制文件,我们只需要直接替换这个文件，理论上就可以解决问题。</p>
+<h3 id="那么如何修改？"><a href="#那么如何修改？" class="headerlink" title="那么如何修改？"></a>那么如何修改？</h3><p>首先直接把class类反编译后再利用javac重新编译这种方案是行不通的。因为有很多链接库找不到，编译无法通过。</p>
+<p>网上找了一下现存的方案，有一个windows下的工具 <code>jclasslib</code>。大概看了一下，是把<code>class</code>文件中的<code>常量池</code>，<code>方法列表</code>等反编译出来，达到可编辑的状态。基本上可以用来修改<code>常量池</code>中的内容，比如一些字符串，类名，方法名等等，做小幅度修改是够了，但是并不能大量修改逻辑。</p>
+<p>还是看一下怎么替换class文件吧。</p>
+<h3 id="直接替换class文件"><a href="#直接替换class文件" class="headerlink" title="直接替换class文件"></a>直接替换class文件</h3><p>上面说了替换文件是可以的实现修改的，关键问题在于怎么生成一个新的class—–聪明的孩纸也想到了:原来怎么生成，还怎么生成呗。<br>建一个Android项目重新编译！因为这里探讨的是Android平台，其他平台类似。 </p>
+<p>下面看看详细步骤：</p>
+<ul>
+<li><strong>反编译旧class文件,生成java类代码文件</strong><br>  反编译直接用AndroidStudio或者网上找反编译工具也行</li>
+<li><strong>新建一个Android项目A，A中建一个moudle B,将反编译的java类文件+jar包导入moudle B 中</strong><br>  这里就是为了重新将修改后的java类编译，这里注意需要将jar包中需要修改的class文件从里面删掉，否则类会重复，编译不过。<br>  至于删除方法<ul>
+<li><code>windows</code>直接zip工具将jar解压缩，删除文件,再重新压缩为jar</li>
+<li><code>mac</code>系统下直接命令行 <code>zip -d filePath</code>就可以了</li>
+</ul>
+</li>
+<li><strong>修改java类逻辑，编译运行项目A</strong><br>  此时java类需要保证类名，方法名什么的不变，不然jar中有其他依赖也没法编译不是~;内部逻辑就可以随便改了。</li>
+<li><strong>把A项目编译后的class.jar中对应的新class文件导出</strong><br>  jar包就在 module B 的目录下:<code>build/intermediates/bundles/default/class.jar</code><br>  将其解压，导出对应类的class就可以拿去替换啦</li>
+<li><strong>将新的class文件替换到第三方jar包中,搞定。</strong></li>
+</ul>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/11/01/Games/" class="archive-article-date">
-  	<time datetime="2016-11-01T02:43:49.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-01</time>
+      <a href="/uncategorized/2017/01/17/Andorid-Change-Jar/" class="archive-article-date">
+  	<time datetime="2017-01-17T08:58:32.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-17</time>
 </a>
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/class/">class</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
+	</div>
+
       
 
       <div class="clearfix"></div>
@@ -194,7 +217,7 @@
 
 
   
-    <article id="post-Fresco-Sourcecode-Analyse" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-SQLite" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -204,7 +227,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/25/Fresco-Sourcecode-Analyse/">Fresco源码分析Part 1</a>
+      <a class="article-title" href="/uncategorized/2016/12/24/Android-SQLite/">Android SQLite数据库升级处理</a>
     </h1>
   
 
@@ -212,35 +235,177 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这次打算写系列文章分析一下Fresco的源码，希望在这个过程中学习并了解优秀框架的设计思想，以及存在问题。</p>
-<h1 id="Fresco概述"><a href="#Fresco概述" class="headerlink" title="Fresco概述"></a>Fresco概述</h1><p>Fresco是Facebook发布的开源图片请求库,优秀的内存管理，支持三级缓存广受欢迎。</p>
-<h1 id="Fresco整体结构"><a href="#Fresco整体结构" class="headerlink" title="Fresco整体结构"></a>Fresco整体结构</h1><p>通常图片请求框架，大体的功能可以划分为下面几个模块:</p>
+        <p>按照业务需求，需要做Android数据库升级，记录一下通常的实现方法</p>
+<p>我们都知道，实现SqLite升级需要重写SQliteOpenHelper的<code>onUpgrade</code>方法,此方法会传递三个参数 <code>db</code>,<code>oldVersion</code>,<code>newVersion</code></p>
+<p>升级时需要根据当前版本和新版本来确定如何升级,这就需要处理<strong>顺序升级</strong>和<strong>跨版本升级</strong>。</p>
+<h3 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h3><p>目前有两个方案供我们选择：</p>
 <ul>
-<li>数据请求</li>
-<li>数据展示</li>
-<li>缓存</li>
+<li><p><strong>方案1: 可以遍历所有升级情况，为每种情况实现一种升级方式</strong><br>  例如，假设我们目前最新版本为4那么按照升级历史来说我们应该处理了下面几种情况：</p>
+<ul>
+<li>1-&gt;2</li>
+<li>2-&gt;3</li>
+<li>1-&gt;3</li>
+<li>1-&gt;4</li>
+<li>2-&gt;4</li>
+<li>3-&gt;4</li>
 </ul>
-<p>下面我们了解一下各个功能模块的大体实现，对Fresco有个整体的印象，在这之后我们再详细分析各个功能模块的细节。</p>
-<h2 id="数据请求"><a href="#数据请求" class="headerlink" title="数据请求"></a>数据请求</h2><p>Fresco的数据请求部分采用</p>
-<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>Fresco 自己定义了线程池</p>
-<p>父类是<code>AbstractExecutorService.java</code></p>
-<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count = list.size();</div><div class="line"><span class="comment">//use count below</span></div><div class="line">`</div></pre></td></tr></table></figure>
-<p>参考：</p>
+</li>
+<li><p><strong>方案2: 按照版本顺序升级</strong><br>  还是上面的例子，升级到版本4,我们需要处理三种情况:</p>
+<ul>
+<li>1-&gt;2</li>
+<li>2-&gt;3 </li>
+<li>3-&gt;4 </li>
+</ul>
+</li>
+</ul>
+<p>这里可以看到，<strong>方案1</strong>随着版本增加，需要考虑的情况会呈指数级增长，工作量也随之上升;但是它的<strong>优势</strong>在于每次升级版本都是直接从旧版本升级到最新版本,只做一次升级操作,效率是最高的,（相对于第二种方案）不会出现冗余的操作。</p>
+<p><strong>方案2</strong>的<strong>优势</strong>在于它考虑的情况少了很多，只需要关心两个版本间的差别，每次升级的工作量只是当前版本的修改，不会显著增加。但是<strong>缺点</strong>是需要挨个版本升级，假设一个极端情况从版本1，升级到版本10，会做10次升级操作，这其中如果冗余操作比较多的话可能会消耗较长时间，所以最好提供进度条来处理这种情况。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>这里只给出方案2的实现代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(<span class="keyword">final</span> SQLiteDatabase db, <span class="keyword">final</span> <span class="keyword">int</span> oldVersion, <span class="keyword">final</span> <span class="keyword">int</span> newVersion)</span> </span>&#123;</div><div class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = oldVersion; i &lt;= newVersion; ++i) &#123;</div><div class="line">    <span class="keyword">switch</span> (i) &#123;</div><div class="line">        <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">            upgrade1To2(db);</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">            upgrade2To3(db);</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">            upgrade3To4(db);</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="常用的升级操作SQL"><a href="#常用的升级操作SQL" class="headerlink" title="常用的升级操作SQL:"></a>常用的升级操作SQL:</h3><p>SQLite Alter</p>
+<p><img src="/img/page_img/alter-table-stmt.gif" alt="SQLite Alter"></p>
+<p>添加，删除列Android实现,这里添加多列时使用事务的方式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">db.beginTransaction();</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    db.execSQL(<span class="string">"ALTER TABLE FEEDS ADD COLUMN CONTENT_1 TEXT;"</span>);</div><div class="line">    db.execSQL(<span class="string">"ALTER TABLE FEEDS ADD COLUMN CONTENT_2 TEXT;"</span>);</div><div class="line">    db.setTransactionSuccessful();</div><div class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    db.endTransaction();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p><a href="http://blog.csdn.net/column/details/master-fresco.html" target="_blank" rel="external">http://blog.csdn.net/column/details/master-fresco.html</a></p>
+<p>注意：Sqlite目前不支持删除列,只能先删除表再创建新表,通常采用拷贝数据到临时表，建新表，然后恢复数据，删除临时表</p>
+<p>官方说明<br>SQLite supports a limited subset of ALTER TABLE. The ALTER TABLE command in SQLite allows the user to rename a table or to add a new column to an existing table.</p>
+</blockquote>
+<ul>
+<li>添加，删除表,重命名表<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//删除</span></div><div class="line">drop table tableName;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="如何选择方案？"><a href="#如何选择方案？" class="headerlink" title="如何选择方案？"></a>如何选择方案？</h3><p>那么在我们项目中如何选择就<strong>需要根据项目来做具体的评估</strong>，不过目前还是比较<strong>倾向于第二种方案</strong>，因为方案1的开发，测试工作量都是指数级增长，这个是个很大硬伤。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/12/24/Android-SQLite/" class="archive-article-date">
+  	<time datetime="2016-12-24T09:33:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlite/">sqlite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/升级/">升级</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Service-Keep-Alive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/12/21/Service-Keep-Alive/">Service保活方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目前存在的保活方案"><a href="#目前存在的保活方案" class="headerlink" title="目前存在的保活方案"></a>目前存在的保活方案</h1><ul>
+<li>Service 设置为前台进程<br>  两个Service利用同一个NotificationId设为前台进程，然后stop其中一个Service，此时Notification会被删掉，而另一个Servcie依旧被认为是在前台状态(5.0以下适用)</li>
+<li>屏幕关闭时启动一个1像素Activity</li>
+<li>Native层保活，通过invoke重启Android进程，文件互相阻塞的方式实现检测进程Alive</li>
+<li>两个Service互相启动</li>
+<li>利用其他App唤起</li>
+<li>监听系统广播唤起</li>
+<li>设定闹钟，定时唤醒</li>
+<li>账户同步唤醒</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/12/21/Service-Keep-Alive/" class="archive-article-date">
+  	<time datetime="2016-12-21T03:41:20.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/keep-alive/">keep alive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/service/">service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/保活/">保活</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-url-encode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/12/20/url-encode/">Url Encode的一些细节:RFC-1738与RFC-2396</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Andorid开发中遇到URL编码问题，服务端要求只对value部分作编码处理，而okHttp3.0.1中FormBody默认是对key，value都做编码处理。</p>
+<p>而在我修改urlencode的时候发现URL编码方案是有两种的，如题；<br>那么他们的不同点仅仅是对空格的处理:</p>
+<p><code>RFC-1738</code> : 空格编码为”+”</p>
+<p><code>RFC-2396</code> : 空格编码为”%20”</p>
+<p>那么在Android中对应的方法是什么呢?</p>
+<p>RFC-1738<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// " " -&gt; "+"</span></div><div class="line">java.net.URLEncoder.encode(value, <span class="string">"utf-8"</span>)</div></pre></td></tr></table></figure></p>
+<p>RFC-2396<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// " " -&gt; "%20"</span></div><div class="line">android.net.Uri.encode(value);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参考： <a href="https://zh.wikipedia.org/zh-hans/%E7%99%BE%E5%88%86%E5%8F%B7%E7%BC%96%E7%A0%81" target="_blank" rel="external">维基百科 UrlEncode</a></p>
 </blockquote>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/10/25/Fresco-Sourcecode-Analyse/" class="archive-article-date">
-  	<time datetime="2016-10-25T03:59:46.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-25</time>
+      <a href="/uncategorized/2016/12/20/url-encode/" class="archive-article-date">
+  	<time datetime="2016-12-20T03:08:42.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-20</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fresco/">Fresco</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/encode/">encode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/url/">url</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urlencode/">urlencode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/url编码/">url编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编码/">编码</a></li></ul>
 	</div>
 
       
@@ -261,7 +426,7 @@
 
 
   
-    <article id="post-Git-Shortcuts" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-base-details" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -271,7 +436,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/25/Git-Shortcuts/">Git-Shortcuts</a>
+      <a class="article-title" href="/uncategorized/2016/12/15/java-base-details/">Java 基础细节问题总结</a>
     </h1>
   
 
@@ -279,85 +444,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Git命令行默认的命令很长，每天经常敲，积累下来会很耗时间，虽然Git提供了部分命令的shortcuts,但依旧不够精简。这里记录一下直接用bash的alias设置Git shortcut的样例。</p>
-<p>bash 支持命令行的重命名，只需要在~/.bash_profile中添加下面配置就可以了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ----------------------</span></div><div class="line"><span class="comment"># Git Aliases</span></div><div class="line"><span class="comment"># ----------------------</span></div><div class="line"><span class="built_in">alias</span> ga=<span class="string">'git add'</span></div><div class="line"><span class="built_in">alias</span> gaa=<span class="string">'git add .'</span></div><div class="line"><span class="built_in">alias</span> gaaa=<span class="string">'git add -A'</span></div><div class="line"><span class="built_in">alias</span> gb=<span class="string">'git branch'</span></div><div class="line"><span class="built_in">alias</span> gbd=<span class="string">'git branch -d '</span></div><div class="line"><span class="built_in">alias</span> gc=<span class="string">'git commit'</span></div><div class="line"><span class="built_in">alias</span> gcm=<span class="string">'git commit -m'</span></div><div class="line"><span class="built_in">alias</span> gco=<span class="string">'git checkout'</span></div><div class="line"><span class="built_in">alias</span> gcob=<span class="string">'git checkout -b'</span></div><div class="line"><span class="built_in">alias</span> gcom=<span class="string">'git checkout master'</span></div><div class="line"><span class="built_in">alias</span> gd=<span class="string">'git diff'</span></div><div class="line"><span class="built_in">alias</span> gda=<span class="string">'git diff HEAD'</span></div><div class="line"><span class="built_in">alias</span> gi=<span class="string">'git init'</span></div><div class="line"><span class="built_in">alias</span> gl=<span class="string">'git log'</span></div><div class="line"><span class="built_in">alias</span> glg=<span class="string">'git log --graph --oneline --decorate --all'</span></div><div class="line"><span class="built_in">alias</span> gld=<span class="string">'git log --pretty=format:"%h %ad %s" --date=short --all'</span></div><div class="line"><span class="built_in">alias</span> gm=<span class="string">'git merge --no-ff'</span></div><div class="line"><span class="built_in">alias</span> gp=<span class="string">'git pull'</span></div><div class="line"><span class="built_in">alias</span> gps=<span class="string">'git push'</span></div><div class="line"><span class="built_in">alias</span> gs=<span class="string">'git status -s'</span></div><div class="line"><span class="built_in">alias</span> gst=<span class="string">'git stash'</span></div><div class="line"><span class="built_in">alias</span> gstl=<span class="string">'git stash list'</span></div><div class="line"><span class="built_in">alias</span> gstp=<span class="string">'git stash pop'</span></div><div class="line"><span class="built_in">alias</span> gstd=<span class="string">'git stash drop'</span></div><div class="line"></div><div class="line"><span class="comment"># ----------------------</span></div><div class="line"><span class="comment"># Git Functions</span></div><div class="line"><span class="comment"># ----------------------</span></div><div class="line"><span class="comment"># Git log find by commit message</span></div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">glf</span></span>() &#123; git <span class="built_in">log</span> --all --grep=<span class="string">"<span class="variable">$1</span>"</span>; &#125;</div></pre></td></tr></table></figure>
-<p>其中<code>glf</code></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/10/25/Git-Shortcuts/" class="archive-article-date">
-  	<time datetime="2016-10-25T02:30:48.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-25</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-App-start-improvement" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/14/Android-App-start-improvement/">Android启动优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="启动分类"><a href="#启动分类" class="headerlink" title="启动分类"></a>启动分类</h2><ul>
-<li><p>冷启动<br>  冷启动指App后台没有运行任何服务，第一次启动<code>Application</code>。这时会创建<code>Application</code>，<code>MainActivity</code>显示App</p>
+        <h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>整数</p>
+<ul>
+<li>byte : 8位,1字节  -128~127</li>
+<li>short: 2字节    </li>
+<li>int : 4字节</li>
+<li>long : 8字节</li>
+</ul>
+<p>浮点数</p>
+<ul>
+<li>float : 4字节 </li>
+<li>double: 8字节</li>
+</ul>
+<p>字符型</p>
+<ul>
+<li>char : 2字节,可以表示一个中文字符</li>
+</ul>
+<p>布尔</p>
+<ul>
+<li>boolean : 1位,1/8字节</li>
+</ul>
+<h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><p>一些不太常用的关键字:</p>
+<ul>
+<li>strictfp: strict float point 精确浮点数,可应用于类，接口，方法；此关键字修饰的类或方法，里面的float,double需要符合IEEE-754规范</li>
+<li>transient: 标记不会被序列化的字段  </li>
+<li>volatile: 通常，volatile关键字用来阻止（伪）编译器认为的无法“被代码本身”改变的代码（变量/对象）进行优化。</li>
+<li>assert: 用于程序调试</li>
+<li>const: 保留关键字,无具体含义</li>
+<li>native: 声明一个方法是C/C++/FORTRAN语言实现</li>
+</ul>
+<h2 id="volatile-关键字详解"><a href="#volatile-关键字详解" class="headerlink" title="volatile 关键字详解"></a>volatile 关键字详解</h2><blockquote>
+<p>参考：<a href="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html" target="_blank" rel="external">IBM Volatile</a><br><a href="http://www.infoq.com/cn/articles/ftf-java-volatile" target="_blank" rel="external">http://www.infoq.com/cn/articles/ftf-java-volatile</a></p>
+<h3 id="Volatile的官方定义"><a href="#Volatile的官方定义" class="headerlink" title="Volatile的官方定义"></a>Volatile的官方定义</h3></blockquote>
+<p>Java语言规范第三版中对volatile的定义如下： java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致的更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁更加方便。如果一个字段被声明成volatile，java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
+<p>解释一下：</p>
+<p>volatile实现了synchronized的可见性部分的功能，但是并不能保证互斥。也就是可以保证一个线程修改了共享变量的值，其他线程能马上读取到这个值；所以可以用于多线程读，而不能用于多线程写实现同步。<br>volatile的读的额外开销很小，而写的开销比较大，但是都比synchronized效率高不少。用volatile的主要原因就是在某些情况下可以提高性能。</p>
+<h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><ul>
+<li>Math.floor(x); (向下取整)取小于等于x的最接近的double类型整数;参数是double</li>
+<li>Math.round(x); 四舍五入,返回long或int;</li>
+<li>Math.ceil(x); (向上取整)取大于等于x的最接近的double整数</li>
+</ul>
+<h1 id="类中各个定义块执行顺序"><a href="#类中各个定义块执行顺序" class="headerlink" title="类中各个定义块执行顺序"></a>类中各个定义块执行顺序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</div><div class="line">    <span class="comment">//静态块</span></div><div class="line">    <span class="keyword">static</span> &#123;&#125;</div><div class="line">    <span class="comment">//构造块</span></div><div class="line">    &#123;&#125;</div><div class="line">    <span class="comment">//构造方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Demo</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>静态块<br>  用static声明，JVM加载类的时候执行一次，优先于main函数。</p>
 </li>
-<li><p>热启动<br>  指后台已经有App相关进程在运行时启动App，比如按Home键再返回App</p>
+<li><p>构造块<br>  比如类定义{}，每一次创建对象时执行，相当于向构造器前面加上构造快的内容</p>
 </li>
 </ul>
-<h2 id="本地启动时间的统计方法"><a href="#本地启动时间的统计方法" class="headerlink" title="本地启动时间的统计方法"></a>本地启动时间的统计方法</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ adb shell am start -W packagename/activity</div><div class="line"><span class="comment"># 例如</span></div><div class="line">$ adb shell am start -W com.xkj.test/com.xkj.test.MainActivity</div></pre></td></tr></table></figure>
-<p>比如启动MainActivity：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ adb shell am start -W com.xkj.test/com.xkj.test.MainActivity</div><div class="line">Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.xkj.test/.MainActivity&#125;</div><div class="line">Status: ok</div><div class="line">Activity: com.xkj.test/.MainActivity</div><div class="line">ThisTime: 965</div><div class="line">TotalTime: 965</div><div class="line">WaitTime: 986</div><div class="line">Complete</div></pre></td></tr></table></figure></p>
-<p>一般只要看TotalTime就可以了</p>
-<h2 id="启动流程详解"><a href="#启动流程详解" class="headerlink" title="启动流程详解"></a>启动流程详解</h2><p>通过Launcher启动Activity需要经过下面几个步骤</p>
+<p>执行顺序: 静态块&gt;构造块&gt;构造方法</p>
+<p>继承时执行顺序: 父类静态块&gt;子类静态块&gt;父类构造块&gt;父类构造方法&gt;子类构造块&gt;子类构造方法</p>
+<h1 id="运算符规则-加法"><a href="#运算符规则-加法" class="headerlink" title="运算符规则 - 加法"></a>运算符规则 - 加法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span> b1 = <span class="number">1</span>,b2 = <span class="number">2</span>, b3, b6;</div><div class="line"><span class="keyword">final</span> <span class="keyword">byte</span> b4 = <span class="number">4</span>, b5 = <span class="number">6</span>;</div><div class="line">b6 = b4+b5;</div><div class="line">b3 = (b1+b2);</div><div class="line">System.out.println(b3+b6);</div></pre></td></tr></table></figure>
+<p>运行结果： 第4行报错</p>
+<p>原因： 表达式类型会自动提升</p>
+<p>作加法运算时</p>
 <ul>
-<li>在Launcher中点击App icon，Launcher调用<code>startActivity</code>启动</li>
+<li>所有byte,short,char型的值会被提升为int</li>
+<li>如果有一个数字为long型,那么计算结果为long</li>
+<li>如果有一个为float时，结果为float</li>
+<li>如果有一个为double时，结果为double</li>
 </ul>
-<h2 id="MainActivity执行生命周期"><a href="#MainActivity执行生命周期" class="headerlink" title="MainActivity执行生命周期"></a>MainActivity执行生命周期</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">-&gt; Application 构造函数</div><div class="line">-&gt; Application.attachBaseContext()</div><div class="line">-&gt; Application.onCreate()</div><div class="line">-&gt; Activity 构造函数</div><div class="line">-&gt; Activity.setTheme()</div><div class="line">-&gt; Activity.onCreate()</div><div class="line">-&gt; Activity.onStart</div><div class="line">-&gt; Activity.onResume</div><div class="line">-&gt; Activity.onAttachedToWindow</div><div class="line">-&gt; Activity.onWindowFocusChanged</div></pre></td></tr></table></figure>
+<p>final 变量会被JVM优化，因此第三行编译时会优化为 b6 = 10,不会报错</p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/10/14/Android-App-start-improvement/" class="archive-article-date">
-  	<time datetime="2016-10-14T02:37:40.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-14</time>
+      <a href="/uncategorized/2016/12/15/java-base-details/" class="archive-article-date">
+  	<time datetime="2016-12-15T06:43:40.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-15</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动/">启动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/启动优化/">启动优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试必备/">面试必备</a></li></ul>
 	</div>
 
       
@@ -378,7 +536,7 @@
 
 
   
-    <article id="post-2014-11-3-Android-Show-App-Memory" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-annotation" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -388,7 +546,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/01/2014-11-3-Android-Show-App-Memory/">Android如何查看App占用内存</a>
+      <a class="article-title" href="/uncategorized/2016/12/14/java-annotation/">Java注解</a>
     </h1>
   
 
@@ -396,40 +554,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="命令行方式"><a href="#命令行方式" class="headerlink" title="命令行方式"></a>命令行方式</h1><h2 id="adb-shell"><a href="#adb-shell" class="headerlink" title="adb shell"></a>adb shell</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell dumpsys meminfo [your.<span class="keyword">package</span>.name]</div></pre></td></tr></table></figure>
-<p>Demo:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell dumpsys meminfo com.xkj.example</div></pre></td></tr></table></figure>
-<p><strong>优点</strong>：命令行执行比较方便</p>
-<p><strong>缺点</strong>：无法实时更新</p>
-<h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell</div><div class="line">$ top -m [count]</div></pre></td></tr></table></figure>
-<p>Demo:查看内存占用前10的应用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell </div><div class="line">$ top -m <span class="number">10</span></div></pre></td></tr></table></figure>
-<p>Rss 列显示的为内存占用</p>
-<p><strong>优点</strong>：命令行执行比较方便,可以实时更新，而且有历史记录</p>
-<p><strong>缺点</strong>：指定app时找起来不太方便</p>
-<h1 id="手机设置中查看"><a href="#手机设置中查看" class="headerlink" title="手机设置中查看"></a>手机设置中查看</h1><p>设置-&gt;应用程序-&gt;正在运行</p>
-<p>找到你自己的app就可以直接查看占用的内存</p>
-<p><strong>优点</strong>：可以对比其他app的运行内存，普适性较强，会有动态更新</p>
-<p><strong>缺点</strong>：查看内存时无法操作app</p>
-<h1 id="使用DDMS"><a href="#使用DDMS" class="headerlink" title="使用DDMS"></a>使用DDMS</h1><p>直接使用DDMS工具来查看(不知道DDMS的话，可以洗洗睡了)</p>
-<p>通常在Eclipse中直接在Android工具中打开DDMS，或者直接在AndroidSDK中打开也OK。</p>
-<p><strong>优点</strong>：图形界面直观，方便</p>
-<p><strong>缺点</strong>：可定制性不强，没有相关分析</p>
-<h1 id="利用API自己实现内存监听"><a href="#利用API自己实现内存监听" class="headerlink" title="利用API自己实现内存监听"></a>利用API自己实现内存监听</h1><p>Android 提供了Api可以检测指定app的内存占用大小，可以考虑自己实现</p>
-<p><strong>优点</strong>：可以随意定制,优势显而易见</p>
-<p><strong>缺点</strong>：需要懂技术</p>
+        <p>Annotation</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><pre><code>java 5 引入的新特性
+</code></pre><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><h1 id="标准Annotation"><a href="#标准Annotation" class="headerlink" title="标准Annotation"></a>标准Annotation</h1><ul>
+<li>Override</li>
+<li>Deprecated</li>
+<li>SuppressWarnings</li>
+</ul>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/10/01/2014-11-3-Android-Show-App-Memory/" class="archive-article-date">
-  	<time datetime="2016-10-01T11:11:07.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-01</time>
+      <a href="/uncategorized/2016/12/14/java-annotation/" class="archive-article-date">
+  	<time datetime="2016-12-14T02:18:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-14</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/annotation/">annotation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 	</div>
 
       
@@ -450,7 +593,7 @@
 
 
   
-    <article id="post-2014-11-3-Android-Tools-IDEA" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Dirs" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -460,7 +603,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/01/2014-11-3-Android-Tools-IDEA/">Android开发神器:IntelliJ IDEA</a>
+      <a class="article-title" href="/uncategorized/2016/12/12/Android-Dirs/">Android App中的几种目录</a>
     </h1>
   
 
@@ -468,41 +611,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="官方主页"><a href="#官方主页" class="headerlink" title="官方主页"></a><a href="https://www.jetbrains.com/idea/" target="_blank" rel="external">官方主页</a></h2><blockquote>
-<p>以下快捷键均为Mac系统下有效</p>
-</blockquote>
-<h2 id="最赞的地方"><a href="#最赞的地方" class="headerlink" title="最赞的地方"></a>最赞的地方</h2><ul>
-<li>支持项目文件搜索</li>
+        <ul>
+<li><code>/system</code> : 存放room</li>
 </ul>
-<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键:"></a>快捷键:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Command + Shift + n </div><div class="line">or</div><div class="line">Shift Shift</div></pre></td></tr></table></figure>
-<p>以前写Js时用惯了Sublime,其中的文件搜索简直太方便了，查找效率没的说，一个字爽！</p>
-<p>吐槽：Eclipse 中的文件搜索只支持打开的项目文件，用起来很不方便，我总不能把我项目所有文件都打开吧,而且特别卡</p>
 <ul>
-<li>流畅</li>
-</ul>
-<p>无论是启动速度还是文件操作都是相当的流畅，传说中的行云流水，可以用来秀操作了！</p>
-<ul>
-<li><p>贴心的代码提示</p>
+<li><p>获取程序路径： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    getApplicationContext().getFilesDir()</div><div class="line"><span class="comment">//&gt;&gt; /data/app/com.yourpackagename.apk/files</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>全面细致的代码错误提示</p>
+<li><p>获取程序安装包路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getApplicationContext().getPackageResourcePath();</div></pre></td></tr></table></figure>
 </li>
+<li><p>获取程序默认数据库路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getApplicationContext().getDatabasePath().getAbsolutePath();</div></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="碉堡的插件们"><a href="#碉堡的插件们" class="headerlink" title="碉堡的插件们"></a>碉堡的插件们</h2><p>插件安装方法，进 Pereferences-&gt;Plugins,然后直接搜索,上图：</p>
-<p><img src="/img/page_img/img_2_2014-11-03.png" alt="Plugins"></p>
-<h3 id="ideaVim-Vim-er必备"><a href="#ideaVim-Vim-er必备" class="headerlink" title="ideaVim (Vim-er必备)"></a>ideaVim (Vim-er必备)</h3><p>支持Vim操作，个人感觉比Eclipse中的Vim插件支持的更好一些</p>
-<h3 id="FindBugs"><a href="#FindBugs" class="headerlink" title="FindBugs"></a>FindBugs</h3><p>自动查找Bug，你懂得。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/10/01/2014-11-3-Android-Tools-IDEA/" class="archive-article-date">
-  	<time datetime="2016-10-01T11:11:07.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-01</time>
+      <a href="/uncategorized/2016/12/12/Android-Dirs/" class="archive-article-date">
+  	<time datetime="2016-12-12T07:18:37.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-12</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dir/">dir</a></li></ul>
 	</div>
 
       
@@ -523,7 +656,7 @@
 
 
   
-    <article id="post-2014-12-4-Android-resolution-ratio" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Functional-Programming" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -533,7 +666,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/01/2014-12-4-Android-resolution-ratio/">Android 分辨率</a>
+      <a class="article-title" href="/uncategorized/2016/12/09/Functional-Programming/">函数式编程解析</a>
     </h1>
   
 
@@ -541,237 +674,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="名词解释："><a href="#名词解释：" class="headerlink" title="名词解释："></a>名词解释：</h3><blockquote>
-<p>Density : 值表示每英寸有多少个显示点，与分辨率是两个概念。 基于屏幕密度的抽象单位，设备无关的点，用于说明与密度无关的尺寸和位置。这些单位是相对于一个160dpi的屏幕，所有一个dp是160dpi屏幕上的一个点。</p>
-</blockquote>
-<h3 id="dp-sp-px的区别"><a href="#dp-sp-px的区别" class="headerlink" title="dp, sp, px的区别"></a>dp, sp, px的区别</h3><ul>
-<li>dp与密度无关的像素, 160dip(每英寸屏幕160像素点)屏幕上1dp=1px</li>
-<li>px实际像素值,屏幕上的点，大小永远不会变</li>
-<li>spscaled pixels — best for text size (放大像素)（与刻度无关的像素）：主要处理字体的大小。与dp类似，但是可以根据用户的字体大小首选项进行缩放。<br>主要用于字体显示best for textsize。虽然谷歌建议用sp作字体单位，但是实际应用的时候，用户若设置字体大小会破坏布局，增加布局难度，最好是用dp作字体单位。</li>
-</ul>
-<h3 id="获取屏幕密度"><a href="#获取屏幕密度" class="headerlink" title="获取屏幕密度"></a>获取屏幕密度</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DisplayMetrics dm = <span class="keyword">new</span> DisplayMetrics();  </div><div class="line">dm = getResources().getDisplayMetrics();</div><div class="line"><span class="keyword">float</span> density = dm.density;<span class="comment">//屏幕密度（像素比例：0.75, 1.0, 1.5, 2.0）</span></div><div class="line"><span class="keyword">int</span> densityDPI = dm.densityDpi;<span class="comment">//屏幕密度（每寸像素：120, 160, 240, 320）</span></div></pre></td></tr></table></figure>
-<h3 id="不同屏幕的Density"><a href="#不同屏幕的Density" class="headerlink" title="不同屏幕的Density"></a>不同屏幕的Density</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">屏幕类型</th>
-<th style="text-align:center">屏幕全名</th>
-<th style="text-align:center">像素密度</th>
-<th style="text-align:center">分辨率</th>
-<th style="text-align:center">资源</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">VGA</td>
-<td style="text-align:center">Video Graphics Array</td>
-<td style="text-align:center">160</td>
-<td style="text-align:center">640*480</td>
-<td style="text-align:center">mdpi</td>
-</tr>
-<tr>
-<td style="text-align:left">HVGA</td>
-<td style="text-align:center">Half VGA</td>
-<td style="text-align:center">160</td>
-<td style="text-align:center">320*480</td>
-<td style="text-align:center">mdpi</td>
-</tr>
-<tr>
-<td style="text-align:left">QVGA</td>
-<td style="text-align:center">Quarter VGA</td>
-<td style="text-align:center">120</td>
-<td style="text-align:center">240*320</td>
-<td style="text-align:center">ldpi</td>
-</tr>
-<tr>
-<td style="text-align:left">WVGA</td>
-<td style="text-align:center">Wide VGA</td>
-<td style="text-align:center">240</td>
-<td style="text-align:center">480*800</td>
-<td style="text-align:center">hdpi</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">320</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">xhdpi</td>
-</tr>
-</tbody>
-</table>
-<h3 id="不同layout-对应屏幕大小"><a href="#不同layout-对应屏幕大小" class="headerlink" title="不同layout 对应屏幕大小"></a>不同layout 对应屏幕大小</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">layout 类型</th>
-<th style="text-align:left">屏幕尺寸</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">layout-small</td>
-<td style="text-align:left">&lt;3 inch</td>
-</tr>
-<tr>
-<td style="text-align:left">layout-normal</td>
-<td style="text-align:left">3 ~ 4.5 inch</td>
-</tr>
-<tr>
-<td style="text-align:left">layout-large</td>
-<td style="text-align:left">4 ~ 7 inch</td>
-</tr>
-<tr>
-<td style="text-align:left">layout-xlarge</td>
-<td style="text-align:left">7 ~ 10 inch</td>
-</tr>
-</tbody>
-</table>
-<h3 id="如何做到自适应屏幕大小呢？"><a href="#如何做到自适应屏幕大小呢？" class="headerlink" title="如何做到自适应屏幕大小呢？"></a>如何做到自适应屏幕大小呢？</h3><p>1）界面布局方面 </p>
-<p>   需要根据物理尺寸的大小准备5套布局，</p>
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>传统面向对象编程是命令式编程，命令式编程的思路是告诉机器该怎么按照步骤解决问题；而函数式编程是告诉机器要做什么。</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子:"></a>举个栗子:</h3><p>实现为数组每个元素加2。</p>
 <ul>
-<li>layout 放一些通用布局xml文件，比如界面中顶部和底部的布局，不会随着屏幕大小变化，类似windos窗口的title bar</li>
-<li>layout-small 屏幕尺寸小于3英寸左右的布局</li>
-<li>layout-normal 屏幕尺寸小于4.5英寸左右，</li>
-<li>layout-large 4英寸-7英寸之间</li>
-<li>layout-xlarge 7-10英寸之间 </li>
-</ul>
-<p>2）图片资源方面 </p>
-<p>需要根据dpi值准备5套图片资源</p>
-<ul>
-<li>drawable </li>
-<li>drawalbe-ldpi</li>
-<li>drawable-mdpi</li>
-<li>drawable-hdpi</li>
-<li>drawable-xhdpi </li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/10/01/2014-12-4-Android-resolution-ratio/" class="archive-article-date">
-  	<time datetime="2016-10-01T11:11:07.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-jekyll-moveto-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/10/01/jekyll-moveto-hexo/">Jekyll迁移到Hexo记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记录一下迁移过程中遇到的问题</p>
-<h1 id="迁移步骤"><a href="#迁移步骤" class="headerlink" title="迁移步骤"></a>迁移步骤</h1><ul>
-<li>直接将jekyll下的md文件拷贝到hexo的<code>_posts</code>目录下</li>
-<li>因为hexo用的MarkDown语法解析器和Jekyll不一致，需要替换一些语法问题.替换方法见:<a href="http://reverland.org/web/2015/11/18/notes-on-migrating-from-jeykll-to-hexo/" target="_blank" rel="external">迁移过程</a></li>
-<li>修改配置,部署</li>
-</ul>
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>部署命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure></p>
-<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><ul>
-<li><p>CNAME<br>首先你需要先有个域名，然后再域名服务器下设置CNAME映射到你github上博客地址‘somename.github.io’,然后创建CNAME文件放在<br><code>hexo/source</code>目录下,CNAME中只写一行你的域名比如<code>www.youraddress.com</code>,注意不需要加<code>http</code>前缀</p>
+<li><p>命令式解决方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numbers.length;i++)&#123;</div><div class="line">    numbers[i] = numbers[i]+<span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>_config.xml配置需要调整<br>注意冒号后面有空格</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">url: http://youraddress.com</div><div class="line">root: /</div><div class="line"><span class="comment">#如果不绑定域名</span></div><div class="line">url: http://youraddress.com</div><div class="line">root: /</div></pre></td></tr></table></figure>
+<li><p>函数式解决方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">numbers.map(x=&gt;x+<span class="number">2</span>)</div><div class="line"><span class="comment">//x=&gt;x+2; 这句话定义了一个匿名函数，传一个变量x进入，函数的操作是 x+2</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/10/01/jekyll-moveto-hexo/" class="archive-article-date">
-  	<time datetime="2016-10-01T10:30:50.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-01</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Permissions" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/09/26/Android-Permissions/">Android权限解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android-Permissions"><a href="#Android-Permissions" class="headerlink" title="Android Permissions"></a>Android Permissions</h1><p>Android权限相关解析</p>
-<h2 id="安全架构"><a href="#安全架构" class="headerlink" title="安全架构"></a>安全架构</h2><p>Android权限体系的关键点是，在<strong>默认情况下</strong>App没有任何权限去做一些可能对系统、用户或其他app不利的事,包括读写用户隐私数据，访问其他程序数据，网络接口，保持设备常亮等等。</p>
-<p>因为每个App运行在独立沙盒中，必须明确声明需要共享的数据。可以通过声明自定义<code>permissions</code>。App静态声明需要的权限，系统会在安装app时获得用户的允许。</p>
-<h2 id="Application-Signing"><a href="#Application-Signing" class="headerlink" title="Application Signing"></a>Application Signing</h2><p>Android的签名作用在于</p>
+<p>从上面两种实现方式可以看出</p>
 <ul>
-<li>用来区分每个app</li>
-<li>自签名，不需要权威机构授予签名，自己通过工具生成即可</li>
-<li>系统用来实现签名级别的权限(<code>signature-level permissions</code>)</li>
+<li>命令式通过循环每个数组元素，为每个元素重新赋值+2；</li>
+<li><p>函数式关注的是+2这个操作，而不是怎么循环,要不要循环。</p>
+</li>
+<li><p>函数<br>函数式编程中的函数不同于命令式中的函数，可以理解为数学中的函数表达式，每一个函数实际上就是个表达式，可以相互嵌套，最典型的就是数学中： <code>f(x)</code></p>
+</li>
+<li><p>关于变量<br>函数式中的变量和命令式的变量定义是不一样的，函数式中的变量是不能变的。这个其实也容易理解，比如一个表达式: <code>x=x+1</code><br>这个在命令式中相当于赋值语句，将x自增1; 而在函数式中，或者说数学中，<code>x=x+1</code>明显这个表达式是错误的。那么函数式中实现自增操作的方式是什么呢?<br>看这个：<code>y=x+1</code>,函数式中可以创建一个新的变量来保存新的值。</p>
+</li>
+<li><p>函数式编程的优势</p>
+</li>
 </ul>
-<h2 id="User-IDs-and-File-Access"><a href="#User-IDs-and-File-Access" class="headerlink" title="User IDs and File Access"></a>User IDs and File Access</h2>
+<p>函数式是渐进式的求出结果，一个一个的函数嵌套。</p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/09/26/Android-Permissions/" class="archive-article-date">
-  	<time datetime="2016-09-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-26</time>
+      <a href="/uncategorized/2016/12/09/Functional-Programming/" class="archive-article-date">
+  	<time datetime="2016-12-09T03:42:10.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-09</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Permissions/">Android Permissions</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/functional-programming/">functional programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数式编程/">函数式编程</a></li></ul>
 	</div>
 
       
@@ -792,7 +729,7 @@
 
 
   
-    <article id="post-Android-Service-Details" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java-General-Type" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -802,7 +739,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/09/01/Android-Service-Details/">Android Service详解</a>
+      <a class="article-title" href="/uncategorized/2016/12/06/Java-General-Type/">泛型</a>
     </h1>
   
 
@@ -810,25 +747,92 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Service 四大组件之一，主要的后台任务组件，重点用于后台任务，比如播放音乐，做复杂运算，后台下载等等。<br>但是Service也是运行在主线程的，所以注意耗时操作。</p>
-<p>实现一个Service的方式有以下几种</p>
-<ul>
-<li>继承Service</li>
-<li>继承IntentService</li>
+        <h2 id="定义泛型方法："><a href="#定义泛型方法：" class="headerlink" title="定义泛型方法："></a>定义泛型方法：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T extends BaseEvent&gt; <span class="function">T <span class="title">demoFunction</span><span class="params">(Class&lt;T&gt; c)</span>throw InstantiationException,IllegalAccessException</span>&#123;</div><div class="line">   <span class="comment">//创建泛型对象 </span></div><div class="line">   T t = c.newInstance();</div><div class="line">   <span class="comment">//t 可以直接作为BaseEvent来用</span></div><div class="line">   <span class="keyword">return</span> t;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnRxInterface</span>&lt;<span class="title">ENTITY</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ENTITY <span class="title">onGetEntity</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RxClass</span>&lt;<span class="title">ENTITY</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ENTITY <span class="title">onGetEntity</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/12/06/Java-General-Type/" class="archive-article-date">
+  	<time datetime="2016-12-06T10:04:38.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛型/">泛型</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-AppStores-Android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/11/09/AppStores-Android/">发布到应用商店需要准备的东西</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常用应用市场"><a href="#常用应用市场" class="headerlink" title="常用应用市场"></a>常用应用市场</h1><ul>
+<li><a href="http://open.qq.com/" target="_blank" rel="external">1）腾讯应用宝：</a></li>
+<li><a href="http://www.eoemarket.com/" target="_blank" rel="external">2）优亿市场：</a></li>
+<li><a href="http://shouji.baidu.com/" target="_blank" rel="external">3）百度手机助手：</a></li>
+<li><a href="http://www.91.com/" target="_blank" rel="external">4）91无线：</a></li>
+<li><a href="http://developer.wandoujia.com/" target="_blank" rel="external">5）豌豆荚：</a></li>
+<li><a href="http://dev.anzhi.com/" target="_blank" rel="external">6）安智市场：</a></li>
+<li><a href="http://dev.360.cn/" target="_blank" rel="external">7）360：</a></li>
+<li><a href="http://dev.gfan.com/" target="_blank" rel="external">8）机锋：</a></li>
+<li><a href="hina应用汇：http://dev.appchina.com/market/dev/index.action">9）AppC</a></li>
+<li><a href="http://dev.apk.hiapk.com/login" target="_blank" rel="external">10）安卓市场：</a></li>
+<li><a href="http://dev.mumayi.com/user/index" target="_blank" rel="external">11）木蚂蚁：</a></li>
+<li><a href="http://www.nduoa.com/" target="_blank" rel="external">12）N多网：</a></li>
+<li><a href="http://open.lenovo.com/developer/" target="_blank" rel="external">13）联想开放平台：</a></li>
+<li><a href="http://www.feiliu.com/" target="_blank" rel="external">14）飞流：</a></li>
+<li><a href="http://developer.huawei.com/" target="_blank" rel="external">15）华为：</a></li>
+<li><a href="http://dev.xiaomi.com/" target="_blank" rel="external">16）小米开放平台：</a></li>
+<li><a href="http://open.flyme.cn" target="_blank" rel="external">17）魅族市场：</a></li>
+<li><a href="http://dev.wostore.cn/" target="_blank" rel="external">18）联通WO：</a></li>
+<li><a href="http://ggm.3g.cn/" target="_blank" rel="external">19）3G安卓市场：</a></li>
+<li><a href="((]]http://open.sohu.com/*">20）搜狐平台：</a>* ))</li>
 </ul>
-<h2 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h2><p>官方实现 用来实现异步线程队列的Service，方便使用。<br>适用于后台线程异步任务，按顺序执行，执行完成自动关闭的功能。比如后台下载任务，上传图片任务都比较适合。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/09/01/Android-Service-Details/" class="archive-article-date">
-  	<time datetime="2016-08-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-01</time>
+      <a href="/uncategorized/2016/11/09/AppStores-Android/" class="archive-article-date">
+  	<time datetime="2016-11-09T07:42:01.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-09</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/四大组件/">四大组件</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/appstore/">appstore</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/">deploy</a></li></ul>
 	</div>
 
       
@@ -851,7 +855,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
   
 
@@ -861,7 +865,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 XBlog
+    		&copy; 2017 XBlog
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -908,7 +912,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12.5px;">jar</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
     			</div>
     	</section>
     

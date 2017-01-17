@@ -148,7 +148,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-adb-shell" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Seven-suggest" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/04/adb-shell/">Adb Shell 命令总结</a>
+      <a class="article-title" href="/uncategorized/2016/07/07/Seven-suggest/">七个建议</a>
     </h1>
   
 
@@ -166,74 +166,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目录</p>
-<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><ul>
-<li>登入shell<code>adb shell //运行远端shell交互</code></li>
-<li>运行远端shell 命令: <code>adb shell &lt;command&gt;</code></li>
-<li>运行仿真控制台命令: <code>adb emu &lt;command&gt;</code></li>
-</ul>
-<h2 id="进程信息相关"><a href="#进程信息相关" class="headerlink" title="进程信息相关"></a>进程信息相关</h2><ul>
-<li>获取手机所有进程: <code>adb shell ps -x</code><ul>
-<li>利用grep筛选关键字：<code>adb shell ps -x | grep qiyi</code></li>
-<li>VSS - Virtual Set Size 虚拟耗用内存（包含共享库占用的内存）</li>
-<li>RSS - Resident Set Size 实际使用物理内存（包含共享库占用的内存）</li>
-<li>PSS - Proportional Set Size 实际使用的物理内存（比例分配共享库占用的内存）</li>
-<li>USS - Unique Set Size 进程独自占用的物理内存（不包含共享库占用的内存）</li>
-</ul>
-</li>
-<li>设备信息：<code>cat /system/build.prop | grep &quot;product&quot;</code></li>
-<li>CPU信息：<code>/proc/cpuinfo</code>和<code>/proc/stat</code></li>
-<li>内存：<code>/proc/meminfo adb shell dumpsys meminfo</code></li>
-</ul>
-<h2 id="文件导入导出"><a href="#文件导入导出" class="headerlink" title="文件导入导出"></a>文件导入导出</h2><ul>
-<li>导入: <code>adb push &lt;local&gt; &lt;remote&gt;</code><ul>
-<li><code>adb push  &lt;local_file_path&gt;  /sdcard/</code></li>
-</ul>
-</li>
-<li><p>导出: <code>adb pull &lt;remote&gt; [&lt;local&gt;]</code></p>
-<ul>
-<li><code>adb pull  /sdcard/ &lt;local_file_path&gt;</code></li>
-</ul>
-</li>
-<li><p>文件同步: <code>adb sync [&lt;directory&gt;] //只有发生改变时从主机拷贝到设备</code></p>
-</li>
-</ul>
-<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><ul>
-<li>浏览日志: <code>adb logcat [&lt;filter-spec&gt;]</code></li>
-</ul>
-<h2 id="应用卸载安装"><a href="#应用卸载安装" class="headerlink" title="应用卸载安装"></a>应用卸载安装</h2><ul>
-<li>拷贝文件包到设备并安装: <code>adb install [-l] [-r] [-s] &lt;file&gt;</code></li>
-<li>卸载程序包，-k意味着保留数据和缓存: <code>adb uninstall [-k] &lt;package&gt;</code></li>
-<li>返回所有的bugreport信息: <code>adb bugreport</code></li>
-<li>转发套接字连接: <code>adb forward &lt;local&gt; &lt;remote&gt;</code></li>
-</ul>
-<h2 id="连接设备"><a href="#连接设备" class="headerlink" title="连接设备"></a>连接设备</h2><ul>
-<li>阻塞直到设备上线: <code>adb wait-for-device</code></li>
-<li>启动服务： <code>adb start-server</code></li>
-<li>关闭服务：<code>adb kill-server</code></li>
-<li>列印offline,bootloader,device信息: <code>adb get-state</code></li>
-<li>获取序列号：<code>adb get-serialno</code></li>
-<li>连续列印设备状态:<code>adb status-window</code></li>
-<li>重装载/system分区: <code>adb remount</code></li>
-<li>重启: <code>adb reboot [bootloader|recomry]</code><ul>
-<li><code>adb reboot-bootloader</code></li>
-</ul>
-</li>
-<li>获取权限：<code>adb root</code></li>
-<li>重启adb重新监听usb：<code>adb usb</code></li>
-</ul>
+        <p>#一、不要别人点什么，就做什么<br>“小伙子，千万不要当一个被人点菜的厨师，别人点什么，你就烧什么。不要接受那样一份工作，别人下命令你该干什么，以及怎么干。你要去一个地方，那里的人肯定你对产品的想法，相信你的能力，放手让你去做。”</p>
+<p>#二、推销自己<br>“你工作得很好，代码看上去不错，很少出Bug。但是，问题是别人都没看到这一点。为了让其他人相信你，你必须首先让别人知道你做了什么。你需要推销自己，引起别人的注意。”</p>
+<p>#三、学会带领团队<br>“当你的技术能力过关以后，就要考验你与他人相处的能力了。”</p>
+<p>#四、生活才是最重要的<br>“你要想通，这一切并不重要。有人提交了烂代码，网站下线了，又怎么样？工作并不是你的整个生活。它们不是真正的问题，只是工作上的问题。真正重要的事情都发生在工作以外。我回到家，家里人正在等我，这才重要啊。”</p>
+<p>#五、自己找到道路<br>“以前都是我们告诉你做什么，从现在开始，你必须自己回答这个问题了，我期待你来告诉我，什么事情需要做。”</p>
+<p>#六、把自己当成主人<br>“不要再去开这样的会了。你参加一个会，那是因为你参与了某件事。如果不确定自己为什么要在场，就停下来问。如果这件事不需要你，就离开。不要从头到尾都静静地参加一个会，要把自己当成负责人，大家会相信你的。”</p>
+<p>#七、找到水平更高的人<br>“找到那些比你水平更高、更聪明的人，尽量和他们在一起，吃饭或者喝咖啡，向他们讨教，了解他们拥有的知识。你的职业，甚至你的生活，都会因此变得更好。”</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/02/04/adb-shell/" class="archive-article-date">
-  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+      <a href="/uncategorized/2016/07/07/Seven-suggest/" class="archive-article-date">
+  	<time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-07</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/">cmd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/commend/">commend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/life/">life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
 	</div>
 
       
@@ -254,7 +205,7 @@
 
 
   
-    <article id="post-Android-ThreadPool" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android_source_code" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -264,7 +215,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/04/Android-ThreadPool/">Android线程池解析</a>
+      <a class="article-title" href="/uncategorized/2016/07/07/Android_source_code/">Android源码解析</a>
     </h1>
   
 
@@ -272,899 +223,608 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目录</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>思路: 线程池维护N个线程持续运行，可以随时接收Runnable任务交给池内线程执行。任务队列为空时等待。</p>
+        <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="Fragment源码解析"><a href="#Fragment源码解析" class="headerlink" title="Fragment源码解析"></a>Fragment源码解析</h2><p><a href="!--￼0--&gt;/Fragment_Source_Code">Fragment源码解析</a></p>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><hr>
+<h2 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h2><h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><h2 id="Intent-IntentFilter"><a href="#Intent-IntentFilter" class="headerlink" title="Intent,IntentFilter"></a>Intent,IntentFilter</h2><h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><h2 id="SQLiteDatabase"><a href="#SQLiteDatabase" class="headerlink" title="SQLiteDatabase"></a>SQLiteDatabase</h2><h2 id="adb-shell"><a href="#adb-shell" class="headerlink" title="adb shell"></a>adb shell</h2><h1 id="提高篇"><a href="#提高篇" class="headerlink" title="提高篇"></a>提高篇</h1><h2 id="View-绘制流程"><a href="#View-绘制流程" class="headerlink" title="View 绘制流程"></a>View 绘制流程</h2><h2 id="ActivityManagerService的使用"><a href="#ActivityManagerService的使用" class="headerlink" title="ActivityManagerService的使用"></a>ActivityManagerService的使用</h2><p>startActivity流程<br>startService流程</p>
+<h2 id="PackageManagerService使用"><a href="#PackageManagerService使用" class="headerlink" title="PackageManagerService使用"></a>PackageManagerService使用</h2><p>开机时如何解析所有已安装应用程序的Apk包的信息</p>
+<h2 id="基本掌握View添加至窗口的过程—即WindowManagerIml-、WindowManagerService类的用法"><a href="#基本掌握View添加至窗口的过程—即WindowManagerIml-、WindowManagerService类的用法" class="headerlink" title="基本掌握View添加至窗口的过程—即WindowManagerIml 、WindowManagerService类的用法"></a>基本掌握View添加至窗口的过程—即WindowManagerIml 、WindowManagerService类的用法</h2><h2 id="Canvas绘制-自定义控件"><a href="#Canvas绘制-自定义控件" class="headerlink" title="Canvas绘制,自定义控件"></a>Canvas绘制,自定义控件</h2><h2 id="Handler，消息机制原理"><a href="#Handler，消息机制原理" class="headerlink" title="Handler，消息机制原理"></a>Handler，消息机制原理</h2><h2 id="Context-实现原理"><a href="#Context-实现原理" class="headerlink" title="Context 实现原理"></a>Context 实现原理</h2><h2 id="触摸事件的分发流程"><a href="#触摸事件的分发流程" class="headerlink" title="触摸事件的分发流程"></a>触摸事件的分发流程</h2><h2 id="能编写自定义View-ViewGroup"><a href="#能编写自定义View-ViewGroup" class="headerlink" title="能编写自定义View,ViewGroup"></a>能编写自定义View,ViewGroup</h2><h2 id="Binder机制"><a href="#Binder机制" class="headerlink" title="Binder机制"></a>Binder机制</h2><h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h1><p>《Android内核剖析》</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/07/07/Android_source_code/" class="archive-article-date">
+  	<time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android源码/">Android源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/source-code/">source code</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Fragment_Source_Code" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/07/06/Fragment_Source_Code/">Fragment全面解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h1><p>v4包源码</p>
+<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><p>片段，官方提供的容器用于展示页面。典型的宿主是FragmentActivity。与Activity的功能类似，但是比Activity更加灵活，可以自由实例化，动态添加、切换、组合等。生命周期随Activity和自己的状态改变。</p>
+<blockquote>
+<p>实际上Fragment不止以Activity为宿主，只要实现了FragmentHostCallback就可以作为Fragment的宿主</p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>Android 3.0(API 11)以后引入，主要是为大屏幕（Pad）提供UI解决方案。</p>
+<blockquote>
+<p>[B] 最好将Fragment设计成可重复使用的模块化Activity组件,一个Fragment可能添加到多个Activity，不要在Fragment直接关联另一个Fragment或Activity，而以接口的方式关联。</p>
+<p>参考：<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">官方文档</a></p>
+</blockquote>
+<p><img src="!--￼3--&gt;/images/page_img/fragment_lifecycle.png" alt="Fragment生命周期">{: .pull-right}</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>生命周期如右图, </p>
+<p>一般必须实现的三个生命周期</p>
+<h3 id="onCreate"><a href="#onCreate" class="headerlink" title="onCreate"></a>onCreate</h3><pre><code>用于恢复一些，上次暂停或停止后保存的数据
+</code></pre><h3 id="onCreateView"><a href="#onCreateView" class="headerlink" title="onCreateView"></a>onCreateView</h3><pre><code>创建Fragment的View,实现View的查找等
+</code></pre><h3 id="onPause"><a href="#onPause" class="headerlink" title="onPause"></a>onPause</h3><pre><code>保存一些需要恢复的数据,确保用户回来之后需要存在的数据
+</code></pre><h2 id="扩展类"><a href="#扩展类" class="headerlink" title="扩展类"></a>扩展类</h2><ul>
+<li><p><code>DialogFragment</code><br>  用于替代Dialog,优点在于可以将对话框压入Fragment管理栈</p>
+</li>
+<li><p><code>ListFragment</code><br>  显示一个列表，封装了列表的一些操作，比如实现了onListItemClick方法等</p>
+</li>
+<li><p><code>PreferenceFragment</code><br>  用于创建设置页面，PreferenceActivity的替代品</p>
+</li>
+</ul>
+<h1 id=""><a href="#" class="headerlink" title="-"></a>-</h1><h1 id="-1"><a href="#-1" class="headerlink" title="-"></a>-</h1><h2 id="添加用户界面"><a href="#添加用户界面" class="headerlink" title="添加用户界面"></a>添加用户界面</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123; </div><div class="line">    <span class="meta">@Override</span> </div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        <span class="comment">// Inflate the layout for this fragment </span></div><div class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.example_fragment, container, <span class="keyword">false</span>);</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>inflater.inflate(int,ViewGroup,boolean)</code><br>三个参数</p>
+<ul>
+<li>布局</li>
+<li>Fragment中的View的父View</li>
+<li>boolean参数:指示是否应该在扩展期间将扩展布局附加至 ViewGroup（第二个参数）的布尔值。（在本例中，其值为 false，因为系统已经将扩展布局插入 container—传递 true 值会在最终布局中创建一个多余的视图组。）</li>
+</ul>
+<h2 id="添加到Activity中"><a href="#添加到Activity中" class="headerlink" title="添加到Activity中"></a>添加到Activity中</h2><p>###1,布局文件中标签形式添加<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当系统创建此 Activity 布局时，会实例化在布局中指定的每个片段，并为每个片段调用 onCreateView() 方法，以检索每个片段的布局。<strong>系统会直接插入片段返回的 View 来替代 &lt;fragment&gt; 元素</strong>。</p>
+<blockquote>
+<p>注：每个片段都需要一个唯一的标识符，重启 Activity 时，系统可以使用该标识符来恢复片段（您也可以使用该标识符来捕获片段以执行某些事务，如将其删除）。 </p>
+<p>可以通过三种方式为片段提供 ID：</p>
+<ul>
+<li>为 android:id 属性提供唯一 ID</li>
+<li>为 android:tag 属性提供唯一字符串</li>
+<li>如果您未给以上两个属性提供值，系统会使用容器视图的 ID</li>
+</ul>
+</blockquote>
+<h3 id="2-通过编程方式添加到ViewGroup"><a href="#2-通过编程方式添加到ViewGroup" class="headerlink" title="2,通过编程方式添加到ViewGroup"></a>2,通过编程方式添加到ViewGroup</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FragmentManager fragmentManager = getFragmentManager()</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction(); </div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
+<h2 id="添加没有UI的Fragment"><a href="#添加没有UI的Fragment" class="headerlink" title="添加没有UI的Fragment"></a>添加没有UI的Fragment</h2><p>当Fragment没有UI时，只能通过<code>add(Fragment fragment,String tag)</code>的方式添加到Activity中，此时Tag就是唯一标识符。此时也不会调用<code>onCreateView</code>方法。可以通过<code>findFragmentByTag()</code>方式查找到此<code>Fragment</code></p>
+<h1 id="FragmentActivity"><a href="#FragmentActivity" class="headerlink" title="FragmentActivity"></a>FragmentActivity</h1><ul>
+<li>继承链:<br>  <code>BaseFragmentActivityHoneycomb</code> &gt; <code>BaseFragmentActivityEclair</code> &gt; <code>BaseFragmentActivityDonut</code> &gt; <code>Activity</code></li>
+<li>如果想作为<code>Fragment</code>的Host需要实现<code>FragmentHostCallback</code>,<code>HostCallbacks</code>是其中的实现类</li>
+</ul>
+<h2 id="实现Fragment的onActiivtyResult回调"><a href="#实现Fragment的onActiivtyResult回调" class="headerlink" title="实现Fragment的onActiivtyResult回调"></a>实现Fragment的onActiivtyResult回调</h2><ul>
+<li><code>int mNextCandidateRequestIndex</code></li>
+<li><code>boolean mStartedActivityFromFragment</code></li>
+<li><code>SparseArrayCompat&lt;String&gt; mPendingFragmentActivityResults</code></li>
+<li><code>requestCode</code>有效的是0xffff 低4位16进制,否则无效</li>
+</ul>
+<p>基于Activity的<code>onActivityResult</code>根据<code>requestCode</code>从<code>mPendingFragmentActivityResults</code>中找到对应<code>Fragment</code>名称，进而找到<code>Fragment</code></p>
+<h1 id="FragmentController"><a href="#FragmentController" class="headerlink" title="FragmentController"></a>FragmentController</h1><p>内部有属性<code>FragmentHostCallback mHost</code>, 用于包裹<code>FragmentHostCallback</code>的功能,让Activity可以作为Fragment的宿主。基本上实现的方法都是直接调用<code>mHost</code>,或<code>mHost.mFragmentManager</code>的方法。作为二者功能的一个整合。</p>
+<h1 id="FragmentManager-FragmentManagerImpl"><a href="#FragmentManager-FragmentManagerImpl" class="headerlink" title="FragmentManager,FragmentManagerImpl"></a>FragmentManager,FragmentManagerImpl</h1><ul>
+<li>abstract FragmentManager : 定义接口</li>
+<li>interface BackStackEntry : 回退栈接口</li>
+<li><p>class FragmentManagerImpl : 实现类</p>
+</li>
+<li><p>moveToState<br>实现了Fragment的生命周期相关调用</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/07/06/Fragment_Source_Code/" class="archive-article-date">
+  	<time datetime="2016-07-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fragment/">Fragment</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-DesignParttenFactory" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/24/DesignParttenFactory/">设计模式--工厂模式(创建型)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>面向对象编程中，最通常的方法是一个new操作时产生一个对象，通常用new操作符来创建。但是一些复杂情况下，new操作符就不够用了。比如一个类的创建需要一系列步骤，可能需要根据参数决定创建哪个子类，生成对象之前需要创建其他的辅助对象，参数需要经过处理等等。这些情况下创建对象就是一个过程了，而不只是一步操作。</p>
+<p>问题: 如何能方便的构造对象，而不用关心构造对象的细节和过程呢？</p>
+<p>答案就是：工厂模式,工厂模式主要是为创建对象提供过度接口，以便将创建对象的具体过程屏蔽起来，达到灵活性的目的。</p>
+<h2 id="工厂模式de历史"><a href="#工厂模式de历史" class="headerlink" title="工厂模式de历史"></a>工厂模式de历史</h2><ul>
+<li>还没有工厂时代：假如还没有工业革命，如果一个客户要一款宝马车,一般的做法是客户去创建一款宝马车，然后拿来用。</li>
+<li>简单工厂模式：后来出现工业革命。用户不用去创建宝马车。因为客户有一个工厂来帮他创建宝马.想要什么车，这个工厂就可以建。比如想要320i系列车。工厂就创建这个系列的车。即工厂可以创建产品。</li>
+<li>工厂方法模式时代：为了满足客户，宝马车系列越来越多，如320i，523i,30li等系列一个工厂无法创建所有的宝马系列。于是由单独分出来多个具体的工厂。每个具体工厂创建一种系列。即具体工厂类只能创建一个具体产品。但是宝马工厂还是个抽象。你需要指定某个具体的工厂才能生产车出来。</li>
+<li>抽象工厂模式时代：随着客户的要求越来越高，宝马车必须配置空调。而且这空调必须对应给系列车才能使用。于是这个工厂开始生产宝马车和需要的空调。</li>
+</ul>
+<p>最终是客户只要对宝马的销售员说：我要523i空调车，销售员就直接给他523i空调车了。而不用自己去创建523i空调车宝马车.<br>这就是工厂模式。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>工厂模式可以分为三类</p>
+<ol>
+<li>简单工厂模式(Simple Factory)</li>
+<li>工厂方法模式(Factory Method)</li>
+<li>抽象工厂模式(Abstract Factory)</li>
+</ol>
+<h3 id="三种工厂的区别"><a href="#三种工厂的区别" class="headerlink" title="三种工厂的区别"></a>三种工厂的区别</h3><h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h4><h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>一个抽象产品类，可以派生出多个具体的产品类<br>一个抽象工厂类，可以派生出多个具体的工厂类<br>每个具体工厂类只能创建一个具体产品类的实例</p>
+<h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><p>多个抽象产品类，每个抽象产品类可以派生出多个具体产品类。<br>一个抽象工厂类，可以派生出多个具体工厂类。<br>每个具体工厂类可以创建多个具体产品类的实例。   </p>
+<p>TODO: other</p>
+<p><a href="http://www.jianshu.com/p/f111f06da05b" target="_blank" rel="external">http://www.jianshu.com/p/f111f06da05b</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/24/DesignParttenFactory/" class="archive-article-date">
+  	<time datetime="2016-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-DesignParttenTemplateMethod" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/24/DesignParttenTemplateMethod/">设计模式--模板方法(类行为型)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>模板方法模式是一种比较基本的代码复用技术，父类来控制宏观上几个方法执行步骤，在子类中实现这些方法，这样如果需要修改某个步骤时只去修改子类方法，不需要改变父类逻辑。而且如果有新的实现只要实现一个新的子类就可以了。</p>
+<h2 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h2><p>开发过程中常遇到一种情况：已知一个算法或业务的主要步骤，但每一步的具体实现是未知的，不确定的。</p>
+<p>比如去医院看病，一般包含几个步骤：</p>
+<ol>
+<li>挂号</li>
+<li>诊断</li>
+<li>治疗</li>
+<li>离开</li>
+</ol>
+<p>挂号和离开是一样的，而其他的诊断和治疗则不尽相同。这时对于各种病症诊断和治疗的实现就是不一样的。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>实现上述需求需要考虑几种情况：</p>
+<ol>
+<li>主要步骤大体是固定的，挂号一般是一样的，具体的诊断和治疗实现是不一致的</li>
+<li>但是部分可能有变化，比如诊断结果没有问题的时候不需要治疗，那么治疗这步就不需要了，这就需要根据具体情况确定</li>
+</ol>
+<p>模板方法就是抽象出系列固定框架，将一些大体步骤抽象出来，而具体步骤实现延迟到子类中。使得一个算法总体结构不变，可以重新定义算法中某些特定的步骤。(有点类似于注入)</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><ul>
+<li><strong>抽象类(AbstractClass)</strong>: 定义抽象的源于操作，具体的子类将重新定义他们以实现一个算法</li>
+<li><strong>具体子类(ConcreteClass)</strong>: 实现源于操作以完成算法中与特定子相关的步骤</li>
+</ul>
 <h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>重用线程池中的线程，减少因为线程的创建和销毁带来的性能开销</li>
-<li>能有效控制线程池的最大并发数，避免大量的线程之间因互相抢占系统资源而导致的阻塞线程</li>
-<li>能够对线程进行简单地管理，并提供定时执行以及指定间隔循环执行等功能 源于Java Executor接口，Android中的实现：ThreadPoolExecutor。 可配置为四类线程池。</li>
+<li>是一种代码复用的基本技术。它们在类库中尤其重要，它们提取了类库中的公共行为。</li>
+<li>导致一种反向的控制结构，这种结构有时成为“好莱坞法则”：“Don’t call me,We will call you”。通过父类调用子类的操作（而不是子类操作父类），通过子类的扩展增加新的行为，符合“开闭原则”</li>
+<li>符合单一职责原则</li>
 </ul>
-<blockquote>
-<p>相比来说通过<code>new Thread</code>的方式执行的缺点：</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>每个不同的实现都要实现一个子类，这会导致类的个数增加，系统更加庞大，抽象，不易理解。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/6/24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        AbstractBank bank = <span class="keyword">new</span> ConcreteDeposit();</div><div class="line">        bank.templateMethod();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String TAG = <span class="string">"AbstractBank"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mNumber;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 模板方法</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">templateMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">        takeNumber();</div><div class="line">        transact();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//取号</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">takeNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">        Log.d(TAG, <span class="string">"take number"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">//钩子方法</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">hook</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 存款</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDeposit</span> <span class="keyword">extends</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(TAG, <span class="string">"transact of concreteDeposit 存款"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 取款</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteTransfer</span> <span class="keyword">extends</span> <span class="title">AbstractBank</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</div><div class="line">            Log.d(TAG, <span class="string">" transact of Transfer 取款"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="各种方法说明"><a href="#各种方法说明" class="headerlink" title="各种方法说明"></a>各种方法说明</h2><ul>
+<li><strong>模板方法</strong>: 算法步骤的整体调用</li>
+<li><strong>基本方法</strong>: 组成算法的每一步具体实现</li>
+<li><strong>钩子方法</strong>: 用于子类反向控制父类模板方法中调用顺序，逻辑的方法.<br>比如父类中通过钩子方法返回值判断某一步骤是否执行，这样子类可以通过返回true or false来控制父类算法的逻辑走向,<br>代码如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//父类中</span></div><div class="line">...</div><div class="line"><span class="keyword">if</span>(needJump())&#123;<span class="comment">//needJump就是钩子方法</span></div><div class="line">    jump();<span class="comment">//基本方法</span></div><div class="line">&#125;</div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment">//子类中</span></div><div class="line">...</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">needJump</span><span class="params">()</span></span>&#123;</div><div class="line">   <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/24/DesignParttenTemplateMethod/" class="archive-article-date">
+  	<time datetime="2016-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Thread_Summary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/21/Thread_Summary/">多线程知识点总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程是运行过程中的程序，进程是操作系统进行资源分配和调度的一个独立单位。</p>
+<p>进程的三个特征:</p>
 <ul>
-<li>每次new Thread新建对象性能差。</li>
-<li>线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。</li>
-<li>缺乏更多功能，如定时执行、定期执行、线程中断。</li>
+<li>独立: 独立存在的实体，每个进程有自己的内存空间</li>
+<li>动态: 程序只是一个静态指令集合，而进程是活动中的指令集合</li>
+<li>并发性: 多个进程可在单一处理器上并发执行</li>
 </ul>
+<blockquote>
+<p>并发：指在同一时间点只能有一条指令执行，多个进程指令被快速轮换执行，使宏观上有多个进程同时执行的效果。</p>
+<p>并行：同一个时间点，有多条指令在多个处理同时执行。</p>
 </blockquote>
-<h2 id="构造函数说明"><a href="#构造函数说明" class="headerlink" title="构造函数说明"></a>构造函数说明</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</div><div class="line">     BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory)</div></pre></td></tr></table></figure>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><ul>
+<li>线程是CPU调度的基本单位</li>
+<li>是进程中的实际运作单位，并且在进程中是独立的并发的执行流</li>
+</ul>
+<h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><ul>
+<li>线程是进程的组成部分，一个进程可以有多个线程</li>
+<li>不同的进程使用独立的内存空间， 而同一个进程的多个线程共享父进程拥有的全部资源。方便了，但也会有同步问题</li>
+<li>内存空间和栈内存，每个线程都拥有独立的栈内存用来存储本地手。线程拥有自己的堆栈，自己的程序计数器和自己的局部变量，但不用有系统资源</li>
+<li>线程的调度由进程负责，而进程的调度直接由系统来管理和分配资源</li>
+</ul>
+<blockquote>
+<p>扩展: <a href="http://www.infoq.com/cn/articles/java-memory-model-1" target="_blank" rel="external">Java内存模型</a></p>
+</blockquote>
+<h1 id="实现多线程的两种方式"><a href="#实现多线程的两种方式" class="headerlink" title="实现多线程的两种方式"></a>实现多线程的两种方式</h1><h2 id="实现Runable接口"><a href="#实现Runable接口" class="headerlink" title="实现Runable接口"></a>实现Runable接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunnableThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//线程代码</span></div><div class="line">    &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="继承Thread"><a href="#继承Thread" class="headerlink" title="继承Thread"></a>继承Thread</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChildThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//线程代码</span></div><div class="line">    &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Runnable-Thread两种方式对比"><a href="#Runnable-Thread两种方式对比" class="headerlink" title="Runnable,Thread两种方式对比:"></a>Runnable,Thread两种方式对比:</h2><ul>
+<li>Runnable更灵活，因为是接口可以多继承，而Thread方式只能继承Thread</li>
+<li></li>
+<li>Runnable访问当前线程必须用Thread.currentThread()方法；继承Thread类的话，使用this获得当前线程。</li>
+</ul>
+<h2 id="使用Callable和Future创建线程"><a href="#使用Callable和Future创建线程" class="headerlink" title="使用Callable和Future创建线程"></a>使用Callable和Future创建线程</h2><h1 id="线程五种状态"><a href="#线程五种状态" class="headerlink" title="线程五种状态"></a>线程五种状态</h1><ul>
+<li>就绪</li>
+<li>执行中</li>
+<li>中断</li>
+<li>暂停</li>
+<li>停止</li>
+</ul>
+<h1 id="如何中断线程"><a href="#如何中断线程" class="headerlink" title="如何中断线程"></a>如何中断线程</h1><p>三种方式中断线程</p>
 <ul>
-<li><code>corePoolSize</code><br>核心线程数。默认核心线程一直存活，即便闲置时。若<code>allowCoreThreadTimeOut=true</code> =&gt; 核心线程等待新任务时间超过<code>keepAliveTime</code>会被终止。</li>
-<li><code>maximumPoolSize</code><br>最大线程数,活动线程达到此值后，后续新任务会被阻塞</li>
-<li><code>keepAliveTime</code><br>非核心线程闲置时超时时长，超过后非核心线程会被回收。当<code>allowCoreThreadTimeOut = true</code> 那么核心线程也会超时。</li>
-<li><code>unit</code><br>keepAliveTime的单位,枚举。<code>TimeUnit.MILLISECONDS</code>,<code>TimeUnit.SECONDS</code>,<code>TimeUnit.MINUTES</code></li>
-<li><code>workQueue</code><br>线程池中的任务队列，通过线程池的execute方法提交的Runnable会存储在这个参数中</li>
-<li><code>threadFactory</code><br>线程工厂，为线程池提供创建新线程功能。<code>ThreadFactory</code>是接口,只有一个方法： <code>Thread newThread(Runnable r)</code></li>
+<li>1,通过代码中设置标记位</li>
+<li>2,通过抛出异常停止</li>
+<li>(不推荐)3,通过stop()方法,stop已经弃用，会造成未知错误</li>
 </ul>
-<h2 id="Java线程池的种类"><a href="#Java线程池的种类" class="headerlink" title="Java线程池的种类"></a>Java线程池的种类</h2><ul>
-<li>newCachedThreadPool</li>
+<h1 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h1><h2 id="sleep-wait"><a href="#sleep-wait" class="headerlink" title="sleep(),wait()"></a>sleep(),wait()</h2><h3 id="sleep"><a href="#sleep" class="headerlink" title="sleep()"></a>sleep()</h3><ul>
+<li>表示让当前运行的线程休眠一段时间,</li>
+<li>时间过后线程自动唤醒,</li>
+<li>sleep方法是静态的，每次都是针对当前运行中的线程，因为睡眠未运行的线程没有意义。</li>
+<li>sleep不会释放同步锁</li>
 </ul>
-<p>缓存的线程池，需要时创建，无用时回收，合理使用资源.</p>
+<h3 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h3><ul>
+<li>让线程等待一段时间，需要其他线程唤醒(<code>notify()</code>)，</li>
+<li>wait方法是非静态方法，</li>
+<li>wait方法会释放同步锁</li>
+</ul>
+<h2 id="intercept-intercepted-isIntercepted-stop"><a href="#intercept-intercepted-isIntercepted-stop" class="headerlink" title="intercept(),intercepted(),isIntercepted(),stop()"></a>intercept(),intercepted(),isIntercepted(),stop()</h2><ul>
+<li>intercept(): 将intercept状态设置为true</li>
+<li>intercepted(): 判断是否已经中断，并将状态值重置。</li>
+<li>isIntercepted(): 判断是否已经中断</li>
+</ul>
+<blockquote>
+<p>intercept算是Java中提供的中断线程的标准方式（stop已经废弃）。但是调用intercept之后并不会立刻停止线程，而只是改变线程中intercept状态，而线程需要自己判断这个状态值，来处理是否要停止线程（当然自己加状态值来判断是一样的）</p>
+</blockquote>
+<h2 id="stop-弃用"><a href="#stop-弃用" class="headerlink" title="stop():弃用"></a>stop():弃用</h2><p>会直接终止线程，有时会抛出ThreadDeadException，会引发未知错误。</p>
+<h3 id="为什么不能用stop"><a href="#为什么不能用stop" class="headerlink" title="为什么不能用stop?"></a>为什么不能用stop?</h3><ol>
+<li>stop会立刻停止线程，这样会引起线程中同步锁强制释放，造成不同步的状态。比如在synchorized方法中间中断返回，会使后面的代码无法执行，可能会有赋值或其他操作，这就导致了不一致的状态。</li>
+<li>stop立刻停止线程，使一些线程中需要的回收清理操作无法正确执行。</li>
+</ol>
+<h2 id="suspend-resume方法-弃用"><a href="#suspend-resume方法-弃用" class="headerlink" title="suspend,resume方法 (弃用)"></a>suspend,resume方法 (弃用)</h2><p>suspend 暂停线程<br>resume 继续执行线程</p>
+<h3 id="为什么弃用"><a href="#为什么弃用" class="headerlink" title="为什么弃用"></a>为什么弃用</h3><ul>
+<li>因为会导致独占资源；比如在synchronized方法中只调用suspend不调用resume会导致同步方法中的资源一直被占用，其他线程阻塞一直无法获取到资源。</li>
+<li>?导致不同步；非同步方法中间执行suspend这时其他线程获取值之后再resume会导致不同步</li>
+</ul>
+<h2 id="yeild"><a href="#yeild" class="headerlink" title="yeild()"></a>yeild()</h2><p>放弃当前的CPU执行时间，重新分配CPU资源。有可能会立马再次分配给此线程执行时间。</p>
+<h2 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h2><p>用来连接两个线程，让他们顺序执行</p>
 <ul>
-<li>newFixedThreadPool</li>
+<li>A中调用b.join(),会让A在B之后执行。(A要求加入B)</li>
 </ul>
-<p>固定数量线程</p>
+<h2 id="线程的使用"><a href="#线程的使用" class="headerlink" title="线程的使用"></a>线程的使用</h2><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p><a href="/posts/">TODO: more link 详解</a></p>
+<h2 id="多线程最佳实践"><a href="#多线程最佳实践" class="headerlink" title="多线程最佳实践"></a>多线程最佳实践</h2><blockquote>
+<p>参考</p>
 <ul>
-<li>newScheduledThreadPool </li>
+<li><a href="http://www.runoob.com/java/java-multithreading.html" target="_blank" rel="external">RUNOOB.COM-Java 多线程编程</a></li>
+<li><a href="http://www.infoq.com/cn/articles/java-interrupt-mechanism" target="_blank" rel="external">详细分析Java中断机制</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/19910517" target="_blank" rel="external">Java中的线程Thread方法之—suspend()和resume()</a></li>
 </ul>
-<p>用于定时，延时，周期性任务的执行</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/21/Thread_Summary/" class="archive-article-date">
+  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Thread_Producer_Consumer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/21/Thread_Producer_Consumer/">多线程-生产者消费者模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>几个要求</p>
 <ul>
-<li>newSingleThreadPool</li>
+<li>生产者只有在仓储未满时生产产品</li>
+<li>消费者只有在仓储不为空时消费产品</li>
+<li>?当消费者发现仓储为空时，可以通知生产者生产</li>
+<li>?生产者发现仓储满了时，可以通知消费者消费</li>
 </ul>
-<p>只有一个线程运行，保证任务顺序执行FIFO，LILO</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ExecutorService service = Executors.newCachedThreadPool();</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/02/04/Android-ThreadPool/" class="archive-article-date">
-  	<time datetime="2016-02-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread/">thread</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thread-pool/">thread pool</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-AndroidStudioShortcuts" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/03/AndroidStudioShortcuts/">AndroidStudio快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目录</p>
-<p>总结一下AndroidStudio常用快捷键，以备不时之需。</p>
-<h1 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">F1</td>
-<td style="text-align:left">帮助</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+F1</td>
-<td style="text-align:left">查找文件所在目录位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+1</td>
-<td style="text-align:left">快速打开或隐藏工程面板</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+</td>
-<td style="text-align:left">打开设置对话框</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Alt(Option)+Home</strong></td>
-<td style="text-align:left"><strong>跳转到导航栏</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Esc</td>
-<td style="text-align:left">光标返回编辑框</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Shift+Esc</strong></td>
-<td style="text-align:left"><strong>光标返回编辑框,关闭无用的窗口</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+Click</td>
-<td style="text-align:left">关闭标签页</td>
-</tr>
-<tr>
-<td style="text-align:left">F12</td>
-<td style="text-align:left">把焦点从编辑器移到最近使用的工具窗口</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Y</td>
-<td style="text-align:left">同步</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+S</td>
-<td style="text-align:left">打开设置对话框</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Shift+Inert</td>
-<td style="text-align:left">开启/关闭列选择模式</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+S</td>
-<td style="text-align:left">打开当前项目/模块属性</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Alt(Option)+Shift+C</strong></td>
-<td style="text-align:left"><strong>查看文件的变更历史</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+F10</td>
-<td style="text-align:left">运行</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+F9</td>
-<td style="text-align:left">debug运行</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+F12</td>
-<td style="text-align:left">资源管理器打开文件夹</td>
-</tr>
-</tbody>
-</table>
-<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl(Command)+C</td>
-<td style="text-align:left">复制当前行或选中的内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+D</td>
-<td style="text-align:left">粘贴当前行或选中的内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+X</td>
-<td style="text-align:left">剪切当前行或选中的内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Y</td>
-<td style="text-align:left">删除行</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Z</td>
-<td style="text-align:left">倒退</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Z</td>
-<td style="text-align:left">向前</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Enter</td>
-<td style="text-align:left">自动修正</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+L</td>
-<td style="text-align:left">格式化代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+I</td>
-<td style="text-align:left">将选中的代码进行自动缩进编排</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+O</td>
-<td style="text-align:left">优化导入的类和包</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Insert</td>
-<td style="text-align:left">得到一些Intention Action，可以生成构造器、Getter、Setter、将 == 改为 equals() 等</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+V</td>
-<td style="text-align:left">选最近使用的剪贴板内容并插入</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+V</td>
-<td style="text-align:left">简单粘贴</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Insert</td>
-<td style="text-align:left">选最近使用的剪贴板内容并插入（同Ctrl(Command)+Shift+V）</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Enter</td>
-<td style="text-align:left">在当前行的上面插入新行，并移动光标到新行（此功能光标在行首时有效）</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+Enter</td>
-<td style="text-align:left">在当前行的下面插入新行，并移动光标到新行</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+J</strong></td>
-<td style="text-align:left"><strong>自动代码</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+T</strong></td>
-<td style="text-align:left"><strong>把选中的代码放在 try{} 、if{} 、 else{} 里</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+Alt(Option)+Insert</td>
-<td style="text-align:left">竖编辑模式</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+ /</td>
-<td style="text-align:left">注释 //</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+ /</td>
-<td style="text-align:left">注释 /…/</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+J</td>
-<td style="text-align:left">合并成一行</td>
-</tr>
-<tr>
-<td style="text-align:left">F2/Shift+F2</td>
-<td style="text-align:left">跳转到下/上一个错误语句处</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Shift+Back</strong></td>
-<td style="text-align:left"><strong>跳转到上次编辑的地方</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Space</td>
-<td style="text-align:left">类名自动完成</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+Alt(Option)+Up/Down</td>
-<td style="text-align:left">内容向上/下移动</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Up/Down</td>
-<td style="text-align:left">语句向上/下移动</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+U</td>
-<td style="text-align:left">大小写切换</td>
-</tr>
-<tr>
-<td style="text-align:left">Tab</td>
-<td style="text-align:left">代码标签输入完成后，按 Tab，生成代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Backspace</td>
-<td style="text-align:left">按单词删除</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Enter</td>
-<td style="text-align:left">语句完成</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+J</td>
-<td style="text-align:left">用动态模板环绕</td>
-</tr>
-</tbody>
-</table>
-<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+F12</strong></td>
-<td style="text-align:left"><strong>显示当前文件的结构</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+H</td>
-<td style="text-align:left">显示类继承结构图</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Q</td>
-<td style="text-align:left">显示注释文档</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+P</strong></td>
-<td style="text-align:left"><strong>方法参数提示</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+U</td>
-<td style="text-align:left">打开当前类的父类或者实现的接口</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Left/Right</td>
-<td style="text-align:left">切换代码视图</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+Left/Right</strong></td>
-<td style="text-align:left"><strong>返回上次编辑的位置</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Alt(Option)+Up/Down</strong></td>
-<td style="text-align:left"><strong>在方法间快速移动定位</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+B</td>
-<td style="text-align:left">快速打开光标处的类或方法</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+W</strong></td>
-<td style="text-align:left"><strong>选中代码，连续按会有其他效果</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+W</td>
-<td style="text-align:left">取消选择光标所在词</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+ - / +</td>
-<td style="text-align:left">折叠/展开代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+ - / +</td>
-<td style="text-align:left">折叠/展开全部代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+.</td>
-<td style="text-align:left">折叠/展开当前花括号中的代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+</td>
-<td style="text-align:left">] / [    跳转到代码块结束/开始处</td>
-</tr>
-<tr>
-<td style="text-align:left">F2</td>
-<td style="text-align:left">或 Shift+F2 高亮错误或警告快速定位</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Shift+C</strong></td>
-<td style="text-align:left"><strong>复制路径</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+C</td>
-<td style="text-align:left">复制引用，必须选择类名</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Alt(Option)+Up/Down</strong></td>
-<td style="text-align:left"><strong>在方法间快速移动定位</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+F1</td>
-<td style="text-align:left">要打开编辑器光标字符处使用的类或者方法 Java 文档的浏览器</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+G</td>
-<td style="text-align:left">定位行</td>
-</tr>
-</tbody>
-</table>
-<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl(Command)+F</td>
-<td style="text-align:left">在当前窗口查找文本</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+F</td>
-<td style="text-align:left">在指定环境下查找文本</td>
-</tr>
-<tr>
-<td style="text-align:left">F3</td>
-<td style="text-align:left">向下查找关键字出现位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+F3</td>
-<td style="text-align:left">向上一个关键字出现位置</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+R</td>
-<td style="text-align:left">在当前窗口替换文本</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+R</td>
-<td style="text-align:left">在指定窗口替换文本</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+N</td>
-<td style="text-align:left">查找类</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+N</td>
-<td style="text-align:left">查找文件</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Alt(Option)+N</td>
-<td style="text-align:left">查找项目中的方法或变量</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+B</td>
-<td style="text-align:left">查找变量的来源</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+B</td>
-<td style="text-align:left">快速打开光标处的类或方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+B</td>
-<td style="text-align:left">跳转到类或方法实现处</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+E</strong></td>
-<td style="text-align:left"><strong>最近打开的文件</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+F3</td>
-<td style="text-align:left">快速查找，效果和Ctrl(Command)+F相同</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>F4</strong></td>
-<td style="text-align:left"><strong>跳转至定义变量的位置</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Alt(Option)+F7</strong></td>
-<td style="text-align:left"><strong>查询当前元素在工程中的引用</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+F7</strong></td>
-<td style="text-align:left"><strong>查询当前元素在当前文件中的引用，然后按 F3 可以选择</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+F7</td>
-<td style="text-align:left">选中查询当前元素在工程中的引用</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Shift+F7</strong></td>
-<td style="text-align:left"><strong>高亮显示匹配的字符，按 Esc 高亮消失</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+F7</strong></td>
-<td style="text-align:left"><strong>查找某个方法的所有调用地方</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+Alt(Option)+N</td>
-<td style="text-align:left">查找类中的方法或变量</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+O</td>
-<td style="text-align:left">弹出显示查找内容</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Up/Down</td>
-<td style="text-align:left">快速跳转搜索结果</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Shift+S</td>
-<td style="text-align:left">高级搜索、搜索结构</td>
-</tr>
-</tbody>
-</table>
-<h1 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">F5</td>
-<td style="text-align:left">复制</td>
-</tr>
-<tr>
-<td style="text-align:left">F6</td>
-<td style="text-align:left">移动</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Delete</td>
-<td style="text-align:left">安全删除</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+U</td>
-<td style="text-align:left">转到父类</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+O</td>
-<td style="text-align:left">重写父类的方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+I</td>
-<td style="text-align:left">实现方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+N</td>
-<td style="text-align:left">内联</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+Shift+T</td>
-<td style="text-align:left">弹出重构菜单</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+F6</td>
-<td style="text-align:left">重构-重命名</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+M</strong></td>
-<td style="text-align:left"><strong>提取代码组成方法</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+C</strong></td>
-<td style="text-align:left"><strong>将变量更改为常量</strong></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+V</strong></td>
-<td style="text-align:left"><strong>定义变量引用当前对象或者方法的返回值</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+F</td>
-<td style="text-align:left">将局部变量更改为类的成员变量</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>Ctrl(Command)+Alt(Option)+P</strong></td>
-<td style="text-align:left"><strong>将变量更改为方法的参数</strong></td>
-</tr>
-</tbody>
-</table>
-<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><table>
-<thead>
-<tr>
-<th style="text-align:left">按键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">F8</td>
-<td style="text-align:left">跳到下一步</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+F8</td>
-<td style="text-align:left">跳出函数、跳到下一个断点</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Shift+F8</td>
-<td style="text-align:left">强制跳出函数</td>
-</tr>
-<tr>
-<td style="text-align:left">F7</td>
-<td style="text-align:left">进入代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Shift+F7</td>
-<td style="text-align:left">智能进入代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+Shift+F7</td>
-<td style="text-align:left">强制进入代码</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+F9</td>
-<td style="text-align:left">运行至光标处</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+Alt(Option)+F9</td>
-<td style="text-align:left">强制运行至光标处</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl(Command)+F2</td>
-<td style="text-align:left">停止运行</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt(Option)+F8</td>
-<td style="text-align:left">计算变量值</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/02/03/AndroidStudioShortcuts/" class="archive-article-date">
-  	<time datetime="2016-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AndroidStudio/">AndroidStudio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shortcut/">shortcut</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-SampleCodes" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/02/01/SampleCodes/">Android样例代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目录</p>
-<h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * BaseAdapter</div><div class="line"> * Created by fuqiang on 16/2/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MBaseAdapter</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">widget</span>.<span class="title">BaseAdapter</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String TAG = <span class="string">"MBaseAdapter"</span>;</div><div class="line">    <span class="keyword">private</span> LayoutInflater mInfalter;</div><div class="line">    <span class="keyword">private</span> ArrayList&lt;T&gt; mList;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MBaseAdapter</span><span class="params">(Context context, ArrayList&lt;T&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">if</span> (context == <span class="keyword">null</span>) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Context is null"</span>);</div><div class="line">        &#125;</div><div class="line">        mContext = context;</div><div class="line">        mList = list;</div><div class="line">        mInfalter = LayoutInflater.from(context);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mList != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mList.size();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> position;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="发送短信"><a href="#发送短信" class="headerlink" title="发送短信"></a>发送短信</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendSms</span><span class="params">(Context context, String phoneNumber,</span></span></div><div class="line">            String content) &#123;</div><div class="line">    Uri uri = Uri.parse(<span class="string">"smsto:"</span></div><div class="line">            + (TextUtils.isEmpty(phoneNumber) ? <span class="string">""</span> : phoneNumber));</div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SENDTO, uri);</div><div class="line">    intent.putExtra(<span class="string">"sms_body"</span>, TextUtils.isEmpty(content) ? <span class="string">""</span> : content);</div><div class="line">    context.startActivity(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="判断当前app处于前台还是后台"><a href="#判断当前app处于前台还是后台" class="headerlink" title="判断当前app处于前台还是后台"></a>判断当前app处于前台还是后台</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isApplicationBackground</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</div><div class="line">    ActivityManager am = (ActivityManager) context</div><div class="line">            .getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</div><div class="line">    List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(<span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (!tasks.isEmpty()) &#123;</div><div class="line">        ComponentName topActivity = tasks.get(<span class="number">0</span>).topActivity;</div><div class="line">        <span class="keyword">if</span> (!topActivity.getPackageName().equals(context.getPackageName())) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.GET_TASKS"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="判断网络是否连接"><a href="#判断网络是否连接" class="headerlink" title="判断网络是否连接"></a>判断网络是否连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOnline</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    ConnectivityManager manager = (ConnectivityManager) context</div><div class="line">            .getSystemService(Activity.CONNECTIVITY_SERVICE);</div><div class="line">    NetworkInfo info = manager.getActiveNetworkInfo();</div><div class="line">    <span class="keyword">if</span> (info != <span class="keyword">null</span> &amp;&amp; info.isConnected()) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/02/01/SampleCodes/" class="archive-article-date">
-  	<time datetime="2016-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sample/">sample</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Dialog-About" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/01/24/Android-Dialog-About/">Android Dialog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目录</p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//利用Builder创建对话框</span></div><div class="line">AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
-<p>可以为Dialog单独设置Style:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">new</span> ContextThemeWrapper(<span class="keyword">this</span>, R.style.AlertDialogCustom));</div></pre></td></tr></table></figure></p>
-<h2 id="设置透明度（Dialog自身的透明度）"><a href="#设置透明度（Dialog自身的透明度）" class="headerlink" title="设置透明度（Dialog自身的透明度）"></a>设置透明度（Dialog自身的透明度）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WindowManager.LayoutParams lp=dialog.getWindow().getAttributes();</div><div class="line">lp.alpha=<span class="number">1.0f</span>;</div><div class="line">dialog.getWindow().setAttributes(lp);</div></pre></td></tr></table></figure>
-<p>alpha在0.0f到1.0f之间。1.0完全不透明，0.0f完全透明</p>
-<h2 id="设置黑暗度-Dialog自身的黑暗度"><a href="#设置黑暗度-Dialog自身的黑暗度" class="headerlink" title="设置黑暗度(Dialog自身的黑暗度)"></a>设置黑暗度(Dialog自身的黑暗度)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dialog.setContentView(R.layout.dialog);</div><div class="line"></div><div class="line">WindowManager.LayoutParams lp=dialog.getWindow().getAttributes();</div><div class="line">lp.dimAmount=<span class="number">1.0f</span>;</div><div class="line">dialog.getWindow().setAttributes(lp);</div><div class="line">dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);</div></pre></td></tr></table></figure>
-<p>dimAmount在0.0f和1.0f之间，0.0f完全不暗，1.0f全暗</p>
-<h2 id="设置Dialog底背景模糊和黑暗度"><a href="#设置Dialog底背景模糊和黑暗度" class="headerlink" title="设置Dialog底背景模糊和黑暗度"></a>设置Dialog底背景模糊和黑暗度</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_BLUR_BEHIND</span>（设置模糊）</div><div class="line"></div><div class="line"><span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_DIM_BEHIND</span>（设置暗淡）</div></pre></td></tr></table></figure>
-<h2 id="清除Dialog底背景模糊和黑暗度"><a href="#清除Dialog底背景模糊和黑暗度" class="headerlink" title="清除Dialog底背景模糊和黑暗度"></a>清除Dialog底背景模糊和黑暗度</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND | WindowManager.LayoutParams.FLAG_DIM_BEHIND)</div></pre></td></tr></table></figure>
-<h2 id="BaseDialog"><a href="#BaseDialog" class="headerlink" title="BaseDialog"></a>BaseDialog</h2><ul>
-<li>目前只加了ButterKnife</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/4/19.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseDialog</span> <span class="keyword">extends</span> <span class="title">Dialog</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">int</span> themeResId)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, themeResId);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">boolean</span> cancelable, OnCancelListener cancelListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, cancelable, cancelListener);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/*</span></div><div class="line">     *  重写</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(<span class="keyword">int</span> layoutResID)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.setContentView(layoutResID);</div><div class="line">        ButterKnife.bind(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>BaseDialog用法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/4/19.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ADialog</span> <span class="keyword">extends</span> <span class="title">BaseDialog</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bind</span>(R.id.text)</div><div class="line">    TextView mName;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">int</span> themeResId)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, themeResId);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">boolean</span> cancelable, OnCancelListener cancelListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, cancelable, cancelListener);</div><div class="line">        <span class="comment">//设置布局</span></div><div class="line">        setContentView(R.layout.dialog_count_down);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.tutorialspoint.com/android/android_alert_dialoges.htm" target="_blank" rel="external">tutorialspoint Dialog</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2016/01/24/Android-Dialog-About/" class="archive-article-date">
-  	<time datetime="2016-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-24</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dialog/">Dialog</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Demos" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2016/01/01/Demos/">博文开篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
 <blockquote>
+<p>如何通知消费者和生产者的？?</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/6/21.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProducerConsumerV2</span> <span class="keyword">implements</span> <span class="title">IDemo</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runDemo</span><span class="params">()</span> </span>&#123;</div><div class="line">        Storage storage = <span class="keyword">new</span> Storage();</div><div class="line"></div><div class="line">        ExecutorService service = Executors.newCachedThreadPool();</div><div class="line">        service.submit(<span class="keyword">new</span> Producer(<span class="string">"生产者1"</span>, storage));</div><div class="line">        service.submit(<span class="keyword">new</span> Producer(<span class="string">"生产者2"</span>, storage));</div><div class="line">        service.submit(<span class="keyword">new</span> Consumer(<span class="string">"消费者1"</span>, storage));</div><div class="line">        service.submit(<span class="keyword">new</span> Consumer(<span class="string">"消费者2"</span>, storage));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        <span class="keyword">private</span> Storage mStorage;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(String name, Storage storage)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>();</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">            mStorage = storage;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                Product p = mStorage.add(<span class="keyword">new</span> Product((<span class="keyword">int</span>) (Math.random() * <span class="number">1000</span>) + <span class="string">""</span>));</div><div class="line">                System.out.println(<span class="string">"Producer "</span> + name + <span class="string">" create "</span> + p.product);</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">500</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line">        <span class="keyword">private</span> Storage mStorage;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(String name, Storage storage)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>();</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">            mStorage = storage;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Product p = mStorage.take();</div><div class="line">                    System.out.println(<span class="string">"        Consumer"</span> + name + <span class="string">" take "</span> + p.product);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Storage</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> BlockingQueue&lt;Product&gt; products = <span class="keyword">new</span> LinkedBlockingDeque&lt;Product&gt;();</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> Product <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">return</span> products.take();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> Product <span class="title">add</span><span class="params">(Product p)</span> </span>&#123;</div><div class="line">            products.add(p);</div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String product;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Product</span><span class="params">(String value)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>();</div><div class="line">            product = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/21/Thread_Producer_Consumer/" class="archive-article-date">
+  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Java_threads" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/21/Java_threads/">Java多线程总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/06/21/Java_threads/" class="archive-article-date">
+  	<time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Scheme" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/06/11/Android-Scheme/">Android Scheme</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="网页打开app-Url-Scheme实现-Android-IOS均支持"><a href="#网页打开app-Url-Scheme实现-Android-IOS均支持" class="headerlink" title="网页打开app Url Scheme实现(Android,IOS均支持)"></a>网页打开app Url Scheme实现(Android,IOS均支持)</h3><blockquote>
+<p>这里指从第三方网页端打开我们自己的app，如果是自己的WebView，处理的方式更多一些（比如拦截并解析url等）</p>
+</blockquote>
+<p>平时我们会需要实现从网页中打开app，这就需要网页和app端配合来实现,下面挨个介绍各自的实现</p>
+<h5 id="step1-网页端实现"><a href="#step1-网页端实现" class="headerlink" title="step1:网页端实现"></a>step1:网页端实现</h5><p>利用<code>&lt;a&gt;</code>标签实现跳转,类似下面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 网页端scheme格式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"scheme://com.packagename/path/3?arg1=value1&amp;arg2=value2"</span>&gt;</span>打开app<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 实例 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"xkj://com.xkj.test/test?page=1&amp;per_page=10"</span>&gt;</span>打开包名为com.xkj.test的测试app<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="step2-Android端实现"><a href="#step2-Android端实现" class="headerlink" title="step2:Android端实现"></a>step2:Android端实现</h5><ul>
+<li>响应打开Activity</li>
+</ul>
+<p>Android端需要在<code>AndroidManifest.xml</code>中配置响应scheme的Activity<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">".TestActivity"</span></div><div class="line">    <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.BROWSABLE"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 这里的scheme可以只写scheme --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"xkj"</span> <span class="attr">android:host</span>=<span class="string">"com.xkj.test"</span>&gt;</span><span class="tag">&lt;/<span class="name">data</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <ul>
-<li>整理知识，学习笔记</li>
-<li>发布日记，杂文，所见所想</li>
-<li>撰写发布技术文稿（代码支持）</li>
-<li>撰写发布学术论文（LaTeX 公式支持）</li>
+<li>Activity获取参数</li>
 </ul>
-</blockquote>
-<p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"></p>
-<p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
-<h3 id="Windows-Mac-Linux-全平台客户端"><a href="#Windows-Mac-Linux-全平台客户端" class="headerlink" title="Windows/Mac/Linux 全平台客户端"></a><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="external">Windows/Mac/Linux 全平台客户端</a></h3><blockquote>
-<p>请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 <i class="icon-file"></i> <strong>新文稿</strong> 或者使用快捷键 <code>Ctrl+Alt+N</code>。</p>
-</blockquote>
-<hr>
-<h2 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown"></a>什么是 Markdown</h2><p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
-<h3 id="1-制作一份待办事宜-Todo-列表"><a href="#1-制作一份待办事宜-Todo-列表" class="headerlink" title="1. 制作一份待办事宜 Todo 列表"></a>1. 制作一份待办事宜 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-待办事宜-todo-列表" target="_blank" rel="external">Todo 列表</a></h3><ul>
-<li>[ ] 支持以 PDF 格式导出文稿</li>
-<li>[ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
-<li>[x] 新增 Todo 列表功能</li>
-<li>[x] 修复 LaTex 公式渲染问题</li>
-<li>[x] 新增 LaTex 公式编号功能</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Uri uri = getIntent().getData();  </div><div class="line">String page = uri.getQueryParameter(<span class="string">"page"</span>);  </div><div class="line">String per_page = uri.getQueryParameter(<span class="string">"per_page"</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>WebView获取参数</li>
 </ul>
-<h3 id="2-书写一个质能守恒公式-LaTeX"><a href="#2-书写一个质能守恒公式-LaTeX" class="headerlink" title="2. 书写一个质能守恒公式[^LaTeX]"></a>2. 书写一个质能守恒公式[^LaTeX]</h3><p>$$E=mc^2$$</p>
-<h3 id="3-高亮一段代码-code"><a href="#3-高亮一段代码-code" class="headerlink" title="3. 高亮一段代码[^code]"></a>3. 高亮一段代码[^code]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># A comment</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'hello world'</span></div></pre></td></tr></table></figure>
-<h3 id="4-高效绘制-流程图"><a href="#4-高效绘制-流程图" class="headerlink" title="4. 高效绘制 流程图"></a>4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图" target="_blank" rel="external">流程图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: Start</div><div class="line">op=&gt;operation: Your Operation</div><div class="line">cond=&gt;condition: Yes or No?</div><div class="line">e=&gt;end</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
-<h3 id="5-高效绘制-序列图"><a href="#5-高效绘制-序列图" class="headerlink" title="5. 高效绘制 序列图"></a>5. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图" target="_blank" rel="external">序列图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Alice-&gt;Bob: Hello Bob, how are you?</div><div class="line">Note right of Bob: Bob thinks</div><div class="line">Bob--&gt;Alice: I am good thanks!</div></pre></td></tr></table></figure>
-<h3 id="6-高效绘制-甘特图"><a href="#6-高效绘制-甘特图" class="headerlink" title="6. 高效绘制 甘特图"></a>6. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图" target="_blank" rel="external">甘特图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">title 项目开发流程</div><div class="line">section 项目确定</div><div class="line">    需求分析       :a1, 2016-06-22, 3d</div><div class="line">    可行性报告     :after a1, 5d</div><div class="line">    概念验证       : 5d</div><div class="line">section 项目实施</div><div class="line">    概要设计      :2016-07-05  , 5d</div><div class="line">    详细设计      :2016-07-08, 10d</div><div class="line">    编码          :2016-07-15, 10d</div><div class="line">    测试          :2016-07-22, 5d</div><div class="line">section 发布验收</div><div class="line">    发布: 2d</div><div class="line">    验收: 3d</div></pre></td></tr></table></figure>
-<h3 id="7-绘制表格"><a href="#7-绘制表格" class="headerlink" title="7. 绘制表格"></a>7. 绘制表格</h3><table>
-<thead>
-<tr>
-<th>项目</th>
-<th style="text-align:right">价格</th>
-<th style="text-align:center">数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>计算机</td>
-<td style="text-align:right">\$1600</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td>手机</td>
-<td style="text-align:right">\$12</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td>管线</td>
-<td style="text-align:right">\$1</td>
-<td style="text-align:center">234</td>
-</tr>
-</tbody>
-</table>
-<h3 id="8-更详细语法说明"><a href="#8-更详细语法说明" class="headerlink" title="8. 更详细语法说明"></a>8. 更详细语法说明</h3><p>想要查看更详细的语法说明，可以参考我们准备的 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown" target="_blank" rel="external">Cmd Markdown 简明语法手册</a>，进阶用户可以参考 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册" target="_blank" rel="external">Cmd Markdown 高阶语法手册</a> 了解更多高级功能。</p>
-<p>总而言之，不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。<strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
-<hr>
-<h2 id="什么是-Cmd-Markdown"><a href="#什么是-Cmd-Markdown" class="headerlink" title="什么是 Cmd Markdown"></a>什么是 Cmd Markdown</h2><p>您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 <strong>编辑/发布/阅读</strong> Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。</p>
-<h3 id="1-实时同步预览"><a href="#1-实时同步预览" class="headerlink" title="1. 实时同步预览"></a>1. 实时同步预览</h3><p>我们将 Cmd Markdown 的主界面一分为二，左边为<strong>编辑区</strong>，右边为<strong>预览区</strong>，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！</p>
-<h3 id="2-编辑工具栏"><a href="#2-编辑工具栏" class="headerlink" title="2. 编辑工具栏"></a>2. 编辑工具栏</h3><p>也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 <strong>编辑区</strong> 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。</p>
-<p><img src="https://www.zybuluo.com/static/img/toolbar-editor.png" alt="tool-editor"></p>
-<h3 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h3><p>完全心无旁骛的方式编辑文字：点击 <strong>编辑工具栏</strong> 最右侧的拉伸按钮或者按下 <code>Ctrl + M</code>，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！</p>
-<h3 id="4-实时的云端文稿"><a href="#4-实时的云端文稿" class="headerlink" title="4. 实时的云端文稿"></a>4. 实时的云端文稿</h3><p>为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 <strong>编辑工具栏</strong> 的最右侧提示 <code>已保存</code> 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。</p>
-<h3 id="5-离线模式"><a href="#5-离线模式" class="headerlink" title="5. 离线模式"></a>5. 离线模式</h3><p>在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。</p>
-<h3 id="6-管理工具栏"><a href="#6-管理工具栏" class="headerlink" title="6. 管理工具栏"></a>6. 管理工具栏</h3><p>为了便于管理您的文稿，在 <strong>预览区</strong> 的顶部放置了如下所示的 <strong>管理工具栏</strong>：</p>
-<p><img src="https://www.zybuluo.com/static/img/toolbar-manager.jpg" alt="tool-manager"></p>
-<p>通过管理工具栏可以：</p>
-<p><i class="icon-share"></i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br><i class="icon-file"></i> 新建：开始撰写一篇新的文稿<br><i class="icon-trash"></i> 删除：删除当前的文稿<br><i class="icon-cloud"></i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br><i class="icon-reorder"></i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br><i class="icon-pencil"></i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
-<h3 id="7-阅读工具栏"><a href="#7-阅读工具栏" class="headerlink" title="7. 阅读工具栏"></a>7. 阅读工具栏</h3><p><img src="https://www.zybuluo.com/static/img/toolbar-reader.jpg" alt="tool-manager"></p>
-<p>通过 <strong>预览区</strong> 右上角的 <strong>阅读工具栏</strong>，可以查看当前文稿的目录并增强阅读体验。</p>
-<p>工具栏上的五个图标依次为：</p>
-<p><i class="icon-list"></i> 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落<br><i class="icon-chevron-sign-left"></i> 视图：互换左边编辑区和右边预览区的位置<br><i class="icon-adjust"></i> 主题：内置了黑白两种模式的主题，试试 <strong>黑色主题</strong>，超炫！<br><i class="icon-desktop"></i> 阅读：心无旁骛的阅读模式提供超一流的阅读体验<br><i class="icon-fullscreen"></i> 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境</p>
-<h3 id="8-阅读模式"><a href="#8-阅读模式" class="headerlink" title="8. 阅读模式"></a>8. 阅读模式</h3><p>在 <strong>阅读工具栏</strong> 点击 <i class="icon-desktop"></i> 或者按下 <code>Ctrl+Alt+M</code> 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。</p>
-<h3 id="9-标签、分类和搜索"><a href="#9-标签、分类和搜索" class="headerlink" title="9. 标签、分类和搜索"></a>9. 标签、分类和搜索</h3><p>在编辑区任意行首位置输入以下格式的文字可以标签当前文档：</p>
-<p>标签： 未分类</p>
-<p>标签以后的文稿在【文件列表】（Ctrl+Alt+F）里会按照标签分类，用户可以同时使用键盘或者鼠标浏览查看，或者在【文件列表】的搜索文本框内搜索标题关键字过滤文稿，如下图所示：</p>
-<p><img src="https://www.zybuluo.com/static/img/file-list.png" alt="file-list"></p>
-<h3 id="10-文稿发布和分享"><a href="#10-文稿发布和分享" class="headerlink" title="10. 文稿发布和分享"></a>10. 文稿发布和分享</h3><p>在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 <i class="icon-share"></i> (Ctrl+Alt+P) 发布这份文档给好友吧！</p>
-<hr>
-<p>再一次感谢您花费时间阅读这份欢迎稿，点击 <i class="icon-file"></i> (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！</p>
-<p>作者 <a href="http://weibo.com/ghosert" target="_blank" rel="external">@ghosert</a><br>2016 年 07月 07日    </p>
-<p>[^LaTeX]: 支持 <strong>LaTeX</strong> 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$， 访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">MathJax</a> 参考更多使用方法。</p>
-<p>[^code]: 代码高亮功能支持包括 Java, Python, JavaScript 在内的，<strong>四十一</strong>种主流编程语言。</p>
-<p><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">https://www.zybuluo.com/mdeditor</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">webView.setWebViewClient(<span class="keyword">new</span> WebViewClient()&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">      Uri uri=Uri.parse(url);</div><div class="line">          <span class="keyword">if</span>(uri.getScheme().equals(<span class="string">"xkj"</span>)&amp;&amp;uri.getHost().equals(<span class="string">"com.xkj.test"</span>))&#123;</div><div class="line">              String arg0=uri.getQueryParameter(<span class="string">"page"</span>);</div><div class="line">              String arg1=uri.getQueryParameter(<span class="string">"per_page"</span>);</div><div class="line">             </div><div class="line">          &#125;<span class="keyword">else</span>&#123;</div><div class="line">              view.loadUrl(url);</div><div class="line">          &#125;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="网页打开app-Android-Intent实现-Android独有"><a href="#网页打开app-Android-Intent实现-Android独有" class="headerlink" title="网页打开app Android Intent实现(Android独有)"></a>网页打开app Android Intent实现(Android独有)</h3><p><a href="https://developer.chrome.com/multidevice/android/intents" target="_blank" rel="external">Chrome文档</a></p>
+<p>参考资料:<a href="http://blog.html5funny.com/2015/06/19/open-app-from-mobile-web-browser-or-webview/" target="_blank" rel="external">http://blog.html5funny.com/2015/06/19/open-app-from-mobile-web-browser-or-webview/</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2016/01/01/Demos/" class="archive-article-date">
-  	<time datetime="2015-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-01</time>
+      <a href="/uncategorized/2016/06/11/Android-Scheme/" class="archive-article-date">
+  	<time datetime="2016-06-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-11</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第一篇/">第一篇</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 	</div>
 
       
@@ -1185,7 +845,7 @@
 
 
   
-    <article id="post-Android-Clean-Structure" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Keyboard" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -1195,7 +855,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/10/01/Android-Clean-Structure/">My Android Clean Architecture</a>
+      <a class="article-title" href="/uncategorized/2016/05/23/Android-Keyboard/">Android键盘操作</a>
     </h1>
   
 
@@ -1203,264 +863,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在折腾Android开发架构的东西，之前跟朋友聊天，聊到关于架构的问题，回头仔细想想自己在项目里面没怎么使用什么架构，最多就是个MVP模式。这不赶上项目刚完结，正好来研究一下开发架构的问题。</p>
-<p>本篇整理的开发架构是基于Uncle Bob的<a href="http://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="external">Android-Clean-Architecture</a> <a href="http://www.jianshu.com/p/c6a1a5c9a49b" target="_blank" rel="external">(中文版)</a></p>
-<blockquote>
-<p>同时也参考了一些其他架构:<br><a href="http://www.inferjay.com/blog/2015/08/18/flux-architecture-on-android/" target="_blank" rel="external">Flux Architecture on Android
-</a></p>
-</blockquote>
-<h2 id="具体实现方案如下"><a href="#具体实现方案如下" class="headerlink" title="##具体实现方案如下"></a>##具体实现方案如下</h2><h3 id="1-数据"><a href="#1-数据" class="headerlink" title="1.数据"></a>1.数据</h3><ul>
-<li>json数据请求：retrofit + okHttp</li>
-<li>图片数据请求：<a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></li>
-</ul>
-<h3 id="2-反射-amp-依赖注入"><a href="#2-反射-amp-依赖注入" class="headerlink" title="2.反射&amp;依赖注入"></a>2.反射&amp;依赖注入</h3><ul>
-<li>Dagger2</li>
-<li>ButterKnife</li>
-</ul>
-<h3 id="3-响应式"><a href="#3-响应式" class="headerlink" title="3.响应式"></a>3.响应式</h3><ul>
-<li>RxJava,RxAndroid</li>
-</ul>
-<h2 id="一些学习时候的参考文章"><a href="#一些学习时候的参考文章" class="headerlink" title="一些学习时候的参考文章:"></a>一些学习时候的参考文章:</h2><hr>
-<h3 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a>Retrofit</h3><ul>
-<li><a href="">官网</a></li>
-<li><a href="http://themakeinfo.com/2015/04/retrofit-android-tutorial/" target="_blank" rel="external">Retrofit Android Tutorial</a></li>
-<li><a href="https://www.captechconsulting.com/blogs/volley-vs-retrofit---a-battle-royale" target="_blank" rel="external">Retrofit vs Volley对比</a></li>
-<li><a href="http://android.jobbole.com/81564/" target="_blank" rel="external">各种网络请求对比</a></li>
-</ul>
-<h3 id="OkHttp"><a href="#OkHttp" class="headerlink" title="OkHttp"></a>OkHttp</h3><ul>
-<li><a href="http://square.github.io/okhttp/" target="_blank" rel="external">官网</a></li>
-<li><a href="https://github.com/hongyangAndroid/okhttp-utils" target="_blank" rel="external">一个包装的库okHttpUtil</a></li>
-<li><a href="http://android.jobbole.com/81613/" target="_blank" rel="external">okHttp实现https</a></li>
-<li><a href="http://www.skholingua.com/android-basic/other-sdk-n-libs/okhttp" target="_blank" rel="external">okHttp教程</a></li>
-</ul>
-<h3 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h3><ul>
-<li><a href="http://square.github.io/picasso/" target="_blank" rel="external">Picasso</a></li>
-<li><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso git</a></li>
-</ul>
-<h3 id="ButterKnife"><a href="#ButterKnife" class="headerlink" title="ButterKnife"></a>ButterKnife</h3><ul>
-<li><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官网</a></li>
-<li><a href="http://blog.chengyunfeng.com/?p=550" target="_blank" rel="external">中文教程 View 注入框架 Butter Knife 4.0 发布</a></li>
-</ul>
-<h3 id="RxJava-RxAndroid"><a href="#RxJava-RxAndroid" class="headerlink" title="RxJava,RxAndroid"></a>RxJava,RxAndroid</h3><ul>
-<li><a href="https://github.com/lzyzsd/Awesome-RxJava" target="_blank" rel="external">Awesome-RxJava教程合集</a></li>
-<li><p><a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="external">RxAndroid git</a></p>
-</li>
-<li><p><a href="https://bboyfeiyu.gitbooks.io/android-tech-frontier/content/issue-9/NotRxJava%E6%87%92%E4%BA%BA%E4%B8%93%E7%94%A8%E6%8C%87%E5%8D%97.html" target="_blank" rel="external">NotRxJava懒人专用指南(为什么用rxjava)</a></p>
-</li>
-<li><p><a href="http://www.kancloud.cn/digest/architecting-android-the-evolution/66317" target="_blank" rel="external">响应式方法RxJava</a></p>
-</li>
-<li><p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="external">rxjava教程</a></p>
-</li>
-</ul>
-<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><ul>
-<li><a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html" target="_blank" rel="external">官方教程</a></li>
-<li><a href="https://github.com/orfjackal/retrolambda" target="_blank" rel="external">retrolambda use lambda on java7</a></li>
-</ul>
-<h3 id="Dagger2-amp-依赖注入"><a href="#Dagger2-amp-依赖注入" class="headerlink" title="Dagger2 &amp; 依赖注入"></a>Dagger2 &amp; 依赖注入</h3><ul>
-<li><a href="https://github.com/codepath/android_guides/wiki/Dependency-Injection-with-Dagger-2" target="_blank" rel="external">Dagger2</a></li>
-<li><a href="http://codethink.me/2015/08/01/dependency-injection-theory/" target="_blank" rel="external">依赖注入原理</a></li>
-<li><a href="http://code.tutsplus.com/tutorials/dependency-injection-with-dagger-2-on-android--cms-23345" target="_blank" rel="external">Dependency Injection With Dagger 2 on Android</a></li>
-<li><a href="https://bboyfeiyu.gitbooks.io/android-tech-frontier/content/issue-7/Android%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%EF%BC%9ADagger2+Espresso2+Mockito/index.html" target="_blank" rel="external">Android测试框架: Dagger 2 + Espresso 2 + Mockito</a></li>
-</ul>
+        <h3 id="键盘操作"><a href="#键盘操作" class="headerlink" title="键盘操作"></a>键盘操作</h3><p>####显示或隐藏<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line">imm.toggleSoftInput(<span class="number">0</span>, InputMethodManager.HIDE_NOT_ALWAYS);</div></pre></td></tr></table></figure></p>
+<h4 id="显示键盘"><a href="#显示键盘" class="headerlink" title="显示键盘"></a>显示键盘</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line">imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);</div></pre></td></tr></table></figure>
+<h4 id="隐藏键盘"><a href="#隐藏键盘" class="headerlink" title="隐藏键盘"></a>隐藏键盘</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line">imm.hideSoftInputFromWindow(view.getWindowToken(), <span class="number">0</span>); <span class="comment">//强制隐藏键盘</span></div></pre></td></tr></table></figure>
+<h4 id="获取输入法隐藏或显示状态"><a href="#获取输入法隐藏或显示状态" class="headerlink" title="获取输入法隐藏或显示状态"></a>获取输入法隐藏或显示状态</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);  </div><div class="line"><span class="keyword">boolean</span> isOpen=imm.isActive();<span class="comment">//isOpen若返回true，则表示输入法打开</span></div></pre></td></tr></table></figure>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/10/01/Android-Clean-Structure/" class="archive-article-date">
-  	<time datetime="2015-09-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-10-01</time>
+      <a href="/uncategorized/2016/05/23/Android-Keyboard/" class="archive-article-date">
+  	<time datetime="2016-05-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-23</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-PhoneGap-Plugin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/08/11/PhoneGap-Plugin/">PhoneGap插件开发</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近项目有需求，要做一个Android版的PhoneGap聊天插件，简单来说就是封装一些Android原生页面.对于我这个没有接触过PhoneGap的人来说还是费了一番力气的。</p>
-<p>最终做完这个之后几大感想: </p>
-<blockquote>
-<p>做技术的只有Google能救你，baidu还是算了吧。我能说百度连PhoneGap官网都搜不到么？</p>
-<p>PhoneGap文档做完我才知道不同版本的内容是相对互补的,而我只看了最新版本的文档,里面的东西寥寥无几…(被这个坑的很惨)</p>
-</blockquote>
-<p>PhoneGap插件实际上就是帮你把原生代码导入到PhoneGap Android平台下的项目中一起编译运行。因此，library,sub-project,source code 都是可以直接放到插件里面的.</p>
-<h2 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h2><ul>
-<li>phonggap基础开发环境: <a href="http://docs.phonegap.com/en/3.3.0/guide_cli_index.md.html#The%20Command-Line%20Interface" target="_blank" rel="external">cordova</a></li>
-<li>插件创建工具: <a href="http://docs.phonegap.com/en/3.3.0/plugin_ref_plugman.md.html#Using%20Plugman%20to%20Manage%20Plugins" target="_blank" rel="external">plugman</a></li>
-</ul>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 创建phonegap项目</div><div class="line">$ cordova create [project_name] [com.package.name] <span class="string">"AppName"</span></div><div class="line"></div><div class="line"># 添加Android平台</div><div class="line">$ cordova platform add android</div><div class="line"></div><div class="line"># 编译项目</div><div class="line">$ cordova build</div><div class="line"></div><div class="line"># 启动模拟器</div><div class="line">$ cordova emulate android</div><div class="line"></div><div class="line"># 直接run也可以</div><div class="line">$ cordova run android</div><div class="line"></div><div class="line"># 创建插件</div><div class="line">$ plugman create --name &lt;pluginName&gt; --plugin_id &lt;pluginID&gt; --plugin_version &lt;version&gt; [--path &lt;directory&gt;] [--variable NAME=VALUE]</div><div class="line"></div><div class="line"># 插件添加平台</div><div class="line">$ plugman platform add --platform_name &lt;platform&gt;</div><div class="line"></div><div class="line">#安装插件，在phonegap项目目录下</div><div class="line">$ cordova plugin add path/of/plugin</div><div class="line"></div><div class="line">#删除插件，在phonegap项目目录下</div><div class="line">$ cordova plugin rm path/of/plugin</div></pre></td></tr></table></figure>
-<h2 id="插件目录"><a href="#插件目录" class="headerlink" title="插件目录"></a>插件目录</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">├ phonegap</div><div class="line">├─┬ src</div><div class="line">│ ├─┬ android</div><div class="line">│ │ ├── plugin.java</div><div class="line">│ │ ├── libs</div><div class="line">├── plugin.xml</div></pre></td></tr></table></figure>
-<blockquote>
-<p>新建的插件中会包含一个<code>projectname.java</code>的文件，里面是插件的demo,自己照着写就行了</p>
-</blockquote>
-<p>你的源代码可以直接放在<code>android</code>目录下面,<code>jar</code>包放在<code>libs</code>里面。不过实际上你放在哪都可以，关键在<code>plugin.xml</code>的配置.我们重点讲解的也是<code>plugin.xml</code>的配置，这个很重要！很重要！很重要（说三遍</p>
-<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><p><a href="http://docs.phonegap.com/en/3.3.0/plugin_ref_spec.md.html#Plugin%20Specification" target="_blank" rel="external">官方<code>plugin.xml</code>配置详解</a></p>
-<p>说几个重点的配置项,下面是典型的<code>plugin.xml</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version='1.0' encoding='utf-8'?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"ihaveu_chat"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>chat_plugin<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">name</span>=<span class="string">"chat_plugin"</span> <span class="attr">src</span>=<span class="string">"www/chat_plugin.js"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"cordova.plugins.chat_plugin"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--权限配置--&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.CAMERA"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">"/*"</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"chat_plugin"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"ihaveu_chat.chat_plugin"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/manifest/application"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--AndroidManifest.xml application 下的配置--&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"com.avoscloud.leanchatconversation.activity.LoginActivity"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.avos.avoscloud.PushService"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 类  这里的target-dir 跟目录是phonegap项目,这里会把chat_plugin.java 直接拷贝到target-dir对应目录中,这里同样也可以是 string.xml,styels.xml 等资源文件--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/chat_plugin.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/ihaveu_chat/chat_plugin"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!--  jar 包--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/xxxx.jar"</span> <span class="attr">target-dir</span>=<span class="string">"libs"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!-- library  这里的custom指这个library是自定义的。那么src是相对于插件根目录，如果是false，src值相对于android_sdk跟目录--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">framework</span> <span class="attr">src</span>=<span class="string">"src/android/libs/mylibrary_project"</span> <span class="attr">custom</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>当你的插件需要用到<code>sub-project</code>时,需要配置<code>&lt;framework src=&quot;src/android/libs/mylibrary_project&quot; custom=&quot;true&quot; /&gt;</code></p>
-<p>当你的插件需要用到<code>jar</code>时,需要配置<code>&lt;source-file src=&quot;src/android/libs/xxxx.jar&quot; target-dir=&quot;libs&quot; /&gt;</code></p>
-<blockquote>
-<p>sub-project 的配置是难住我的地方.</p>
-<p>sub-project 的结构需要是ant而不是gradle,也就是eclipse下的Library Project结构</p>
-</blockquote>
-<h2 id="插件的使用"><a href="#插件的使用" class="headerlink" title="插件的使用"></a>插件的使用</h2><p>js端调用插件中的方法<br>位置:<code>项目目录/www/js/index.js</code>的<code>onDeviceReady</code>事件里面<br>重点在于 <code>cordova</code> 全局对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//启动聊天界面</span></div><div class="line"></div><div class="line"><span class="comment">//前两个分别是成功和失败的回调方法</span></div><div class="line"><span class="comment">// chat_plugin 是插件名称</span></div><div class="line"><span class="comment">// startChat 是方法名称</span></div><div class="line"><span class="comment">// [] 是传递的参数</span></div><div class="line">cordova.exec(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"startChat"</span>+msg);</div><div class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"startChat error "</span>+msg);</div><div class="line">&#125;,<span class="string">"chat_plugin"</span>,<span class="string">"startChat"</span>,[]);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>其实不用上面那么麻烦的，可以直接<code>require</code>插件打包出得js文件，但是我还没有找到<code>require(&#39;参数&#39;)</code>这个参数路径应该设的值,囧</p>
-</blockquote>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/08/11/PhoneGap-Plugin/" class="archive-article-date">
-  	<time datetime="2015-08-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-08-11</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phonegap/">phonegap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugin/">plugin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugins/">plugins</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-shell-cmd" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/23/shell-cmd/">Shell常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><hr>
-<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p><code>sudo 用户 -c 命令</code></p>
-<p>切换为root用户</p>
-<p><code>sudo su</code></p>
-<p>切换其他用户</p>
-<p><code>sudo username</code></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/23/shell-cmd/" class="archive-article-date">
-  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-start-up" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/23/start-up/">创业-资源</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://startupclass.club/" target="_blank" rel="external">YC</a>;<br>YC中文社区，创业必逛，很多视频讲座等。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/23/start-up/" class="archive-article-date">
-  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创业/">创业</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/keyboard/">keyboard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/键盘/">键盘</a></li></ul>
 	</div>
 
       
@@ -1483,7 +901,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
     </nav>
   
 
@@ -1493,7 +911,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 XBlog
+    		&copy; 2017 XBlog
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1540,7 +958,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12.5px;">jar</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
     			</div>
     	</section>
     

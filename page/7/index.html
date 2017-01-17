@@ -148,7 +148,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-Android-Notification" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Theme-ActionBar" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/01/22/Android-Notification/">Notification</a>
+      <a class="article-title" href="/uncategorized/2015/03/13/Android-Theme-ActionBar/">Android自定义样式</a>
     </h1>
   
 
@@ -166,55 +166,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>参考资料：</p>
-<p><a href="http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Compatibility" target="_blank" rel="external">Notifications</a></p>
-</blockquote>
-<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>使用<code>NotificationCompat.Builder</code>创建<code>Notification</code></p>
-<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NotificationCompat.Builder mBuilder = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>)</div><div class="line">.setSmallIcon(R.drawable.notification_icon)</div><div class="line">.setContentTitle(<span class="string">"My notification"</span>)</div><div class="line">.setContentText(<span class="string">"Hello World!"</span>);</div></pre></td></tr></table></figure></p>
-<h3 id="设置内容"><a href="#设置内容" class="headerlink" title="设置内容"></a>设置内容</h3><ul>
-<li>icon : <code>builder.setSmallIcon(R.drawable.ic);</code></li>
-<li>title : <code>builder.setContextText(&quot;内容&quot;);</code></li>
-</ul>
-<h3 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h3><ul>
-<li>ongoing : 是否一直持续，比如打电话</li>
-<li>setAutoCancel() :  设置是否自动删除</li>
-</ul>
-<h3 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><p>通过设置<code>PendingIntent</code>响应点击事件。</p>
-<p>4.1以上版本支持展开式的通知，支持多个Action Button,4.1以下不支持.<a href="http://developer.android.com/training/notify-user/expanded.html" target="_blank" rel="external">Using Big View Styles</a></p>
-<h3 id="priority"><a href="#priority" class="headerlink" title="priority"></a>priority</h3><p><code>builder.setPriority();</code>设置优先级</p>
-<h5 id="创建PendingIntent"><a href="#创建PendingIntent" class="headerlink" title="创建PendingIntent"></a>创建PendingIntent</h5><p><code>PendingIntent</code> 的目标可以是 <code>Activity</code>，<code>Broadcast</code>,<code>Service</code><br>打开Activity</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Intent resultIntent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, ResultActivity.class);</div><div class="line"></div><div class="line"><span class="comment">// Because clicking the notification opens a new ("special") activity, there's</span></div><div class="line"><span class="comment">// no need to create an artificial back stack.</span></div><div class="line">PendingIntent resultPendingIntent =</div><div class="line">	PendingIntent.getActivity(</div><div class="line">	<span class="keyword">this</span>,</div><div class="line">	<span class="number">0</span>,</div><div class="line">	resultIntent,</div><div class="line">	PendingIntent.FLAG_UPDATE_CURRENT</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>发送广播</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(mContext, AppUpdateReceiver.class);</div><div class="line">intent.putExtra(AppUpdateReceiver.P_DOWNLOAD_URL, url);</div><div class="line">PendingIntent pIntent = PendingIntent.getBroadcast(mContext, REQUEST_CODE, intent, 	PendingIntent.FLAG_UPDATE_CURRENT);</div></pre></td></tr></table></figure>
-<p>打开Service</p>
-<h4 id="设置点击事件"><a href="#设置点击事件" class="headerlink" title="设置点击事件"></a>设置点击事件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PendingIntent resultPendingIntent;</div><div class="line">...</div><div class="line">mBuilder.setContentIntent(resultPendingIntent);</div></pre></td></tr></table></figure>
-<h3 id="展示"><a href="#展示" class="headerlink" title="展示"></a>展示</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mNotificationManager =</div><div class="line">	(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);</div><div class="line">mNotificationManager.notify(notification_id,notification);</div></pre></td></tr></table></figure>
-<p>之后可以通过<code>notification_id</code>来更新notification</p>
-<h3 id="删除Notification"><a href="#删除Notification" class="headerlink" title="删除Notification"></a>删除Notification</h3><ul>
-<li><code>cancel(notification_id)</code> : 清除指定id的通知</li>
-<li><code>cancelAll()</code> : 清除你之前展示的所有通知</li>
-<li><code>setAutoCancel()</code> : 通过设置<code>notification</code>的属性，使用户点击之后自动删除</li>
-</ul>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
-<li>点击通知栏没有反应<br>Notificaiton 对应的PendingIntent 对应的是一个服务代码如下</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(mContext, InstallAppService.class);</div><div class="line">intent.putExtra(InstallAppService.P_FILE_PATH, filePath);</div><div class="line"> <span class="comment">// 设置点击之后启动一个服务</span></div><div class="line"> PendingIntent pIntent = PendingIntent.getService(mContext, genRequestCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);</div><div class="line"> NotificationCompat.Builder mBuilder = <span class="keyword">new</span> NotificationCompat.Builder(mContext)</div><div class="line">         .setTicker(<span class="string">"下载完成"</span>)</div><div class="line">         .setContent(<span class="keyword">new</span> RemoteViews(mPackageName, R.layout.download_notification_fail))</div><div class="line">         .setSmallIcon(R.drawable.ic_launcher)</div><div class="line">         .setContentIntent(pIntent);</div><div class="line"> Notification n = mBuilder.build();</div><div class="line"> n.contentView.setTextViewText(R.id.notification_title, msg);</div></pre></td></tr></table></figure>
-<h4 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h4><p>在三星测试机上点击此通知无法启动对应的服务。这个测试机已被刷为4.4系统。在其他手机（Nexus5,小米3，LG，HTC等）上没有出现问题</p>
-<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>经过反复查找和测试，定位到<code>getService</code>方法中的<code>requestCode</code>参数。当<code>requestCode</code>为定值时，第一次点击之后可以正确打开服务，但是之后（不知道是次数原因还是其他原因）会出现点击之后没有反应的情况。</p>
-<h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><p>针对上述原因，我把<code>requestCode</code>参数设置为随机数，算是暂时解决了这个问题</p>
+        <p>这里是设置Activity一些样式的例子:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"AppBaseTheme"</span>&gt;</span><span class="xml"></span></div><div class="line"><span class="comment">&lt;!--ActionBar 样式--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:actionBarStyle"</span>&gt;</span>@style/MyActionBar<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--ActionMode 背景颜色--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:actionModeBackground"</span>&gt;</span>@color/white<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--ActionMode 关闭按钮--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:actionModeCloseDrawable"</span>&gt;</span>@drawable/ok<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--ActionBar 后退按钮--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:homeAsUpIndicator"</span>&gt;</span>@drawable/abs__ic_ab_back_holo_light<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以下item是ActionBar可以设置的样式:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Action bar styles --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionDropDownStyle"</span>&gt;</span>@android:style/Widget.Spinner.DropDown<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionButtonStyle"</span>&gt;</span>@android:style/Widget.ActionButton<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionOverflowButtonStyle"</span>&gt;</span>@android:style/Widget.ActionButton.Overflow<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeBackground"</span>&gt;</span>@android:drawable/cab_background_top_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeSplitBackground"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeCloseDrawable"</span>&gt;</span>@android:drawable/ic_menu_close_clear_cancel<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeCutDrawable"</span>&gt;</span>@android:drawable/ic_menu_cut_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeCopyDrawable"</span>&gt;</span>@android:drawable/ic_menu_copy_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModePasteDrawable"</span>&gt;</span>@android:drawable/ic_menu_paste_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeSelectAllDrawable"</span>&gt;</span>@android:drawable/ic_menu_selectall_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeShareDrawable"</span>&gt;</span>@android:drawable/ic_menu_share_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeFindDrawable"</span>&gt;</span>@android:drawable/ic_menu_find_holo_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeWebSearchDrawable"</span>&gt;</span>@android:drawable/ic_menu_search<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarTabStyle"</span>&gt;</span>@style/Widget.ActionBar.TabView<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarTabBarStyle"</span>&gt;</span>@style/Widget.ActionBar.TabBar<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarTabTextStyle"</span>&gt;</span>@style/Widget.ActionBar.TabText<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeStyle"</span>&gt;</span>@style/Widget.ActionMode<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModeCloseButtonStyle"</span>&gt;</span>@style/Widget.ActionButton.CloseMode<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarStyle"</span>&gt;</span>@android:style/Widget.ActionBar<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarSplitStyle"</span>&gt;</span>?android:attr/actionBarStyle<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarSize"</span>&gt;</span>@dimen/action_bar_default_height<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionModePopupWindowStyle"</span>&gt;</span>?android:attr/popupWindowStyle<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionMenuTextAppearance"</span>&gt;</span>@android:style/TextAppearance.Holo.Widget.ActionBar.Menu<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionMenuTextColor"</span>&gt;</span>?android:attr/textColorPrimary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarWidgetTheme"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarDivider"</span>&gt;</span>?android:attr/dividerVertical<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"actionBarItemBackground"</span>&gt;</span>?android:attr/selectableItemBackground<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"dividerVertical"</span>&gt;</span>@drawable/divider_vertical_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"dividerHorizontal"</span>&gt;</span>@drawable/divider_vertical_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"buttonBarStyle"</span>&gt;</span>@android:style/ButtonBar<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"buttonBarButtonStyle"</span>&gt;</span>?android:attr/buttonStyle<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"segmentedButtonStyle"</span>&gt;</span>@android:style/SegmentedButton<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/01/22/Android-Notification/" class="archive-article-date">
-  	<time datetime="2015-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-22</time>
+      <a href="/uncategorized/2015/03/13/Android-Theme-ActionBar/" class="archive-article-date">
+  	<time datetime="2015-03-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-13</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Notification/">Notification</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActionBar/">ActionBar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/style/">style</a></li></ul>
 	</div>
 
       
@@ -235,7 +201,7 @@
 
 
   
-    <article id="post-Android-OGEngine-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-Widget-ProgressBar" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -245,7 +211,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/01/19/Android-OGEngine-1/">OGEngine教程(一):简介</a>
+      <a class="article-title" href="/uncategorized/2015/03/06/Android-Widget-ProgressBar/">Android控件-ProgressBar</a>
     </h1>
   
 
@@ -253,330 +219,139 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="gt-简介"><a href="#gt-简介" class="headerlink" title="&gt;简介"></a>&gt;简介</h3><p>OGEngine是国内一款开源移动端游戏开发引擎，基于AndEngine。目前开始走向跨平台，之前一直专注于Android端。</p>
+        <h1 id="ProgressBar"><a href="#ProgressBar" class="headerlink" title="ProgressBar"></a>ProgressBar</h1>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/03/06/Android-Widget-ProgressBar/" class="archive-article-date">
+  	<time datetime="2015-03-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ProgressBar/">ProgressBar</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Support-v7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/03/02/Android-Support-v7/">Android Support V7</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇文章简单介绍一些Android L Android Support v7 package（com.android.support:recyclerview-v7:21.0.0-rc1）中包含的一些组件，以及相关的信息。</p>
+<h3 id="1-Views"><a href="#1-Views" class="headerlink" title="1. Views"></a>1. Views</h3><h4 id="1-1-CardView"><a href="#1-1-CardView" class="headerlink" title="1.1 CardView"></a>1.1 CardView</h4><p>支持圆角和阴影的View</p>
+<h4 id="1-2-RecycleView"><a href="#1-2-RecycleView" class="headerlink" title="1.2 RecycleView"></a>1.2 RecycleView</h4><p>ListView的升级版本</p>
+<p><a href="http://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156" target="_blank" rel="external">CardView &amp; RecycleView教程</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/03/02/Android-Support-v7/" class="archive-article-date">
+  	<time datetime="2015-03-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Support-v7/">Support v7</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/">Android下利用Charles监听Https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android手机利用Charles监听Https请求</p>
+<h3 id="1-安装证书"><a href="#1-安装证书" class="headerlink" title="1,安装证书"></a>1,安装证书</h3><h4 id="方法1-Android-4-0以上"><a href="#方法1-Android-4-0以上" class="headerlink" title="方法1 (Android 4.0以上):"></a>方法1 (Android 4.0以上):</h4><p>Android 4.0以上的手机支持用户安装证书。</p>
+<p>1,下载证书到手机上</p>
+<p>2,设置-&gt;安全-&gt;从存储设备安装 即可,安装时需要设置锁屏PIN或密码</p>
+<h4 id="方法2-需要Root"><a href="#方法2-需要Root" class="headerlink" title="方法2  (需要Root)"></a>方法2  (需要Root)</h4><p>手机root之后</p>
+<p>1,直接将证书拷贝到：<code>etc/security/cacerts</code> </p>
+<p>2,设置-&gt;安全-&gt;受信任的凭据 ，在系统tab找到你安装上的证书，然后选中即可。这样是以系统证书存在的。</p>
 <blockquote>
-<p>从最开始想开始做Android游戏开发时，为了选择一个游戏引擎纠结了很久，最终定下OGEngine。<br>原因在于：OGEngine用Java编写、开源虽然资料不是很多，但是源码示例不少够用了。没有选择cocos2d-x主要因为C语言不熟悉，还有cocos主站有点乱找不到头绪的赶脚。</p>
+<p>参考<a href="http://blog.csdn.net/winceos/article/details/32130655" target="_blank" rel="external">Android下安装证书的方法</a></p>
 </blockquote>
-<h3 id="gt-相关资料"><a href="#gt-相关资料" class="headerlink" title="&gt;相关资料"></a>&gt;相关资料</h3><ul>
-<li><a href="http://www.ogengine.com/" target="_blank" rel="external">OGEngine 官网</a></li>
-</ul>
-<h3 id="gt-HelloWorld-项目"><a href="#gt-HelloWorld-项目" class="headerlink" title="&gt;HelloWorld 项目"></a>&gt;HelloWorld 项目</h3><h4 id="需要的资源"><a href="#需要的资源" class="headerlink" title="需要的资源:"></a>需要的资源:</h4><ul>
-<li>OGEngine lib  <a href="http://oge.ogengine.com/download/downloadInfo.jsp" target="_blank" rel="external">下载地址</a></li>
-</ul>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤:"></a>步骤:</h4><ol>
-<li>新建项目将OGEngine lib拷贝到项目libs文件夹中，添加lib的引用</li>
-<li>新建建类 MainGameLauncher 继承自 GameLauncher</li>
-<li>将MainActivity 修改为继承 GameActivity</li>
-<li>创建MainScene继承自Scene，作为主要场景，类似于一个页面</li>
-</ol>
-<p>到此，最最基本的项目结构就建好了</p>
-<p>GameLauncher 一枚</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainGameLauncher</span> <span class="keyword">extends</span> <span class="title">GameLauncher</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CAMERA_WIDTH = <span class="number">320</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> PixelPerfectEngineOptions <span class="title">onCreatePixelPerfectEngineOptions</span><span class="params">()</span> </span>&#123;</div><div class="line">        PixelPerfectEngineOptions pixelPerfectEngineOptions = <span class="keyword">new</span> PixelPerfectEngineOptions(ZoomCamera.class);</div><div class="line">        <span class="comment">// 设置竖屏</span></div><div class="line">        pixelPerfectEngineOptions.setScreenOrientation(ScreenOrientation.PORTRAIT_FIXED);</div><div class="line">        <span class="comment">// 适配模式,这里设置为“保持宽度不变，改变高”</span></div><div class="line">        pixelPerfectEngineOptions.setPixelPerfectMode(PixelPerfectMode.CHANGE_HEIGHT);</div><div class="line">        <span class="comment">// 参考尺寸</span></div><div class="line">        pixelPerfectEngineOptions.setDesiredSize(CAMERA_WIDTH);</div><div class="line">        <span class="keyword">return</span> pixelPerfectEngineOptions;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLoadResources</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 加载资源</span></div><div class="line">        RegionRes.loadBitmapTextureFromAssets(Res.mBackGroundTexture);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLoadComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 启动一个Scene</span></div><div class="line">        startScene(MainScene.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>GameActivity:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">GameActivity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> GameLauncher <span class="title">CreateGameLauncher</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">//游戏启动器</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MainGameLauncher();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle pSavedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(pSavedInstanceState);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>MainScene:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainScene</span> <span class="keyword">extends</span> <span class="title">Scene</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> VertexBufferObjectManager pVertexBufferObjectManager;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSceneCreate</span><span class="params">(SceneBundle bundle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSceneCreate(bundle);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</div><div class="line">        initBg();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initBg</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="comment">// 创建并显示一个背景图精灵</span></div><div class="line">        Sprite bg = <span class="keyword">new</span> Sprite(<span class="number">0</span>, <span class="number">0</span>, RegionRes.getRegion(Res.mBackGroundTexture), pVertexBufferObjectManager);</div><div class="line">        <span class="comment">// 添加到场景中</span></div><div class="line">        <span class="keyword">this</span>.attachChild(bg);</div><div class="line">        <span class="comment">// 创建一个文字并加入到场景中</span></div><div class="line">        Text text = <span class="keyword">new</span> Text(<span class="number">100</span>,<span class="number">100</span>, FontHelper.getBitmapFont(FontHelper.FONT_TEST),<span class="string">"汪萍 fuqiang"</span>,pVertexBufferObjectManager);</div><div class="line">        text.setScale(<span class="number">0.8f</span>);</div><div class="line">        <span class="keyword">this</span>.attachChild(text);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/01/19/Android-OGEngine-1/" class="archive-article-date">
-  	<time datetime="2015-01-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-19</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GameDevelop/">GameDevelop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OGEngine/">OGEngine</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vim-short-keys" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/07/vim-short-keys/">Vim快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记得是在刚上班的时候就开始用Vim，不过到现在为止感觉还是没有完全将Vim的潜力完全挖掘出来。<br>这里主要记录一下常用的快捷键，方便查找。</p>
-<hr>
-<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><ul>
-<li><code>i</code>: 在当前字符的左边插入</li>
-<li><code>I</code>: 在当前行首插入</li>
-<li><code>a</code>: 在当前字符的右边插入</li>
-<li><code>A</code>: 在当前行尾插入</li>
-<li><code>o</code>: 在当前行下面插入一个新行</li>
-<li><code>O</code>: 在当前行上面插入一个新行</li>
-<li><code>d</code>: 删除.删除和查找,方向，重复次数方向都可以组合操作</li>
-<li><code>dd</code>: 删除当前</li>
-<li><code>D</code>: 删除当前为止到行尾</li>
-</ul>
-<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><ul>
-<li><code>[范围]s/[源字符]/[目标字符]/[g]</code>: 替换字符</li>
-<li><code>s/[源字符]/[目标字符]</code>: 替换字符,当前行</li>
-<li><code>%s/[源字符]/[目标字符]</code>: 替换字符,整个文件范围</li>
-<li><code>1,20 s/[源字符]/[目标字符]</code>: 替换字符,1到20行</li>
-<li><code>/[字符表达式]</code>: 查找字符</li>
-<li><code>/admin</code>: 查找admin</li>
-<li><code>/a.*in</code>: 查找类似admin,aaxxxin,axxxxin,<code>.</code> 匹配单个字符,<code>*</code>匹配任意字符 类似正则表达式， </li>
-</ul>
-<h3 id="光标定位"><a href="#光标定位" class="headerlink" title="光标定位"></a>光标定位</h3><ul>
-<li><code>k</code>: 上</li>
-<li><code>j</code>: 下 </li>
-<li><code>h</code>: 左</li>
-<li><code>l</code>: 右</li>
-<li><code>gg</code>: 到文件首</li>
-<li><code>G</code>: 到文件尾</li>
-<li><code>^</code>: 到行首</li>
-<li><code>$</code>: 到行尾</li>
-<li><code>w</code>: 移动到下一个单词</li>
-<li><code>b</code>: 移动到上一个单词</li>
-<li><code>%</code>: 跳到匹配的括号处（”{ }””[]””()”）</li>
-<li><code>[num]G</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>[num]gg</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>[num]:</code>: 移动光标到指定的行(num),比如: 10G就是到第10行</li>
-<li><code>&amp;lt;control-i, tab&amp;gt;</code>:跳到下一个跳点(Jump Point)</li>
-<li><code>&amp;lt;control-o&amp;gt;</code>:跳到上一个跳点</li>
-<li><code>H</code>: 移动光标到屏幕上面</li>
-<li><code>M</code>: 移动光标到屏幕中间</li>
-<li><code>L</code>: 移动光标到屏幕下面</li>
-<li><code>&amp;lt;control-F&amp;gt;</code>: 向下移动一屏。</li>
-<li><code>&amp;lt;control-B&amp;gt;</code>: 向上移动一屏。</li>
-<li><code>*</code>: 读取光标处的字符串，并且移动光标到它再次出现的地方。</li>
-<li><code>\#</code>: 和上面的类似，但是是往反方向寻找。</li>
-<li><code>ma</code>: 在当前光标的位置标记一个书签，名字为 a。书签名只能是小写字母。你看不见书签的存在，但它确实已经在那里了。</li>
-<li><code>`a</code>: 到书签 a 处。注意这个不是单引号，它一般位于大部分键盘的 1 的左边。</li>
-<li><code>`.</code>: 到你上次编辑文件的地方。这个命令很有用，而且你不用自己去标记它</li>
-<li><code>/text</code>: 从当前光标处开始搜索字符串 text，并且到达 text 出现的地方。必须使用回车来开始这个搜索命令。如果想重复上次的搜索的话，按n。</li>
-<li><code>?text</code>: 和上面类似，但是是反方向。</li>
+<h3 id="2-设置Charles"><a href="#2-设置Charles" class="headerlink" title="2,设置Charles"></a>2,设置Charles</h3><p>打开Charles -&gt; Proxy -&gt; Proxy Settings -&gt; SSL</p>
+<p>勾选Enable SSL proxying</p>
+<p>Locations添加想要监听的域名和端口，比如 www.ihaveu.com, 443</p>
+<p>以上</p>
+<h3 id="附-如何设置手机代理"><a href="#附-如何设置手机代理" class="headerlink" title="附:如何设置手机代理"></a>附:如何设置手机代理</h3><ul>
+<li>在手机上WLAN中找到链接的网络</li>
+<li>设置网络</li>
+<li>高级选项</li>
+<li>填写PC的ip</li>
+<li>端口号通常默认 8888，否则需要到Charles中找到对应监听的端口号</li>
+<li>保存即可</li>
 </ul>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/07/vim-short-keys/" class="archive-article-date">
-  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Zsh" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/07/Zsh/">Mac神器-Shell:Zsh</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天偶尔看新闻，看到一个介绍Zsh的文章，立马装上！下面简单介绍一下Zsh的几大优点和安装方法</p>
-<p>相关链接：<a href="http://zsh.sourceforge.net/" target="_blank" rel="external">zsh官网</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>方法一</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L https:<span class="comment">//github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>方法二（需要安装好git）</p>
-</li>
-</ul>
-<p>克隆项目到本地<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div></pre></td></tr></table></figure></p>
-<p>拷贝zsh配置文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div></pre></td></tr></table></figure></p>
-<p>修改默认shell为zsh<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chsh -s /bin/zsh</div></pre></td></tr></table></figure></p>
-<p>至此已经安装成功,重新打开一个终端可以看到效果</p>
-<h2 id="强大功能"><a href="#强大功能" class="headerlink" title="强大功能"></a>强大功能</h2><blockquote>
-<p>以下命令均为输入命令后按 &lt;TAB&gt;键</p>
-</blockquote>
-<h3 id="目录选择"><a href="#目录选择" class="headerlink" title="目录选择"></a>目录选择</h3><p>双击&lt;TAB&gt;:之后可以用方向键选择需要打开的目录</p>
-<p><img src="/img/page_img/zsh-2.png" alt="目录选择"></p>
-<h3 id="目录历史"><a href="#目录历史" class="headerlink" title="目录历史"></a>目录历史</h3><p>cd -&lt;TAB&gt;: 显示最近打开的目录;可以直接通过序号选择,例如: cd -1<tab></tab></p>
-<p><img src="/img/page_img/zsh-1.png" alt="目录历史"></p>
-<h3 id="命令参数提示"><a href="#命令参数提示" class="headerlink" title="命令参数提示"></a>命令参数提示</h3><p>[任意命令] - &lt;TAB&gt;</p>
-<p><img src="/img/page_img/zsh-3.png" alt="命令参数提示"></p>
-<h3 id="支持全局alias"><a href="#支持全局alias" class="headerlink" title="支持全局alias"></a>支持全局alias</h3><p>alias 支持指定部分参数,下面例子仅作说明<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ alias  lss=ls\ -l  </div><div class="line">$ lss                   <span class="comment">//相当于 ls -l</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/07/Zsh/" class="archive-article-date">
-  	<time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-07</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-RAM" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/RAM/">谈谈Android内存</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="内存简介："><a href="#内存简介：" class="headerlink" title="内存简介："></a>内存简介：</h2><p><strong>RAM（random access memory）</strong>:随机存取存储器。说白了就是内存。<br>一般Java在内存分配时会涉及到以下区域：</p>
-<p><strong>寄存器（Registers）</strong>：速度最快的存储场所，因为寄存器位于处理器内部，我们在程序中无法控制</p>
-<p><strong>栈（Stack）</strong>：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中</p>
-<p><strong>堆（Heap）</strong>：堆内存用来存放由new创建的对象和数组。在堆中分配的内存，由Java虚拟机的自动垃圾回收器（GC）来管理。</p>
-<p><strong>静态域（static field）</strong>：  静态存储区域就是指在固定的位置存放应用程序运行时一直存在的数据，Java在内存中专门划分了一个静态存储区域来管理一些特殊的数据变量如静态的数据变量</p>
-<p><strong>常量池（constant pool）</strong>：虚拟机必须为每个被装载的类型维护一个常量池。常量池就是该类型所用到常量的一个有序集和，包括直接常量（string,integer和floating point常量）和对其他类型，字段和方法的符号引用。</p>
-<p><strong>非RAM存储</strong>：硬盘等永久存储空间</p>
-<h2 id="堆栈特点对比："><a href="#堆栈特点对比：" class="headerlink" title="堆栈特点对比："></a>堆栈特点对比：</h2><p><strong>栈：</strong>当定义一个变量时，Java就在栈中为这个变量分配内存空间，当该变量退出该作用域后，Java会自动释放掉为该变量所分配的内存空间，该内存空间可以立即被另作他用。</p>
-<p><strong>堆：</strong>当堆中的new产生数组和对象超出其作用域后，它们不会被释放，只有在没有引用变量指向它们的时候才变成垃圾，不能再被使用。即使这样，所占内存也不会立即释放，而是等待被垃圾回收器收走。这也是Java比较占内存的原因。</p>
-<p><strong>栈：</strong>存取速度比堆要快，仅次于寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。</p>
-<p><strong>堆：</strong>堆是一个运行时数据区，可以动态地分配内存大小，因此存取速度较慢。也正因为这个特点，堆的生存期不必事先告诉编译器，而且Java的垃圾收集器会自动收走这些不再使用的数据。</p>
-<p><strong>栈：</strong>栈中的数据可以共享， 它是由编译器完成的，有利于节省空间。</p>
-<p>例如：需要定义两个变量int a = 3；int b = 3；</p>
-<p>编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找栈中是否有3这个值，如果没找到，就将3存放进来，然后将a指向3。接着处理int b = 3；在创建完b的引用变量后，因为在栈中已经有3这个值，便将b直接指向3。这样，就出现了a与b同时均指向3的情况。这时，如果再让a=4；那么编译器会重新搜索栈中是否有4值，如果没有，则将4存放进来，并让a指向4；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。</p>
-<p><strong>堆：</strong>例如上面栈中a的修改并不会影响到b, 而在堆中一个对象引用变量修改了这个对象的内部状态，会影响到另一个对象引用变量。<br>（注：因此像int,float,[] 这类都是存在栈中，）</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/RAM/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存/">内存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Theme-Translucent" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Theme-Translucent/">Android主题-透明</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>将Activity设置为透明,并把ActionBar隐藏</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--透明--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Theme.Translucent"</span> <span class="attr">parent</span>=<span class="string">"AppTheme"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p> 此方法同样可以解决初次打开App时会闪现Activity的白屏。主要是因为App默认的Activity的默认主题是白色带ActionBar的，因此同过修改默认主题可以避免此问题。</p>
-</blockquote>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/Android-Theme-Translucent/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
+      <a href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/" class="archive-article-date">
+  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
 </a>
       
 	<div class="article-tag tagcloud">
@@ -602,7 +377,7 @@
 
 
   
-    <article id="post-Android-Service-Long-Time-Stay" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android-WebViewBridge" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -612,7 +387,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/">Android Service</a>
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-WebViewBridge/">WebView中实现js与java互相调用</a>
     </h1>
   
 
@@ -620,64 +395,340 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>Service用于一些耗时的操作，或者 后台执行，不提供用户交互界面的操作，例如：下载，播放音乐等</p>
-<h3 id="在独立进程运行"><a href="#在独立进程运行" class="headerlink" title="在独立进程运行"></a>在独立进程运行</h3><p>以 “：message”中以”:” 开头 代表在独立进程中运行， 在关闭App 后仍然独立运行</p>
-<h3 id="生命周期："><a href="#生命周期：" class="headerlink" title="生命周期："></a>生命周期：</h3><h4 id="onCreate-onStart-onDestroy"><a href="#onCreate-onStart-onDestroy" class="headerlink" title="onCreate, onStart,onDestroy()"></a>onCreate, onStart,onDestroy()</h4><p>第一次启动时调用onCreate()-&gt;onStart()， 如果启动一个正在运行的Service，不会调用onCreate,只调用onStart<br>停止服务时调用onDestroy();</p>
-<h4 id="onStartCommand-Intent-int-int"><a href="#onStartCommand-Intent-int-int" class="headerlink" title="onStartCommand(Intent , int , int )"></a>onStartCommand(Intent , int , int )</h4><p>有四种返回值：</p>
+        <p>在Android项目中，经常会用到在<code>Webview</code>中js与java的互相调用。当然，Google官方为WebView提供了对应的方法，通过<code>WebView.addJavascriptInterface()</code>方法来注入java对象来实现。但是这个方法有一个问题，在于4.2版本之前有漏洞。</p>
+<p>今天就来介绍另外一种js与java的互相调用的实现方式。当然这种方式可能网上已经有一些教程，我这里介绍的还是相对完善的一套解决方案。</p>
+<p>实现这套方案的条件：要求开发人员同时熟悉java与js</p>
+<h2 id="1-整体思路："><a href="#1-整体思路：" class="headerlink" title="1.整体思路："></a>1.整体思路：</h2><ul>
+<li>js调用java</li>
+</ul>
+<p>首先将js代码注入到webview的页面中,然后通过修改<code>window.location.href</code>来向java传递参数,java端通过监听页面url的改变来识别js端传递的参数.然后再经解析数据实现java方法的调用.</p>
+<ul>
+<li>java调用js</li>
+</ul>
+<p>java通过<code>webView.loadUrl(&quot;javascript:&quot;+jsCode);</code>来实现js代码的调用</p>
+<h2 id="2-详解："><a href="#2-详解：" class="headerlink" title="2.详解："></a>2.详解：</h2><h3 id="2-1-js调用java的实现"><a href="#2-1-js调用java的实现" class="headerlink" title="2.1 js调用java的实现"></a>2.1 js调用java的实现</h3><h4 id="2-1-1-js调用Java最简单版本-不支持callback"><a href="#2-1-1-js调用Java最简单版本-不支持callback" class="headerlink" title="2.1.1  js调用Java最简单版本,不支持callback"></a>2.1.1  js调用Java最简单版本,不支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">	<span class="comment">// 不包含回调方法的参数调用</span></div><div class="line">	share:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arg = &#123;<span class="attr">title</span>:<span class="string">"i am title"</span>&#125;;</div><div class="line">		<span class="comment">//修改href传递参数</span></div><div class="line">	    <span class="built_in">window</span>.location.href=<span class="string">"app://share?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>定义了一个全局对象来定义一些java端需要调用的方法，比如这里的share。关键的地方在于传递的参数格式<code>app://share</code>，很像<code>http</code>协议对吧,其实就是自己定义了一个协议开头而已。</p>
+<p>参数格式说明：</p>
+<p><code>app://share?+JSON.stringify(arg)</code></p>
+<p><code>app://</code> : 协议名称，自己可以随便定义，只要方便解析</p>
+<p><code>share</code> : 方法名称，用于指定需要执行的java方法</p>
+<p><code>?+JSON.stringify(arg)</code> : json格式参数</p>
+<h4 id="2-1-1-js调用java高端版支持callback"><a href="#2-1-1-js调用java高端版支持callback" class="headerlink" title="2.1.1 js调用java高端版支持callback"></a>2.1.1 js调用java高端版支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用于保存所有回调函数</span></div><div class="line"><span class="built_in">window</span>._callbacks = &#123;&#125;;</div><div class="line"><span class="comment">// 回调Id生成器</span></div><div class="line"><span class="built_in">window</span>._callbacks_id = <span class="number">0</span>;</div><div class="line"><span class="comment">// js Java 桥接器</span></div><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">        微信分享</div><div class="line">        @param  message:&#123;url:页面地址string, image:缩略图地址string,title:分享标题string,description:分享内容string &#125;</div><div class="line">        @param  success:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">        @param  error:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">     */</div><div class="line">    wxshare:<span class="function"><span class="keyword">function</span>(<span class="params">message,success,error</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(!message || !success || !error)&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"message or success or error is empty."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//== start =========================</span></div><div class="line">        <span class="comment">//这里是处理js调用java之后的回调,只要是需要回调都要像下面这样写</span></div><div class="line">        <span class="comment">// 生成 Callback Id</span></div><div class="line">        <span class="keyword">var</span> id = _callbacks_id++;</div><div class="line">        <span class="comment">// 设置回调函数</span></div><div class="line">        _callbacks[id]=&#123;</div><div class="line">            <span class="attr">success</span>:success,</div><div class="line">            <span class="attr">error</span>:error</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//== end =========================</span></div><div class="line"></div><div class="line">        <span class="comment">//解析Message</span></div><div class="line">        <span class="comment">// 通过修改location.href 给WebView传递参数</span></div><div class="line">        <span class="keyword">var</span> arg = &#123;</div><div class="line">            <span class="attr">message</span>:message,</div><div class="line">            <span class="comment">// 回调函数的id,java端通过callback_id来调用指定回调函数</span></div><div class="line">            callback_id:id</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">window</span>.location.href= <span class="string">"app://wxshare?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
+<p>思路: 当java端调用wxshare方法时会注册一组回调函数:<code>success</code>,<code>error</code>,然后将<code>callback_id</code>传递给java端，当java端执行完成后通过<code>callback_id</code>调用js端的回调函数</p>
+<p><code>_callback</code>: 保存回调函数<br><code>_callback_id</code> : 回调函数id生成器</p>
+<h4 id="2-2-java-端代码"><a href="#2-2-java-端代码" class="headerlink" title="2.2 java 端代码"></a>2.2 java 端代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeWebViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(<span class="keyword">final</span> WebView view, String url)</span> </span>&#123;</div><div class="line">        	<span class="comment">//在这里处理js传递过来的参数 url</span></div><div class="line">        	<span class="comment">//比如 url = app://share</span></div><div class="line">            <span class="keyword">if</span> (mBridge.handleJsArgument(url, <span class="keyword">new</span> WebViewBridge.handleJsCallback() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onHandleJs</span><span class="params">(String func, JSONObject argument)</span> </span>&#123;</div><div class="line">                   <span class="comment">//func 是js传递过来的方法名,比如 share </span></div><div class="line">                   <span class="comment">//argument ： 参数</span></div><div class="line">                &#125;</div><div class="line">            &#125;)) &#123;</div><div class="line">	            <span class="comment">//返回true代表请求已经被处理，为了防止传过来的参数被webview加载，直接返回true</span></div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            view.loadUrl(url);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">            <span class="comment">//此处需要注入js代码</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageStarted</span><span class="params">(WebView view, String url, Bitmap favicon)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageStarted(view, url, favicon);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">            <span class="comment">//这里需要触发js注入完成事件</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>设置WebViewClient: <code>webView.setWebClient(new BridgeWebViewClient());</code></p>
+</blockquote>
+<p>上面的代码定义了一个BridgeWebViewClient类，关键在sholdOverrideUrlLoading方法中，通过<code>mBridge.handleJsArgument</code>方法来解析url,如果是js调用就会阻断页面的加载。</p>
+<p>下面是 handleJsArgument方法细节，这里的代码可以不用细看，只是用来解析参数的，解析完成后，在回调接口中返回方法名称和JSONObject格式的参数.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handleJsArgument</span><span class="params">(String url, handleJsCallback jscallback)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || !url.startsWith(UAPP_PRE)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//解析参数</span></div><div class="line">    String func = parseFuncName(url);</div><div class="line">    jscallback.onHandleJs(func, parseJsArgumentFromJsonStr(url));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> JSONObject <span class="title">parseJsArgumentFromJsonStr</span><span class="params">(String json)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (json == <span class="keyword">null</span> || json.equals(<span class="string">""</span>) || !json.startsWith(UAPP_PRE) || json.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    json = json.substring(json.indexOf(<span class="string">"?"</span>) + <span class="number">1</span>);</div><div class="line">    JSONObject jsonObject=<span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        jsonObject = <span class="keyword">new</span> JSONObject(json);</div><div class="line">    &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> jsonObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">parseFuncName</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || url.equals(<span class="string">""</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    String a = UAPP_PRE + <span class="string">"\\w+\\??"</span>;</div><div class="line">    String result = <span class="string">""</span>;</div><div class="line">    Pattern pattern = Pattern.compile(a);</div><div class="line">    Matcher matcher = pattern.matcher(url);</div><div class="line">    <span class="keyword">if</span> (matcher.find()) &#123;</div><div class="line">        result = matcher.group(<span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = <span class="number">0</span>;</div><div class="line">        start = result.indexOf(<span class="string">"/"</span>) + <span class="number">2</span>;</div><div class="line">        start = start &gt;= result.length() ? result.length() : start;</div><div class="line">        <span class="keyword">if</span> (result.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">            end = result.length();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            end = result.indexOf(<span class="string">"?"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result.substring(start, end);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-2-java调用js的实现"><a href="#2-2-java调用js的实现" class="headerlink" title="2.2 java调用js的实现"></a>2.2 java调用js的实现</h3><p>java调用js的方法，相当简单:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String jsCode = <span class="string">"(function()&#123; /*js code here*/  &#125;)()"</span>;</div><div class="line">webview.loadUrl(<span class="string">"javascript:"</span> + jsCode);</div></pre></td></tr></table></figure></p>
+<p>注意：要把js代码用自执行函数包裹起来</p>
+<p>利用这种方法可以把任意代码注入到页面中</p>
+<p>注意：<br>当页面刚加载时就需要把 2.1中的js代码注入到页面中，但是有时会出现页面加载完成，但是注入的代码没有执行的现象,应该是因为js没有及时加载而页面先加载完成。要解决这个问题就需要在页面加载完成时触发一个事件比如<code>jsBridgeReady</code>,js端通过监听jsBridgeReady事件来调用java方法。那么总体流程如下：</p>
+<p>加载页面-&gt;注入js代码-&gt;页面加载完成-&gt;触发js注入完成事件</p>
+<p>代码：</p>
+<p>在BridgeWebClient中添加逻辑：<br>1,加载页面时注入js代码：<br>2,加载完成后触发加载完成事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="comment">// 注入桥接代码</span></div><div class="line">    <span class="comment">// 这里通过读取js文件获得js代码</span></div><div class="line">    <span class="keyword">if</span> (mFileName != <span class="keyword">null</span>) &#123;</div><div class="line">        view.loadUrl(mBridge.createBaseJs(mContext, mFileName));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">    <span class="comment">// 触发注入完成事件，用于解决 注入的代码没有及时加载成功导致无法调用的问题</span></div><div class="line">    view.loadUrl(<span class="string">"(function()&#123;if(window.UAPPJSBridgeReady)&#123;window.UAPPJSBridgeReady();&#125;&#125;)()"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>如果你也想从文件读取js代码，记得把读取的代码压缩一下，把注释和换行删除,不然很可能会报错</p>
+</blockquote>
+<p>js端调用java注入的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//判断代码是否注入完成</span></div><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">	<span class="comment">//调用注入的方法</span></div><div class="line">    <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="comment">//监听注入完成的事件</span></div><div class="line">    <span class="built_in">window</span>.onBridgeLoaded=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">            <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上就是Android端js与java互相调用的方法，Good Luck!</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/03/Android-WebViewBridge/" class="archive-article-date">
+  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-debug-kill-app" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/03/Android-debug-kill-app/">Android 调试技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-如何模拟App被Kill掉"><a href="#1-如何模拟App被Kill掉" class="headerlink" title="1.如何模拟App被Kill掉"></a>1.如何模拟App被Kill掉</h3><p>以前开发App时有一个bug出现在系统回收掉app之后，重新打开时造成的，当时模拟的方式是不断打开其他app占用内存，直到app被回收。那种方法现在想想太…</p>
+<p><em>正确姿势：</em> 需要模拟器或者root过的手机</p>
+<p>在ddms中直接kill掉App线程</p>
+<blockquote>
+<p>App被Kill掉之后重启会直接打开最后显示的Activity</p>
+</blockquote>
+<h3 id="2-adb-shell-真机获取root权限"><a href="#2-adb-shell-真机获取root权限" class="headerlink" title="2.adb shell 真机获取root权限"></a>2.adb shell 真机获取root权限</h3><p>前提条件：手机已经root</p>
+<p>1, 将手机连接到电脑,然后输入下面命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell <span class="comment">//进入shell</span></div><div class="line">$ su  <span class="comment">// 获取root权限</span></div></pre></td></tr></table></figure></p>
+<p>2, 手机会提示获取root权限的提示，点击授权即可</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/03/Android-debug-kill-app/" class="archive-article-date">
+  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-make-jar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/02/Android-make-jar/">如何重新编辑jar包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇到一个问题，为了使用Monkey Talk作测试，需要把项目转换成AspectJ的项目，但是转换完成之后，编译项目的时候遇到了一个冲突,意思是说aspectj的某个jar包和项目中的一个jar包的<code>about.html</code>文件冲突了。因为<code>about.html</code>文件没什么用，就打算直接把它从<code>jar</code>包中删掉。</p>
+<p>详细解决方法：</p>
 <ol>
-<li><strong>START_STICKY</strong>：<br>如果service进程被kill掉，保留service的状态为开始状态，但不保留递送的intent对象。随后系统会尝试重新创建service，由于服务状态为开始状态，所以创建服务后一定会调用onStartCommand(Intent,int,int)方法。如果在此期间没有任何启动命令被传递到service，那么参数Intent将为null。</li>
-<li><strong>START_NOT_STICKY</strong>：<br>“非粘性的”。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统将会把它置为started状态，系统不会自动重启该服务，直到startService(Intent intent)方法再次被调用;。</li>
-<li><strong>START_REDELIVER_INTENT</strong>：<br>重传Intent。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统会自动重启该服务，并将Intent的值传入。</li>
-<li><strong>START_STICKY_COMPATIBILITY</strong>：<br>START_STICKY的兼容版本，但不保证服务被kill后一定能重启。 </li>
+<li>将jar包用解压工具解压，把解压后的<code>about.html</code>文件删掉</li>
+<li>利用命令 <code>jar cvf jar_name.jar ./*</code> 重新打包</li>
 </ol>
-<h3 id="启动方式"><a href="#启动方式" class="headerlink" title="启动方式"></a>启动方式</h3><ul>
-<li><strong>startService()</strong></li>
-</ul>
-<p>正常启动未被启动过的Service：<br>onCreate() - &gt; onStart()  -运行- -&gt;stopService()或selfStop() -&gt; onDestroy()</p>
-<p>启动正在运行的Service：不会回调onCreate()<br>onStart()  -运行- -&gt; stopService()或selfStop() -&gt; onDestroy()</p>
-<p>传递参数：<br>启动Service时通过intent 传递参数，Service 中在 onStartCommand(Intent ,int ,int )回调方法中获取参数</p>
-<ul>
-<li><strong>bindService()</strong></li>
-</ul>
-<p>把这个 Service 和调用 Service 的客户类绑起来，如果调用这个客户类被销毁，Service 也会被销毁。<br>好处是会回调onBind()方法，可以从这里返回一个实现IBind接口的类，这样可以实现和Service的通信了。<br>如果调用时Service没有运行，会自动启动Service</p>
-<p>绑定未启动的Service过程：没有onStart()回调</p>
-<p>onCreate –&gt; onBind(只一次，不可多次绑定) –&gt; onUnbind –&gt; onDestory</p>
-<h4 id="二者区别："><a href="#二者区别：" class="headerlink" title="二者区别："></a>二者区别：</h4><ul>
-<li><strong>startService()</strong> : 调用者和服务没有关系，即使调用者退出，服务仍然运行。</li>
-<li><strong>bindService()</strong> : 调用者和服务绑定，如果调用者退出，那么服务也被停止了。</li>
-</ul>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>所以，在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。</p>
-<h3 id="使服务常驻内存，不被系统销毁"><a href="#使服务常驻内存，不被系统销毁" class="headerlink" title="使服务常驻内存，不被系统销毁"></a>使服务常驻内存，不被系统销毁</h3><p>自己的app的service总是容易被系统回收，基本上的解决思路有以下几种：</p>
-<ul>
-<li>把service写成系统服务，将不会被回收(未实践)：<br>在Manifest.xml文件中设置persistent属性为true，则可使该服务免受out-of-memory killer的影响。但是这种做法一定要谨慎，系统服务太多将严重影响系统的整体运行效率。</li>
-<li><p>提高service的优先级(未实践)：<br>设置android:priority=”1000”</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 为了消去加上android:priority="1000"后出现的警告信息，可以设置android:exported属性，指示该服务是否能够被其他应用程序组件调用或跟它交互 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.example.helloandroid.weatherforecast.service.UpdateWidgetService"</span><span class="attr">android:exported</span>=<span class="string">"false"</span> &gt;</span></div><div class="line">	 <span class="comment">&lt;!-- 为防止Service被系统回收，可以通过提高优先级解决，1000是最高优先级，数字越小，优先级越低 --&gt;</span></div><div class="line">	 <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"1000"</span>&gt;</span><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">service</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>将服务写成前台服务foreground service(已实践，很大程度上能解决问题，但不能保证一定不会被杀)：<br>重写onStartCommand方法，使用StartForeground(int,Notification)方法来启动service。</p>
-</li>
-</ul>
+<p>命令说明： <code>jar cvf  jar包名称  需要打包的文件</code></p>
+<p>实际上就是利用jdk提供的命令重新将文件打包而已.</p>
 <blockquote>
-<p>注：前台服务会在状态栏显示一个通知，最典型的应用就是音乐播放器，只要在播放状态下，就算休眠也不会被杀，如果不想显示通知，只要把参数里的int设为0即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Notification notification = <span class="keyword">new</span> Notification(R.drawable.logo,</div><div class="line">                <span class="string">"wf update service is running"</span>,</div><div class="line">                System.currentTimeMillis());</div><div class="line">        pintent=PendingIntent.getService(<span class="keyword">this</span>, <span class="number">0</span>, intent, <span class="number">0</span>);</div><div class="line">        notification.setLatestEventInfo(<span class="keyword">this</span>, <span class="string">"WF Update Service"</span>,</div><div class="line">                <span class="string">"wf update service is running！"</span>, pintent);</div><div class="line">            </div><div class="line">        <span class="comment">//让该service前台运行，避免手机休眠时系统自动杀掉该服务</span></div><div class="line">        <span class="comment">//如果 id 为 0 ，那么状态栏的 notification 将不会显示。</span></div><div class="line">        startForeground(startId, notification);</div></pre></td></tr></table></figure></p>
+<p>参考文档： <a href="http://docs.oracle.com/javase/tutorial/deployment/jar/build.html" target="_blank" rel="external">jar 命令文档</a></p>
 </blockquote>
-<p>同时，对于通过startForeground启动的service，onDestory方法中需要通过stopForeground(true)来取消前台运行状态。</p>
-<blockquote>
-<p>ps：如果service被杀后下次重启出错，可能是此时重发的Intent为null的缘故，可以通过修改onStartCommand方法的返回值来解决：</p>
-</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/02/Android-make-jar/" class="archive-article-date">
+  	<time datetime="2015-02-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-9-patch-pic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/01/Android-9-patch-pic/">Android 9-patch图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android可以处理一种特殊的png图片9-patch图，图片以<code>.9.png</code>结尾,主要为了实现图片的部分区域的缩放。更多时候应用在按钮或其他控件的背景图上。</p>
+<h3 id="gt-制作方法："><a href="#gt-制作方法：" class="headerlink" title="&gt;制作方法："></a>&gt;制作方法：</h3><p>Android提供了制作9-patch图的工具位置在：<code>android_sdk/tools/draw9patch</code></p>
+<p>先看下工具截图：</p>
+<p><img src="/img/page_img/20150201_1.png" alt="9-patch tools"></p>
+<p>简单来说：<br>截图中左边是编辑区，右边是预览</p>
+<p>左边图中的四条黑线分别指定缩放区域和显示区域. </p>
 <ul>
-<li>利用ANDROID的系统广播检查Service的运行状态，如果被杀掉，就再起来:<br>利用的系统广播是Intent.ACTION_TIME_TICK，这个广播每分钟发送一次，我们可以每分钟检查一次Service的运行状态，如果已经被结束了，就重新启动Service。</li>
+<li>左、上: 缩放区域(repeat区域)</li>
+<li>右、下: 内容区域</li>
+</ul>
+<p>编辑时很简单，只要拖动对应的线条就可以调整到你需要的缩放效果，右边可以实时预览。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/02/01/Android-9-patch-pic/" class="archive-article-date">
+  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/9-patch/">9-patch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Event-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/02/01/Android-Event-01/">Android事件基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-事件处理机制"><a href="#1-事件处理机制" class="headerlink" title="1.事件处理机制"></a>1.事件处理机制</h1><ol>
+<li>基于监听的事件处理</li>
+<li>基于回调的事件处理</li>
+</ol>
+<h2 id="1-1-基于监听的事件处理"><a href="#1-1-基于监听的事件处理" class="headerlink" title="1.1 基于监听的事件处理"></a>1.1 基于监听的事件处理</h2><h3 id="1-1-1-View事件种类"><a href="#1-1-1-View事件种类" class="headerlink" title="1.1.1 View事件种类"></a>1.1.1 View事件种类</h3><ol>
+<li><code>View.OnClickListener</code></li>
+<li><code>View.OnCreateContextMenuListener</code></li>
+<li><code>View.OnFocusChangeListener</code></li>
+<li><code>View.OnKeyListener</code></li>
+<li><code>View.OnLongClickListener</code></li>
+<li><code>View.OnTouchListener</code></li>
+</ol>
+<h3 id="1-1-2-实现事件监听器的几种形式"><a href="#1-1-2-实现事件监听器的几种形式" class="headerlink" title="1.1.2 实现事件监听器的几种形式"></a>1.1.2 实现事件监听器的几种形式</h3><ol>
+<li>内部类</li>
+<li>外部类</li>
+<li>Activity本身实现事件接口</li>
+<li>匿名内部类形式</li>
+</ol>
+<h2 id="1-2-基于回调的事件处理"><a href="#1-2-基于回调的事件处理" class="headerlink" title="1.2 基于回调的事件处理"></a>1.2 基于回调的事件处理</h2><p>组件自身负责处理事件,通过集成组件重写其中的事件接口来实现</p>
+<h3 id="1-2-1-View回调事件"><a href="#1-2-1-View回调事件" class="headerlink" title="1.2.1 View回调事件"></a>1.2.1 View回调事件</h3><ol>
+<li><code>boolean onKeyDown(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyLongPress(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyShortcut(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onKeyUp(int keyCode,KeyEvent event);</code></li>
+<li><code>boolean onTouchEvent(MotionEvent event);</code></li>
+<li><code>boolean onTrackballEvent(MotionEvent event);</code></li>
+</ol>
+<h3 id="1-2-2-基于回调的事件传播"><a href="#1-2-2-基于回调的事件传播" class="headerlink" title="1.2.2 基于回调的事件传播"></a>1.2.2 基于回调的事件传播</h3><ul>
+<li>如果事件返回true，说明事件已经被处理，不会传播</li>
+<li>如果事件返回false，说明事件未被处理，会继续传播</li>
+</ul>
+<h2 id="响应系统设置的事件"><a href="#响应系统设置的事件" class="headerlink" title="响应系统设置的事件"></a>响应系统设置的事件</h2><p>当应用程序随系统设置进行调整，比如屏幕方向，导航等。有时候还需要应用程序监听系统设置的更改作出响应。</p>
+<h1 id="2-Configuration-类"><a href="#2-Configuration-类" class="headerlink" title="2. Configuration 类"></a>2. Configuration 类</h1><p>提供了一些配置相关的功能<br><code>Configuration conf = getResources().getConfiguration();</code><br>常用属性</p>
+<ul>
+<li><code>public float fontScale</code>: 系统字体缩放系数</li>
+<li><code>public int keyboard</code>: 获取键盘类型</li>
+<li><code>public int keyboardHidden</code>: 返回键盘是否可用（软键盘是否开启） </li>
+<li><code>public Locale locale</code>: 获取用户当前的Locale场所（位置）</li>
+<li><code>public int mcc</code>: 获取移动信号的国家码</li>
+<li><code>public int mnc</code>: 获取移动信号的网络码</li>
+<li><code>public int navigation</code>: 判断系统上方向导航设备类型</li>
+<li><code>public int orientation</code>: 获取系统屏幕的方向</li>
+<li><code>public int touchscreen</code>: 获取系统触摸屏的触摸方式</li>
+</ul>
+<h3 id="响应系统设置更改事件"><a href="#响应系统设置更改事件" class="headerlink" title="响应系统设置更改事件"></a>响应系统设置更改事件</h3><p><code>public void onConfigurationChanged(Configuration newConfig);</code></p>
+<h1 id="3-Handler-消息传递机制"><a href="#3-Handler-消息传递机制" class="headerlink" title="3. Handler 消息传递机制"></a>3. Handler 消息传递机制</h1><p>为了解决Android多线程事件传递的问题</p>
+<h2 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h2><p>两个作用：</p>
+<ul>
+<li>在新启动的线程中发送消息</li>
+<li>在主线程中获取、处理消息<br>//TODO: 继续</li>
 </ul>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/12/04/Android-Service-Long-Time-Stay/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
+      <a href="/uncategorized/2015/02/01/Android-Event-01/" class="archive-article-date">
+  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event/">Event</a></li></ul>
 	</div>
 
       
@@ -698,7 +749,7 @@
 
 
   
-    <article id="post-Android-Resources-strings" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Jenkins_Set_up" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -708,7 +759,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Resources-strings/">Android资源-strings</a>
+      <a class="article-title" href="/uncategorized/2015/01/27/Jenkins_Set_up/">Jenkins持续集成系统</a>
     </h1>
   
 
@@ -716,145 +767,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文介绍Resources strings中的一些知识点.</p>
-<p>strings.xml中如何输入特殊字符</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">空格 : &amp;#160;</div><div class="line">" : &amp;#34; 或 &amp;quot;</div><div class="line">' : &amp;#39; 或 &amp;apos;</div><div class="line">&amp; :  &amp;#38; 或 &amp;amp;</div><div class="line">lt(&lt;) : &amp;#60; 或 &amp;lt;</div><div class="line">gt(&gt;) : &amp;#62; 或 &amp;gt;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/Android-Resources-strings/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Problems" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/12/04/Android-Problems/">Android常见问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-ListView-Item无法点击参考"><a href="#1-ListView-Item无法点击参考" class="headerlink" title="1.ListView Item无法点击参考"></a>1.ListView Item无法点击<a href="http://blog.csdn.net/zhufuing/article/details/8677407" target="_blank" rel="external">参考</a></h3><p>在item 的 最外层添加如下属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:descendantFocusability=<span class="string">"blocksDescendants"</span></div></pre></td></tr></table></figure></p>
-<h3 id="2-Android中系统设置中的清除数据究竟会清除哪些数据-参考"><a href="#2-Android中系统设置中的清除数据究竟会清除哪些数据-参考" class="headerlink" title="2.Android中系统设置中的清除数据究竟会清除哪些数据-参考"></a>2.Android中系统设置中的清除数据究竟会清除哪些数据-<a href="http://my.eoe.cn/sunshine_girl/archive/14873.html" target="_blank" rel="external">参考</a></h3><p>应用中的清理数据，会清理掉除去lib文件夹（含内部文件）的文件及文件夹。<br>p.s:/sdcard/Android/data/这个目录也是和包名相关的，但是系统中的清理数据不会清理掉这个目录中的相关信息。</p>
-<h3 id="3-如何修改-Android-ActionBar-左边的-icon"><a href="#3-如何修改-Android-ActionBar-左边的-icon" class="headerlink" title="3.如何修改 Android ActionBar 左边的 icon"></a>3.如何修改 Android ActionBar 左边的 icon</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span>  <span class="attr">android:logo</span>=<span class="string">"@drawable/logo"</span> &gt;</span></div></pre></td></tr></table></figure>
-<h3 id="4-WebView加载页面"><a href="#4-WebView加载页面" class="headerlink" title="4.WebView加载页面"></a>4.WebView加载页面</h3><p>设置WebViewClient ，可以使点击WebView中的链接在WebView中加载</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.webView.setWebViewClient(<span class="keyword">new</span> webViewClient()); </div><div class="line"><span class="comment">//加载地址</span></div><div class="line"><span class="keyword">this</span>.webView.loadUrl(<span class="string">"http://10.0.2.2"</span>);  </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">webViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span></span>&#123;</div><div class="line"><span class="comment">//重写shouldOverrideUrlLoading方法，使点击链接后不使用其他的浏览器打开。 </span></div><div class="line">    <span class="meta">@Override</span> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(WebView view, String url)</span> </span>&#123; </div><div class="line">    </div><div class="line">        view.loadUrl(url); </div><div class="line"></div><div class="line">        <span class="comment">//如果不需要其他对点击链接事件的处理返回true，否则返回false </span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>；</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2014/12/04/Android-Problems/" class="archive-article-date">
-  	<time datetime="2014-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-12-04</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Best-Practices" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2014/11/13/Android-Best-Practices/">Android最佳实践</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此文来自于Futurice公司分享的最佳实践,可以避免走很多弯路。类似的文章我找了很久，今天伯乐在线第一篇文章就是，这个，惊喜之余立马收藏在自己博客里。tips: 赞RSS.</p>
+        <p>Jenkins配置方法：</p>
+<h2 id="1-安装tomcat"><a href="#1-安装tomcat" class="headerlink" title="1.安装tomcat"></a>1.安装tomcat</h2><h2 id="2-下载Jenkins"><a href="#2-下载Jenkins" class="headerlink" title="2.下载Jenkins"></a>2.下载Jenkins</h2><p>将下载好的jenkins.war,放入tomcat下的 <code>web_app</code>目录</p>
+<h2 id="3-启动tomcat-进入-http-localhost-8080-jenkins"><a href="#3-启动tomcat-进入-http-localhost-8080-jenkins" class="headerlink" title="3.启动tomcat,进入 http://localhost:8080/jenkins"></a>3.启动tomcat,进入 <a href="http://localhost:8080/jenkins" target="_blank" rel="external">http://localhost:8080/jenkins</a></h2><h2 id="4-配置Jenkins"><a href="#4-配置Jenkins" class="headerlink" title="4.配置Jenkins"></a>4.配置Jenkins</h2><h3 id="4-1-进入系统配置"><a href="#4-1-进入系统配置" class="headerlink" title="4.1.进入系统配置"></a>4.1.进入系统配置</h3><h3 id="4-2-配置JavaSDK"><a href="#4-2-配置JavaSDK" class="headerlink" title="4.2.配置JavaSDK"></a>4.2.配置JavaSDK</h3><p>按照提示设置好JavaSdk的目录(绝对路径)就好</p>
 <blockquote>
-<h4 id="官方Github"><a href="#官方Github" class="headerlink" title="官方Github"></a><a href="http://wowubuntu.com/markdown/://github.com/futurice/android-best-practices" target="_blank" rel="external">官方Github</a></h4></blockquote>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><h4 id="Use-Gradle-and-its-recommended-project-structure"><a href="#Use-Gradle-and-its-recommended-project-structure" class="headerlink" title="Use Gradle and its recommended project structure"></a>Use Gradle and its recommended project structure</h4><p>使用Gradle和其推荐的项目结构</p>
-<h4 id="Put-passwords-and-sensitive-data-in-gradle-properties"><a href="#Put-passwords-and-sensitive-data-in-gradle-properties" class="headerlink" title="Put passwords and sensitive data in gradle.properties"></a>Put passwords and sensitive data in gradle.properties</h4><p>将密码或者敏感数据放在gradle.properties中</p>
-<h4 id="Don’t-write-your-own-HTTP-client-use-Volley-or-Retrofit-libraries"><a href="#Don’t-write-your-own-HTTP-client-use-Volley-or-Retrofit-libraries" class="headerlink" title="Don’t write your own HTTP client, use Volley or Retrofit libraries"></a>Don’t write your own HTTP client, use Volley or Retrofit libraries</h4><p>不要自己写HTTP 客户端，直接使用Volley 或者 Retrofit</p>
-<h4 id="Use-the-Jackson-library-to-parse-JSON-data"><a href="#Use-the-Jackson-library-to-parse-JSON-data" class="headerlink" title="Use the Jackson library to parse JSON data"></a>Use the Jackson library to parse JSON data</h4><p>使用Jackson解析JSON数据</p>
-<h4 id="Use-Volley-or-Retrofit-OkHttp-Picasso-for-networking-and-images"><a href="#Use-Volley-or-Retrofit-OkHttp-Picasso-for-networking-and-images" class="headerlink" title="Use Volley or Retrofit+OkHttp+Picasso for networking and images"></a>Use Volley or Retrofit+OkHttp+Picasso for networking and images</h4><p>使用Volley或者Retrofit+OkHttp+Picasso请求数据和图片</p>
-<h4 id="Avoid-Guava-and-use-only-a-few-libraries-due-to-the-65k-method-limit"><a href="#Avoid-Guava-and-use-only-a-few-libraries-due-to-the-65k-method-limit" class="headerlink" title="Avoid Guava and use only a few libraries due to the 65k method limit"></a>Avoid Guava and use only a few libraries due to the 65k method limit</h4><p>不要使用太多library，小心65k个方法个数限制</p>
-<h4 id="Use-Fragments-to-represent-a-UI-screen"><a href="#Use-Fragments-to-represent-a-UI-screen" class="headerlink" title="Use Fragments to represent a UI screen"></a>Use Fragments to represent a UI screen</h4><p>使用Fragments做UI部分</p>
-<h4 id="Use-Activities-just-to-manage-Fragments"><a href="#Use-Activities-just-to-manage-Fragments" class="headerlink" title="Use Activities just to manage Fragments"></a>Use Activities just to manage Fragments</h4><p>Activity 仅仅用来管理Fragment</p>
-<h4 id="Layout-XMLs-are-code-organize-them-well"><a href="#Layout-XMLs-are-code-organize-them-well" class="headerlink" title="Layout XMLs are code, organize them well"></a>Layout XMLs are code, organize them well</h4><p>组织好XML</p>
-<h4 id="Use-styles-to-avoid-duplicate-attributes-in-layout-XMLs"><a href="#Use-styles-to-avoid-duplicate-attributes-in-layout-XMLs" class="headerlink" title="Use styles to avoid duplicate attributes in layout XMLs"></a>Use styles to avoid duplicate attributes in layout XMLs</h4><p>使用 style 来避免layout中的重复属性</p>
-<h4 id="Use-multiple-style-files-to-avoid-a-single-huge-one"><a href="#Use-multiple-style-files-to-avoid-a-single-huge-one" class="headerlink" title="Use multiple style files to avoid a single huge one"></a>Use multiple style files to avoid a single huge one</h4><p>把巨大的style文件分解成多个小的</p>
-<h4 id="Keep-your-colors-xml-short-and-DRY-just-define-the-palette"><a href="#Keep-your-colors-xml-short-and-DRY-just-define-the-palette" class="headerlink" title="Keep your colors.xml short and DRY, just define the palette"></a>Keep your colors.xml short and DRY, just define the palette</h4><p>保持colors.xml DRY,只定义模板颜色</p>
-<h4 id="Also-keep-dimens-xml-DRY-define-generic-constants"><a href="#Also-keep-dimens-xml-DRY-define-generic-constants" class="headerlink" title="Also keep dimens.xml DRY, define generic constants"></a>Also keep dimens.xml DRY, define generic constants</h4><p>保持 dimes.xml DRY，定义通用的值</p>
-<h4 id="Do-not-make-a-deep-hierarchy-of-ViewGroups"><a href="#Do-not-make-a-deep-hierarchy-of-ViewGroups" class="headerlink" title="Do not make a deep hierarchy of ViewGroups"></a>Do not make a deep hierarchy of ViewGroups</h4><p>不要给你的ViewGroup装太多东西</p>
-<h4 id="Avoid-client-side-processing-for-WebViews-and-beware-of-leaks"><a href="#Avoid-client-side-processing-for-WebViews-and-beware-of-leaks" class="headerlink" title="Avoid client-side processing for WebViews, and beware of leaks"></a>Avoid client-side processing for WebViews, and beware of leaks</h4><p>使用WebView时不要在客户端做太多处理，小心内存泄露</p>
-<h4 id="Avoid-testing-with-Robolectric-on-Activities-Fragments-and-Views"><a href="#Avoid-testing-with-Robolectric-on-Activities-Fragments-and-Views" class="headerlink" title="Avoid testing with Robolectric on Activities, Fragments, and Views"></a>Avoid testing with Robolectric on Activities, Fragments, and Views</h4><p>不要使用Robolectric测试Activity,Fragment和View</p>
+<p>mac下查找<code>JAVA_HOME</code>的方法：<br>命令行<code>$ /usr/libexec/java_home</code> ，然后将目录地址添加到 <code>~/.bash_profile</code>中</p>
+</blockquote>
+<h3 id="4-3-配置Ant"><a href="#4-3-配置Ant" class="headerlink" title="4.3.配置Ant"></a>4.3.配置Ant</h3><p>设置Ant目录地址即可</p>
+<h3 id="4-4-配置构建项目"><a href="#4-4-配置构建项目" class="headerlink" title="4.4.配置构建项目"></a>4.4.配置构建项目</h3><p>重点需要配置的位置：</p>
+<h4 id="4-4-1-源码管理"><a href="#4-4-1-源码管理" class="headerlink" title="4.4.1. 源码管理"></a>4.4.1. 源码管理</h4><p>(img)</p>
+<h4 id="4-4-2-Invoke-Ant"><a href="#4-4-2-Invoke-Ant" class="headerlink" title="4.4.2. Invoke Ant"></a>4.4.2. Invoke Ant</h4><p><img src="/img/page_img/20150201_2-1.png" alt="Invoke Ant"></p>
+<p>令。测试环境中是 <code>ant debug</code>,正式环境可以是 <code>ant release</code>.</p>
+<p>参数：</p>
+<ul>
+<li><p>Targets : 需要执行的命令</p>
+</li>
+<li><p>Build File : 相对于workspace的目录，也就是源码管理时填写的目录</p>
+</li>
+</ul>
+<p>如图中的配置构建时相当于执行：<code>ant -f uapp/build.xml debug</code></p>
+<h4 id="4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins"><a href="#4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)"></a>4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)</h4><p><img src="/img/page_img/20150201_2-3.png" alt="Run Android monkey tester"></p>
+<h4 id="4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins"><a href="#4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)"></a>4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)</h4><p><img src="/img/page_img/20150201_2-2.png" alt="install android package"></p>
+<h4 id="4-4-5-配置构建之后保存的文档"><a href="#4-4-5-配置构建之后保存的文档" class="headerlink" title="4.4.5. 配置构建之后保存的文档"></a>4.4.5. 配置构建之后保存的文档</h4><p>配置好之后，构建成功之后就会显示此文件，可以点击直接下载，见下图：</p>
+<p><img src="/img/page_img/20150201_2-4.png" alt="install android package"></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2014/11/13/Android-Best-Practices/" class="archive-article-date">
-  	<time datetime="2014-11-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2014-11-13</time>
+      <a href="/uncategorized/2015/01/27/Jenkins_Set_up/" class="archive-article-date">
+  	<time datetime="2015-01-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-27</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最佳实践/">最佳实践</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
 	</div>
 
       
@@ -877,7 +824,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
     </nav>
   
 
@@ -887,7 +834,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 XBlog
+    		&copy; 2017 XBlog
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -934,7 +881,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12.5px;">jar</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
     			</div>
     	</section>
     

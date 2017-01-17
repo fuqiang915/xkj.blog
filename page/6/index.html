@@ -148,7 +148,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-Android-Widget-ProgressBar" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell-cmd" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/03/06/Android-Widget-ProgressBar/">Android控件-ProgressBar</a>
+      <a class="article-title" href="/uncategorized/2015/07/23/shell-cmd/">Shell常用命令</a>
     </h1>
   
 
@@ -166,18 +166,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="ProgressBar"><a href="#ProgressBar" class="headerlink" title="ProgressBar"></a>ProgressBar</h1>
+        <h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><hr>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p><code>sudo 用户 -c 命令</code></p>
+<p>切换为root用户</p>
+<p><code>sudo su</code></p>
+<p>切换其他用户</p>
+<p><code>sudo username</code></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/03/06/Android-Widget-ProgressBar/" class="archive-article-date">
-  	<time datetime="2015-03-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-06</time>
+      <a href="/uncategorized/2015/07/23/shell-cmd/" class="archive-article-date">
+  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ProgressBar/">ProgressBar</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
 	</div>
 
       
@@ -198,7 +204,7 @@
 
 
   
-    <article id="post-Android-Support-v7" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-redis-introduce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -208,7 +214,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/03/02/Android-Support-v7/">Android Support V7</a>
+      <a class="article-title" href="/uncategorized/2015/07/16/redis-introduce/">redis 介绍</a>
     </h1>
   
 
@@ -216,22 +222,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇文章简单介绍一些Android L Android Support v7 package（com.android.support:recyclerview-v7:21.0.0-rc1）中包含的一些组件，以及相关的信息。</p>
-<h3 id="1-Views"><a href="#1-Views" class="headerlink" title="1. Views"></a>1. Views</h3><h4 id="1-1-CardView"><a href="#1-1-CardView" class="headerlink" title="1.1 CardView"></a>1.1 CardView</h4><p>支持圆角和阴影的View</p>
-<h4 id="1-2-RecycleView"><a href="#1-2-RecycleView" class="headerlink" title="1.2 RecycleView"></a>1.2 RecycleView</h4><p>ListView的升级版本</p>
-<p><a href="http://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156" target="_blank" rel="external">CardView &amp; RecycleView教程</a></p>
+        <p>今天项目中实现消息发送队列时用到redis，之前从来没接触过，这里记录一下一些基本使用方法.</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><hr>
+<p>Redis是一个Key-Value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)和zset(有序集合)。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，Redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是Redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install</div></pre></td></tr></table></figure>
+<p>安装成功之后启动服务：<code>redis-server</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启动服务，应用对应配置</span></div><div class="line">/usr/local/bin/redis-server /etc/redis.conf</div></pre></td></tr></table></figure>
+<p>命令行工具： <code>redis-cli</code></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><hr>
+<p>取值：<code>get [key]</code></p>
+<p>存值：<code>set [key] [value]</code></p>
+<h2 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h2><p><a href="http://redisdoc.com/" target="_blank" rel="external">Redis 命令参考</a></p>
+<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><p>设置需要密码链接： requirepass</p>
+<p>默认配置如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div></pre></td><td class="code"><pre><div class="line"># # Note on units: when memory size is needed, it is possible to specify</div><div class="line"># it in the usual form of 1k 5GB 4M and so forth:</div><div class="line">#</div><div class="line"># 1k =&gt; 1000 bytes</div><div class="line"># 1kb =&gt; 1024 bytes</div><div class="line"># 1m =&gt; 1000000 bytes</div><div class="line"># 1mb =&gt; 1024*1024 bytes</div><div class="line"># 1g =&gt; 1000000000 bytes</div><div class="line"># 1gb =&gt; 1024*1024*1024 bytes</div><div class="line">#</div><div class="line"># units are case insensitive so 1GB 1Gb 1gB are all the same.</div><div class="line"># # By default Redis does not run as a daemon. Use 'yes' if you need it.</div><div class="line"># Note that Redis will write a pid file in /var/run/redis.pid when daemonized.</div><div class="line">daemonize no</div><div class="line"># # When running daemonized, Redis writes a pid file in /var/run/redis.pid by</div><div class="line"># default. You can specify a custom pid file location here.</div><div class="line">pidfile /var/run/redis.pid</div><div class="line"># # Accept connections on the specified port, default is 6379.</div><div class="line"># If port 0 is specified Redis will not listen on a TCP socket.</div><div class="line">port 6379</div><div class="line"># # If you want you can bind a single interface, if the bind option is not</div><div class="line"># specified all the interfaces will listen for incoming connections.</div><div class="line">#</div><div class="line"># bind 127.0.0.1</div><div class="line"># # Specify the path for the unix socket that will be used to listen for</div><div class="line"># incoming connections. There is no default, so Redis will not listen</div><div class="line"># on a unix socket when not specified.</div><div class="line">#</div><div class="line"># unixsocket /tmp/redis.sock</div><div class="line"># unixsocketperm 755</div><div class="line"># # Close the connection after a client is idle for N seconds (0 to disable)</div><div class="line">timeout 0</div><div class="line"># # TCP keepalive.</div><div class="line">#</div><div class="line"># If non-zero, use SO_KEEPALIVE to send TCP ACKs to clients in absence</div><div class="line"># of communication. This is useful for two reasons:</div><div class="line">#</div><div class="line"># 1) Detect dead peers.</div><div class="line"># 2) Take the connection alive from the point of view of network</div><div class="line">#    equipment in the middle.</div><div class="line">#</div><div class="line"># On Linux, the specified value (in seconds) is the period used to send ACKs.</div><div class="line"># Note that to close the connection the double of the time is needed.</div><div class="line"># On other kernels the period depends on the kernel configuration.</div><div class="line">#</div><div class="line"># A reasonable value for this option is 60 seconds.</div><div class="line">tcp-keepalive 0</div><div class="line"># # Specify the server verbosity level.</div><div class="line"># This can be one of:</div><div class="line"># debug (a lot of information, useful for development/testing)</div><div class="line"># verbose (many rarely useful info, but not a mess like the debug level)</div><div class="line"># notice (moderately verbose, what you want in production probably)</div><div class="line"># warning (only very important / critical messages are logged)</div><div class="line">loglevel notice</div><div class="line"># # Specify the log file name. Also 'stdout' can be used to force</div><div class="line"># Redis to log on the standard output. Note that if you use standard</div><div class="line"># output for logging but daemonize, logs will be sent to /dev/null</div><div class="line">logfile stdout</div><div class="line"># # To enable logging to the system logger, just set 'syslog-enabled' to yes,</div><div class="line"># and optionally update the other syslog parameters to suit your needs.</div><div class="line"># syslog-enabled no</div><div class="line"># # Specify the syslog identity.</div><div class="line"># syslog-ident redis</div><div class="line"># # Specify the syslog facility. Must be USER or between LOCAL0-LOCAL7.</div><div class="line"># syslog-facility local0</div><div class="line"># # Set the number of databases. The default database is DB 0, you can select</div><div class="line"># a different one on a per-connection basis using SELECT &lt;dbid&gt; where</div><div class="line"># dbid is a number between 0 and 'databases'-1</div><div class="line">databases 16</div><div class="line"># ################################ SNAPSHOTTING  #################################</div><div class="line">#</div><div class="line"># Save the DB on disk:</div><div class="line">#</div><div class="line">#   save &lt;seconds&gt; &lt;changes&gt;</div><div class="line">#</div><div class="line">#   Will save the DB if both the given number of seconds and the given</div><div class="line">#   number of write operations against the DB occurred.</div><div class="line">#</div><div class="line">#   In the example below the behaviour will be to save:</div><div class="line">#   after 900 sec (15 min) if at least 1 key changed</div><div class="line">#   after 300 sec (5 min) if at least 10 keys changed</div><div class="line">#   after 60 sec if at least 10000 keys changed</div><div class="line">#</div><div class="line">#   Note: you can disable saving at all commenting all the "save" lines.</div><div class="line">#</div><div class="line">#   It is also possible to remove all the previously configured save</div><div class="line">#   points by adding a save directive with a single empty string argument</div><div class="line">#   like in the following example:</div><div class="line">#</div><div class="line">#   save ""</div><div class="line"># save 900 1</div><div class="line">save 300 10</div><div class="line">save 60 10000</div><div class="line"># # By default Redis will stop accepting writes if RDB snapshots are enabled</div><div class="line"># (at least one save point) and the latest background save failed.</div><div class="line"># This will make the user aware (in an hard way) that data is not persisting</div><div class="line"># on disk properly, otherwise chances are that no one will notice and some</div><div class="line"># distater will happen.</div><div class="line">#</div><div class="line"># If the background saving process will start working again Redis will</div><div class="line"># automatically allow writes again.</div><div class="line">#</div><div class="line"># However if you have setup your proper monitoring of the Redis server</div><div class="line"># and persistence, you may want to disable this feature so that Redis will</div><div class="line"># continue to work as usually even if there are problems with disk,</div><div class="line"># permissions, and so forth.</div><div class="line">stop-writes-on-bgsave-error yes</div><div class="line"># # Compress string objects using LZF when dump .rdb databases?</div><div class="line"># For default that's set to 'yes' as it's almost always a win.</div><div class="line"># If you want to save some CPU in the saving child set it to 'no' but</div><div class="line"># the dataset will likely be bigger if you have compressible values or keys.</div><div class="line">rdbcompression yes</div><div class="line"># # Since version 5 of RDB a CRC64 checksum is placed at the end of the file.</div><div class="line"># This makes the format more resistant to corruption but there is a performance</div><div class="line"># hit to pay (around 10%) when saving and loading RDB files, so you can disable it</div><div class="line"># for maximum performances.</div><div class="line">#</div><div class="line"># RDB files created with checksum disabled have a checksum of zero that will</div><div class="line"># tell the loading code to skip the check.</div><div class="line">rdbchecksum yes</div><div class="line"># # The filename where to dump the DB</div><div class="line">dbfilename dump.rdb</div><div class="line"># # The working directory.</div><div class="line">#</div><div class="line"># The DB will be written inside this directory, with the filename specified</div><div class="line"># above using the 'dbfilename' configuration directive.</div><div class="line"># </div><div class="line"># The Append Only File will also be created inside this directory.</div><div class="line"># </div><div class="line"># Note that you must specify a directory here, not a file name.</div><div class="line">dir ./</div><div class="line"># ################################# REPLICATION #################################</div><div class="line"># # Master-Slave replication. Use slaveof to make a Redis instance a copy of</div><div class="line"># another Redis server. Note that the configuration is local to the slave</div><div class="line"># so for example it is possible to configure the slave to save the DB with a</div><div class="line"># different interval, or to listen to another port, and so on.</div><div class="line">#</div><div class="line"># slaveof &lt;masterip&gt; &lt;masterport&gt;</div><div class="line"># # If the master is password protected (using the "eequirepass" configuration</div><div class="line"># directive below) it is possible to tell the slave to authenticate before</div><div class="line"># starting the replication synchronization process, otherwise the master will</div><div class="line"># refuse the slave request.</div><div class="line">#</div><div class="line"># masterauth &lt;master-password&gt;</div><div class="line"># # When a slave loses its connection with the master, or when the replication</div><div class="line"># is still in progress, the slave can act in two different ways:</div><div class="line">#</div><div class="line"># 1) if slave-serve-stale-data is set to 'yes' (the default) the slave will</div><div class="line">#    still reply to client requests, possibly with out of date data, or the</div><div class="line">#    data set may just be empty if this is the first synchronization.</div><div class="line">#</div><div class="line"># 2) if slave-serve-stale-data is set to 'no' the slave will reply with</div><div class="line">#    an error "SYNC with master in progress" to all the kind of commands</div><div class="line">#    but to INFO and SLAVEOF.</div><div class="line">#</div><div class="line">slave-serve-stale-data yes</div><div class="line"># # You can configure a slave instance to accept writes or not. Writing against</div><div class="line"># a slave instance may be useful to store some ephemeral data (because data</div><div class="line"># written on a slave will be easily deleted after resync with the master) but</div><div class="line"># may also cause problems if clients are writing to it because of a</div><div class="line"># misconfiguration.</div><div class="line">#</div><div class="line"># Since Redis 2.6 by default slaves are read-only.</div><div class="line">#</div><div class="line"># Note: read only slaves are not designed to be exposed to untrusted clients</div><div class="line"># on the internet. It's just a protection layer against misuse of the instance.</div><div class="line"># Still a read only slave exports by default all the administrative commands</div><div class="line"># such as CONFIG, DEBUG, and so forth. To a limited extend you can improve</div><div class="line"># security of read only slaves using 'rename-command' to shadow all the</div><div class="line"># administrative / dangerous commands.</div><div class="line">slave-read-only yes</div><div class="line"># # Slaves send PINGs to server in a predefined interval. It's possible to change</div><div class="line"># this interval with the repl_ping_slave_period option. The default value is 10</div><div class="line"># seconds.</div><div class="line">#</div><div class="line"># repl-ping-slave-period 10</div><div class="line"># # The following option sets a timeout for both Bulk transfer I/O timeout and</div><div class="line"># master data or ping response timeout. The default value is 60 seconds.</div><div class="line">#</div><div class="line"># It is important to make sure that this value is greater than the value</div><div class="line"># specified for repl-ping-slave-period otherwise a timeout will be detected</div><div class="line"># every time there is low traffic between the master and the slave.</div><div class="line">#</div><div class="line"># repl-timeout 60</div><div class="line"># # Disable TCP_NODELAY on the slave socket after SYNC?</div><div class="line">#</div><div class="line"># If you select "yes" Redis will use a smaller number of TCP packets and</div><div class="line"># less bandwidth to send data to slaves. But this can add a delay for</div><div class="line"># the data to appear on the slave side, up to 40 milliseconds with</div><div class="line"># Linux kernels using a default configuration.</div><div class="line">#</div><div class="line"># If you select "no" the delay for data to appear on the slave side will</div><div class="line"># be reduced but more bandwidth will be used for replication.</div><div class="line">#</div><div class="line"># By default we optimize for low latency, but in very high traffic conditions</div><div class="line"># or when the master and slaves are many hops away, turning this to "yes" may</div><div class="line"># be a good idea.</div><div class="line">repl-disable-tcp-nodelay no</div><div class="line"># # The slave priority is an integer number published by Redis in the INFO output.</div><div class="line"># It is used by Redis Sentinel in order to select a slave to promote into a</div><div class="line"># master if the master is no longer working correctly.</div><div class="line">#</div><div class="line"># A slave with a low priority number is considered better for promotion, so</div><div class="line"># for instance if there are three slaves with priority 10, 100, 25 Sentinel will</div><div class="line"># pick the one wtih priority 10, that is the lowest.</div><div class="line">#</div><div class="line"># However a special priority of 0 marks the slave as not able to perform the</div><div class="line"># role of master, so a slave with priority of 0 will never be selected by</div><div class="line"># Redis Sentinel for promotion.</div><div class="line">#</div><div class="line"># By default the priority is 100.</div><div class="line">slave-priority 100</div><div class="line"># ################################## SECURITY ###################################</div><div class="line"># # Require clients to issue AUTH &lt;PASSWORD&gt; before processing any other</div><div class="line"># commands.  This might be useful in environments in which you do not trust</div><div class="line"># others with access to the host running redis-server.</div><div class="line">#</div><div class="line"># This should stay commented out for backward compatibility and because most</div><div class="line"># people do not need auth (e.g. they run their own servers).</div><div class="line"># </div><div class="line"># Warning: since Redis is pretty fast an outside user can try up to</div><div class="line"># 150k passwords per second against a good box. This means that you should</div><div class="line"># use a very strong password otherwise it will be very easy to break.</div><div class="line">#</div><div class="line">requirepass xkjqiang</div><div class="line"># # Command renaming.</div><div class="line">#</div><div class="line"># It is possible to change the name of dangerous commands in a shared</div><div class="line"># environment. For instance the CONFIG command may be renamed into something</div><div class="line"># hard to guess so that it will still be available for internal-use tools</div><div class="line"># but not available for general clients.</div><div class="line">#</div><div class="line"># Example:</div><div class="line">#</div><div class="line"># rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52</div><div class="line">#</div><div class="line"># It is also possible to completely kill a command by renaming it into</div><div class="line"># an empty string:</div><div class="line">#</div><div class="line"># rename-command CONFIG ""</div><div class="line">#</div><div class="line"># Please note that changing the name of commands that are logged into the</div><div class="line"># AOF file or transmitted to slaves may cause problems.</div><div class="line"># ################################### LIMITS ####################################</div><div class="line"># # Set the max number of connected clients at the same time. By default</div><div class="line"># this limit is set to 10000 clients, however if the Redis server is not</div><div class="line"># able to configure the process file limit to allow for the specified limit</div><div class="line"># the max number of allowed clients is set to the current file limit</div><div class="line"># minus 32 (as Redis reserves a few file descriptors for internal uses).</div><div class="line">#</div><div class="line"># Once the limit is reached Redis will close all the new connections sending</div><div class="line"># an error 'max number of clients reached'.</div><div class="line">#</div><div class="line"># maxclients 10000</div><div class="line"># # Don't use more memory than the specified amount of bytes.</div><div class="line"># When the memory limit is reached Redis will try to remove keys</div><div class="line"># accordingly to the eviction policy selected (see maxmemmory-policy).</div><div class="line">#</div><div class="line"># If Redis can't remove keys according to the policy, or if the policy is</div><div class="line"># set to 'noeviction', Redis will start to reply with errors to commands</div><div class="line"># that would use more memory, like SET, LPUSH, and so on, and will continue</div><div class="line"># to reply to read-only commands like GET.</div><div class="line">#</div><div class="line"># This option is usually useful when using Redis as an LRU cache, or to set</div><div class="line"># an hard memory limit for an instance (using the 'noeviction' policy).</div><div class="line">#</div><div class="line"># WARNING: If you have slaves attached to an instance with maxmemory on,</div><div class="line"># the size of the output buffers needed to feed the slaves are subtracted</div><div class="line"># from the used memory count, so that network problems / resyncs will</div><div class="line"># not trigger a loop where keys are evicted, and in turn the output</div><div class="line"># buffer of slaves is full with DELs of keys evicted triggering the deletion</div><div class="line"># of more keys, and so forth until the database is completely emptied.</div><div class="line">#</div><div class="line"># In short... if you have slaves attached it is suggested that you set a lower</div><div class="line"># limit for maxmemory so that there is some free RAM on the system for slave</div><div class="line"># output buffers (but this is not needed if the policy is 'noeviction').</div><div class="line">#</div><div class="line"># maxmemory &lt;bytes&gt;</div><div class="line"># # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory</div><div class="line"># is reached. You can select among five behaviors:</div><div class="line"># </div><div class="line"># volatile-lru -&gt; remove the key with an expire set using an LRU algorithm</div><div class="line"># allkeys-lru -&gt; remove any key accordingly to the LRU algorithm</div><div class="line"># volatile-random -&gt; remove a random key with an expire set</div><div class="line"># allkeys-random -&gt; remove a random key, any key</div><div class="line"># volatile-ttl -&gt; remove the key with the nearest expire time (minor TTL)</div><div class="line"># noeviction -&gt; don't expire at all, just return an error on write operations</div><div class="line"># </div><div class="line"># Note: with any of the above policies, Redis will return an error on write</div><div class="line">#       operations, when there are not suitable keys for eviction.</div><div class="line">#</div><div class="line">#       At the date of writing this commands are: set setnx setex append</div><div class="line">#       incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd</div><div class="line">#       sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby</div><div class="line">#       zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby</div><div class="line">#       getset mset msetnx exec sort</div><div class="line">#</div><div class="line"># The default is:</div><div class="line">#</div><div class="line"># maxmemory-policy volatile-lru</div><div class="line"># # LRU and minimal TTL algorithms are not precise algorithms but approximated</div><div class="line"># algorithms (in order to save memory), so you can select as well the sample</div><div class="line"># size to check. For instance for default Redis will check three keys and</div><div class="line"># pick the one that was used less recently, you can change the sample size</div><div class="line"># using the following configuration directive.</div><div class="line">#</div><div class="line"># maxmemory-samples 3</div><div class="line"># ############################## APPEND ONLY MODE ###############################</div><div class="line"># # By default Redis asynchronously dumps the dataset on disk. This mode is</div><div class="line"># good enough in many applications, but an issue with the Redis process or</div><div class="line"># a power outage may result into a few minutes of writes lost (depending on</div><div class="line"># the configured save points).</div><div class="line">#</div><div class="line"># The Append Only File is an alternative persistence mode that provides</div><div class="line"># much better durability. For instance using the default data fsync policy</div><div class="line"># (see later in the config file) Redis can lose just one second of writes in a</div><div class="line"># dramatic event like a server power outage, or a single write if something</div><div class="line"># wrong with the Redis process itself happens, but the operating system is</div><div class="line"># still running correctly.</div><div class="line">#</div><div class="line"># AOF and RDB persistence can be enabled at the same time without problems.</div><div class="line"># If the AOF is enabled on startup Redis will load the AOF, that is the file</div><div class="line"># with the better durability guarantees.</div><div class="line">#</div><div class="line"># Please check http://redis.io/topics/persistence for more information.</div><div class="line"># appendonly no</div><div class="line"># # The name of the append only file (default: "appendonly.aof")</div><div class="line"># appendfilename appendonly.aof</div><div class="line"># # The fsync() call tells the Operating System to actually write data on disk</div><div class="line"># instead to wait for more data in the output buffer. Some OS will really flush </div><div class="line"># data on disk, some other OS will just try to do it ASAP.</div><div class="line">#</div><div class="line"># Redis supports three different modes:</div><div class="line">#</div><div class="line"># no: don't fsync, just let the OS flush the data when it wants. Faster.</div><div class="line"># always: fsync after every write to the append only log . Slow, Safest.</div><div class="line"># everysec: fsync only one time every second. Compromise.</div><div class="line">#</div><div class="line"># The default is "everysec", as that's usually the right compromise between</div><div class="line"># speed and data safety. It's up to you to understand if you can relax this to</div><div class="line"># "no" that will let the operating system flush the output buffer when</div><div class="line"># it wants, for better performances (but if you can live with the idea of</div><div class="line"># some data loss consider the default persistence mode that's snapshotting),</div><div class="line"># or on the contrary, use "always" that's very slow but a bit safer than</div><div class="line"># everysec.</div><div class="line">#</div><div class="line"># More details please check the following article:</div><div class="line"># http://antirez.com/post/redis-persistence-demystified.html</div><div class="line">#</div><div class="line"># If unsure, use "everysec".</div><div class="line"># # appendfsync always</div><div class="line">appendfsync everysec</div><div class="line"># appendfsync no</div><div class="line"># # When the AOF fsync policy is set to always or everysec, and a background</div><div class="line"># saving process (a background save or AOF log background rewriting) is</div><div class="line"># performing a lot of I/O against the disk, in some Linux configurations</div><div class="line"># Redis may block too long on the fsync() call. Note that there is no fix for</div><div class="line"># this currently, as even performing fsync in a different thread will block</div><div class="line"># our synchronous write(2) call.</div><div class="line">#</div><div class="line"># In order to mitigate this problem it's possible to use the following option</div><div class="line"># that will prevent fsync() from being called in the main process while a</div><div class="line"># BGSAVE or BGREWRITEAOF is in progress.</div><div class="line">#</div><div class="line"># This means that while another child is saving, the durability of Redis is</div><div class="line"># the same as "appendfsync none". In practical terms, this means that it is</div><div class="line"># possible to lose up to 30 seconds of log in the worst scenario (with the</div><div class="line"># default Linux settings).</div><div class="line"># </div><div class="line"># If you have latency problems turn this to "yes". Otherwise leave it as</div><div class="line"># "no" that is the safest pick from the point of view of durability.</div><div class="line">no-appendfsync-on-rewrite no</div><div class="line"># # Automatic rewrite of the append only file.</div><div class="line"># Redis is able to automatically rewrite the log file implicitly calling</div><div class="line"># BGREWRITEAOF when the AOF log size grows by the specified percentage.</div><div class="line"># </div><div class="line"># This is how it works: Redis remembers the size of the AOF file after the</div><div class="line"># latest rewrite (if no rewrite has happened since the restart, the size of</div><div class="line"># the AOF at startup is used).</div><div class="line">#</div><div class="line"># This base size is compared to the current size. If the current size is</div><div class="line"># bigger than the specified percentage, the rewrite is triggered. Also</div><div class="line"># you need to specify a minimal size for the AOF file to be rewritten, this</div><div class="line"># is useful to avoid rewriting the AOF file even if the percentage increase</div><div class="line"># is reached but it is still pretty small.</div><div class="line">#</div><div class="line"># Specify a percentage of zero in order to disable the automatic AOF</div><div class="line"># rewrite feature.</div><div class="line"># auto-aof-rewrite-percentage 100</div><div class="line">auto-aof-rewrite-min-size 64mb</div><div class="line"># ################################ LUA SCRIPTING  ###############################</div><div class="line"># # Max execution time of a Lua script in milliseconds.</div><div class="line">#</div><div class="line"># If the maximum execution time is reached Redis will log that a script is</div><div class="line"># still in execution after the maximum allowed time and will start to</div><div class="line"># reply to queries with an error.</div><div class="line">#</div><div class="line"># When a long running script exceed the maximum execution time only the</div><div class="line"># SCRIPT KILL and SHUTDOWN NOSAVE commands are available. The first can be</div><div class="line"># used to stop a script that did not yet called write commands. The second</div><div class="line"># is the only way to shut down the server in the case a write commands was</div><div class="line"># already issue by the script but the user don't want to wait for the natural</div><div class="line"># termination of the script.</div><div class="line">#</div><div class="line"># Set it to 0 or a negative value for unlimited execution without warnings.</div><div class="line">lua-time-limit 5000</div><div class="line"># ################################## SLOW LOG ###################################</div><div class="line"># # The Redis Slow Log is a system to log queries that exceeded a specified</div><div class="line"># execution time. The execution time does not include the I/O operations</div><div class="line"># like talking with the client, sending the reply and so forth,</div><div class="line"># but just the time needed to actually execute the command (this is the only</div><div class="line"># stage of command execution where the thread is blocked and can not serve</div><div class="line"># other requests in the meantime).</div><div class="line"># </div><div class="line"># You can configure the slow log with two parameters: one tells Redis</div><div class="line"># what is the execution time, in microseconds, to exceed in order for the</div><div class="line"># command to get logged, and the other parameter is the length of the</div><div class="line"># slow log. When a new command is logged the oldest one is removed from the</div><div class="line"># queue of logged commands.</div><div class="line"># # The following time is expressed in microseconds, so 1000000 is equivalent</div><div class="line"># to one second. Note that a negative number disables the slow log, while</div><div class="line"># a value of zero forces the logging of every command.</div><div class="line">slowlog-log-slower-than 10000</div><div class="line"># # There is no limit to this length. Just be aware that it will consume memory.</div><div class="line"># You can reclaim memory used by the slow log with SLOWLOG RESET.</div><div class="line">slowlog-max-len 128</div><div class="line"># ############################### ADVANCED CONFIG ###############################</div><div class="line"># # Hashes are encoded using a memory efficient data structure when they have a</div><div class="line"># small number of entries, and the biggest entry does not exceed a given</div><div class="line"># threshold. These thresholds can be configured using the following directives.</div><div class="line">hash-max-ziplist-entries 512</div><div class="line">hash-max-ziplist-value 64</div><div class="line"># # Similarly to hashes, small lists are also encoded in a special way in order</div><div class="line"># to save a lot of space. The special representation is only used when</div><div class="line"># you are under the following limits:</div><div class="line">list-max-ziplist-entries 512</div><div class="line">list-max-ziplist-value 64</div><div class="line"># # Sets have a special encoding in just one case: when a set is composed</div><div class="line"># of just strings that happens to be integers in radix 10 in the range</div><div class="line"># of 64 bit signed integers.</div><div class="line"># The following configuration setting sets the limit in the size of the</div><div class="line"># set in order to use this special memory saving encoding.</div><div class="line">set-max-intset-entries 512</div><div class="line"># # Similarly to hashes and lists, sorted sets are also specially encoded in</div><div class="line"># order to save a lot of space. This encoding is only used when the length and</div><div class="line"># elements of a sorted set are below the following limits:</div><div class="line">zset-max-ziplist-entries 128</div><div class="line">zset-max-ziplist-value 64</div><div class="line"># # Active rehashing uses 1 millisecond every 100 milliseconds of CPU time in</div><div class="line"># order to help rehashing the main Redis hash table (the one mapping top-level</div><div class="line"># keys to values). The hash table implementation Redis uses (see dict.c)</div><div class="line"># performs a lazy rehashing: the more operation you run into an hash table</div><div class="line"># that is rehashing, the more rehashing "steps" are performed, so if the</div><div class="line"># server is idle the rehashing is never complete and some more memory is used</div><div class="line"># by the hash table.</div><div class="line"># </div><div class="line"># The default is to use this millisecond 10 times every second in order to</div><div class="line"># active rehashing the main dictionaries, freeing memory when possible.</div><div class="line">#</div><div class="line"># If unsure:</div><div class="line"># use "activerehashing no" if you have hard latency requirements and it is</div><div class="line"># not a good thing in your environment that Redis can reply form time to time</div><div class="line"># to queries with 2 milliseconds delay.</div><div class="line">#</div><div class="line"># use "activerehashing yes" if you don't have such hard requirements but</div><div class="line"># want to free memory asap when possible.</div><div class="line">activerehashing yes</div><div class="line"># # The client output buffer limits can be used to force disconnection of clients</div><div class="line"># that are not reading data from the server fast enough for some reason (a</div><div class="line"># common reason is that a Pub/Sub client can't consume messages as fast as the</div><div class="line"># publisher can produce them).</div><div class="line">#</div><div class="line"># The limit can be set differently for the three different classes of clients:</div><div class="line">#</div><div class="line"># normal -&gt; normal clients</div><div class="line"># slave  -&gt; slave clients and MONITOR clients</div><div class="line"># pubsub -&gt; clients subcribed to at least one pubsub channel or pattern</div><div class="line">#</div><div class="line"># The syntax of every client-output-buffer-limit directive is the following:</div><div class="line">#</div><div class="line"># client-output-buffer-limit &lt;class&gt; &lt;hard limit&gt; &lt;soft limit&gt; &lt;soft seconds&gt;</div><div class="line">#</div><div class="line"># A client is immediately disconnected once the hard limit is reached, or if</div><div class="line"># the soft limit is reached and remains reached for the specified number of</div><div class="line"># seconds (continuously).</div><div class="line"># So for instance if the hard limit is 32 megabytes and the soft limit is</div><div class="line"># 16 megabytes / 10 seconds, the client will get disconnected immediately</div><div class="line"># if the size of the output buffers reach 32 megabytes, but will also get</div><div class="line"># disconnected if the client reaches 16 megabytes and continuously overcomes</div><div class="line"># the limit for 10 seconds.</div><div class="line">#</div><div class="line"># By default normal clients are not limited because they don't receive data</div><div class="line"># without asking (in a push way), but just after a request, so only</div><div class="line"># asynchronous clients may create a scenario where data is requested faster</div><div class="line"># than it can read.</div><div class="line">#</div><div class="line"># Instead there is a default limit for pubsub and slave clients, since</div><div class="line"># subscribers and slaves receive data in a push fashion.</div><div class="line">#</div><div class="line"># Both the hard or the soft limit can be disabled by setting them to zero.</div><div class="line">client-output-buffer-limit normal 0 0 0</div><div class="line">client-output-buffer-limit slave 256mb 64mb 60</div><div class="line">client-output-buffer-limit pubsub 32mb 8mb 60</div><div class="line"># # Redis calls an internal function to perform many background tasks, like</div><div class="line"># closing connections of clients in timeot, purging expired keys that are</div><div class="line"># never requested, and so forth.</div><div class="line">#</div><div class="line"># Not all tasks are perforemd with the same frequency, but Redis checks for</div><div class="line"># tasks to perform accordingly to the specified "hz" value.</div><div class="line">#</div><div class="line"># By default "hz" is set to 10. Raising the value will use more CPU when</div><div class="line"># Redis is idle, but at the same time will make Redis more responsive when</div><div class="line"># there are many keys expiring at the same time, and timeouts may be</div><div class="line"># handled with more precision.</div><div class="line">#</div><div class="line"># The range is between 1 and 500, however a value over 100 is usually not</div><div class="line"># a good idea. Most users should use the default of 10 and raise this up to</div><div class="line"># 100 only in environments where very low latency is required.</div><div class="line">hz 10</div><div class="line"># # When a child rewrites the AOF file, if the following option is enabled</div><div class="line"># the file will be fsync-ed every 32 MB of data generated. This is useful</div><div class="line"># in order to commit the file to the disk more incrementally and avoid</div><div class="line"># big latency spikes.</div><div class="line">aof-rewrite-incremental-fsync yes</div><div class="line"># ################################## INCLUDES ###################################</div><div class="line"># # Include one or more other config files here.  This is useful if you</div><div class="line"># have a standard template that goes to all Redis server but also need</div><div class="line"># to customize a few per-server settings.  Include files can include</div><div class="line"># other files, so use this wisely.</div><div class="line">#</div><div class="line"># include /path/to/local.conf</div><div class="line"># include /path/to/other.conf</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/03/02/Android-Support-v7/" class="archive-article-date">
-  	<time datetime="2015-03-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-02</time>
+      <a href="/uncategorized/2015/07/16/redis-introduce/" class="archive-article-date">
+  	<time datetime="2015-07-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-16</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Support-v7/">Support v7</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
 	</div>
 
       
@@ -252,7 +268,7 @@
 
 
   
-    <article id="post-Android-debug-kill-app" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Mysql-About" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -262,7 +278,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-debug-kill-app/">Android 调试技巧</a>
+      <a class="article-title" href="/uncategorized/2015/07/14/Mysql-About/">Mysql常见问题</a>
     </h1>
   
 
@@ -270,485 +286,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-如何模拟App被Kill掉"><a href="#1-如何模拟App被Kill掉" class="headerlink" title="1.如何模拟App被Kill掉"></a>1.如何模拟App被Kill掉</h3><p>以前开发App时有一个bug出现在系统回收掉app之后，重新打开时造成的，当时模拟的方式是不断打开其他app占用内存，直到app被回收。那种方法现在想想太…</p>
-<p><em>正确姿势：</em> 需要模拟器或者root过的手机</p>
-<p>在ddms中直接kill掉App线程</p>
-<blockquote>
-<p>App被Kill掉之后重启会直接打开最后显示的Activity</p>
+        <h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><hr>
+<h3 id="登陆Mysql"><a href="#登陆Mysql" class="headerlink" title="登陆Mysql"></a>登陆Mysql</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//root身份</div><div class="line">mysql -u root</div></pre></td></tr></table></figure>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><blockquote>
+<p>[] 中为变量</p>
 </blockquote>
-<h3 id="2-adb-shell-真机获取root权限"><a href="#2-adb-shell-真机获取root权限" class="headerlink" title="2.adb shell 真机获取root权限"></a>2.adb shell 真机获取root权限</h3><p>前提条件：手机已经root</p>
-<p>1, 将手机连接到电脑,然后输入下面命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ adb shell <span class="comment">//进入shell</span></div><div class="line">$ su  <span class="comment">// 获取root权限</span></div></pre></td></tr></table></figure></p>
-<p>2, 手机会提示获取root权限的提示，点击授权即可</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-debug-kill-app/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-WebViewBridge" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-WebViewBridge/">WebView中实现js与java互相调用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Android项目中，经常会用到在<code>Webview</code>中js与java的互相调用。当然，Google官方为WebView提供了对应的方法，通过<code>WebView.addJavascriptInterface()</code>方法来注入java对象来实现。但是这个方法有一个问题，在于4.2版本之前有漏洞。</p>
-<p>今天就来介绍另外一种js与java的互相调用的实现方式。当然这种方式可能网上已经有一些教程，我这里介绍的还是相对完善的一套解决方案。</p>
-<p>实现这套方案的条件：要求开发人员同时熟悉java与js</p>
-<h2 id="1-整体思路："><a href="#1-整体思路：" class="headerlink" title="1.整体思路："></a>1.整体思路：</h2><ul>
-<li>js调用java</li>
-</ul>
-<p>首先将js代码注入到webview的页面中,然后通过修改<code>window.location.href</code>来向java传递参数,java端通过监听页面url的改变来识别js端传递的参数.然后再经解析数据实现java方法的调用.</p>
-<ul>
-<li>java调用js</li>
-</ul>
-<p>java通过<code>webView.loadUrl(&quot;javascript:&quot;+jsCode);</code>来实现js代码的调用</p>
-<h2 id="2-详解："><a href="#2-详解：" class="headerlink" title="2.详解："></a>2.详解：</h2><h3 id="2-1-js调用java的实现"><a href="#2-1-js调用java的实现" class="headerlink" title="2.1 js调用java的实现"></a>2.1 js调用java的实现</h3><h4 id="2-1-1-js调用Java最简单版本-不支持callback"><a href="#2-1-1-js调用Java最简单版本-不支持callback" class="headerlink" title="2.1.1  js调用Java最简单版本,不支持callback"></a>2.1.1  js调用Java最简单版本,不支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">	<span class="comment">// 不包含回调方法的参数调用</span></div><div class="line">	share:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arg = &#123;<span class="attr">title</span>:<span class="string">"i am title"</span>&#125;;</div><div class="line">		<span class="comment">//修改href传递参数</span></div><div class="line">	    <span class="built_in">window</span>.location.href=<span class="string">"app://share?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>定义了一个全局对象来定义一些java端需要调用的方法，比如这里的share。关键的地方在于传递的参数格式<code>app://share</code>，很像<code>http</code>协议对吧,其实就是自己定义了一个协议开头而已。</p>
-<p>参数格式说明：</p>
-<p><code>app://share?+JSON.stringify(arg)</code></p>
-<p><code>app://</code> : 协议名称，自己可以随便定义，只要方便解析</p>
-<p><code>share</code> : 方法名称，用于指定需要执行的java方法</p>
-<p><code>?+JSON.stringify(arg)</code> : json格式参数</p>
-<h4 id="2-1-1-js调用java高端版支持callback"><a href="#2-1-1-js调用java高端版支持callback" class="headerlink" title="2.1.1 js调用java高端版支持callback"></a>2.1.1 js调用java高端版支持callback</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用于保存所有回调函数</span></div><div class="line"><span class="built_in">window</span>._callbacks = &#123;&#125;;</div><div class="line"><span class="comment">// 回调Id生成器</span></div><div class="line"><span class="built_in">window</span>._callbacks_id = <span class="number">0</span>;</div><div class="line"><span class="comment">// js Java 桥接器</span></div><div class="line"><span class="built_in">window</span>.UAPPJSBridge =&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">        微信分享</div><div class="line">        @param  message:&#123;url:页面地址string, image:缩略图地址string,title:分享标题string,description:分享内容string &#125;</div><div class="line">        @param  success:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">        @param  error:function(errCode,errStr); errCode:错误码number,errStr:错误描述string</div><div class="line">     */</div><div class="line">    wxshare:<span class="function"><span class="keyword">function</span>(<span class="params">message,success,error</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(!message || !success || !error)&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"message or success or error is empty."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//== start =========================</span></div><div class="line">        <span class="comment">//这里是处理js调用java之后的回调,只要是需要回调都要像下面这样写</span></div><div class="line">        <span class="comment">// 生成 Callback Id</span></div><div class="line">        <span class="keyword">var</span> id = _callbacks_id++;</div><div class="line">        <span class="comment">// 设置回调函数</span></div><div class="line">        _callbacks[id]=&#123;</div><div class="line">            <span class="attr">success</span>:success,</div><div class="line">            <span class="attr">error</span>:error</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//== end =========================</span></div><div class="line"></div><div class="line">        <span class="comment">//解析Message</span></div><div class="line">        <span class="comment">// 通过修改location.href 给WebView传递参数</span></div><div class="line">        <span class="keyword">var</span> arg = &#123;</div><div class="line">            <span class="attr">message</span>:message,</div><div class="line">            <span class="comment">// 回调函数的id,java端通过callback_id来调用指定回调函数</span></div><div class="line">            callback_id:id</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">window</span>.location.href= <span class="string">"app://wxshare?"</span>+<span class="built_in">JSON</span>.stringify(arg);</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
-<p>思路: 当java端调用wxshare方法时会注册一组回调函数:<code>success</code>,<code>error</code>,然后将<code>callback_id</code>传递给java端，当java端执行完成后通过<code>callback_id</code>调用js端的回调函数</p>
-<p><code>_callback</code>: 保存回调函数<br><code>_callback_id</code> : 回调函数id生成器</p>
-<h4 id="2-2-java-端代码"><a href="#2-2-java-端代码" class="headerlink" title="2.2 java 端代码"></a>2.2 java 端代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">BridgeWebViewClient</span> <span class="keyword">extends</span> <span class="title">WebViewClient</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldOverrideUrlLoading</span><span class="params">(<span class="keyword">final</span> WebView view, String url)</span> </span>&#123;</div><div class="line">        	<span class="comment">//在这里处理js传递过来的参数 url</span></div><div class="line">        	<span class="comment">//比如 url = app://share</span></div><div class="line">            <span class="keyword">if</span> (mBridge.handleJsArgument(url, <span class="keyword">new</span> WebViewBridge.handleJsCallback() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onHandleJs</span><span class="params">(String func, JSONObject argument)</span> </span>&#123;</div><div class="line">                   <span class="comment">//func 是js传递过来的方法名,比如 share </span></div><div class="line">                   <span class="comment">//argument ： 参数</span></div><div class="line">                &#125;</div><div class="line">            &#125;)) &#123;</div><div class="line">	            <span class="comment">//返回true代表请求已经被处理，为了防止传过来的参数被webview加载，直接返回true</span></div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            view.loadUrl(url);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">            <span class="comment">//此处需要注入js代码</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageStarted</span><span class="params">(WebView view, String url, Bitmap favicon)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageStarted(view, url, favicon);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">            <span class="comment">//这里需要触发js注入完成事件</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>设置WebViewClient: <code>webView.setWebClient(new BridgeWebViewClient());</code></p>
-</blockquote>
-<p>上面的代码定义了一个BridgeWebViewClient类，关键在sholdOverrideUrlLoading方法中，通过<code>mBridge.handleJsArgument</code>方法来解析url,如果是js调用就会阻断页面的加载。</p>
-<p>下面是 handleJsArgument方法细节，这里的代码可以不用细看，只是用来解析参数的，解析完成后，在回调接口中返回方法名称和JSONObject格式的参数.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handleJsArgument</span><span class="params">(String url, handleJsCallback jscallback)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || !url.startsWith(UAPP_PRE)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//解析参数</span></div><div class="line">    String func = parseFuncName(url);</div><div class="line">    jscallback.onHandleJs(func, parseJsArgumentFromJsonStr(url));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> JSONObject <span class="title">parseJsArgumentFromJsonStr</span><span class="params">(String json)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (json == <span class="keyword">null</span> || json.equals(<span class="string">""</span>) || !json.startsWith(UAPP_PRE) || json.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    json = json.substring(json.indexOf(<span class="string">"?"</span>) + <span class="number">1</span>);</div><div class="line">    JSONObject jsonObject=<span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        jsonObject = <span class="keyword">new</span> JSONObject(json);</div><div class="line">    &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e)&#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> jsonObject;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">parseFuncName</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (url == <span class="keyword">null</span> || url.equals(<span class="string">""</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">    String a = UAPP_PRE + <span class="string">"\\w+\\??"</span>;</div><div class="line">    String result = <span class="string">""</span>;</div><div class="line">    Pattern pattern = Pattern.compile(a);</div><div class="line">    Matcher matcher = pattern.matcher(url);</div><div class="line">    <span class="keyword">if</span> (matcher.find()) &#123;</div><div class="line">        result = matcher.group(<span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = <span class="number">0</span>;</div><div class="line">        start = result.indexOf(<span class="string">"/"</span>) + <span class="number">2</span>;</div><div class="line">        start = start &gt;= result.length() ? result.length() : start;</div><div class="line">        <span class="keyword">if</span> (result.indexOf(<span class="string">"?"</span>) == -<span class="number">1</span>) &#123;</div><div class="line">            end = result.length();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            end = result.indexOf(<span class="string">"?"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result.substring(start, end);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-2-java调用js的实现"><a href="#2-2-java调用js的实现" class="headerlink" title="2.2 java调用js的实现"></a>2.2 java调用js的实现</h3><p>java调用js的方法，相当简单:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String jsCode = <span class="string">"(function()&#123; /*js code here*/  &#125;)()"</span>;</div><div class="line">webview.loadUrl(<span class="string">"javascript:"</span> + jsCode);</div></pre></td></tr></table></figure></p>
-<p>注意：要把js代码用自执行函数包裹起来</p>
-<p>利用这种方法可以把任意代码注入到页面中</p>
-<p>注意：<br>当页面刚加载时就需要把 2.1中的js代码注入到页面中，但是有时会出现页面加载完成，但是注入的代码没有执行的现象,应该是因为js没有及时加载而页面先加载完成。要解决这个问题就需要在页面加载完成时触发一个事件比如<code>jsBridgeReady</code>,js端通过监听jsBridgeReady事件来调用java方法。那么总体流程如下：</p>
-<p>加载页面-&gt;注入js代码-&gt;页面加载完成-&gt;触发js注入完成事件</p>
-<p>代码：</p>
-<p>在BridgeWebClient中添加逻辑：<br>1,加载页面时注入js代码：<br>2,加载完成后触发加载完成事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadResource</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="comment">// 注入桥接代码</span></div><div class="line">    <span class="comment">// 这里通过读取js文件获得js代码</span></div><div class="line">    <span class="keyword">if</span> (mFileName != <span class="keyword">null</span>) &#123;</div><div class="line">        view.loadUrl(mBridge.createBaseJs(mContext, mFileName));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">super</span>.onLoadResource(view, url);</div><div class="line">&#125;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPageFinished</span><span class="params">(WebView view, String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPageFinished(view, url);</div><div class="line">    <span class="comment">// 触发注入完成事件，用于解决 注入的代码没有及时加载成功导致无法调用的问题</span></div><div class="line">    view.loadUrl(<span class="string">"(function()&#123;if(window.UAPPJSBridgeReady)&#123;window.UAPPJSBridgeReady();&#125;&#125;)()"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>如果你也想从文件读取js代码，记得把读取的代码压缩一下，把注释和换行删除,不然很可能会报错</p>
-</blockquote>
-<p>js端调用java注入的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//判断代码是否注入完成</span></div><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">	<span class="comment">//调用注入的方法</span></div><div class="line">    <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	<span class="comment">//监听注入完成的事件</span></div><div class="line">    <span class="built_in">window</span>.onBridgeLoaded=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">window</span>.UAPPJSBridge)&#123;</div><div class="line">            <span class="built_in">window</span>.UAPPJSBridge.wxshare(message,success,error);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>以上就是Android端js与java互相调用的方法，Good Luck!</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-WebViewBridge/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Charles-Proxy-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/">Android下利用Charles监听Https</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android手机利用Charles监听Https请求</p>
-<h3 id="1-安装证书"><a href="#1-安装证书" class="headerlink" title="1,安装证书"></a>1,安装证书</h3><h4 id="方法1-Android-4-0以上"><a href="#方法1-Android-4-0以上" class="headerlink" title="方法1 (Android 4.0以上):"></a>方法1 (Android 4.0以上):</h4><p>Android 4.0以上的手机支持用户安装证书。</p>
-<p>1,下载证书到手机上</p>
-<p>2,设置-&gt;安全-&gt;从存储设备安装 即可,安装时需要设置锁屏PIN或密码</p>
-<h4 id="方法2-需要Root"><a href="#方法2-需要Root" class="headerlink" title="方法2  (需要Root)"></a>方法2  (需要Root)</h4><p>手机root之后</p>
-<p>1,直接将证书拷贝到：<code>etc/security/cacerts</code> </p>
-<p>2,设置-&gt;安全-&gt;受信任的凭据 ，在系统tab找到你安装上的证书，然后选中即可。这样是以系统证书存在的。</p>
-<blockquote>
-<p>参考<a href="http://blog.csdn.net/winceos/article/details/32130655" target="_blank" rel="external">Android下安装证书的方法</a></p>
-</blockquote>
-<h3 id="2-设置Charles"><a href="#2-设置Charles" class="headerlink" title="2,设置Charles"></a>2,设置Charles</h3><p>打开Charles -&gt; Proxy -&gt; Proxy Settings -&gt; SSL</p>
-<p>勾选Enable SSL proxying</p>
-<p>Locations添加想要监听的域名和端口，比如 www.ihaveu.com, 443</p>
-<p>以上</p>
-<h3 id="附-如何设置手机代理"><a href="#附-如何设置手机代理" class="headerlink" title="附:如何设置手机代理"></a>附:如何设置手机代理</h3><ul>
-<li>在手机上WLAN中找到链接的网络</li>
-<li>设置网络</li>
-<li>高级选项</li>
-<li>填写PC的ip</li>
-<li>端口号通常默认 8888，否则需要到Charles中找到对应监听的端口号</li>
-<li>保存即可</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/03/Android-Charles-Proxy-HTTPS/" class="archive-article-date">
-  	<time datetime="2015-02-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-03</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-make-jar" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/02/Android-make-jar/">如何重新编辑jar包</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天遇到一个问题，为了使用Monkey Talk作测试，需要把项目转换成AspectJ的项目，但是转换完成之后，编译项目的时候遇到了一个冲突,意思是说aspectj的某个jar包和项目中的一个jar包的<code>about.html</code>文件冲突了。因为<code>about.html</code>文件没什么用，就打算直接把它从<code>jar</code>包中删掉。</p>
-<p>详细解决方法：</p>
-<ol>
-<li>将jar包用解压工具解压，把解压后的<code>about.html</code>文件删掉</li>
-<li>利用命令 <code>jar cvf jar_name.jar ./*</code> 重新打包</li>
-</ol>
-<p>命令说明： <code>jar cvf  jar包名称  需要打包的文件</code></p>
-<p>实际上就是利用jdk提供的命令重新将文件打包而已.</p>
-<blockquote>
-<p>参考文档： <a href="http://docs.oracle.com/javase/tutorial/deployment/jar/build.html" target="_blank" rel="external">jar 命令文档</a></p>
-</blockquote>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/02/Android-make-jar/" class="archive-article-date">
-  	<time datetime="2015-02-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-02</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-Event-01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/01/Android-Event-01/">Android事件基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-事件处理机制"><a href="#1-事件处理机制" class="headerlink" title="1.事件处理机制"></a>1.事件处理机制</h1><ol>
-<li>基于监听的事件处理</li>
-<li>基于回调的事件处理</li>
-</ol>
-<h2 id="1-1-基于监听的事件处理"><a href="#1-1-基于监听的事件处理" class="headerlink" title="1.1 基于监听的事件处理"></a>1.1 基于监听的事件处理</h2><h3 id="1-1-1-View事件种类"><a href="#1-1-1-View事件种类" class="headerlink" title="1.1.1 View事件种类"></a>1.1.1 View事件种类</h3><ol>
-<li><code>View.OnClickListener</code></li>
-<li><code>View.OnCreateContextMenuListener</code></li>
-<li><code>View.OnFocusChangeListener</code></li>
-<li><code>View.OnKeyListener</code></li>
-<li><code>View.OnLongClickListener</code></li>
-<li><code>View.OnTouchListener</code></li>
-</ol>
-<h3 id="1-1-2-实现事件监听器的几种形式"><a href="#1-1-2-实现事件监听器的几种形式" class="headerlink" title="1.1.2 实现事件监听器的几种形式"></a>1.1.2 实现事件监听器的几种形式</h3><ol>
-<li>内部类</li>
-<li>外部类</li>
-<li>Activity本身实现事件接口</li>
-<li>匿名内部类形式</li>
-</ol>
-<h2 id="1-2-基于回调的事件处理"><a href="#1-2-基于回调的事件处理" class="headerlink" title="1.2 基于回调的事件处理"></a>1.2 基于回调的事件处理</h2><p>组件自身负责处理事件,通过集成组件重写其中的事件接口来实现</p>
-<h3 id="1-2-1-View回调事件"><a href="#1-2-1-View回调事件" class="headerlink" title="1.2.1 View回调事件"></a>1.2.1 View回调事件</h3><ol>
-<li><code>boolean onKeyDown(int keyCode,KeyEvent event);</code></li>
-<li><code>boolean onKeyLongPress(int keyCode,KeyEvent event);</code></li>
-<li><code>boolean onKeyShortcut(int keyCode,KeyEvent event);</code></li>
-<li><code>boolean onKeyUp(int keyCode,KeyEvent event);</code></li>
-<li><code>boolean onTouchEvent(MotionEvent event);</code></li>
-<li><code>boolean onTrackballEvent(MotionEvent event);</code></li>
-</ol>
-<h3 id="1-2-2-基于回调的事件传播"><a href="#1-2-2-基于回调的事件传播" class="headerlink" title="1.2.2 基于回调的事件传播"></a>1.2.2 基于回调的事件传播</h3><ul>
-<li>如果事件返回true，说明事件已经被处理，不会传播</li>
-<li>如果事件返回false，说明事件未被处理，会继续传播</li>
-</ul>
-<h2 id="响应系统设置的事件"><a href="#响应系统设置的事件" class="headerlink" title="响应系统设置的事件"></a>响应系统设置的事件</h2><p>当应用程序随系统设置进行调整，比如屏幕方向，导航等。有时候还需要应用程序监听系统设置的更改作出响应。</p>
-<h1 id="2-Configuration-类"><a href="#2-Configuration-类" class="headerlink" title="2. Configuration 类"></a>2. Configuration 类</h1><p>提供了一些配置相关的功能<br><code>Configuration conf = getResources().getConfiguration();</code><br>常用属性</p>
-<ul>
-<li><code>public float fontScale</code>: 系统字体缩放系数</li>
-<li><code>public int keyboard</code>: 获取键盘类型</li>
-<li><code>public int keyboardHidden</code>: 返回键盘是否可用（软键盘是否开启） </li>
-<li><code>public Locale locale</code>: 获取用户当前的Locale场所（位置）</li>
-<li><code>public int mcc</code>: 获取移动信号的国家码</li>
-<li><code>public int mnc</code>: 获取移动信号的网络码</li>
-<li><code>public int navigation</code>: 判断系统上方向导航设备类型</li>
-<li><code>public int orientation</code>: 获取系统屏幕的方向</li>
-<li><code>public int touchscreen</code>: 获取系统触摸屏的触摸方式</li>
-</ul>
-<h3 id="响应系统设置更改事件"><a href="#响应系统设置更改事件" class="headerlink" title="响应系统设置更改事件"></a>响应系统设置更改事件</h3><p><code>public void onConfigurationChanged(Configuration newConfig);</code></p>
-<h1 id="3-Handler-消息传递机制"><a href="#3-Handler-消息传递机制" class="headerlink" title="3. Handler 消息传递机制"></a>3. Handler 消息传递机制</h1><p>为了解决Android多线程事件传递的问题</p>
-<h2 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h2><p>两个作用：</p>
-<ul>
-<li>在新启动的线程中发送消息</li>
-<li>在主线程中获取、处理消息<br>//TODO: 继续</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/01/Android-Event-01/" class="archive-article-date">
-  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event/">Event</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-9-patch-pic" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/02/01/Android-9-patch-pic/">Android 9-patch图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android可以处理一种特殊的png图片9-patch图，图片以<code>.9.png</code>结尾,主要为了实现图片的部分区域的缩放。更多时候应用在按钮或其他控件的背景图上。</p>
-<h3 id="gt-制作方法："><a href="#gt-制作方法：" class="headerlink" title="&gt;制作方法："></a>&gt;制作方法：</h3><p>Android提供了制作9-patch图的工具位置在：<code>android_sdk/tools/draw9patch</code></p>
-<p>先看下工具截图：</p>
-<p><img src="/img/page_img/20150201_1.png" alt="9-patch tools"></p>
-<p>简单来说：<br>截图中左边是编辑区，右边是预览</p>
-<p>左边图中的四条黑线分别指定缩放区域和显示区域. </p>
-<ul>
-<li>左、上: 缩放区域(repeat区域)</li>
-<li>右、下: 内容区域</li>
-</ul>
-<p>编辑时很简单，只要拖动对应的线条就可以调整到你需要的缩放效果，右边可以实时预览。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/02/01/Android-9-patch-pic/" class="archive-article-date">
-  	<time datetime="2015-01-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-02-01</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/9-patch/">9-patch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Jenkins_Set_up" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/01/27/Jenkins_Set_up/">Jenkins持续集成系统</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Jenkins配置方法：</p>
-<h2 id="1-安装tomcat"><a href="#1-安装tomcat" class="headerlink" title="1.安装tomcat"></a>1.安装tomcat</h2><h2 id="2-下载Jenkins"><a href="#2-下载Jenkins" class="headerlink" title="2.下载Jenkins"></a>2.下载Jenkins</h2><p>将下载好的jenkins.war,放入tomcat下的 <code>web_app</code>目录</p>
-<h2 id="3-启动tomcat-进入-http-localhost-8080-jenkins"><a href="#3-启动tomcat-进入-http-localhost-8080-jenkins" class="headerlink" title="3.启动tomcat,进入 http://localhost:8080/jenkins"></a>3.启动tomcat,进入 <a href="http://localhost:8080/jenkins" target="_blank" rel="external">http://localhost:8080/jenkins</a></h2><h2 id="4-配置Jenkins"><a href="#4-配置Jenkins" class="headerlink" title="4.配置Jenkins"></a>4.配置Jenkins</h2><h3 id="4-1-进入系统配置"><a href="#4-1-进入系统配置" class="headerlink" title="4.1.进入系统配置"></a>4.1.进入系统配置</h3><h3 id="4-2-配置JavaSDK"><a href="#4-2-配置JavaSDK" class="headerlink" title="4.2.配置JavaSDK"></a>4.2.配置JavaSDK</h3><p>按照提示设置好JavaSdk的目录(绝对路径)就好</p>
-<blockquote>
-<p>mac下查找<code>JAVA_HOME</code>的方法：<br>命令行<code>$ /usr/libexec/java_home</code> ，然后将目录地址添加到 <code>~/.bash_profile</code>中</p>
-</blockquote>
-<h3 id="4-3-配置Ant"><a href="#4-3-配置Ant" class="headerlink" title="4.3.配置Ant"></a>4.3.配置Ant</h3><p>设置Ant目录地址即可</p>
-<h3 id="4-4-配置构建项目"><a href="#4-4-配置构建项目" class="headerlink" title="4.4.配置构建项目"></a>4.4.配置构建项目</h3><p>重点需要配置的位置：</p>
-<h4 id="4-4-1-源码管理"><a href="#4-4-1-源码管理" class="headerlink" title="4.4.1. 源码管理"></a>4.4.1. 源码管理</h4><p>(img)</p>
-<h4 id="4-4-2-Invoke-Ant"><a href="#4-4-2-Invoke-Ant" class="headerlink" title="4.4.2. Invoke Ant"></a>4.4.2. Invoke Ant</h4><p><img src="/img/page_img/20150201_2-1.png" alt="Invoke Ant"></p>
-<p>令。测试环境中是 <code>ant debug</code>,正式环境可以是 <code>ant release</code>.</p>
-<p>参数：</p>
-<ul>
-<li><p>Targets : 需要执行的命令</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> [username] <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'[password]'</span>;</div></pre></td></tr></table></figure>
+<h3 id="为用户添加权限"><a href="#为用户添加权限" class="headerlink" title="为用户添加权限"></a>为用户添加权限</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> [<span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span>,<span class="keyword">create</span>,<span class="keyword">drop</span>] <span class="keyword">on</span> [*.*] <span class="keyword">to</span> [ihaveu_message]@[localhost] <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'[ihaveu]'</span>;</div></pre></td></tr></table></figure>
+<p>例如，为test_user添加select等权限到所有数据库<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span>,<span class="keyword">create</span>,<span class="keyword">drop</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> test_user@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'test'</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><h3 id="查看所有用户"><a href="#查看所有用户" class="headerlink" title="查看所有用户"></a>查看所有用户</h3><p>需要root权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">user</span>,host,<span class="keyword">password</span> <span class="keyword">from</span> mysql.user;</div></pre></td></tr></table></figure></p>
+<h2 id="mysql服务"><a href="#mysql服务" class="headerlink" title="mysql服务"></a>mysql服务</h2><hr>
+<p>重启、启动、停止mysql服务<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/Library/StartupItems/MySQLCOM/MySQLCOM restart</div><div class="line">/Library/StartupItems/MySQLCOM/MySQLCOM <span class="keyword">start</span></div><div class="line">/<span class="keyword">Library</span>/StartupItems/MySQLCOM/MySQLCOM <span class="keyword">stop</span></div></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><hr>
+<h3 id="设置数据库默认编码为utf-8"><a href="#设置数据库默认编码为utf-8" class="headerlink" title="设置数据库默认编码为utf-8"></a>设置数据库默认编码为utf-8</h3><ul>
+<li><p>修改mysql配置文件/etc/my.cnf</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /usr/local/mysql/support-files/my-medium.cnf /etc/my.cnf</div><div class="line">sudo vi /etc/my.cnf</div></pre></td></tr></table></figure>
 </li>
-<li><p>Build File : 相对于workspace的目录，也就是源码管理时填写的目录</p>
+<li><p>添加配置</p>
 </li>
 </ul>
-<p>如图中的配置构建时相当于执行：<code>ant -f uapp/build.xml debug</code></p>
-<h4 id="4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins"><a href="#4-4-3-Install-Android-package-配置安装包位置-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)"></a>4.4.3. Install Android package 配置安装包位置(需要安装Android Emulator Plugins)</h4><p><img src="/img/page_img/20150201_2-3.png" alt="Run Android monkey tester"></p>
-<h4 id="4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins"><a href="#4-4-4-Run-Android-monkey-tester-运行monkey测试-需要安装Android-Emulator-Plugins" class="headerlink" title="4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)"></a>4.4.4. Run Android monkey tester 运行monkey测试(需要安装Android Emulator Plugins)</h4><p><img src="/img/page_img/20150201_2-2.png" alt="install android package"></p>
-<h4 id="4-4-5-配置构建之后保存的文档"><a href="#4-4-5-配置构建之后保存的文档" class="headerlink" title="4.4.5. 配置构建之后保存的文档"></a>4.4.5. 配置构建之后保存的文档</h4><p>配置好之后，构建成功之后就会显示此文件，可以点击直接下载，见下图：</p>
-<p><img src="/img/page_img/20150201_2-4.png" alt="install android package"></p>
+<p>[client]部分加入：<br><code>default-character-set=utf8</code></p>
+<p>[mysqld]部分加入：<br><code>character-set-server=utf8</code></p>
+<blockquote>
+<p>修改上述文件之后有可能出现无法启动mysql的情况。</p>
+</blockquote>
+<p>修改完毕之后再启动mysql</p>
+<ul>
+<li>检查结果<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show variables like '%char%';</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>典型的配置文件内容如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">[client]</div><div class="line">default-character-<span class="keyword">set</span> = utf8</div><div class="line">port = <span class="number">3306</span></div><div class="line">socket = /tmp/mysql.sock</div><div class="line">[mysqld]</div><div class="line"><span class="keyword">user</span> = mysql</div><div class="line">port = <span class="number">3306</span></div><div class="line">socket = /tmp/mysql.sock</div><div class="line">basedir = /opt/mysql</div><div class="line">datadir = /opt/mysql/<span class="keyword">var</span></div><div class="line"><span class="keyword">log</span>-<span class="keyword">error</span> = /opt/mysql/<span class="keyword">var</span>/mysql-error.log</div><div class="line">pid-<span class="keyword">file</span> = /opt/mysql/<span class="keyword">var</span>/mysql.pid</div><div class="line">log_slave_updates = <span class="number">1</span></div><div class="line"><span class="keyword">log</span>-<span class="keyword">bin</span> = /opt/mysql/<span class="keyword">var</span>/mysql-<span class="keyword">bin</span></div><div class="line">binlog_format = mixed</div><div class="line">binlog_cache_size = <span class="number">4</span>M</div><div class="line">max_binlog_cache_size = <span class="number">8</span>M</div><div class="line">max_binlog_size = <span class="number">1</span>G</div><div class="line">expire_logs_days = <span class="number">90</span></div><div class="line">key_buffer_size = <span class="number">384</span>M</div><div class="line">sort_buffer_size = <span class="number">2</span>M</div><div class="line">read_buffer_size = <span class="number">2</span>M</div><div class="line">read_rnd_buffer_size = <span class="number">16</span>M</div><div class="line">join_buffer_size = <span class="number">2</span>M</div><div class="line">thread_cache_size = <span class="number">8</span></div><div class="line">query_cache_size = <span class="number">32</span>M</div><div class="line">query_cache_limit = <span class="number">2</span>M</div><div class="line">query_cache_min_res_unit = <span class="number">2</span>k</div><div class="line">thread_concurrency = <span class="number">32</span></div><div class="line">table_cache = <span class="number">614</span></div><div class="line">table_open_cache = <span class="number">512</span></div><div class="line">open_files_limit = <span class="number">10240</span></div><div class="line">back_log = <span class="number">600</span></div><div class="line">max_connections = <span class="number">5000</span></div><div class="line">max_connect_errors = <span class="number">6000</span></div><div class="line"><span class="keyword">external</span>-locking = <span class="literal">FALSE</span></div><div class="line">max_allowed_packet = <span class="number">16</span>M</div><div class="line"><span class="keyword">default</span>-<span class="keyword">storage</span>-<span class="keyword">engine</span> = MYISAM</div><div class="line">thread_stack = <span class="number">192</span>k</div><div class="line">transaction_isolation = <span class="keyword">READ</span>-COMMITTED</div><div class="line">tmp_table_size = <span class="number">256</span>M</div><div class="line">max_heap_table_size = <span class="number">512</span>M</div><div class="line">bulk_insert_buffer_size = <span class="number">64</span>M</div><div class="line">myisam_sort_buffer_size = <span class="number">64</span>M</div><div class="line">myisam_max_sort_file_size = <span class="number">10</span>G</div><div class="line">myisam_repair_threads = <span class="number">1</span></div><div class="line">myisam_recover</div><div class="line">long_query_time = <span class="number">2</span></div><div class="line">slow_query_log</div><div class="line">slow_query_log_file = /opt/mysql/<span class="keyword">var</span>/slow.log</div><div class="line"><span class="keyword">skip</span>-<span class="keyword">name</span>-resolve</div><div class="line"><span class="keyword">skip</span>-locking</div><div class="line"><span class="keyword">skip</span>-networking</div><div class="line">innodb_additional_mem_pool_size = <span class="number">16</span>M</div><div class="line">innodb_buffer_pool_size = <span class="number">512</span>M</div><div class="line">innodb_data_file_path = ibdata1:<span class="number">256</span>M:<span class="keyword">autoextend</span></div><div class="line">innodb_file_io_threads = <span class="number">4</span></div><div class="line">innodb_thread_aoncurrency = <span class="number">8</span></div><div class="line">innodb_flush_log_at_trx_commit = <span class="number">2</span></div><div class="line">innodb_log_buffer_size = <span class="number">16</span>M</div><div class="line">innodb_log_file_size = <span class="number">128</span>M</div><div class="line">innodb_log_files_in_group = <span class="number">3</span></div><div class="line">innodb_max_dirty_pages_pct = <span class="number">90</span></div><div class="line">innodb_lock_wait_timeout = <span class="number">120</span></div><div class="line">innodb_file_per_table = <span class="number">0</span></div><div class="line">[mysqldump]</div><div class="line"><span class="keyword">quick</span></div><div class="line">max_allow_packet = <span class="number">64</span>M</div><div class="line">[mysql]</div><div class="line"><span class="keyword">no</span>-<span class="keyword">auto</span>-rehash</div><div class="line">safr-updates</div><div class="line">[myisamchk]</div><div class="line">key_buffer_size = <span class="number">256</span>M</div><div class="line">sort_buffer_size = <span class="number">256</span>M</div><div class="line">read_buffer = <span class="number">2</span>M</div><div class="line">[mysqldump]</div><div class="line"><span class="keyword">quick</span></div><div class="line">max_allow_packet = <span class="number">64</span>M</div><div class="line">[mysql]</div><div class="line"><span class="keyword">no</span>-<span class="keyword">auto</span>-rehash</div><div class="line"><span class="keyword">safe</span>-updates</div><div class="line">[myisamchk]</div><div class="line">key_buffer_size = <span class="number">256</span>M</div><div class="line">sort_buffer_size = <span class="number">256</span>M</div><div class="line">read_buffer = <span class="number">2</span>M</div><div class="line">write_buffer = <span class="number">2</span>M</div><div class="line">[mysqlhotcopy]</div><div class="line">interactive-<span class="keyword">timeout</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/01/27/Jenkins_Set_up/" class="archive-article-date">
-  	<time datetime="2015-01-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-27</time>
+      <a href="/uncategorized/2015/07/14/Mysql-About/" class="archive-article-date">
+  	<time datetime="2015-07-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-14</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/用户/">用户</a></li></ul>
 	</div>
 
       
@@ -769,7 +348,7 @@
 
 
   
-    <article id="post-Effective_Java_39" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Design-links" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -779,7 +358,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/01/24/Effective_Java_39/">Effective Java 第39条:必要时进行保护性拷贝</a>
+      <a class="article-title" href="/uncategorized/2015/07/14/Design-links/">设计资源站</a>
     </h1>
   
 
@@ -787,31 +366,395 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>旨在保持代码健壮性，防止客户端破坏类的约束条件。</p>
-<p>例如,下面这个类表示一段不可变的时间周期：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date start;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Date end;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start,Date end)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(start.compareTo(end)&gt;<span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span>+end);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">this</span>.start = start;</div><div class="line">		<span class="keyword">this</span>.end = end;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> start;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> end;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看似代码没什么问题，在构造方式内验证了数据的约束。但是遇到如下攻击问题就凸显出来了。</p>
-<p>这些时候就需要用到保护性拷贝</p>
-<h3 id="第一种攻击-传入构造参数之后，修改引用的值"><a href="#第一种攻击-传入构造参数之后，修改引用的值" class="headerlink" title="第一种攻击: 传入构造参数之后，修改引用的值"></a>第一种攻击: 传入构造参数之后，修改引用的值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Date start = <span class="keyword">new</span> Date();</div><div class="line">Date end = <span class="keyword">new</span> Date();</div><div class="line">Period p = <span class="keyword">new</span> Period(start,end);</div><div class="line">end.setYear(<span class="number">78</span>);<span class="comment">// 修改了内部参数，导致约束失效</span></div></pre></td></tr></table></figure>
-<p><strong>解决办法</strong>：将传入的参数拷贝一份，而不使用原始对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start,Date end)</span></span>&#123;</div><div class="line">	<span class="comment">//保护性拷贝</span></div><div class="line">	<span class="keyword">this</span>.start = <span class="keyword">new</span> Date(start.getTime());</div><div class="line">	<span class="keyword">this</span>.end= <span class="keyword">new</span> Date(end.getTime());</div><div class="line"></div><div class="line">	<span class="comment">//验证数据有效性	</span></div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.start.compareTo(<span class="keyword">this</span>.end)&gt;<span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start +<span class="string">" after "</span>+end);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>对于参数类型可以被不可信任方子类化的参数，不要使用clone方法进行保护性拷贝。</p>
-<h3 id="第二种攻击-修改获取到的参数引用"><a href="#第二种攻击-修改获取到的参数引用" class="headerlink" title="第二种攻击: 修改获取到的参数引用"></a>第二种攻击: 修改获取到的参数引用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Date start = <span class="keyword">new</span> Date();</div><div class="line">Date end = <span class="keyword">new</span> Date();</div><div class="line">Period p = <span class="keyword">new</span> Period(start,end):;</div><div class="line">p.end().setYear(<span class="number">78</span>);<span class="comment">// 修改了类参数，导致约束无效</span></div></pre></td></tr></table></figure>
-<p><strong>解决办法</strong>：end()返回可变内部域的保护性拷贝</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Date(start.getTime());</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Date(end.getTime());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>到此为止，这个类就是真正不可变的了，约束有了保证,绝对不会违反”周期的起始时间不能落后于结束时间”这个约束条件。</p>
+        <h3 id="UI4App"><a href="#UI4App" class="headerlink" title="UI4App"></a><a href="http://ui4app.com/" target="_blank" rel="external">UI4App</a></h3><p>界面设计，图标设计，资源。 各种控件设计资源，很实用。</p>
+<h3 id="EasyIcon"><a href="#EasyIcon" class="headerlink" title="EasyIcon"></a><a href="http://www.easyicon.net/" target="_blank" rel="external">EasyIcon</a></h3><p>简洁，实用的icon站</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/uncategorized/2015/01/24/Effective_Java_39/" class="archive-article-date">
-  	<time datetime="2015-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-24</time>
+      <a href="/uncategorized/2015/07/14/Design-links/" class="archive-article-date">
+  	<time datetime="2015-07-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-14</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Effective/">Effective</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网站/">网站</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计/">设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/资源/">资源</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-solution-of-small-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/13/solution-of-small-project/">个人小项目前后端解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>博主平时闲下来会做一些小项目，但是好多想做的项目都需要数据源，需要服务器，可是又不想花太多钱来做，那怎么办？</p>
+<p>本篇博客就介绍了一种完全免费的，从数据源到服务器再到前端展示的一套实现方案。</p>
+<h2 id="1-数据源"><a href="#1-数据源" class="headerlink" title="1. 数据源"></a>1. 数据源</h2><p><a href="http://www.locoy.com/" target="_blank" rel="external">火车头采集器</a>windows下数据爬取工具,可以免费使用。</p>
+<p><em>优点</em>： 不需要开发成本， 只要一套配置就可以爬取大部分网站数据。</p>
+<p><em>缺点</em>： 不如自己写爬虫灵活</p>
+<p>这个地方各位看需要吧，个人觉得这个工具挺好用的。</p>
+<h2 id="2-服务器"><a href="#2-服务器" class="headerlink" title="2. 服务器"></a>2. 服务器</h2><p><a href="http://www.bmob.cn" target="_blank" rel="external">bmob</a></p>
+<p>这个是一个针对移动开发的后端服务，提供了数据存储，数据接口。特别好用，适合不想写后端的前端大神 :)。SDK实现了ORM封装，前端可以直接通过SDK操作后端数据，省去了自己写接口的时间。</p>
+<h2 id="3-前端展示"><a href="#3-前端展示" class="headerlink" title="3. 前端展示"></a>3. 前端展示</h2><p>看自己擅长的领域吧， 有了上面的数据源和服务器，做App还是网站都不是问题</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/13/solution-of-small-project/" class="archive-article-date">
+  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个人开发者/">个人开发者</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/云服务/">云服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/免费/">免费</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据服务/">数据服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据爬取/">数据爬取</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络数据/">网络数据</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Node-Sails-Solutions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Solutions/">Sails 一些解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文为目录，记录一些<a href="http://sailsjs.org/#!/" target="_blank" rel="external">Sails</a>项目中遇到的一些常见问题的解决方案</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="通用邮箱登录"><a href="#通用邮箱登录" class="headerlink" title="通用邮箱登录"></a>通用邮箱登录</h3><ol>
+<li><p>利用<a href="https://github.com/jaredhanson/passport" target="_blank" rel="external">passport</a> + ldapauth</p>
+<p> 相关链接</p>
+<p> <a href="!--￼7--&gt;/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a></p>
+<p> <a href="http://passportjs.org/" target="_blank" rel="external">passport主页</a></p>
+</li>
+</ol>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>后台一些功能常需要队列来实现，比如群发通知等。node可以用kue来实现</p>
+<p><a href="https://github.com/Automattic/kue" target="_blank" rel="external">kue git</a></p>
+<p>例如：<br><code>api/services/KueQueue.js</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//const</span></div><div class="line"><span class="keyword">var</span> MESSAGE_JOB = <span class="string">'message'</span>,</div><div class="line">    MQTT_SERVER = <span class="string">'mqtt://172.20.2.244:1884'</span>;</div><div class="line"></div><div class="line"><span class="comment">//mqtt</span></div><div class="line"><span class="keyword">var</span> mqtt = <span class="built_in">require</span>(<span class="string">'mqtt'</span>);</div><div class="line"><span class="keyword">var</span> client = mqtt.connect(MQTT_SERVER);</div><div class="line"></div><div class="line"><span class="comment">//kue</span></div><div class="line"><span class="comment">//<span class="doctag">TODO:</span> add</span></div><div class="line"><span class="keyword">var</span> kue = <span class="built_in">require</span>(<span class="string">'kue'</span>),queue = kue.createQueue(&#123;</div><div class="line">    <span class="attr">prefix</span>: <span class="string">'q'</span>,</div><div class="line">    <span class="attr">redis</span>:&#123;</div><div class="line">        <span class="attr">port</span>:<span class="number">6379</span>,</div><div class="line">        <span class="attr">host</span>:<span class="string">'localhost'</span>,</div><div class="line">        <span class="attr">auth</span>:<span class="string">'xkjqiang'</span>,</div><div class="line">        <span class="attr">db</span>: <span class="number">3</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//执行message任务</span></div><div class="line">queue.process(MESSAGE_JOB,<span class="function"><span class="keyword">function</span>(<span class="params">job,done</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"run message job:"</span>,<span class="built_in">JSON</span>.stringify(job));</div><div class="line">    sendMessage(job.data.message,job.data.token,done);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//------- Function -----------------------------------------------------------------</span></div><div class="line"><span class="comment">//发送mqtt通知</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendMessage</span>(<span class="params">message,token,done</span>)</span>&#123;</div><div class="line">   </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">// 添加到发送队列中</span></div><div class="line">    push:<span class="function"><span class="keyword">function</span>(<span class="params">message,token</span>)</span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Controller中调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">KueQueue.push(message,token);</div></pre></td></tr></table></figure></p>
+<h2 id="服务端工具"><a href="#服务端工具" class="headerlink" title="服务端工具"></a>服务端工具</h2><h3 id="永久运行"><a href="#永久运行" class="headerlink" title="永久运行"></a>永久运行</h3><p>服务端部署node项目时需要永久运行项目，<a href="https://www.npmjs.com/package/forever" target="_blank" rel="external">forever</a>是个不错的选择,forever比较轻量级，小项目比较合适.</p>
+<p>安装<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[sudo] npm install forever -g</div></pre></td></tr></table></figure></p>
+<p>使用也很简单,详细的文档参考上边网址<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">forever start</div><div class="line"><span class="comment">//指定输出日志，启动</span></div><div class="line">forever start -l forever.log -o out.log -e err.log my-daemon.js</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">pm2</a>也是一款同类型插件，只是比较重，根据项目自己衡量吧</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="升级控制"><a href="#升级控制" class="headerlink" title="升级控制"></a>升级控制</h3><p><a href="https://github.com/building5/sails-db-migrate" target="_blank" rel="external">sails db migrate</a></p>
+<p>解决数据库更改的问题，提供数据版本的升级降级等基本操作</p>
+<h2 id="各种环境控制"><a href="#各种环境控制" class="headerlink" title="各种环境控制"></a>各种环境控制</h2><p>我们的项目通常会分开发环境和正式环境，其中一些配置比如数据库配置都是不一样的.Sails中只需要在<code>config/local</code>，<code>config/env/development</code>,<code>config/env/production</code> 里面分别配置就可以了。<br>1.<code>local</code> 本地的配置，优先级高于development 和 production<br>2.<code>development</code>和<code>production</code>分别是开发环境和产品环境。</p>
+<blockquote>
+<p><code>sails lift</code>:默认是测试环境启动服务,启动正式环境:<code>sails lift --prod</code></p>
+</blockquote>
+<p>下面是一个示例代码.</p>
+<p><code>config/local</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="attr">models</span>:&#123;</div><div class="line">    <span class="attr">connection</span>: <span class="string">'xkjMysqlServer'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">connections</span> : &#123;</div><div class="line">    <span class="comment">//本地配置</span></div><div class="line">    xkjMysqlServer: &#123;</div><div class="line">        <span class="attr">adapter</span>: <span class="string">'sails-mysql'</span>,</div><div class="line">        <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">        <span class="attr">user</span>: <span class="string">'username'</span>,</div><div class="line">        <span class="attr">password</span>: <span class="string">'password'</span>,</div><div class="line">        <span class="attr">database</span>: <span class="string">'database_name'</span>,</div><div class="line">        <span class="attr">charset</span>   : <span class="string">'utf8'</span>,</div><div class="line">        <span class="attr">collation</span> : <span class="string">'utf8_swedish_ci'</span></div><div class="line">    &#125;,</div><div class="line">  &#125; </div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><code>config/env/development</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="comment">//244测试环境配置</span></div><div class="line">  models: &#123;</div><div class="line">    <span class="attr">connection</span>: <span class="string">'Mysql244Server'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">port</span>:<span class="number">1339</span>,</div><div class="line"></div><div class="line">  <span class="comment">//其他配置项</span></div><div class="line"></div><div class="line">  <span class="comment">//队列redis配置</span></div><div class="line">  redis:&#123;</div><div class="line">    <span class="attr">port</span>:<span class="number">6579</span>,</div><div class="line">    <span class="attr">host</span>:<span class="string">'localhost'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">connections</span> :&#123;</div><div class="line">    <span class="comment">//244服务器</span></div><div class="line">    Mysql244Server: &#123;</div><div class="line">      <span class="attr">adapter</span>: <span class="string">'sails-mysql'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">      <span class="attr">user</span>: <span class="string">'username'</span>,</div><div class="line">      <span class="attr">password</span>: <span class="string">'password'</span>,</div><div class="line">      <span class="attr">database</span>: <span class="string">'database_name'</span>,</div><div class="line">      <span class="attr">charset</span>   : <span class="string">'utf8'</span>,</div><div class="line">      <span class="attr">collation</span> : <span class="string">'utf8_swedish_ci'</span></div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><code>config/env/production</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="attr">port</span>: <span class="number">1339</span>,</div><div class="line"></div><div class="line">  <span class="comment">//其他配置信息</span></div><div class="line"></div><div class="line">  <span class="comment">//队列redis配置</span></div><div class="line">  redis:&#123;</div><div class="line">    <span class="attr">port</span>:<span class="number">6379</span>,</div><div class="line">    <span class="attr">host</span>:<span class="string">'localhost'</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p> <code>connections</code>不只可以在<code>config/connections</code>里面定义，可以放在任何位置，其他配置也是<br> <code>config</code>中的文件可以通过 <code>sails.config.somevalue</code>来获取</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/13/Node-Sails-Solutions/" class="archive-article-date">
+  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Node-Sails-Passport-Email" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司的内部管理平台经常需要使用统一的邮箱登录所有的平台，本文介绍在Sails中如何实现这一功能</p>
+<p>下面按照步骤一一介绍</p>
+<h1 id="1-dependencies"><a href="#1-dependencies" class="headerlink" title="1. dependencies"></a>1. dependencies</h1><p>在项目package.json中新增插件包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    ...</div><div class="line">    <span class="string">"bcrypt"</span>: <span class="string">"~0.8.0"</span>,</div><div class="line">    <span class="string">"ldapjs"</span>: <span class="string">"mcavage/node-ldapjs"</span>,</div><div class="line">    <span class="string">"passport"</span>: <span class="string">"~0.2.1"</span>,</div><div class="line">    <span class="string">"passport-ldapauth"</span>: <span class="string">"0.3.0"</span>,</div><div class="line">    ...</div><div class="line">   &#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>然后打开命令行</p>
+<pre><code>sudo npm install
+</code></pre><h1 id="2-创建SessionController"><a href="#2-创建SessionController" class="headerlink" title="2. 创建SessionController"></a>2. 创建SessionController</h1><p>命令行输入</p>
+<pre><code>sails generate api session
+</code></pre><p>然后向 <code>项目目录/api/contorllers/SessionController.js</code> 添加如下代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> bcrypt = <span class="built_in">require</span>(<span class="string">'bcrypt'</span>);</div><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 公司邮箱登录</div><div class="line"> */</div><div class="line">  login:<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> LdapStrategy = <span class="built_in">require</span>(<span class="string">'passport-ldapauth'</span>);</div><div class="line"></div><div class="line">	passport.use(<span class="keyword">new</span> LdapStrategy(&#123;</div><div class="line">		<span class="comment">//这里需要改成自己的配置</span></div><div class="line">	    server: &#123;</div><div class="line">	       <span class="attr">url</span>: <span class="string">'ldap://mail.xxxx.net:389'</span>,</div><div class="line">		   <span class="attr">bindDn</span>: <span class="string">'uid=zimbra,cn=admins,cn=zimbra'</span>,</div><div class="line">		   <span class="attr">bindCredentials</span>: <span class="string">'OKfh_meB'</span>,</div><div class="line">		   <span class="attr">searchBase</span>: <span class="string">'dc=xxxxx,dc=net'</span>,</div><div class="line">		   <span class="attr">searchFilter</span>: <span class="string">'(uid=&#123;&#123;username&#125;&#125;)'</span></div><div class="line">	    &#125;</div><div class="line">	  &#125;));</div><div class="line"></div><div class="line">	passport.authenticate(<span class="string">'ldapauth'</span>, &#123;<span class="attr">session</span>: <span class="literal">false</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,user,info</span>)</span>&#123;</div><div class="line">         	<span class="keyword">if</span>(err) &#123;res.send(err);&#125;</div><div class="line">         	<span class="keyword">if</span>(user)&#123;</div><div class="line">        	  <span class="comment">//创建新用户</span></div><div class="line">        	  <span class="comment">//登录成功</span></div><div class="line">              req.session.isAuthenticated=<span class="literal">true</span>;<span class="comment">// 标记登录成功</span></div><div class="line">         	&#125;<span class="keyword">else</span>&#123;</div><div class="line">         	  <span class="comment">//登录失败的操作</span></div><div class="line">         	&#125;</div><div class="line">	&#125;)(req,res);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="3-配置-Express-Middleware"><a href="#3-配置-Express-Middleware" class="headerlink" title="3. 配置 Express Middleware"></a>3. 配置 Express Middleware</h1><p>使用passport需要我们自己配置一下middleware,位置在 <code>项目目录/config/http.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.http = &#123;</div><div class="line"></div><div class="line">  <span class="attr">middleware</span>: &#123;</div><div class="line"></div><div class="line">    <span class="attr">passportInit</span> : <span class="built_in">require</span>(<span class="string">'passport'</span>).initialize(), <span class="comment">//这里是需要加的东西</span></div><div class="line">    passportSession : <span class="built_in">require</span>(<span class="string">'passport'</span>).session(), <span class="comment">//这里是需要加的东西</span></div><div class="line"></div><div class="line">    order: [</div><div class="line">      <span class="string">'startRequestTimer'</span>,</div><div class="line">      <span class="string">'cookieParser'</span>,</div><div class="line">      <span class="string">'session'</span>,</div><div class="line">      <span class="string">'passportInit'</span>,     <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'passportSession'</span>,  <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'myRequestLogger'</span>,</div><div class="line">      <span class="string">'bodyParser'</span>,</div><div class="line">      <span class="string">'handleBodyParserError'</span>,</div><div class="line">      <span class="string">'compress'</span>,</div><div class="line">      <span class="string">'methodOverride'</span>,</div><div class="line">      <span class="string">'poweredBy'</span>,</div><div class="line">      <span class="string">'router'</span>,</div><div class="line">      <span class="string">'www'</span>,</div><div class="line">      <span class="string">'favicon'</span>,</div><div class="line">      <span class="string">'404'</span>,</div><div class="line">      <span class="string">'500'</span></div><div class="line">    ],</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意<code>order</code> 数组中的顺序保持一致</p>
+<h1 id="4-添加-policy"><a href="#4-添加-policy" class="headerlink" title="4. 添加 policy"></a>4. 添加 policy</h1><p>创建一个新的policy <code>isAuthenticated.js</code> 放在 <code>项目目录/api/policies/</code>目录下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> (req.isAuthenticated) &#123;</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> res.redirect(<span class="string">'/login'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="5-绑定policy到controller"><a href="#5-绑定policy到controller" class="headerlink" title="5. 绑定policy到controller"></a>5. 绑定policy到controller</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.policies = &#123;</div><div class="line">   <span class="string">'*'</span>: <span class="literal">true</span>,</div><div class="line">  <span class="string">'SessionController'</span>: &#123;</div><div class="line">    <span class="string">'*'</span>: <span class="string">'isAuthenticated'</span></div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="6-测试一下吧"><a href="#6-测试一下吧" class="headerlink" title="6. 测试一下吧"></a>6. 测试一下吧</h1><p><a href="http://localhost:1337" target="_blank" rel="external">localhost:1337</a></p>
+<p>创建View的部分，以及其他注销操作本文就不给出了。 </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/" class="archive-article-date">
+  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱登录/">邮箱登录</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-BaseStructure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/13/Android-BaseStructure/">Android项目底层架构解决方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文旨在记录一些通用的Android项目的基础架构常见的解决方案。</p>
+<h1 id="基础架构"><a href="#基础架构" class="headerlink" title="基础架构"></a>基础架构</h1><h2 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h2><ol>
+<li>Volley:实际项目中直接使用ihaveu_util_library中的UtilVolley即可</li>
+</ol>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><ol>
+<li>UtilVolley中包含的ImageLoader</li>
+<li><a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">universal-image-loader</a></li>
+</ol>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>看情况</p>
+<h2 id="页面结构"><a href="#页面结构" class="headerlink" title="页面结构"></a>页面结构</h2><ol>
+<li>需要考虑实现方式:Activity or Activity+Fragment</li>
+</ol>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><ol>
+<li><a href="http://lbs.amap.com/api/" target="_blank" rel="external">高德地图</a></li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/13/Android-BaseStructure/" class="archive-article-date">
+  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件/">插件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解决方案/">解决方案</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Animation-Android" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/05/28/Animation-Android/">Android动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="值动画"><a href="#值动画" class="headerlink" title="值动画"></a>值动画</h2><h3 id="ValueAnimator"><a href="#ValueAnimator" class="headerlink" title="ValueAnimator"></a>ValueAnimator</h3><p>简单值动画示例：<br>下面例子是实现省略号的动画<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> ValueAnimator anim = ValueAnimator.ofInt(<span class="number">0</span>, <span class="number">400</span>);</div><div class="line"> anim.setDuration(<span class="number">3000</span>);</div><div class="line"> anim.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</div><div class="line">         <span class="keyword">int</span> frameValue = (Integer) animation.getAnimatedValue();</div><div class="line">         <span class="keyword">if</span> (frameValue &lt; <span class="number">100</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面"</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt; <span class="number">200</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面."</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt; <span class="number">300</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面.."</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt;= <span class="number">400</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面..."</span>);</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;);</div><div class="line">anim.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">anim.start();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/05/28/Animation-Android/" class="archive-article-date">
+  	<time datetime="2015-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-05-28</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Animation/">Animation</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-CheckBox-Style" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/03/14/Android-CheckBox-Style/">CheckBox样式自定义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在drawable文件夹中建立以下selector即可<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_pressed"</span> <span class="attr">android:state_checked</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_normal"</span> <span class="attr">android:state_checked</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_normal"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在values文件夹下创建以下样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"CustomCheckboxTheme"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Widget.CompoundButton.CheckBox"</span>&gt;</span><span class="xml"></span></div><div class="line">	<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:button"</span>&gt;</span>@drawable/checkbox_style<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>布局中使用下面样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">CheckBox</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/select_all"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">style</span>=<span class="string">"@style/CustomCheckboxTheme"</span> /&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/03/14/Android-CheckBox-Style/" class="archive-article-date">
+  	<time datetime="2015-03-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CheckBox/">CheckBox</a></li></ul>
 	</div>
 
       
@@ -834,7 +777,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
     </nav>
   
 
@@ -844,7 +787,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 XBlog
+    		&copy; 2017 XBlog
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -891,7 +834,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 10px;">jar</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12.5px;">jar</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
     			</div>
     	</section>
     
