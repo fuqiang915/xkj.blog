@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android 自定义通知一些坑 | XBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本篇介绍自定义通知样式时会遇到的一些坑,本篇旨在记录坑不在全面讲解自定义的方法
+坑
+文字颜色:强烈使用系统定义的文字颜色,否则需要固定背景色
+自定义View的尺寸: 建议自适应，因为不同系统高度会有差别
+不同系统版本的兼容性处理
+
+详细讲解文字颜色首先一个大前提，通知栏的背景色的颜色是不确定的，有深色，也有浅色。这里分两种情况说明。一种是自定义布局的背景色固定，这种情况下可以直接指定文字颜色。但是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 自定义通知一些坑">
+<meta property="og:url" content="http://www.xkjchen.com/uncategorized/2017/03/02/Android-Custom-Notification/index.html">
+<meta property="og:site_name" content="XBlog">
+<meta property="og:description" content="本篇介绍自定义通知样式时会遇到的一些坑,本篇旨在记录坑不在全面讲解自定义的方法
+坑
+文字颜色:强烈使用系统定义的文字颜色,否则需要固定背景色
+自定义View的尺寸: 建议自适应，因为不同系统高度会有差别
+不同系统版本的兼容性处理
+
+详细讲解文字颜色首先一个大前提，通知栏的背景色的颜色是不确定的，有深色，也有浅色。这里分两种情况说明。一种是自定义布局的背景色固定，这种情况下可以直接指定文字颜色。但是">
+<meta property="og:updated_time" content="2017-03-06T08:29:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 自定义通知一些坑">
+<meta name="twitter:description" content="本篇介绍自定义通知样式时会遇到的一些坑,本篇旨在记录坑不在全面讲解自定义的方法
+坑
+文字颜色:强烈使用系统定义的文字颜色,否则需要固定背景色
+自定义View的尺寸: 建议自适应，因为不同系统高度会有差别
+不同系统版本的兼容性处理
+
+详细讲解文字颜色首先一个大前提，通知栏的背景色的颜色是不确定的，有深色，也有浅色。这里分两种情况说明。一种是自定义布局的背景色固定，这种情况下可以直接指定文字颜色。但是">
+  
+    <link rel="alternative" href="/atom.xml" title="XBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/xkj_v1_light.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">XBlog</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">技术路线</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/">所有文章</a></li>
+	        
+				<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
+	        
+				<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">XBlog</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/xkj_v1_light.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">XBlog</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">技术路线</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+					<li><a href="/uncategorized/2014/10/22/Android-Resources/">书签</a></li>
+		        
+					<li><a href="/uncategorized/2016/11/01/Games/">游戏</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android-Custom-Notification" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 自定义通知一些坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇介绍自定义通知样式时会遇到的一些坑,本篇旨在记录坑不在全面讲解自定义的方法</p>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><ul>
+<li>文字颜色:强烈使用系统定义的文字颜色,否则需要固定背景色</li>
+<li>自定义View的尺寸: 建议自适应，因为不同系统高度会有差别</li>
+<li>不同系统版本的兼容性处理</li>
+</ul>
+<h1 id="详细讲解"><a href="#详细讲解" class="headerlink" title="详细讲解"></a>详细讲解</h1><h2 id="文字颜色"><a href="#文字颜色" class="headerlink" title="文字颜色"></a>文字颜色</h2><p>首先一个大前提，通知栏的背景色的颜色是不确定的，有深色，也有浅色。<br>这里分两种情况说明。<br>一种是自定义布局的背景色固定，这种情况下可以直接指定文字颜色。但是这种在通知栏的观感不是很好，比如浅色通知栏，显示一条黑色通知显得很突兀，也不好看。</p>
+<p>第二种是透明背景色，这时文字颜色就不能固定了，好在系统提供的对应的文字样式。</p>
+<p>下面详细说下如何使用系统样式</p>
+<p><strong>由于5.0引入MeterialDesign,5.0及以上的样式命名有所更改,所以需要分别设置。</strong></p>
+<h3 id="SDK21以下"><a href="#SDK21以下" class="headerlink" title="SDK21以下"></a>SDK21以下</h3><p>values/style.xml</p>
+<p>标题样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:textAppearance="@android:style/TextAppearance.Material.Notification.Title"</div></pre></td></tr></table></figure></p>
+<p>文字颜色：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:textAppearance="@android:style/TextAppearance.Material.Notification.Info"</div></pre></td></tr></table></figure></p>
+<h3 id="SDK21及以上"><a href="#SDK21及以上" class="headerlink" title="SDK21及以上"></a>SDK21及以上</h3><p>标题颜色</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"</div></pre></td></tr></table></figure>
+<p>内容颜色<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent"</div></pre></td></tr></table></figure></p>
+<h2 id="自定义View的尺寸"><a href="#自定义View的尺寸" class="headerlink" title="自定义View的尺寸"></a>自定义View的尺寸</h2><p>首先Android原生系统中定义的样式大致有两种，一是普通通知，另一种是4.1以后引入的扩展通知<br>普通通知高度为64dp,扩展通知高度为256dp。但是由于国内不同定制系统对这两种高度有不同处理，所以推荐使用自适应的布局，尽量不要固定宽高。<br>至于通知的宽度，不只受屏幕宽度影响，也受自制系统影响。比如华为系统的通知左侧会有时间轴、小米和魅族系统左右会预留padding空间等等。</p>
+<p>所以尺寸上尽量做到自适应。</p>
+<h2 id="不同系统版本的兼容"><a href="#不同系统版本的兼容" class="headerlink" title="不同系统版本的兼容"></a>不同系统版本的兼容</h2><p>扩展布局只支持4.1以上系统，对于4.1以下，可以只设置普通视图的布局。<br>对于7.0以上系统一定不要直接使用<code>notification.bigContentView</code>来设置布局，此方法早已废弃，尤其7.0以后<code>bigContentView</code>可能为空值</p>
+<h2 id="一些代码细节"><a href="#一些代码细节" class="headerlink" title="一些代码细节"></a>一些代码细节</h2><ul>
+<li>创建通知可以使用v4包中的NotificatoinCompat.Builder,以兼容11以下版本。</li>
+<li>设置自定义布局推荐同时设置普通状态和扩展状态的布局，否则有些手机会出现 <code>Bad Notification Exception</code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">builder.setCustomContentView(buildNormalView(pushMessage));</div><div class="line">builder.setCustomBigContentView(buildNoImgView(pushMessage));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>参考:<br><a href="https://developer.android.com/guide/topics/ui/notifiers/notifications.html#CreateNotification" target="_blank" rel="external">https://developer.android.com/guide/topics/ui/notifiers/notifications.html#CreateNotification</a></p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2017/03/02/Android-Custom-Notification/" class="archive-article-date">
+  	<time datetime="2017-03-02T12:13:42.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/custom/">custom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notification/">notification</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义Notification/">自定义Notification</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#坑"><span class="toc-number">1.</span> <span class="toc-text">坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#详细讲解"><span class="toc-number">2.</span> <span class="toc-text">详细讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#文字颜色"><span class="toc-number">2.1.</span> <span class="toc-text">文字颜色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SDK21以下"><span class="toc-number">2.1.1.</span> <span class="toc-text">SDK21以下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SDK21及以上"><span class="toc-number">2.1.2.</span> <span class="toc-text">SDK21及以上</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义View的尺寸"><span class="toc-number">2.2.</span> <span class="toc-text">自定义View的尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不同系统版本的兼容"><span class="toc-number">2.3.</span> <span class="toc-text">不同系统版本的兼容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些代码细节"><span class="toc-number">2.4.</span> <span class="toc-text">一些代码细节</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+<style>
+
+/* toc */
+#tocButton {
+    position: fixed;
+    border-radius: 6px;
+    width: 78px;
+    height: 35px;
+    border: none;
+     right: 50px;
+    top: 75px;
+    background-color: #eee;
+    font-size: 14px;
+    color: gray;
+    text-align: center;
+}
+#tocButton:hover{
+    color: #88acdb;
+}
+
+#toc {
+    min-width: 200px;
+    max-width: 200px;
+    padding-top:5px;
+    position: fixed;
+    padding:15px;
+    background: #eee;
+    border-radius: 10px;
+    border: dashed #eee 2px;
+    right: 50px;
+    top: 100px;
+    font-size: .9em;
+    line-height: 1.65em;
+}
+#toc strong{
+    padding: 10px;
+    font-size: 20px;
+}
+#toc li a{
+    padding: 5px;
+    margin-top: 2px;
+    display: block;
+    background: #eee;
+    border-radius: 6px;
+    color:#555;
+}
+#toc li a:hover{
+    background: #fff;
+}
+</style>
+
+
+
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/uncategorized/2017/02/28/Android-Learn/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android学习路线</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 XBlog
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+
+    
+    	<section class="tools-section tools-section-tag" style="overflow:auto;">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 12px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 18px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 18px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/custom/" style="font-size: 10px;">custom</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12px;">jar</a> <a href="/tags/java/" style="font-size: 16px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notification/" style="font-size: 10px;">notification</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 12px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/stetho/" style="font-size: 10px;">stetho</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 12px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12px;">多线程</a> <a href="/tags/学习路线/" style="font-size: 10px;">学习路线</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12px;">性能</a> <a href="/tags/插件/" style="font-size: 12px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/自定义Notification/" style="font-size: 10px;">自定义Notification</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 14px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">fuqiang.chen@android@Beijing</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

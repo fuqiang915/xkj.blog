@@ -148,6 +148,446 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android-Dialog-About" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/01/24/Android-Dialog-About/">Android Dialog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目录</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//利用Builder创建对话框</span></div><div class="line">AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+<p>可以为Dialog单独设置Style:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">new</span> ContextThemeWrapper(<span class="keyword">this</span>, R.style.AlertDialogCustom));</div></pre></td></tr></table></figure></p>
+<h2 id="设置透明度（Dialog自身的透明度）"><a href="#设置透明度（Dialog自身的透明度）" class="headerlink" title="设置透明度（Dialog自身的透明度）"></a>设置透明度（Dialog自身的透明度）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WindowManager.LayoutParams lp=dialog.getWindow().getAttributes();</div><div class="line">lp.alpha=<span class="number">1.0f</span>;</div><div class="line">dialog.getWindow().setAttributes(lp);</div></pre></td></tr></table></figure>
+<p>alpha在0.0f到1.0f之间。1.0完全不透明，0.0f完全透明</p>
+<h2 id="设置黑暗度-Dialog自身的黑暗度"><a href="#设置黑暗度-Dialog自身的黑暗度" class="headerlink" title="设置黑暗度(Dialog自身的黑暗度)"></a>设置黑暗度(Dialog自身的黑暗度)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dialog.setContentView(R.layout.dialog);</div><div class="line"></div><div class="line">WindowManager.LayoutParams lp=dialog.getWindow().getAttributes();</div><div class="line">lp.dimAmount=<span class="number">1.0f</span>;</div><div class="line">dialog.getWindow().setAttributes(lp);</div><div class="line">dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);</div></pre></td></tr></table></figure>
+<p>dimAmount在0.0f和1.0f之间，0.0f完全不暗，1.0f全暗</p>
+<h2 id="设置Dialog底背景模糊和黑暗度"><a href="#设置Dialog底背景模糊和黑暗度" class="headerlink" title="设置Dialog底背景模糊和黑暗度"></a>设置Dialog底背景模糊和黑暗度</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_BLUR_BEHIND</span>（设置模糊）</div><div class="line"></div><div class="line"><span class="selector-tag">WindowManager</span><span class="selector-class">.LayoutParams</span><span class="selector-class">.FLAG_DIM_BEHIND</span>（设置暗淡）</div></pre></td></tr></table></figure>
+<h2 id="清除Dialog底背景模糊和黑暗度"><a href="#清除Dialog底背景模糊和黑暗度" class="headerlink" title="清除Dialog底背景模糊和黑暗度"></a>清除Dialog底背景模糊和黑暗度</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND | WindowManager.LayoutParams.FLAG_DIM_BEHIND)</div></pre></td></tr></table></figure>
+<h2 id="BaseDialog"><a href="#BaseDialog" class="headerlink" title="BaseDialog"></a>BaseDialog</h2><ul>
+<li>目前只加了ButterKnife</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/4/19.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseDialog</span> <span class="keyword">extends</span> <span class="title">Dialog</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">int</span> themeResId)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, themeResId);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">boolean</span> cancelable, OnCancelListener cancelListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, cancelable, cancelListener);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/*</span></div><div class="line">     *  重写</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(<span class="keyword">int</span> layoutResID)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.setContentView(layoutResID);</div><div class="line">        ButterKnife.bind(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BaseDialog用法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by fuqiang on 16/4/19.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ADialog</span> <span class="keyword">extends</span> <span class="title">BaseDialog</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bind</span>(R.id.text)</div><div class="line">    TextView mName;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">int</span> themeResId)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, themeResId);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">BaseDialog</span><span class="params">(Context context, <span class="keyword">boolean</span> cancelable, OnCancelListener cancelListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, cancelable, cancelListener);</div><div class="line">        <span class="comment">//设置布局</span></div><div class="line">        setContentView(R.layout.dialog_count_down);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.tutorialspoint.com/android/android_alert_dialoges.htm" target="_blank" rel="external">tutorialspoint Dialog</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/01/24/Android-Dialog-About/" class="archive-article-date">
+  	<time datetime="2016-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dialog/">Dialog</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Demos" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2016/01/01/Demos/">博文开篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
+<blockquote>
+<ul>
+<li>整理知识，学习笔记</li>
+<li>发布日记，杂文，所见所想</li>
+<li>撰写发布技术文稿（代码支持）</li>
+<li>撰写发布学术论文（LaTeX 公式支持）</li>
+</ul>
+</blockquote>
+<p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"></p>
+<p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
+<h3 id="Windows-Mac-Linux-全平台客户端"><a href="#Windows-Mac-Linux-全平台客户端" class="headerlink" title="Windows/Mac/Linux 全平台客户端"></a><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="external">Windows/Mac/Linux 全平台客户端</a></h3><blockquote>
+<p>请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 <i class="icon-file"></i> <strong>新文稿</strong> 或者使用快捷键 <code>Ctrl+Alt+N</code>。</p>
+</blockquote>
+<hr>
+<h2 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown"></a>什么是 Markdown</h2><p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
+<h3 id="1-制作一份待办事宜-Todo-列表"><a href="#1-制作一份待办事宜-Todo-列表" class="headerlink" title="1. 制作一份待办事宜 Todo 列表"></a>1. 制作一份待办事宜 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-待办事宜-todo-列表" target="_blank" rel="external">Todo 列表</a></h3><ul>
+<li>[ ] 支持以 PDF 格式导出文稿</li>
+<li>[ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li>[x] 新增 Todo 列表功能</li>
+<li>[x] 修复 LaTex 公式渲染问题</li>
+<li>[x] 新增 LaTex 公式编号功能</li>
+</ul>
+<h3 id="2-书写一个质能守恒公式-LaTeX"><a href="#2-书写一个质能守恒公式-LaTeX" class="headerlink" title="2. 书写一个质能守恒公式[^LaTeX]"></a>2. 书写一个质能守恒公式[^LaTeX]</h3><p>$$E=mc^2$$</p>
+<h3 id="3-高亮一段代码-code"><a href="#3-高亮一段代码-code" class="headerlink" title="3. 高亮一段代码[^code]"></a>3. 高亮一段代码[^code]</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># A comment</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'hello world'</span></div></pre></td></tr></table></figure>
+<h3 id="4-高效绘制-流程图"><a href="#4-高效绘制-流程图" class="headerlink" title="4. 高效绘制 流程图"></a>4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图" target="_blank" rel="external">流程图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: Start</div><div class="line">op=&gt;operation: Your Operation</div><div class="line">cond=&gt;condition: Yes or No?</div><div class="line">e=&gt;end</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
+<h3 id="5-高效绘制-序列图"><a href="#5-高效绘制-序列图" class="headerlink" title="5. 高效绘制 序列图"></a>5. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图" target="_blank" rel="external">序列图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Alice-&gt;Bob: Hello Bob, how are you?</div><div class="line">Note right of Bob: Bob thinks</div><div class="line">Bob--&gt;Alice: I am good thanks!</div></pre></td></tr></table></figure>
+<h3 id="6-高效绘制-甘特图"><a href="#6-高效绘制-甘特图" class="headerlink" title="6. 高效绘制 甘特图"></a>6. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图" target="_blank" rel="external">甘特图</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">title 项目开发流程</div><div class="line">section 项目确定</div><div class="line">    需求分析       :a1, 2016-06-22, 3d</div><div class="line">    可行性报告     :after a1, 5d</div><div class="line">    概念验证       : 5d</div><div class="line">section 项目实施</div><div class="line">    概要设计      :2016-07-05  , 5d</div><div class="line">    详细设计      :2016-07-08, 10d</div><div class="line">    编码          :2016-07-15, 10d</div><div class="line">    测试          :2016-07-22, 5d</div><div class="line">section 发布验收</div><div class="line">    发布: 2d</div><div class="line">    验收: 3d</div></pre></td></tr></table></figure>
+<h3 id="7-绘制表格"><a href="#7-绘制表格" class="headerlink" title="7. 绘制表格"></a>7. 绘制表格</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">\$1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">\$12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">\$1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-更详细语法说明"><a href="#8-更详细语法说明" class="headerlink" title="8. 更详细语法说明"></a>8. 更详细语法说明</h3><p>想要查看更详细的语法说明，可以参考我们准备的 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown" target="_blank" rel="external">Cmd Markdown 简明语法手册</a>，进阶用户可以参考 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-高阶语法手册" target="_blank" rel="external">Cmd Markdown 高阶语法手册</a> 了解更多高级功能。</p>
+<p>总而言之，不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。<strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
+<hr>
+<h2 id="什么是-Cmd-Markdown"><a href="#什么是-Cmd-Markdown" class="headerlink" title="什么是 Cmd Markdown"></a>什么是 Cmd Markdown</h2><p>您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 <strong>编辑/发布/阅读</strong> Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。</p>
+<h3 id="1-实时同步预览"><a href="#1-实时同步预览" class="headerlink" title="1. 实时同步预览"></a>1. 实时同步预览</h3><p>我们将 Cmd Markdown 的主界面一分为二，左边为<strong>编辑区</strong>，右边为<strong>预览区</strong>，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！</p>
+<h3 id="2-编辑工具栏"><a href="#2-编辑工具栏" class="headerlink" title="2. 编辑工具栏"></a>2. 编辑工具栏</h3><p>也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 <strong>编辑区</strong> 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。</p>
+<p><img src="https://www.zybuluo.com/static/img/toolbar-editor.png" alt="tool-editor"></p>
+<h3 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h3><p>完全心无旁骛的方式编辑文字：点击 <strong>编辑工具栏</strong> 最右侧的拉伸按钮或者按下 <code>Ctrl + M</code>，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！</p>
+<h3 id="4-实时的云端文稿"><a href="#4-实时的云端文稿" class="headerlink" title="4. 实时的云端文稿"></a>4. 实时的云端文稿</h3><p>为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 <strong>编辑工具栏</strong> 的最右侧提示 <code>已保存</code> 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。</p>
+<h3 id="5-离线模式"><a href="#5-离线模式" class="headerlink" title="5. 离线模式"></a>5. 离线模式</h3><p>在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。</p>
+<h3 id="6-管理工具栏"><a href="#6-管理工具栏" class="headerlink" title="6. 管理工具栏"></a>6. 管理工具栏</h3><p>为了便于管理您的文稿，在 <strong>预览区</strong> 的顶部放置了如下所示的 <strong>管理工具栏</strong>：</p>
+<p><img src="https://www.zybuluo.com/static/img/toolbar-manager.jpg" alt="tool-manager"></p>
+<p>通过管理工具栏可以：</p>
+<p><i class="icon-share"></i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br><i class="icon-file"></i> 新建：开始撰写一篇新的文稿<br><i class="icon-trash"></i> 删除：删除当前的文稿<br><i class="icon-cloud"></i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br><i class="icon-reorder"></i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br><i class="icon-pencil"></i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
+<h3 id="7-阅读工具栏"><a href="#7-阅读工具栏" class="headerlink" title="7. 阅读工具栏"></a>7. 阅读工具栏</h3><p><img src="https://www.zybuluo.com/static/img/toolbar-reader.jpg" alt="tool-manager"></p>
+<p>通过 <strong>预览区</strong> 右上角的 <strong>阅读工具栏</strong>，可以查看当前文稿的目录并增强阅读体验。</p>
+<p>工具栏上的五个图标依次为：</p>
+<p><i class="icon-list"></i> 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落<br><i class="icon-chevron-sign-left"></i> 视图：互换左边编辑区和右边预览区的位置<br><i class="icon-adjust"></i> 主题：内置了黑白两种模式的主题，试试 <strong>黑色主题</strong>，超炫！<br><i class="icon-desktop"></i> 阅读：心无旁骛的阅读模式提供超一流的阅读体验<br><i class="icon-fullscreen"></i> 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境</p>
+<h3 id="8-阅读模式"><a href="#8-阅读模式" class="headerlink" title="8. 阅读模式"></a>8. 阅读模式</h3><p>在 <strong>阅读工具栏</strong> 点击 <i class="icon-desktop"></i> 或者按下 <code>Ctrl+Alt+M</code> 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。</p>
+<h3 id="9-标签、分类和搜索"><a href="#9-标签、分类和搜索" class="headerlink" title="9. 标签、分类和搜索"></a>9. 标签、分类和搜索</h3><p>在编辑区任意行首位置输入以下格式的文字可以标签当前文档：</p>
+<p>标签： 未分类</p>
+<p>标签以后的文稿在【文件列表】（Ctrl+Alt+F）里会按照标签分类，用户可以同时使用键盘或者鼠标浏览查看，或者在【文件列表】的搜索文本框内搜索标题关键字过滤文稿，如下图所示：</p>
+<p><img src="https://www.zybuluo.com/static/img/file-list.png" alt="file-list"></p>
+<h3 id="10-文稿发布和分享"><a href="#10-文稿发布和分享" class="headerlink" title="10. 文稿发布和分享"></a>10. 文稿发布和分享</h3><p>在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 <i class="icon-share"></i> (Ctrl+Alt+P) 发布这份文档给好友吧！</p>
+<hr>
+<p>再一次感谢您花费时间阅读这份欢迎稿，点击 <i class="icon-file"></i> (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！</p>
+<p>作者 <a href="http://weibo.com/ghosert" target="_blank" rel="external">@ghosert</a><br>2016 年 07月 07日    </p>
+<p>[^LaTeX]: 支持 <strong>LaTeX</strong> 编辑显示支持，例如：$\sum_{i=1}^n a_i=0$， 访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">MathJax</a> 参考更多使用方法。</p>
+<p>[^code]: 代码高亮功能支持包括 Java, Python, JavaScript 在内的，<strong>四十一</strong>种主流编程语言。</p>
+<p><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">https://www.zybuluo.com/mdeditor</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2016/01/01/Demos/" class="archive-article-date">
+  	<time datetime="2015-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第一篇/">第一篇</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android-Clean-Structure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/10/01/Android-Clean-Structure/">My Android Clean Architecture</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在折腾Android开发架构的东西，之前跟朋友聊天，聊到关于架构的问题，回头仔细想想自己在项目里面没怎么使用什么架构，最多就是个MVP模式。这不赶上项目刚完结，正好来研究一下开发架构的问题。</p>
+<p>本篇整理的开发架构是基于Uncle Bob的<a href="http://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="external">Android-Clean-Architecture</a> <a href="http://www.jianshu.com/p/c6a1a5c9a49b" target="_blank" rel="external">(中文版)</a></p>
+<blockquote>
+<p>同时也参考了一些其他架构:<br><a href="http://www.inferjay.com/blog/2015/08/18/flux-architecture-on-android/" target="_blank" rel="external">Flux Architecture on Android
+</a></p>
+</blockquote>
+<h2 id="具体实现方案如下"><a href="#具体实现方案如下" class="headerlink" title="##具体实现方案如下"></a>##具体实现方案如下</h2><h3 id="1-数据"><a href="#1-数据" class="headerlink" title="1.数据"></a>1.数据</h3><ul>
+<li>json数据请求：retrofit + okHttp</li>
+<li>图片数据请求：<a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></li>
+</ul>
+<h3 id="2-反射-amp-依赖注入"><a href="#2-反射-amp-依赖注入" class="headerlink" title="2.反射&amp;依赖注入"></a>2.反射&amp;依赖注入</h3><ul>
+<li>Dagger2</li>
+<li>ButterKnife</li>
+</ul>
+<h3 id="3-响应式"><a href="#3-响应式" class="headerlink" title="3.响应式"></a>3.响应式</h3><ul>
+<li>RxJava,RxAndroid</li>
+</ul>
+<h2 id="一些学习时候的参考文章"><a href="#一些学习时候的参考文章" class="headerlink" title="一些学习时候的参考文章:"></a>一些学习时候的参考文章:</h2><hr>
+<h3 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a>Retrofit</h3><ul>
+<li><a href="">官网</a></li>
+<li><a href="http://themakeinfo.com/2015/04/retrofit-android-tutorial/" target="_blank" rel="external">Retrofit Android Tutorial</a></li>
+<li><a href="https://www.captechconsulting.com/blogs/volley-vs-retrofit---a-battle-royale" target="_blank" rel="external">Retrofit vs Volley对比</a></li>
+<li><a href="http://android.jobbole.com/81564/" target="_blank" rel="external">各种网络请求对比</a></li>
+</ul>
+<h3 id="OkHttp"><a href="#OkHttp" class="headerlink" title="OkHttp"></a>OkHttp</h3><ul>
+<li><a href="http://square.github.io/okhttp/" target="_blank" rel="external">官网</a></li>
+<li><a href="https://github.com/hongyangAndroid/okhttp-utils" target="_blank" rel="external">一个包装的库okHttpUtil</a></li>
+<li><a href="http://android.jobbole.com/81613/" target="_blank" rel="external">okHttp实现https</a></li>
+<li><a href="http://www.skholingua.com/android-basic/other-sdk-n-libs/okhttp" target="_blank" rel="external">okHttp教程</a></li>
+</ul>
+<h3 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h3><ul>
+<li><a href="http://square.github.io/picasso/" target="_blank" rel="external">Picasso</a></li>
+<li><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso git</a></li>
+</ul>
+<h3 id="ButterKnife"><a href="#ButterKnife" class="headerlink" title="ButterKnife"></a>ButterKnife</h3><ul>
+<li><a href="http://jakewharton.github.io/butterknife/" target="_blank" rel="external">官网</a></li>
+<li><a href="http://blog.chengyunfeng.com/?p=550" target="_blank" rel="external">中文教程 View 注入框架 Butter Knife 4.0 发布</a></li>
+</ul>
+<h3 id="RxJava-RxAndroid"><a href="#RxJava-RxAndroid" class="headerlink" title="RxJava,RxAndroid"></a>RxJava,RxAndroid</h3><ul>
+<li><a href="https://github.com/lzyzsd/Awesome-RxJava" target="_blank" rel="external">Awesome-RxJava教程合集</a></li>
+<li><p><a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="external">RxAndroid git</a></p>
+</li>
+<li><p><a href="https://bboyfeiyu.gitbooks.io/android-tech-frontier/content/issue-9/NotRxJava%E6%87%92%E4%BA%BA%E4%B8%93%E7%94%A8%E6%8C%87%E5%8D%97.html" target="_blank" rel="external">NotRxJava懒人专用指南(为什么用rxjava)</a></p>
+</li>
+<li><p><a href="http://www.kancloud.cn/digest/architecting-android-the-evolution/66317" target="_blank" rel="external">响应式方法RxJava</a></p>
+</li>
+<li><p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="external">rxjava教程</a></p>
+</li>
+</ul>
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><ul>
+<li><a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html" target="_blank" rel="external">官方教程</a></li>
+<li><a href="https://github.com/orfjackal/retrolambda" target="_blank" rel="external">retrolambda use lambda on java7</a></li>
+</ul>
+<h3 id="Dagger2-amp-依赖注入"><a href="#Dagger2-amp-依赖注入" class="headerlink" title="Dagger2 &amp; 依赖注入"></a>Dagger2 &amp; 依赖注入</h3><ul>
+<li><a href="https://github.com/codepath/android_guides/wiki/Dependency-Injection-with-Dagger-2" target="_blank" rel="external">Dagger2</a></li>
+<li><a href="http://codethink.me/2015/08/01/dependency-injection-theory/" target="_blank" rel="external">依赖注入原理</a></li>
+<li><a href="http://code.tutsplus.com/tutorials/dependency-injection-with-dagger-2-on-android--cms-23345" target="_blank" rel="external">Dependency Injection With Dagger 2 on Android</a></li>
+<li><a href="https://bboyfeiyu.gitbooks.io/android-tech-frontier/content/issue-7/Android%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%EF%BC%9ADagger2+Espresso2+Mockito/index.html" target="_blank" rel="external">Android测试框架: Dagger 2 + Espresso 2 + Mockito</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/10/01/Android-Clean-Structure/" class="archive-article-date">
+  	<time datetime="2015-09-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-10-01</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-PhoneGap-Plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/08/11/PhoneGap-Plugin/">PhoneGap插件开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近项目有需求，要做一个Android版的PhoneGap聊天插件，简单来说就是封装一些Android原生页面.对于我这个没有接触过PhoneGap的人来说还是费了一番力气的。</p>
+<p>最终做完这个之后几大感想: </p>
+<blockquote>
+<p>做技术的只有Google能救你，baidu还是算了吧。我能说百度连PhoneGap官网都搜不到么？</p>
+<p>PhoneGap文档做完我才知道不同版本的内容是相对互补的,而我只看了最新版本的文档,里面的东西寥寥无几…(被这个坑的很惨)</p>
+</blockquote>
+<p>PhoneGap插件实际上就是帮你把原生代码导入到PhoneGap Android平台下的项目中一起编译运行。因此，library,sub-project,source code 都是可以直接放到插件里面的.</p>
+<h2 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h2><ul>
+<li>phonggap基础开发环境: <a href="http://docs.phonegap.com/en/3.3.0/guide_cli_index.md.html#The%20Command-Line%20Interface" target="_blank" rel="external">cordova</a></li>
+<li>插件创建工具: <a href="http://docs.phonegap.com/en/3.3.0/plugin_ref_plugman.md.html#Using%20Plugman%20to%20Manage%20Plugins" target="_blank" rel="external">plugman</a></li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 创建phonegap项目</div><div class="line">$ cordova create [project_name] [com.package.name] <span class="string">"AppName"</span></div><div class="line"></div><div class="line"># 添加Android平台</div><div class="line">$ cordova platform add android</div><div class="line"></div><div class="line"># 编译项目</div><div class="line">$ cordova build</div><div class="line"></div><div class="line"># 启动模拟器</div><div class="line">$ cordova emulate android</div><div class="line"></div><div class="line"># 直接run也可以</div><div class="line">$ cordova run android</div><div class="line"></div><div class="line"># 创建插件</div><div class="line">$ plugman create --name &lt;pluginName&gt; --plugin_id &lt;pluginID&gt; --plugin_version &lt;version&gt; [--path &lt;directory&gt;] [--variable NAME=VALUE]</div><div class="line"></div><div class="line"># 插件添加平台</div><div class="line">$ plugman platform add --platform_name &lt;platform&gt;</div><div class="line"></div><div class="line">#安装插件，在phonegap项目目录下</div><div class="line">$ cordova plugin add path/of/plugin</div><div class="line"></div><div class="line">#删除插件，在phonegap项目目录下</div><div class="line">$ cordova plugin rm path/of/plugin</div></pre></td></tr></table></figure>
+<h2 id="插件目录"><a href="#插件目录" class="headerlink" title="插件目录"></a>插件目录</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">├ phonegap</div><div class="line">├─┬ src</div><div class="line">│ ├─┬ android</div><div class="line">│ │ ├── plugin.java</div><div class="line">│ │ ├── libs</div><div class="line">├── plugin.xml</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建的插件中会包含一个<code>projectname.java</code>的文件，里面是插件的demo,自己照着写就行了</p>
+</blockquote>
+<p>你的源代码可以直接放在<code>android</code>目录下面,<code>jar</code>包放在<code>libs</code>里面。不过实际上你放在哪都可以，关键在<code>plugin.xml</code>的配置.我们重点讲解的也是<code>plugin.xml</code>的配置，这个很重要！很重要！很重要（说三遍</p>
+<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><p><a href="http://docs.phonegap.com/en/3.3.0/plugin_ref_spec.md.html#Plugin%20Specification" target="_blank" rel="external">官方<code>plugin.xml</code>配置详解</a></p>
+<p>说几个重点的配置项,下面是典型的<code>plugin.xml</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version='1.0' encoding='utf-8'?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"ihaveu_chat"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>chat_plugin<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">name</span>=<span class="string">"chat_plugin"</span> <span class="attr">src</span>=<span class="string">"www/chat_plugin.js"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"cordova.plugins.chat_plugin"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--权限配置--&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.CAMERA"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">"/*"</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"chat_plugin"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"ihaveu_chat.chat_plugin"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/manifest/application"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--AndroidManifest.xml application 下的配置--&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"com.avoscloud.leanchatconversation.activity.LoginActivity"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">"com.avos.avoscloud.PushService"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 类  这里的target-dir 跟目录是phonegap项目,这里会把chat_plugin.java 直接拷贝到target-dir对应目录中,这里同样也可以是 string.xml,styels.xml 等资源文件--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/chat_plugin.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/ihaveu_chat/chat_plugin"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!--  jar 包--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/xxxx.jar"</span> <span class="attr">target-dir</span>=<span class="string">"libs"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!-- library  这里的custom指这个library是自定义的。那么src是相对于插件根目录，如果是false，src值相对于android_sdk跟目录--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">framework</span> <span class="attr">src</span>=<span class="string">"src/android/libs/mylibrary_project"</span> <span class="attr">custom</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当你的插件需要用到<code>sub-project</code>时,需要配置<code>&lt;framework src=&quot;src/android/libs/mylibrary_project&quot; custom=&quot;true&quot; /&gt;</code></p>
+<p>当你的插件需要用到<code>jar</code>时,需要配置<code>&lt;source-file src=&quot;src/android/libs/xxxx.jar&quot; target-dir=&quot;libs&quot; /&gt;</code></p>
+<blockquote>
+<p>sub-project 的配置是难住我的地方.</p>
+<p>sub-project 的结构需要是ant而不是gradle,也就是eclipse下的Library Project结构</p>
+</blockquote>
+<h2 id="插件的使用"><a href="#插件的使用" class="headerlink" title="插件的使用"></a>插件的使用</h2><p>js端调用插件中的方法<br>位置:<code>项目目录/www/js/index.js</code>的<code>onDeviceReady</code>事件里面<br>重点在于 <code>cordova</code> 全局对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//启动聊天界面</span></div><div class="line"></div><div class="line"><span class="comment">//前两个分别是成功和失败的回调方法</span></div><div class="line"><span class="comment">// chat_plugin 是插件名称</span></div><div class="line"><span class="comment">// startChat 是方法名称</span></div><div class="line"><span class="comment">// [] 是传递的参数</span></div><div class="line">cordova.exec(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"startChat"</span>+msg);</div><div class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"startChat error "</span>+msg);</div><div class="line">&#125;,<span class="string">"chat_plugin"</span>,<span class="string">"startChat"</span>,[]);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>其实不用上面那么麻烦的，可以直接<code>require</code>插件打包出得js文件，但是我还没有找到<code>require(&#39;参数&#39;)</code>这个参数路径应该设的值,囧</p>
+</blockquote>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/08/11/PhoneGap-Plugin/" class="archive-article-date">
+  	<time datetime="2015-08-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-08-11</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phonegap/">phonegap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugin/">plugin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/plugins/">plugins</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-start-up" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/uncategorized/2015/07/23/start-up/">创业-资源</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://startupclass.club/" target="_blank" rel="external">YC</a>;<br>YC中文社区，创业必逛，很多视频讲座等。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/uncategorized/2015/07/23/start-up/" class="archive-article-date">
+  	<time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-23</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创业/">创业</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-shell-cmd" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -459,325 +899,9 @@
 
 
   
-    <article id="post-Node-Sails-Solutions" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Solutions/">Sails 一些解决方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文为目录，记录一些<a href="http://sailsjs.org/#!/" target="_blank" rel="external">Sails</a>项目中遇到的一些常见问题的解决方案</p>
-<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="通用邮箱登录"><a href="#通用邮箱登录" class="headerlink" title="通用邮箱登录"></a>通用邮箱登录</h3><ol>
-<li><p>利用<a href="https://github.com/jaredhanson/passport" target="_blank" rel="external">passport</a> + ldapauth</p>
-<p> 相关链接</p>
-<p> <a href="!--￼7--&gt;/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a></p>
-<p> <a href="http://passportjs.org/" target="_blank" rel="external">passport主页</a></p>
-</li>
-</ol>
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>后台一些功能常需要队列来实现，比如群发通知等。node可以用kue来实现</p>
-<p><a href="https://github.com/Automattic/kue" target="_blank" rel="external">kue git</a></p>
-<p>例如：<br><code>api/services/KueQueue.js</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//const</span></div><div class="line"><span class="keyword">var</span> MESSAGE_JOB = <span class="string">'message'</span>,</div><div class="line">    MQTT_SERVER = <span class="string">'mqtt://172.20.2.244:1884'</span>;</div><div class="line"></div><div class="line"><span class="comment">//mqtt</span></div><div class="line"><span class="keyword">var</span> mqtt = <span class="built_in">require</span>(<span class="string">'mqtt'</span>);</div><div class="line"><span class="keyword">var</span> client = mqtt.connect(MQTT_SERVER);</div><div class="line"></div><div class="line"><span class="comment">//kue</span></div><div class="line"><span class="comment">//<span class="doctag">TODO:</span> add</span></div><div class="line"><span class="keyword">var</span> kue = <span class="built_in">require</span>(<span class="string">'kue'</span>),queue = kue.createQueue(&#123;</div><div class="line">    <span class="attr">prefix</span>: <span class="string">'q'</span>,</div><div class="line">    <span class="attr">redis</span>:&#123;</div><div class="line">        <span class="attr">port</span>:<span class="number">6379</span>,</div><div class="line">        <span class="attr">host</span>:<span class="string">'localhost'</span>,</div><div class="line">        <span class="attr">auth</span>:<span class="string">'xkjqiang'</span>,</div><div class="line">        <span class="attr">db</span>: <span class="number">3</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//执行message任务</span></div><div class="line">queue.process(MESSAGE_JOB,<span class="function"><span class="keyword">function</span>(<span class="params">job,done</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"run message job:"</span>,<span class="built_in">JSON</span>.stringify(job));</div><div class="line">    sendMessage(job.data.message,job.data.token,done);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//------- Function -----------------------------------------------------------------</span></div><div class="line"><span class="comment">//发送mqtt通知</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendMessage</span>(<span class="params">message,token,done</span>)</span>&#123;</div><div class="line">   </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">// 添加到发送队列中</span></div><div class="line">    push:<span class="function"><span class="keyword">function</span>(<span class="params">message,token</span>)</span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Controller中调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">KueQueue.push(message,token);</div></pre></td></tr></table></figure></p>
-<h2 id="服务端工具"><a href="#服务端工具" class="headerlink" title="服务端工具"></a>服务端工具</h2><h3 id="永久运行"><a href="#永久运行" class="headerlink" title="永久运行"></a>永久运行</h3><p>服务端部署node项目时需要永久运行项目，<a href="https://www.npmjs.com/package/forever" target="_blank" rel="external">forever</a>是个不错的选择,forever比较轻量级，小项目比较合适.</p>
-<p>安装<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[sudo] npm install forever -g</div></pre></td></tr></table></figure></p>
-<p>使用也很简单,详细的文档参考上边网址<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">forever start</div><div class="line"><span class="comment">//指定输出日志，启动</span></div><div class="line">forever start -l forever.log -o out.log -e err.log my-daemon.js</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/Unitech/pm2" target="_blank" rel="external">pm2</a>也是一款同类型插件，只是比较重，根据项目自己衡量吧</p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="升级控制"><a href="#升级控制" class="headerlink" title="升级控制"></a>升级控制</h3><p><a href="https://github.com/building5/sails-db-migrate" target="_blank" rel="external">sails db migrate</a></p>
-<p>解决数据库更改的问题，提供数据版本的升级降级等基本操作</p>
-<h2 id="各种环境控制"><a href="#各种环境控制" class="headerlink" title="各种环境控制"></a>各种环境控制</h2><p>我们的项目通常会分开发环境和正式环境，其中一些配置比如数据库配置都是不一样的.Sails中只需要在<code>config/local</code>，<code>config/env/development</code>,<code>config/env/production</code> 里面分别配置就可以了。<br>1.<code>local</code> 本地的配置，优先级高于development 和 production<br>2.<code>development</code>和<code>production</code>分别是开发环境和产品环境。</p>
-<blockquote>
-<p><code>sails lift</code>:默认是测试环境启动服务,启动正式环境:<code>sails lift --prod</code></p>
-</blockquote>
-<p>下面是一个示例代码.</p>
-<p><code>config/local</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="attr">models</span>:&#123;</div><div class="line">    <span class="attr">connection</span>: <span class="string">'xkjMysqlServer'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">connections</span> : &#123;</div><div class="line">    <span class="comment">//本地配置</span></div><div class="line">    xkjMysqlServer: &#123;</div><div class="line">        <span class="attr">adapter</span>: <span class="string">'sails-mysql'</span>,</div><div class="line">        <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">        <span class="attr">user</span>: <span class="string">'username'</span>,</div><div class="line">        <span class="attr">password</span>: <span class="string">'password'</span>,</div><div class="line">        <span class="attr">database</span>: <span class="string">'database_name'</span>,</div><div class="line">        <span class="attr">charset</span>   : <span class="string">'utf8'</span>,</div><div class="line">        <span class="attr">collation</span> : <span class="string">'utf8_swedish_ci'</span></div><div class="line">    &#125;,</div><div class="line">  &#125; </div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p><code>config/env/development</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="comment">//244测试环境配置</span></div><div class="line">  models: &#123;</div><div class="line">    <span class="attr">connection</span>: <span class="string">'Mysql244Server'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">port</span>:<span class="number">1339</span>,</div><div class="line"></div><div class="line">  <span class="comment">//其他配置项</span></div><div class="line"></div><div class="line">  <span class="comment">//队列redis配置</span></div><div class="line">  redis:&#123;</div><div class="line">    <span class="attr">port</span>:<span class="number">6579</span>,</div><div class="line">    <span class="attr">host</span>:<span class="string">'localhost'</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">connections</span> :&#123;</div><div class="line">    <span class="comment">//244服务器</span></div><div class="line">    Mysql244Server: &#123;</div><div class="line">      <span class="attr">adapter</span>: <span class="string">'sails-mysql'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">      <span class="attr">user</span>: <span class="string">'username'</span>,</div><div class="line">      <span class="attr">password</span>: <span class="string">'password'</span>,</div><div class="line">      <span class="attr">database</span>: <span class="string">'database_name'</span>,</div><div class="line">      <span class="attr">charset</span>   : <span class="string">'utf8'</span>,</div><div class="line">      <span class="attr">collation</span> : <span class="string">'utf8_swedish_ci'</span></div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p><code>config/env/production</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line">  <span class="attr">port</span>: <span class="number">1339</span>,</div><div class="line"></div><div class="line">  <span class="comment">//其他配置信息</span></div><div class="line"></div><div class="line">  <span class="comment">//队列redis配置</span></div><div class="line">  redis:&#123;</div><div class="line">    <span class="attr">port</span>:<span class="number">6379</span>,</div><div class="line">    <span class="attr">host</span>:<span class="string">'localhost'</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p> <code>connections</code>不只可以在<code>config/connections</code>里面定义，可以放在任何位置，其他配置也是<br> <code>config</code>中的文件可以通过 <code>sails.config.somevalue</code>来获取</p>
-</blockquote>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/13/Node-Sails-Solutions/" class="archive-article-date">
-  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Node-Sails-Passport-Email" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/">Sails Passport 实现邮箱服务登录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>公司的内部管理平台经常需要使用统一的邮箱登录所有的平台，本文介绍在Sails中如何实现这一功能</p>
-<p>下面按照步骤一一介绍</p>
-<h1 id="1-dependencies"><a href="#1-dependencies" class="headerlink" title="1. dependencies"></a>1. dependencies</h1><p>在项目package.json中新增插件包</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">  <span class="string">"dependencies"</span>: &#123;</div><div class="line">    ...</div><div class="line">    <span class="string">"bcrypt"</span>: <span class="string">"~0.8.0"</span>,</div><div class="line">    <span class="string">"ldapjs"</span>: <span class="string">"mcavage/node-ldapjs"</span>,</div><div class="line">    <span class="string">"passport"</span>: <span class="string">"~0.2.1"</span>,</div><div class="line">    <span class="string">"passport-ldapauth"</span>: <span class="string">"0.3.0"</span>,</div><div class="line">    ...</div><div class="line">   &#125;</div><div class="line">...</div></pre></td></tr></table></figure>
-<p>然后打开命令行</p>
-<pre><code>sudo npm install
-</code></pre><h1 id="2-创建SessionController"><a href="#2-创建SessionController" class="headerlink" title="2. 创建SessionController"></a>2. 创建SessionController</h1><p>命令行输入</p>
-<pre><code>sails generate api session
-</code></pre><p>然后向 <code>项目目录/api/contorllers/SessionController.js</code> 添加如下代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> bcrypt = <span class="built_in">require</span>(<span class="string">'bcrypt'</span>);</div><div class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 公司邮箱登录</div><div class="line"> */</div><div class="line">  login:<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> LdapStrategy = <span class="built_in">require</span>(<span class="string">'passport-ldapauth'</span>);</div><div class="line"></div><div class="line">	passport.use(<span class="keyword">new</span> LdapStrategy(&#123;</div><div class="line">		<span class="comment">//这里需要改成自己的配置</span></div><div class="line">	    server: &#123;</div><div class="line">	       <span class="attr">url</span>: <span class="string">'ldap://mail.xxxx.net:389'</span>,</div><div class="line">		   <span class="attr">bindDn</span>: <span class="string">'uid=zimbra,cn=admins,cn=zimbra'</span>,</div><div class="line">		   <span class="attr">bindCredentials</span>: <span class="string">'OKfh_meB'</span>,</div><div class="line">		   <span class="attr">searchBase</span>: <span class="string">'dc=xxxxx,dc=net'</span>,</div><div class="line">		   <span class="attr">searchFilter</span>: <span class="string">'(uid=&#123;&#123;username&#125;&#125;)'</span></div><div class="line">	    &#125;</div><div class="line">	  &#125;));</div><div class="line"></div><div class="line">	passport.authenticate(<span class="string">'ldapauth'</span>, &#123;<span class="attr">session</span>: <span class="literal">false</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,user,info</span>)</span>&#123;</div><div class="line">         	<span class="keyword">if</span>(err) &#123;res.send(err);&#125;</div><div class="line">         	<span class="keyword">if</span>(user)&#123;</div><div class="line">        	  <span class="comment">//创建新用户</span></div><div class="line">        	  <span class="comment">//登录成功</span></div><div class="line">              req.session.isAuthenticated=<span class="literal">true</span>;<span class="comment">// 标记登录成功</span></div><div class="line">         	&#125;<span class="keyword">else</span>&#123;</div><div class="line">         	  <span class="comment">//登录失败的操作</span></div><div class="line">         	&#125;</div><div class="line">	&#125;)(req,res);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="3-配置-Express-Middleware"><a href="#3-配置-Express-Middleware" class="headerlink" title="3. 配置 Express Middleware"></a>3. 配置 Express Middleware</h1><p>使用passport需要我们自己配置一下middleware,位置在 <code>项目目录/config/http.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.http = &#123;</div><div class="line"></div><div class="line">  <span class="attr">middleware</span>: &#123;</div><div class="line"></div><div class="line">    <span class="attr">passportInit</span> : <span class="built_in">require</span>(<span class="string">'passport'</span>).initialize(), <span class="comment">//这里是需要加的东西</span></div><div class="line">    passportSession : <span class="built_in">require</span>(<span class="string">'passport'</span>).session(), <span class="comment">//这里是需要加的东西</span></div><div class="line"></div><div class="line">    order: [</div><div class="line">      <span class="string">'startRequestTimer'</span>,</div><div class="line">      <span class="string">'cookieParser'</span>,</div><div class="line">      <span class="string">'session'</span>,</div><div class="line">      <span class="string">'passportInit'</span>,     <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'passportSession'</span>,  <span class="comment">//这里是需要加的东西</span></div><div class="line">      <span class="string">'myRequestLogger'</span>,</div><div class="line">      <span class="string">'bodyParser'</span>,</div><div class="line">      <span class="string">'handleBodyParserError'</span>,</div><div class="line">      <span class="string">'compress'</span>,</div><div class="line">      <span class="string">'methodOverride'</span>,</div><div class="line">      <span class="string">'poweredBy'</span>,</div><div class="line">      <span class="string">'router'</span>,</div><div class="line">      <span class="string">'www'</span>,</div><div class="line">      <span class="string">'favicon'</span>,</div><div class="line">      <span class="string">'404'</span>,</div><div class="line">      <span class="string">'500'</span></div><div class="line">    ],</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>注意<code>order</code> 数组中的顺序保持一致</p>
-<h1 id="4-添加-policy"><a href="#4-添加-policy" class="headerlink" title="4. 添加 policy"></a>4. 添加 policy</h1><p>创建一个新的policy <code>isAuthenticated.js</code> 放在 <code>项目目录/api/policies/</code>目录下</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> (req.isAuthenticated) &#123;</div><div class="line">        <span class="keyword">return</span> next();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> res.redirect(<span class="string">'/login'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="5-绑定policy到controller"><a href="#5-绑定policy到controller" class="headerlink" title="5. 绑定policy到controller"></a>5. 绑定policy到controller</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.policies = &#123;</div><div class="line">   <span class="string">'*'</span>: <span class="literal">true</span>,</div><div class="line">  <span class="string">'SessionController'</span>: &#123;</div><div class="line">    <span class="string">'*'</span>: <span class="string">'isAuthenticated'</span></div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="6-测试一下吧"><a href="#6-测试一下吧" class="headerlink" title="6. 测试一下吧"></a>6. 测试一下吧</h1><p><a href="http://localhost:1337" target="_blank" rel="external">localhost:1337</a></p>
-<p>创建View的部分，以及其他注销操作本文就不给出了。 </p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/13/Node-Sails-Passport-Email/" class="archive-article-date">
-  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node/">Node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sails/">Sails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱登录/">邮箱登录</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-BaseStructure" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/07/13/Android-BaseStructure/">Android项目底层架构解决方案</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文旨在记录一些通用的Android项目的基础架构常见的解决方案。</p>
-<h1 id="基础架构"><a href="#基础架构" class="headerlink" title="基础架构"></a>基础架构</h1><h2 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h2><ol>
-<li>Volley:实际项目中直接使用ihaveu_util_library中的UtilVolley即可</li>
-</ol>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><ol>
-<li>UtilVolley中包含的ImageLoader</li>
-<li><a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">universal-image-loader</a></li>
-</ol>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>看情况</p>
-<h2 id="页面结构"><a href="#页面结构" class="headerlink" title="页面结构"></a>页面结构</h2><ol>
-<li>需要考虑实现方式:Activity or Activity+Fragment</li>
-</ol>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><ol>
-<li><a href="http://lbs.amap.com/api/" target="_blank" rel="external">高德地图</a></li>
-</ol>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/07/13/Android-BaseStructure/" class="archive-article-date">
-  	<time datetime="2015-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-07-13</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/插件/">插件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解决方案/">解决方案</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Animation-Android" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/05/28/Animation-Android/">Android动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="值动画"><a href="#值动画" class="headerlink" title="值动画"></a>值动画</h2><h3 id="ValueAnimator"><a href="#ValueAnimator" class="headerlink" title="ValueAnimator"></a>ValueAnimator</h3><p>简单值动画示例：<br>下面例子是实现省略号的动画<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> ValueAnimator anim = ValueAnimator.ofInt(<span class="number">0</span>, <span class="number">400</span>);</div><div class="line"> anim.setDuration(<span class="number">3000</span>);</div><div class="line"> anim.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</div><div class="line">         <span class="keyword">int</span> frameValue = (Integer) animation.getAnimatedValue();</div><div class="line">         <span class="keyword">if</span> (frameValue &lt; <span class="number">100</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面"</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt; <span class="number">200</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面."</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt; <span class="number">300</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面.."</span>);</div><div class="line">         &#125; <span class="keyword">else</span> <span class="keyword">if</span> (frameValue &lt;= <span class="number">400</span>) &#123;</div><div class="line">             holder.getBottomRedirectTip().setText(payTypeName + <span class="string">"支付页面..."</span>);</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;);</div><div class="line">anim.setRepeatCount(ValueAnimator.INFINITE);</div><div class="line">anim.start();</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/05/28/Animation-Android/" class="archive-article-date">
-  	<time datetime="2015-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-05-28</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Animation/">Animation</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android-CheckBox-Style" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/uncategorized/2015/03/14/Android-CheckBox-Style/">CheckBox样式自定义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在drawable文件夹中建立以下selector即可<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_pressed"</span> <span class="attr">android:state_checked</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_normal"</span> <span class="attr">android:state_checked</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/checkbox_normal"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在values文件夹下创建以下样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"CustomCheckboxTheme"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Widget.CompoundButton.CheckBox"</span>&gt;</span><span class="xml"></span></div><div class="line">	<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:button"</span>&gt;</span>@drawable/checkbox_style<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>布局中使用下面样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">CheckBox</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/select_all"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">style</span>=<span class="string">"@style/CustomCheckboxTheme"</span> /&gt;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/uncategorized/2015/03/14/Android-CheckBox-Style/" class="archive-article-date">
-  	<time datetime="2015-03-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-03-14</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CheckBox/">CheckBox</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">下一页 &raquo;</a>
     </nav>
   
 
@@ -832,9 +956,9 @@
     
 
     
-    	<section class="tools-section tools-section-tag">
+    	<section class="tools-section tools-section-tag" style="overflow:auto;">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 17.5px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12.5px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12.5px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12.5px;">jar</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 15px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 10px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12.5px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12.5px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12.5px;">性能</a> <a href="/tags/插件/" style="font-size: 12.5px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12.5px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
+    				<a href="/tags/顶/" style="font-size: 10px;">-顶</a> <a href="/tags/9-patch/" style="font-size: 10px;">9-patch</a> <a href="/tags/ANR/" style="font-size: 10px;">ANR</a> <a href="/tags/ActionBar/" style="font-size: 10px;">ActionBar</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Permissions/" style="font-size: 10px;">Android Permissions</a> <a href="/tags/AndroidStudio/" style="font-size: 10px;">AndroidStudio</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Animation/" style="font-size: 10px;">Animation</a> <a href="/tags/CheckBox/" style="font-size: 10px;">CheckBox</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Effective/" style="font-size: 10px;">Effective</a> <a href="/tags/Event/" style="font-size: 10px;">Event</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Fresco/" style="font-size: 10px;">Fresco</a> <a href="/tags/GameDevelop/" style="font-size: 10px;">GameDevelop</a> <a href="/tags/Git/" style="font-size: 12px;">Git</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/IntentFilter/" style="font-size: 10px;">IntentFilter</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java/" style="font-size: 18px;">Java</a> <a href="/tags/Jekyll/" style="font-size: 10px;">Jekyll</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Memory-Leak/" style="font-size: 10px;">Memory Leak</a> <a href="/tags/Monkey/" style="font-size: 10px;">Monkey</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/Node/" style="font-size: 12px;">Node</a> <a href="/tags/Notification/" style="font-size: 10px;">Notification</a> <a href="/tags/OGEngine/" style="font-size: 10px;">OGEngine</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/ProgressBar/" style="font-size: 10px;">ProgressBar</a> <a href="/tags/Sails/" style="font-size: 12px;">Sails</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Support-v7/" style="font-size: 10px;">Support v7</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/android/" style="font-size: 18px;">android</a> <a href="/tags/annotation/" style="font-size: 10px;">annotation</a> <a href="/tags/appstore/" style="font-size: 10px;">appstore</a> <a href="/tags/bugreport/" style="font-size: 10px;">bugreport</a> <a href="/tags/class/" style="font-size: 10px;">class</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/commend/" style="font-size: 10px;">commend</a> <a href="/tags/custom/" style="font-size: 10px;">custom</a> <a href="/tags/deploy/" style="font-size: 10px;">deploy</a> <a href="/tags/dir/" style="font-size: 10px;">dir</a> <a href="/tags/encode/" style="font-size: 10px;">encode</a> <a href="/tags/functional-programming/" style="font-size: 10px;">functional programming</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ideas/" style="font-size: 10px;">ideas</a> <a href="/tags/jar/" style="font-size: 12px;">jar</a> <a href="/tags/java/" style="font-size: 16px;">java</a> <a href="/tags/keep-alive/" style="font-size: 10px;">keep alive</a> <a href="/tags/keyboard/" style="font-size: 10px;">keyboard</a> <a href="/tags/life/" style="font-size: 10px;">life</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notification/" style="font-size: 10px;">notification</a> <a href="/tags/phonegap/" style="font-size: 10px;">phonegap</a> <a href="/tags/plugin/" style="font-size: 12px;">plugin</a> <a href="/tags/plugins/" style="font-size: 10px;">plugins</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sample/" style="font-size: 10px;">sample</a> <a href="/tags/service/" style="font-size: 10px;">service</a> <a href="/tags/share/" style="font-size: 10px;">share</a> <a href="/tags/sharesdk/" style="font-size: 10px;">sharesdk</a> <a href="/tags/shell/" style="font-size: 14px;">shell</a> <a href="/tags/shortcut/" style="font-size: 10px;">shortcut</a> <a href="/tags/source-code/" style="font-size: 10px;">source code</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/start-mode/" style="font-size: 10px;">start mode</a> <a href="/tags/stetho/" style="font-size: 10px;">stetho</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/thread/" style="font-size: 10px;">thread</a> <a href="/tags/thread-pool/" style="font-size: 10px;">thread pool</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/urlencode/" style="font-size: 10px;">urlencode</a> <a href="/tags/url编码/" style="font-size: 10px;">url编码</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/个人开发者/" style="font-size: 10px;">个人开发者</a> <a href="/tags/云服务/" style="font-size: 10px;">云服务</a> <a href="/tags/保活/" style="font-size: 10px;">保活</a> <a href="/tags/免费/" style="font-size: 10px;">免费</a> <a href="/tags/内存/" style="font-size: 12px;">内存</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/函数式编程/" style="font-size: 10px;">函数式编程</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/升级/" style="font-size: 10px;">升级</a> <a href="/tags/协议/" style="font-size: 10px;">协议</a> <a href="/tags/启动/" style="font-size: 10px;">启动</a> <a href="/tags/启动优化/" style="font-size: 10px;">启动优化</a> <a href="/tags/启动模式/" style="font-size: 10px;">启动模式</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/备忘录/" style="font-size: 10px;">备忘录</a> <a href="/tags/多线程/" style="font-size: 12px;">多线程</a> <a href="/tags/学习路线/" style="font-size: 10px;">学习路线</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/常见问题/" style="font-size: 12px;">常见问题</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/开发工具/" style="font-size: 10px;">开发工具</a> <a href="/tags/开发资源/" style="font-size: 10px;">开发资源</a> <a href="/tags/快捷键/" style="font-size: 12px;">快捷键</a> <a href="/tags/性能/" style="font-size: 12px;">性能</a> <a href="/tags/插件/" style="font-size: 12px;">插件</a> <a href="/tags/数据服务/" style="font-size: 10px;">数据服务</a> <a href="/tags/数据爬取/" style="font-size: 10px;">数据爬取</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/最佳实践/" style="font-size: 10px;">最佳实践</a> <a href="/tags/架构/" style="font-size: 12px;">架构</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a> <a href="/tags/系统/" style="font-size: 10px;">系统</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/网站/" style="font-size: 12px;">网站</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/网络数据/" style="font-size: 10px;">网络数据</a> <a href="/tags/自定义Notification/" style="font-size: 10px;">自定义Notification</a> <a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 14px;">设计模式</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/邮箱登录/" style="font-size: 10px;">邮箱登录</a> <a href="/tags/键盘/" style="font-size: 10px;">键盘</a> <a href="/tags/面向对象/" style="font-size: 10px;">面向对象</a> <a href="/tags/面试必备/" style="font-size: 10px;">面试必备</a>
     			</div>
     	</section>
     
@@ -844,7 +968,7 @@
   		
   			<div class="friends-wrap" id="js-friends">
   			
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">Github</a>
   	        
   	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
   	        
